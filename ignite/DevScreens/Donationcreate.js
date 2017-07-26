@@ -34,7 +34,46 @@ export default class HomeScreen extends React.Component {
       switchValue: val
     })
   }
-  render () {
+  food_type(){
+      return(
+          <TouchableOpacity style={styles.type}>
+            <Text style={styles.slide_text1}>Food Type(s):</Text>
+            <Icon name='chevron-right' size={20} color='#f3f3f3' style={{backgroundColor: 'transparent', width: 20}} />
+          </TouchableOpacity>
+      );
+  }
+food_type1(){
+      return(
+          <TouchableOpacity style={styles.type1}>
+              <View style={{alignItems: 'center'}}>
+                <Text style={{backgroundColor: 'transparent',color: '#eeb9aa'}}>Select Food Type(s):</Text>
+                <Text style={styles.slide_text1}>Perishable and Produce</Text>
+            </View>
+            <Text style={styles.slide_text11}>Edit</Text>
+          </TouchableOpacity>
+      );
+  }
+    deliver_type(){
+        return (
+            <TouchableOpacity style={styles.type}>
+              <Text style={styles.slide_text1}>Deliver Type:</Text>
+              <Icon name='chevron-right' size={20} color='#f3f3f3' style={{backgroundColor: 'transparent'}} />
+            </TouchableOpacity>
+        );
+    }
+    deliver_type1 (){
+        return (
+            <TouchableOpacity style={styles.type1}>
+              <View style={{alignItems: 'center'}}>
+                <Text style={{backgroundColor: 'transparent',color: '#eeb9aa'}}>Select Deliver Type:</Text>
+                <Text style={styles.slide_text1}>Pick-Up by Rescuer   </Text>
+            </View>
+            <Text style={styles.slide_text11}>Edit</Text>
+          </TouchableOpacity>
+        );
+    }
+  render () {     
+            
     return (
       <View style={styles.container}>
         <Image source={Images.overlay} style={styles.body}>
@@ -81,17 +120,9 @@ export default class HomeScreen extends React.Component {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{flex: 1}}>
-
-            <TouchableOpacity style={styles.type}>
-              <Text style={styles.slide_text1}>Food Type(s):</Text>
-              <Icon name='chevron-right' size={20} color='#f3f3f3' style={{backgroundColor: 'transparent', width: 20}} />
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.type}>
-              <Text style={styles.slide_text1}>Deliver Type:</Text>
-              <Icon name='chevron-right' size={20} color='#f3f3f3' style={{backgroundColor: 'transparent'}} />
-            </TouchableOpacity>
+          <View style={{flex: 1}}>            
+                { this.state.van === 0 ? this.food_type() : this.food_type1()}
+                { this.state.van === 0 ? this.deliver_type() : this.deliver_type1()}
           </View>
           <View style={styles.slider}>
             <View style={styles.view_slide}>
@@ -105,17 +136,17 @@ export default class HomeScreen extends React.Component {
             </View>
             <View style={{flex: 1, alignItems: 'stretch', justifyContent: 'center'}}>
               <Slider
-                value={this.state.value}
+                value={this.state.van === 0 ? this.state.value : 60}
                 onValueChange={(value) => this.setState({value})}
                 style={styles.slide}
                 maximumTrackTintColor='#f4b9b2'
                 minimumTrackTintColor='#fff'
                 thumbTintColor='#ffb660'
-                maximumValue={100}
+                maximumValue={500}
                 trackStyle={{height: 7}}
                 thumbStyle={{width: 25, height: 25, borderRadius: 20}}
                             />
-              <Text style={styles.text_slider}>{parseInt(this.state.value)}</Text>
+              <Text style={styles.text_slider}>{this.state.van === 0 ? parseInt(this.state.value): 60}</Text>
             </View>
           </View>
 
@@ -132,9 +163,15 @@ export default class HomeScreen extends React.Component {
   }
   van () {
       if(this.state.van === 0){
-        this.setState({van: 1})
+        this.setState({
+            van: 1,
+            switchValue: true
+        })
       }else {
-          this.setState({van: 0})
+          this.setState({
+              van: 0,
+              switchValue: false
+            })
       }
   }
 }
@@ -242,10 +279,26 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingVertical: 20
   },
+    type1: {
+        flex: 1,
+        justifyContent: 'space-around',
+        flexDirection: 'row',
+        borderColor: '#e09579',
+        borderWidth: 1,
+        paddingVertical: 13
+    },
   slide_text1: {
     backgroundColor: 'transparent',
     color: '#f3f3f3',
     fontSize: 20
+
+  },
+slide_text11: {
+    
+    backgroundColor: 'transparent',
+    color: '#f3f3f3',
+    fontSize: 15,
+    alignSelf:'flex-end'
 
   },
   slide_text2: {
