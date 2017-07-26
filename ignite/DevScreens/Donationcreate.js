@@ -136,7 +136,7 @@ food_type1(){
             </View>
             <View style={{flex: 1, alignItems: 'stretch', justifyContent: 'center'}}>
               <Slider
-                value={this.state.van === 0 ? this.state.value : 60}
+                value={this.state.value}
                 onValueChange={(value) => this.setState({value})}
                 style={styles.slide}
                 maximumTrackTintColor='#f4b9b2'
@@ -146,7 +146,7 @@ food_type1(){
                 trackStyle={{height: 7}}
                 thumbStyle={{width: 25, height: 25, borderRadius: 20}}
                             />
-              <Text style={styles.text_slider}>{this.state.van === 0 ? parseInt(this.state.value): 60}</Text>
+              <Text style={styles.text_slider}>{parseInt(this.state.value)}</Text>
             </View>
           </View>
 
@@ -165,12 +165,14 @@ food_type1(){
       if(this.state.van === 0){
         this.setState({
             van: 1,
-            switchValue: true
+            switchValue: true,
+            value: 60
         })
       }else {
           this.setState({
               van: 0,
-              switchValue: false
+              switchValue: false,
+              value: 0
             })
       }
   }
