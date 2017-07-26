@@ -19,7 +19,7 @@ export default class HomeScreen extends React.Component {
     this.state = {
       value: 0,
       switchValue: false,
-      van: false
+      van: 0
     }
     this.toggleSwitch = this.toggleSwitch.bind(this)
   }
@@ -74,7 +74,7 @@ export default class HomeScreen extends React.Component {
                 <Image source={Images.car} />
               </TouchableOpacity>
               <TouchableOpacity style={styles.menu_image} onPress={() => this.van()}>
-                <Image source={this.state.van === true ? Images.van : Images.van1} />
+                <Image source={this.state.van === 0 ? Images.van : Images.van1} />
               </TouchableOpacity>
               <TouchableOpacity style={styles.menu_image}>
                 <Image source={Images.truck} />
@@ -131,7 +131,11 @@ export default class HomeScreen extends React.Component {
     )
   }
   van () {
-
+      if(this.state.van === 0){
+        this.setState({van: 1})
+      }else {
+          this.setState({van: 0})
+      }
   }
 }
 const styles = StyleSheet.create({
@@ -190,8 +194,8 @@ const styles = StyleSheet.create({
 
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 17,
-    paddingBottom: 15
+    //marginTop: 17,
+    //paddingBottom: 15
   },
   menu_image: {
     flex: 1,
