@@ -14,6 +14,7 @@ class RootContainer extends Component {
     if (!ReduxPersist.active) {
       this.props.startup()
     }
+  // alert(JSON.stringify(StartupActions.startup()))
   }
 
   render () {
