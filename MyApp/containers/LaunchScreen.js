@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { Slider } from 'react-native-elements'
 import { Images } from '../DevTheme'
 import styles from '../Styles/LaunchScreenStyles';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 export default class HomeScreen extends React.Component {
   constructor () {
@@ -19,9 +20,10 @@ export default class HomeScreen extends React.Component {
     this.state = {
       value: 0,
       switchValue: false,
-      van: 0
+      van: 0,
+      isDateTImePickerVisible: false
     }
-    this.toggleSwitch = this.toggleSwitch.bind(this)
+    this.toggleSwitch = this.toggleSwitch.bind(this)    
   }
   static navigationOptions = {
     title: 'Create a Donation',
@@ -29,6 +31,19 @@ export default class HomeScreen extends React.Component {
       backgroundColor: '#dd8d6c'
     }
   };
+
+  _showDateTimerPicker=()=> {
+      this.setState({ isDateTImePickerVisible: true })
+  }
+    _hideDateTimerPicker=()=> {
+        this.setState({ isDateTImePickerVisible: false });
+        
+    }
+
+    _handleDatePicked=(date)=> {
+        // alert('A date has been picked: '+date)
+        this._hideDateTimerPicker();
+    }
   toggleSwitch (val) {
     this.setState({
       switchValue: val
@@ -89,7 +104,7 @@ food_type1(){
               <Text style={styles.text}>Date</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.add}>
+            <TouchableOpacity style={styles.add} onPress={this._showDateTimerPicker}>
               <Image source={Images.data_copy} />
               <Text style={styles.text}>Time</Text>
             </TouchableOpacity>
@@ -141,7 +156,10 @@ food_type1(){
               <Text style={styles.text_slider}>{parseInt(this.state.value)}</Text>
             </View>
           </View>
-
+          <DateTimePicker 
+            isVisible={this.state.isDateTImePickerVisible} 
+            onConfirm={this._handleDatePicked}
+            onCancel={this._hideDateTimerPicker}/>
           <Image source={Images.bg1} style={styles.footer}>
             <View style={{flex: 1, backgroundColor: '#ef8579', justifyContent: 'center', borderColor: '#e09579', borderWidth: 1, alignItems: 'center', paddingTop: 10}}>
               <Text style={styles.slide_text2}>Description:</Text>
