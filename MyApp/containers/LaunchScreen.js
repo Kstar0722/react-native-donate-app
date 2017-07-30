@@ -1,7 +1,5 @@
 import React from 'react'
-import {
-  StyleSheet,
-  Text,
+import { Text,
   View,
   Image,
   TextInput,
@@ -11,8 +9,8 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { Slider } from 'react-native-elements'
 import { Images } from '../DevTheme'
-import styles from '../Styles/LaunchScreenStyles';
-import DateTimePicker from 'react-native-modal-datetime-picker';
+import styles from '../Styles/LaunchScreenStyles'
+import DateTimePicker from 'react-native-modal-datetime-picker'
 
 export default class HomeScreen extends React.Component {
   constructor () {
@@ -23,7 +21,7 @@ export default class HomeScreen extends React.Component {
       van: 0,
       isDateTImePickerVisible: false
     }
-    this.toggleSwitch = this.toggleSwitch.bind(this)    
+    this.toggleSwitch = this.toggleSwitch.bind(this)
   }
   static navigationOptions = {
     title: 'Create a Donation',
@@ -32,66 +30,64 @@ export default class HomeScreen extends React.Component {
     }
   };
 
-  _showDateTimerPicker=()=> {
-      this.setState({ isDateTImePickerVisible: true })
+  _showDateTimerPicker=() => {
+    this.setState({ isDateTImePickerVisible: true })
   }
-    _hideDateTimerPicker=()=> {
-        this.setState({ isDateTImePickerVisible: false });
-        
-    }
+  _hideDateTimerPicker=() => {
+    this.setState({ isDateTImePickerVisible: false })
+  }
 
-    _handleDatePicked=(date)=> {
+  _handleDatePicked=(date) => {
         // alert('A date has been picked: '+date)
-        this._hideDateTimerPicker();
-    }
+    this._hideDateTimerPicker()
+  }
   toggleSwitch (val) {
     this.setState({
       switchValue: val
     })
   }
-  food_type(){
-      return(
-          <TouchableOpacity style={styles.type}>
-            <Text style={styles.slide_text1}>Food Type(s):</Text>
-            <Icon name='chevron-right' size={20} color='#f3f3f3' style={{backgroundColor: 'transparent', width: 20}} />
-          </TouchableOpacity>
-      );
+  food_type () {
+    return (
+      <TouchableOpacity style={styles.type}>
+        <Text style={styles.slide_text1}>Food Type(s):</Text>
+        <Icon name='chevron-right' size={20} color='#f3f3f3' style={{backgroundColor: 'transparent', width: 20}} />
+      </TouchableOpacity>
+    );
   }
-food_type1(){
-      return(
-          <TouchableOpacity style={styles.type1}>
-              <View style={{alignItems: 'center'}}>
-                <Text style={{backgroundColor: 'transparent',color: '#eeb9aa'}}>Select Food Type(s):</Text>
-                <Text style={styles.slide_text1}>Perishable and Produce</Text>
-            </View>
-            <Text style={styles.slide_text11}>Edit</Text>
-          </TouchableOpacity>
-      );
+   food_type1() {
+    return (
+      <TouchableOpacity style={styles.type1}>
+        <View style={{alignItems: 'center'}}>
+          <Text style={{backgroundColor: 'transparent', color: '#eeb9aa'}}>Select Food Type(s):</Text>
+          <Text style={styles.slide_text1}>Perishable and Produce</Text>
+        </View>
+        <Text style={styles.slide_text11}>Edit</Text>
+      </TouchableOpacity>
+    );
   }
-    deliver_type(){
-        return (
-            <TouchableOpacity style={styles.type}>
-              <Text style={styles.slide_text1}>Deliver Type:</Text>
-              <Icon name='chevron-right' size={20} color='#f3f3f3' style={{backgroundColor: 'transparent'}} />
-            </TouchableOpacity>
-        );
-    }
-    deliver_type1 (){
-        return (
-            <TouchableOpacity style={styles.type1}>
-              <View style={{alignItems: 'center'}}>
-                <Text style={{backgroundColor: 'transparent',color: '#eeb9aa'}}>Select Deliver Type:</Text>
-                <Text style={styles.slide_text1}>Pick-Up by Rescuer   </Text>
-            </View>
-            <Text style={styles.slide_text11}>Edit</Text>
-          </TouchableOpacity>
-        );
-    }
-  render () {     
-            
+  deliver_type () {
+    return (
+      <TouchableOpacity style={styles.type}>
+        <Text style={styles.slide_text1}>Deliver Type:</Text>
+        <Icon name='chevron-right' size={20} color='#f3f3f3' style={{backgroundColor: 'transparent'}} />
+      </TouchableOpacity>
+    )
+  }
+  deliver_type1 () {
+    return (
+      <TouchableOpacity style={styles.type1}>
+        <View style={{alignItems: 'center'}}>
+          <Text style={{backgroundColor: 'transparent', color: '#eeb9aa'}}>Select Deliver Type:</Text>
+          <Text style={styles.slide_text1}>Pick-Up by Rescuer</Text>
+        </View>
+        <Text style={styles.slide_text11}>Edit</Text>
+      </TouchableOpacity>
+    )
+  }
+  render () {
     return (
       <View style={styles.container}>
-        <Image source={Images.overlay} style={styles.body}>          
+        <Image source={Images.overlay} style={styles.body}>
           <View style={styles.menu}>
 
             <TouchableOpacity style={styles.add}>
@@ -127,9 +123,9 @@ food_type1(){
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{flex: 1}}>            
-                { this.state.van === 0 ? this.food_type() : this.food_type1()}
-                { this.state.van === 0 ? this.deliver_type() : this.deliver_type1()}
+          <View style={{flex: 1}}>
+            { this.state.van === 0 ? this.food_type() : this.food_type1()}
+            { this.state.van === 0 ? this.deliver_type() : this.deliver_type1()}
           </View>
           <View style={styles.slider}>
             <View style={styles.view_slide}>
@@ -156,10 +152,10 @@ food_type1(){
               <Text style={styles.text_slider}>{parseInt(this.state.value)}</Text>
             </View>
           </View>
-          <DateTimePicker 
-            isVisible={this.state.isDateTImePickerVisible} 
+          <DateTimePicker
+            isVisible={this.state.isDateTImePickerVisible}
             onConfirm={this._handleDatePicked}
-            onCancel={this._hideDateTimerPicker}/>
+            onCancel={this._hideDateTimerPicker} />
           <Image source={Images.bg1} style={styles.footer}>
             <View style={{flex: 1, backgroundColor: '#ef8579', justifyContent: 'center', borderColor: '#e09579', borderWidth: 1, alignItems: 'center', paddingTop: 10}}>
               <Text style={styles.slide_text2}>Description:</Text>
@@ -172,18 +168,18 @@ food_type1(){
     )
   }
   van () {
-      if(this.state.van === 0){
-        this.setState({
-            van: 1,
-            switchValue: true,
-            value: 60
-        })
-      }else {
-          this.setState({
-              van: 0,
-              switchValue: false,
-              value: 0
-            })
-      }
+    if (this.state.van === 0) {
+      this.setState({
+        van: 1,
+        switchValue: true,
+        value: 60
+      })
+    } else {
+      this.setState({
+        van: 0,
+        switchValue: false,
+        value: 0
+      })
+    }
   }
 }

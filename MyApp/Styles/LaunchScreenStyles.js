@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   container: {
@@ -55,9 +55,9 @@ export default StyleSheet.create({
   vehicle_img: {
 
     flexDirection: 'row',
-    alignItems: 'center',
-    //marginTop: 17,
-    //paddingBottom: 15
+    alignItems: 'center'
+    // marginTop: 17,
+    // paddingBottom: 15
   },
   menu_image: {
     flex: 1,
@@ -104,26 +104,26 @@ export default StyleSheet.create({
     borderWidth: 1,
     paddingVertical: 15
   },
-    type1: {
-        flex: 1,
-        justifyContent: 'space-around',
-        flexDirection: 'row',
-        borderColor: '#e09579',
-        borderWidth: 1,
-        paddingVertical: 13
-    },
+  type1: {
+    flex: 1,
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    borderColor: '#e09579',
+    borderWidth: 1,
+    paddingVertical: 13
+  },
   slide_text1: {
     backgroundColor: 'transparent',
     color: '#f3f3f3',
     fontSize: 20
 
   },
-slide_text11: {
-    
+  slide_text11: {
+
     backgroundColor: 'transparent',
     color: '#f3f3f3',
     fontSize: 15,
-    alignSelf:'flex-end'
+    alignSelf: 'flex-end'
 
   },
   slide_text2: {

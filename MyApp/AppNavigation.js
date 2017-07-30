@@ -1,14 +1,20 @@
 import { StackNavigator } from 'react-navigation'
-import LaunchScreen from './containers/LaunchScreen';
-import MainScreen from './containers/MainScreen';
-import styles from './Styles/NavigationStyles';
+import LaunchScreen from './containers/LaunchScreen'
+import MainScreen from './containers/MainScreen'
+import SplashScreen from './containers/SplashScreen'
+import SignupScreen from './containers/SignupScreen'
+import BusinessScreen from './containers/BusinessScreen'
+import styles from './Styles/NavigationStyles'
 
 const PrimaryNav = StackNavigator({
-    LaunchScreen: { screen: LaunchScreen },
-    MainScreen: { screen: MainScreen}
-},{
-    
-    initialRouteName: 'MainScreen',
-    heaerStyle: styles.header
+  LaunchScreen: { screen: LaunchScreen },
+  MainScreen: { screen: MainScreen },
+  SplashScreen: { screen: SplashScreen },
+  SignupScreen: { screen: SignupScreen },
+  BusinessScreen: {screen: BusinessScreen}
+}, {
+
+  initialRouteName: 'SplashScreen',
+  heaerStyle: styles.header
 })
 export default PrimaryNav

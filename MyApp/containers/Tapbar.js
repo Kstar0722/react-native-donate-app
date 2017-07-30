@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
-import {  
+import React, { Component } from 'react'
+import {
   View,
-  Image,  
+  Image,
   TouchableOpacity
-} from 'react-native';
-import styles from '../Styles/TapBarStyles';
-import { Images } from '../DevTheme';
+} from 'react-native'
+import styles from '../Styles/TapBarStyles'
+import { Images } from '../DevTheme'
 
 export default class TapBar extends Component {
-    render(){
-        return (
-            <Image source={Images.Tapbg} style={{position: 'absolute' ,bottom: 0}}>
-                <View style={styles.bg}>
-                    <TouchableOpacity>
-                        <Image source={Images.home} style={styles.bg}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Image source={Images.msg} style={styles.bg}/>
-                    </TouchableOpacity>
-                </View>
-            </Image>
-        );
-    }
+  render () {
+    return (
+      <Image source={Images.Tapbg} style={{position: 'absolute', bottom: 0}}>
+        <View style={styles.bg}>
+          <TouchableOpacity>
+            <Image source={Images.home} style={styles.bg} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image source={Images.msg} style={styles.bg} />
+          </TouchableOpacity>
+        </View>
+      </Image>
+    )
+  }
 }

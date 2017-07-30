@@ -1,5 +1,5 @@
 const images = {
-  
+
   overlay: require('../Images/overlay.png'),
   add: require('../Images/add.png'),
   data: require('../Images/date.png'),
@@ -17,7 +17,14 @@ const images = {
   open: require('../Images/open.png'),
   closed: require('../Images/closed.png'),
   Tooltip: require('../Images/TOOLTIP.png'),
-  Toolbut: require('../Images/toolbut.png')
+  Toolbut: require('../Images/toolbut.png'),
+  facebook: require('../Images/facebook.png'),
+  google: require('../Images/google.png'),
+  LOGIN: require('../Images/LOGIN.png'),
+  SINGUP: require('../Images/SIGNUP.png'),
+  signbg: require('../Images/signbg.png'),
+  underline: require('../Images/underline.png'),
+  CONTINUE: require('../Images/CONTINUE.png')
 
 }
 
