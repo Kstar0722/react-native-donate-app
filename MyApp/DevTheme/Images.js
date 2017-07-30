@@ -25,7 +25,8 @@ const images = {
   SINGUP1: require('../Images/SIGNUP1.png'),
   signbg: require('../Images/signbg.png'),
   underline: require('../Images/underline.png'),
-  CONTINUE: require('../Images/CONTINUE.png')
+  CONTINUE: require('../Images/CONTINUE.png'),
+  devide: require('../Images/divide.png')
 
 }
 

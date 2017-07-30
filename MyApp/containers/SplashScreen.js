@@ -54,10 +54,11 @@ export default class SplashScreen extends Component {
                         <Image source={Images.google} />
                     </TouchableOpacity>
                     <View style={styles.login}>
-                        <TouchableOpacity onPress={() => navigate('SignupScreen')}>
+                        <TouchableOpacity onPress={() => navigate('SignupScreen')} style={styles.button}>
                             <Image source={Images.SINGUP1} />
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <Image source={Images.devide} style={{marginBottom: 1}}/>
+                        <TouchableOpacity style={styles.button}>
                             <Image source={Images.LOGIN} />
                         </TouchableOpacity>
                     </View>

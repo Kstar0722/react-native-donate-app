@@ -13,7 +13,7 @@ import { Slider } from 'react-native-elements'
 import { Images } from '../DevTheme'
 import styles from '../Styles/LaunchScreenStyles'
 import DateTimePicker from 'react-native-modal-datetime-picker'
-
+import PersianCalendarPicker from 'react-native-persian-calendar-picker'
 
 
 export default class HomeScreen extends React.Component {
@@ -176,7 +176,7 @@ export default class HomeScreen extends React.Component {
             </View>
             <TextInput placeholder='WRITE HERE' placeholderTextColor='#dd8d6c' style={styles.write} />
           </Image>
-          {/* <Modal
+           <Modal
             animationType={'slide'}
             transparent={true}
             visible={this.state.modalVisible}
@@ -191,7 +191,7 @@ export default class HomeScreen extends React.Component {
              />
            </View>
             
-          </Modal> */}
+          </Modal> 
         </Image>
 
       </View>

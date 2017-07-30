@@ -16,6 +16,9 @@ export default StyleSheet.create({
     login: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginTop: 31
+        marginTop: 25
+    },
+    button: {
+        marginVertical: 8
     }
 })
