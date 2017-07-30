@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import styles from '../Styles/SignupScreenStyles'
 import { Images } from '../DevTheme'
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 export default class BusinessScreen extends Component {
     constructor () {
@@ -63,6 +64,7 @@ export default class BusinessScreen extends Component {
                     <TouchableOpacity style={styles.but} onPress={() => navigate('MainScreen')}>
                             <Image source={Images.SINGUP} />
                     </TouchableOpacity>
+                    <KeyboardSpacer />
            </Image>
             
                 

@@ -4,13 +4,17 @@ import { Text,
   Image,
   TextInput,
   TouchableOpacity,
-  Switch
+  Switch,
+  Modal,
+  Dimensions
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { Slider } from 'react-native-elements'
 import { Images } from '../DevTheme'
 import styles from '../Styles/LaunchScreenStyles'
 import DateTimePicker from 'react-native-modal-datetime-picker'
+
+
 
 export default class HomeScreen extends React.Component {
   constructor () {
@@ -19,7 +23,9 @@ export default class HomeScreen extends React.Component {
       value: 0,
       switchValue: false,
       van: 0,
-      isDateTImePickerVisible: false
+      isDateTImePickerVisible: false,
+      modalVisible: false,
+      date: new Date()
     }
     this.toggleSwitch = this.toggleSwitch.bind(this)
   }
@@ -84,6 +90,14 @@ export default class HomeScreen extends React.Component {
       </TouchableOpacity>
     )
   }
+  setModalVisible = (visible) => {
+    this.setState({
+      modalVisible: visible
+    })
+  }
+  onDateChange =(date) => {
+    this.setState({date: date})
+  }
   render () {
     return (
       <View style={styles.container}>
@@ -95,7 +109,7 @@ export default class HomeScreen extends React.Component {
               <Text style={styles.text}>Image</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.add}>
+            <TouchableOpacity style={styles.add} onPress={()=>{this.setModalVisible(true)}}>
               <Image source={Images.data} />
               <Text style={styles.text}>Date</Text>
             </TouchableOpacity>
@@ -162,6 +176,22 @@ export default class HomeScreen extends React.Component {
             </View>
             <TextInput placeholder='WRITE HERE' placeholderTextColor='#dd8d6c' style={styles.write} />
           </Image>
+          {/* <Modal
+            animationType={'slide'}
+            transparent={true}
+            visible={this.state.modalVisible}
+            onRequestClose={() => alert()}
+          >
+           <View>
+             <PersianCalendarPicker 
+              selectedDate={this.state.date}
+              onDateChange={this.onDateChange}
+              screenWidth={Dimensions.get('window').width}
+              selectedBackgroundColor={'#5ce600'}
+             />
+           </View>
+            
+          </Modal> */}
         </Image>
 
       </View>

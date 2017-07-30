@@ -1,17 +1,21 @@
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'white'
+    },
   facebook: {
-      marginTop: 70,
+      marginTop: 56,
       alignSelf: 'center'
   },
   google: {
-      marginTop: 17,
+      marginTop: 16,
     alignSelf: 'center'
   },
     login: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginTop: 27
+        marginTop: 31
     }
 })

@@ -38,11 +38,11 @@ export default class SplashScreen extends Component {
             <View style={styles.container}>
                 <ImageSlider 
                     images={[
-                        'https://firebasestorage.googleapis.com/v0/b/fir-test-a3cb2.appspot.com/o/Slide1.png?alt=media&token=261ae3b2-631f-4a5a-aac5-9e4ce1c2ca8a',
-                        'https://firebasestorage.googleapis.com/v0/b/fir-test-a3cb2.appspot.com/o/step2.png?alt=media&token=aa4c300c-94be-43f3-ac20-4b3b91bc6022',
-                        'https://firebasestorage.googleapis.com/v0/b/fir-test-a3cb2.appspot.com/o/step3.png?alt=media&token=784fb079-ffb5-4fe2-9cce-4d5336256fbf'
+                        'https://firebasestorage.googleapis.com/v0/b/fir-test-a3cb2.appspot.com/o/Slide1.png?alt=media&token=b759b7dd-3dc5-488c-8469-2ed78237dfe7',
+                        'https://firebasestorage.googleapis.com/v0/b/fir-test-a3cb2.appspot.com/o/step2.png?alt=media&token=40361524-976d-401f-92b0-9ca753c92253',
+                        'https://firebasestorage.googleapis.com/v0/b/fir-test-a3cb2.appspot.com/o/step3.png?alt=media&token=a26c3814-65b2-4623-8c00-05675d05cef5'
                     ]}
-                    height={405}
+                    height={440}
                     position={this.state.position}
                     onPositionChanged={position => this.setState({position})}
                 />
@@ -55,7 +55,7 @@ export default class SplashScreen extends Component {
                     </TouchableOpacity>
                     <View style={styles.login}>
                         <TouchableOpacity onPress={() => navigate('SignupScreen')}>
-                            <Image source={Images.SINGUP} />
+                            <Image source={Images.SINGUP1} />
                         </TouchableOpacity>
                         <TouchableOpacity>
                             <Image source={Images.LOGIN} />

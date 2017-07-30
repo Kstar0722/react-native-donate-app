@@ -22,6 +22,7 @@ const images = {
   google: require('../Images/google.png'),
   LOGIN: require('../Images/LOGIN.png'),
   SINGUP: require('../Images/SIGNUP.png'),
+  SINGUP1: require('../Images/SIGNUP1.png'),
   signbg: require('../Images/signbg.png'),
   underline: require('../Images/underline.png'),
   CONTINUE: require('../Images/CONTINUE.png')
