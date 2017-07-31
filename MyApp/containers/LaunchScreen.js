@@ -13,6 +13,8 @@ import { Slider } from 'react-native-elements'
 import { Images } from '../DevTheme'
 import styles from '../Styles/LaunchScreenStyles'
 import DateTimePicker from 'react-native-modal-datetime-picker'
+import PictureModal from './Modals/pictureModal'
+
 
 
 
@@ -26,7 +28,7 @@ export default class HomeScreen extends React.Component {
       switchValue: false,
       van: 0,
       isDateTImePickerVisible: false,
-      modalVisible: false,
+      picturemodalVisible: false,
       date: new Date()
     }
     this.toggleSwitch = this.toggleSwitch.bind(this)
@@ -92,6 +94,11 @@ export default class HomeScreen extends React.Component {
       </TouchableOpacity>
     )
   }
+  closePictureModal = () => {
+    this.setState({
+      picturemodalVisible: false
+    })
+  }
   setModalVisible = (visible) => {
     this.setState({
       modalVisible: visible
@@ -106,7 +113,7 @@ export default class HomeScreen extends React.Component {
         <Image source={Images.overlay} style={styles.body}>
           <View style={styles.menu}>
 
-            <TouchableOpacity style={styles.add}>
+            <TouchableOpacity style={styles.add} onPress={()=>this.setState({picturemodalVisible: true})}>
               <Image source={Images.add} />
               <Text style={styles.text}>Image</Text>
             </TouchableOpacity>
@@ -173,22 +180,12 @@ export default class HomeScreen extends React.Component {
             onConfirm={this._handleDatePicked}
             onCancel={this._hideDateTimerPicker} />
           <Image source={Images.bg1} style={styles.footer}>
-            <View style={{flex: 1, backgroundColor: '#ef8579', justifyContent: 'center', borderColor: '#e09579', borderWidth: 1, alignItems: 'center', paddingTop: 10}}>
+            <View style={styles.description}>
               <Text style={styles.slide_text2}>Description:</Text>
             </View>
             <TextInput placeholder='WRITE HERE' placeholderTextColor='#dd8d6c' style={styles.write} />
           </Image>
-           <Modal
-            animationType={'slide'}
-            transparent={true}
-            visible={this.state.modalVisible}
-            onRequestClose={() => alert()}
-          >
-           <View>
-            
-           </View>
-            
-          </Modal> 
+           <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal}/>
         </Image>
 
       </View>

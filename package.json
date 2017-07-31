@@ -23,7 +23,7 @@
     "fixcode": "standard --fix"
   },
   "dependencies": {
-    "apisauce": "^0.14.0",
+    "apisauce": "^0.14.0",    
     "format-json": "^1.0.3",
     "lodash": "^4.17.2",
     "prop-types": "^15.5.10",

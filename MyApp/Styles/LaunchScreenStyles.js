@@ -133,6 +133,15 @@ export default StyleSheet.create({
     color: '#f3f3f3',
     fontSize: 20
 
+  },
+  description: {
+    flex: 1, 
+    backgroundColor: '#ef8579', 
+    justifyContent: 'center', 
+    borderColor: '#e09579', 
+    borderWidth: 1, 
+    alignItems: 'center', 
+    paddingTop: 10
   }
 
 })
