@@ -13,7 +13,7 @@ import { Slider } from 'react-native-elements'
 import { Images } from '../DevTheme'
 import styles from '../Styles/LaunchScreenStyles'
 import DateTimePicker from 'react-native-modal-datetime-picker'
-import PersianCalendarPicker from 'react-native-persian-calendar-picker'
+
 
 
 export default class HomeScreen extends React.Component {
@@ -21,6 +21,8 @@ export default class HomeScreen extends React.Component {
     super()
     this.state = {
       value: 0,
+      car: false,
+      truck: false,
       switchValue: false,
       van: 0,
       isDateTImePickerVisible: false,
@@ -126,14 +128,14 @@ export default class HomeScreen extends React.Component {
                         Vehicle Size for Rescue
                     </Text>
             <View style={styles.vehicle_img}>
-              <TouchableOpacity style={styles.menu_image}>
-                <Image source={Images.car} />
+              <TouchableOpacity style={styles.menu_image} onPress={()=>this.setState({car:!this.state.car})}>
+                <Image source={this.state.car ? Images.car1 : Images.car} />
               </TouchableOpacity>
               <TouchableOpacity style={styles.menu_image} onPress={() => this.van()}>
                 <Image source={this.state.van === 0 ? Images.van : Images.van1} />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.menu_image}>
-                <Image source={Images.truck} />
+              <TouchableOpacity style={styles.menu_image} onPress={()=>this.setState({truck:!this.state.truck})}>
+                <Image source={this.state.truck ? Images.truck1 : Images.truck} />
               </TouchableOpacity>
             </View>
           </View>
@@ -183,12 +185,7 @@ export default class HomeScreen extends React.Component {
             onRequestClose={() => alert()}
           >
            <View>
-             <PersianCalendarPicker 
-              selectedDate={this.state.date}
-              onDateChange={this.onDateChange}
-              screenWidth={Dimensions.get('window').width}
-              selectedBackgroundColor={'#5ce600'}
-             />
+            
            </View>
             
           </Modal> 
