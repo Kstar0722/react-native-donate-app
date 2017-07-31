@@ -41,7 +41,7 @@ export default class MainScreen extends Component {
     return (
       
         <TouchableOpacity style={styles.Tooltip} onPress={this.tooltip}>
-          <Image source={Images.Tooltip}  />
+          <Image source={Images.Tooltip}  style={{width: 270,height: 142}}/>
         </TouchableOpacity>
       
     )
