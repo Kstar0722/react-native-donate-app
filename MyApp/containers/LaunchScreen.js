@@ -29,6 +29,7 @@ export default class HomeScreen extends React.Component {
       van: 0,
       isDateTImePickerVisible: false,
       picturemodalVisible: false,
+      foodSelectorVisible:false
       date: new Date()
     }
     this.toggleSwitch = this.toggleSwitch.bind(this)
@@ -99,6 +100,13 @@ export default class HomeScreen extends React.Component {
       picturemodalVisible: false
     })
   }
+
+    closeFoodSelectorModal = () => {
+      this.setState({
+        foodSelectorVisible: false
+      })
+    }
+
   setModalVisible = (visible) => {
     this.setState({
       modalVisible: visible
@@ -187,6 +195,9 @@ export default class HomeScreen extends React.Component {
           </Image>
            <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal}/>
         </Image>
+
+        <PictureModal picturemodalVisible={this.state.foodSelectorVisible} close={this.closeFoodSelectorModal}/>
+
 
       </View>
     )

@@ -82,7 +82,7 @@ export default class MainScreen extends Component {
           <TapBar />
         </View>
       </Image>
-      <Modal animationType={"slide"} transparent={true}
+      <Modal transparent={true}
           visible={this.state.reservedModal} onRequestClose={() => {this.modal(false, false,false) }}>
           <View style={styles.mainViewClone}>
             <View style={styles.modalCover}>
@@ -101,7 +101,7 @@ export default class MainScreen extends Component {
             </View>
           </View>
       </Modal>
-      <Modal animationType={"slide"} transparent={true}
+      <Modal transparent={true}
           visible={this.state.openModal} onRequestClose={() => {this.modal(false, false,false)}}>
           <View style={styles.mainViewClone}>
             <View style={styles.modalCover}>
@@ -119,7 +119,7 @@ export default class MainScreen extends Component {
             </View>
             </View>
       </Modal>
-      <Modal animationType={"slide"} transparent={true}
+      <Modal transparent={true}
           visible={this.state.closedModal} onRequestClose={() => {this.modal(false, false,false)}}>
           <View style={styles.mainViewClone}>
             <View style={styles.modalCover}>
