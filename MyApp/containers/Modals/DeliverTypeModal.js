@@ -39,6 +39,7 @@ export default class PictureModal extends React.Component {
                         </TouchableOpacity>                        
                     </View>
                     <Image source={Images.deliverBG} style={styles.deliverBG}>
+                        <Text style={styles.title_}>Select Delivery Type</Text>
                         <TouchableHighlight onPress={this.props.setType1}>
                             <View style={styles.deliverlist} >                            
                                 <Icon name='circle' size={20} color={this.props.deliverType === 1 ? '#dd8d6c' : 'gray'} style={{marginRight: 24}} />
@@ -59,7 +60,9 @@ export default class PictureModal extends React.Component {
                         </TouchableHighlight>
 
                         <TouchableOpacity style={styles.setButton}>
-                            <Image source={Images.setButton} />
+                            <Image source={Images.setButton} style={{justifyContent:'center'}}>
+                                <Text style={{color:'white',alignSelf:'center'}}>SET</Text>
+                            </Image>
                         </TouchableOpacity>
                     </Image>
                 </View>

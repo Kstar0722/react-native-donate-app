@@ -158,13 +158,13 @@ export default class HomeScreen extends React.Component {
                     </Text>
             <View style={styles.vehicle_img}>
               <TouchableOpacity style={styles.menu_image} onPress={()=>this.setState({car:!this.state.car})}>
-                <Image source={this.state.car ? Images.car1 : Images.car} />
+                <Image source={this.state.car ? Images.car1 : Images.car} style={styles.active} />
               </TouchableOpacity>
               <TouchableOpacity style={styles.menu_image} onPress={() => this.van()}>
-                <Image source={this.state.van === 0 ? Images.van : Images.van1} />
+                <Image source={this.state.van === 0 ? Images.van : Images.van1} style={styles.active}/>
               </TouchableOpacity>
               <TouchableOpacity style={styles.menu_image} onPress={()=>this.setState({truck:!this.state.truck})}>
-                <Image source={this.state.truck ? Images.truck1 : Images.truck} />
+                <Image source={this.state.truck ? Images.truck1 : Images.truck} style={styles.active}/>
               </TouchableOpacity>
             </View>
           </View>

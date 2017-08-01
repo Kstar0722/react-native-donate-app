@@ -142,6 +142,10 @@ export default StyleSheet.create({
     borderWidth: 1, 
     alignItems: 'center', 
     paddingTop: 10
+  },
+  active:{
+    width: 83,
+    height: 83
   }
 
 })

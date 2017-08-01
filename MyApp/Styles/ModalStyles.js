@@ -80,5 +80,11 @@ export default StyleSheet.create({
         fontSize: 22,
         fontFamily: 'Avenir',
         color: '#dd8d6c'
+    },
+    title_: {
+        position: 'absolute',
+        top: 18,
+        fontSize: 18,
+        alignSelf: 'center'
     }
 })
