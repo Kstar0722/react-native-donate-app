@@ -30,7 +30,10 @@ const images = {
   CONTINUE: require('../Images/CONTINUE.png'),
   devide: require('../Images/divide.png'),
   libphoto: require('../Images/libphoto.png'),
-  takepicture: require('../Images/takepicture.png')
+  takepicture: require('../Images/takepicture.png'),
+  modalBg: require('../Images/modalBg.png'),
+  closeLock: require('../Images/closeLock.png'),
+  openLock: require('../Images/openLock.png'),
 
 }
 
