@@ -74,7 +74,8 @@ export default StyleSheet.create({
     },
     deliverType: {
         fontSize: 22,
-        fontFamily: 'Avenir'
+        fontFamily: 'Avenir',
+        color: 'gray'
     },
     deliverType1: {
         fontSize: 22,
