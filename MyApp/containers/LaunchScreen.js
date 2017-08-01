@@ -14,7 +14,7 @@ import { Images } from '../DevTheme'
 import styles from '../Styles/LaunchScreenStyles'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import PictureModal from './Modals/pictureModal'
-
+import DeliverTypeModal from './Modals/DeliverTypeModal'
 
 
 
@@ -29,7 +29,9 @@ export default class HomeScreen extends React.Component {
       van: 0,
       isDateTImePickerVisible: false,
       picturemodalVisible: false,
-      date: new Date()
+      date: new Date(),
+      deliverModalVisible: false,
+      deliverType: -1
     }
     this.toggleSwitch = this.toggleSwitch.bind(this)
   }
@@ -77,7 +79,7 @@ export default class HomeScreen extends React.Component {
   }
   deliver_type () {
     return (
-      <TouchableOpacity style={styles.type}>
+      <TouchableOpacity style={styles.type} onPress={()=>this.setState({ deliverModalVisible: true })}>
         <Text style={styles.slide_text1}>Deliver Type:</Text>
         <Icon name='chevron-right' size={20} color='#f3f3f3' style={{backgroundColor: 'transparent'}} />
       </TouchableOpacity>
@@ -99,6 +101,11 @@ export default class HomeScreen extends React.Component {
       picturemodalVisible: false
     })
   }
+  closedeliverModal = () => {
+    this.setState({
+      deliverModalVisible: false
+    })
+  }
   setModalVisible = (visible) => {
     this.setState({
       modalVisible: visible
@@ -106,6 +113,21 @@ export default class HomeScreen extends React.Component {
   }
   onDateChange =(date) => {
     this.setState({date: date})
+  }
+  setdeliverType1 = () => {
+    this.setState({
+      deliverType: 1
+    })
+  }
+  setdeliverType2 = () => {
+    this.setState({
+      deliverType: 2
+    })
+  }
+  setdeliverType3 = () => {
+    this.setState({
+      deliverType: 3
+    })
   }
   render () {
     return (
@@ -178,7 +200,9 @@ export default class HomeScreen extends React.Component {
           <DateTimePicker
             isVisible={this.state.isDateTImePickerVisible}
             onConfirm={this._handleDatePicked}
-            onCancel={this._hideDateTimerPicker} />
+            onCancel={this._hideDateTimerPicker} 
+            mode={'time'}
+            />
           <Image source={Images.bg1} style={styles.footer}>
             <View style={styles.description}>
               <Text style={styles.slide_text2}>Description:</Text>
@@ -186,6 +210,13 @@ export default class HomeScreen extends React.Component {
             <TextInput placeholder='WRITE HERE' placeholderTextColor='#dd8d6c' style={styles.write} />
           </Image>
            <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal}/>
+           <DeliverTypeModal 
+            deliverModalVisible={this.state.deliverModalVisible} 
+            close={this.closedeliverModal}
+            deliverType={this.state.deliverType}
+            setType1={this.setdeliverType1}
+            setType2={this.setdeliverType2}
+            setType3={this.setdeliverType3}/>
         </Image>
 
       </View>

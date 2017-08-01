@@ -27,6 +27,22 @@ export default StyleSheet.create({
         left: 10
         //marginVertical: 25
     },
+    deliverBG: {
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        paddingLeft: 37
+    },
+    headerright: {
+        position: 'absolute',
+        zIndex: 10,
+        right: 10
+    },
+    setButton:{
+        position: 'absolute',
+        bottom: 15,
+        zIndex: 100,
+        alignSelf: 'center'
+    },
     headertitle: {
         color: '#dd8d6c',
         fontSize: 20,
@@ -50,5 +66,19 @@ export default StyleSheet.create({
     },
     pictureimage: {
         marginTop:15
+    },
+    deliverlist: {
+        flexDirection: 'row',
+        marginBottom: 30
+        
+    },
+    deliverType: {
+        fontSize: 22,
+        fontFamily: 'Avenir'
+    },
+    deliverType1: {
+        fontSize: 22,
+        fontFamily: 'Avenir',
+        color: '#dd8d6c'
     }
 })
