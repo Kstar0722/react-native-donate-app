@@ -14,8 +14,7 @@ import { Images } from '../DevTheme'
 import styles from '../Styles/LaunchScreenStyles'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import PictureModal from './Modals/pictureModal'
-
-
+import DescriptionModal from './Modals/descriptionModal'
 
 
 export default class HomeScreen extends React.Component {
@@ -29,7 +28,7 @@ export default class HomeScreen extends React.Component {
       van: 0,
       isDateTImePickerVisible: false,
       picturemodalVisible: false,
-      foodSelectorVisible:false
+      descriptionModalVisible:false,
       date: new Date()
     }
     this.toggleSwitch = this.toggleSwitch.bind(this)
@@ -101,11 +100,12 @@ export default class HomeScreen extends React.Component {
     })
   }
 
-    closeFoodSelectorModal = () => {
-      this.setState({
-        foodSelectorVisible: false
-      })
-    }
+  closeDescriptionModal = () => {
+    this.setState({
+      descriptionModalVisible: false
+    })
+  }
+
 
   setModalVisible = (visible) => {
     this.setState({
@@ -191,13 +191,14 @@ export default class HomeScreen extends React.Component {
             <View style={styles.description}>
               <Text style={styles.slide_text2}>Description:</Text>
             </View>
-            <TextInput placeholder='WRITE HERE' placeholderTextColor='#dd8d6c' style={styles.write} />
+            <TouchableOpacity onPress={()=>this.setState({descriptionModalVisible: true})}>
+            <Text style={styles.write}>WRITE HERE</Text>
+            </TouchableOpacity>
+
           </Image>
+           <DescriptionModal descriptionModalVisible={this.state.descriptionModalVisible} close={this.closeDescriptionModal}/>
            <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal}/>
         </Image>
-
-        <PictureModal picturemodalVisible={this.state.foodSelectorVisible} close={this.closeFoodSelectorModal}/>
-
 
       </View>
     )

@@ -4,6 +4,8 @@ import MainScreen from './containers/MainScreen'
 import SplashScreen from './containers/SplashScreen'
 import SignupScreen from './containers/SignupScreen'
 import BusinessScreen from './containers/BusinessScreen'
+import SideMenu from './containers/SideMenu'
+
 import styles from './Styles/NavigationStyles'
 
 const PrimaryNav = StackNavigator({
@@ -11,7 +13,8 @@ const PrimaryNav = StackNavigator({
   MainScreen: { screen: MainScreen },
   SplashScreen: { screen: SplashScreen },
   SignupScreen: { screen: SignupScreen },
-  BusinessScreen: {screen: BusinessScreen}
+  BusinessScreen: {screen: BusinessScreen},
+    SideMenu: {screen: SideMenu}
 }, {
 
   initialRouteName: 'SplashScreen',

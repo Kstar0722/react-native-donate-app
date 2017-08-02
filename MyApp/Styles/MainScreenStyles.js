@@ -1,7 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
 var {height, width} = Dimensions.get('window');
-console.log(height);
-console.log('------');
 export default StyleSheet.create({
 
   bg: {
@@ -115,6 +113,107 @@ export default StyleSheet.create({
       color:'#FFFFFF',
       textAlign:'center',
       fontWeight:'bold',
+  },
+  sidemenuBody:{
+    width:width,
+    height:height,
+    backgroundColor:'#FFFFFF',
+    paddingVertical:5,
+    paddingHorizontal:5,
+    width:250
+  },
+  sidemenuInner:{
+    paddingHorizontal:5,
+  },
+  sideMneuClose:{
+    width:25,
+    height:24,
+    marginTop:10
+  },
+  profileName:{
+    fontSize:36,
+    color:'#1d1d26',
+    marginTop:15,
+    marginBottom:5,
+  },
+  profileEmail:{
+    fontSize:16,
+    color:'rgba(29, 29, 38, 0.6)',
+    marginBottom:30,
+  },
+  sideMenuRowCover:{
+    flexDirection:'row',
+    paddingVertical:15,
+    alignItems:'center',
+
+  },
+  sideMenuRowCover1:{
+    borderBottomColor:'rgba(29, 29, 38, 0.1)',
+    borderBottomWidth:2,
+
+  },
+  lastSideMenuRowCover:{
+    flexDirection:'row',
+    paddingBottom:20,
+    marginBottom:20,
+    alignItems:'center',
+  },
+  donationIcon:{
+    width:33.33,
+    height:29.33,
+  },
+  impactIcon:{
+    width:29.33,
+    height:29.33,
+  },
+  profileIcon:{
+    width:26.67,
+    height:25.33,
+  },
+  notificationIcon:{
+    width:26,
+    height:30,
+  },
+  logoutIcon:{
+    width:26.67,
+    height:28,
+  },
+  sideMenuTextInput:{
+    paddingVertical:0,
+    paddingHorizontal:15,
+    height:40,
+    lineHeight:40,
+    fontSize:22,
+    flexDirection:'column',
+    marginLeft:10,
+    color:'#1d1d26',
+  },
+  dCount:{
+    fontSize:20,
+    color:'rgba(29, 29, 38, 0.6)',
+  },
+  cNavigation:{
+    flexDirection:'row',
+    marginTop: 20,
+    height: 44,
+    alignItems:'center',
+    paddingHorizontal:15,
+  },
+  whiteNot:{
+    height:22,
+    width:18,
+  },
+  menuIconNav:{
+    height:20,
+    width:15,
+  },
+  refedText:{
+    flex:1,
+    paddingHorizontal:10,
+    textAlign:'center',
+    color:'#fff',
+    fontWeight:'bold',
+    fontSize:16
   }
 
 })

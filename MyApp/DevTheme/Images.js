@@ -34,6 +34,14 @@ const images = {
   modalBg: require('../Images/modalBg.png'),
   closeLock: require('../Images/closeLock.png'),
   openLock: require('../Images/openLock.png'),
+  sideMenuClose: require('../Images/close.png'),
+  donationIcon: require('../Images/donation.png'),
+  impactIcon: require('../Images/impact.png'),
+  profileIcon: require('../Images/profile.png'),
+  notificationIcon: require('../Images/notification.png'),
+  logoutIcon: require('../Images/logout.png'),
+  whiteNot: require('../Images/not.png'),
+  menuList: require('../Images/list.png'),
 
 }
 

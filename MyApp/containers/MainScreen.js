@@ -11,6 +11,9 @@ import { Images } from '../DevTheme'
 import TapBar from './Tapbar'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Icon1 from 'react-native-vector-icons/Ionicons'
+import SideMenu from 'react-native-side-menu'
+import SideBar from './SideMenu'
+
 
 export default class MainScreen extends Component {
   constructor () {
@@ -20,24 +23,15 @@ export default class MainScreen extends Component {
       reservedModal: false,
       openModal: false,
       closedModal: false,
+      isOpenSideMenu:false,
     }
   }
+
   static navigationOptions = {
-    title: 'Refeed America',
-    headerLeft:
-  <TouchableOpacity style={styles.icon}>
-    <Icon name='bars' size={19} color='white' />
-  </TouchableOpacity>,
-    headerRight:
-  <TouchableOpacity style={styles.icon1}>
-    <Icon1 name='ios-notifications' size={30} color='white' />
-  </TouchableOpacity>,
-
-    headerStyle: {
-      backgroundColor: '#dd8d6c'
-    },
-    headerTintColor: 'white'
-
+    header:null,
+  }
+  sideMenuToggle = (flag) => {
+    this.setState({isOpenSideMenu:flag});
   }
   tooltip = () => {
     this.setState({ tooltip: 1 })
@@ -55,11 +49,22 @@ export default class MainScreen extends Component {
       this.setState({reservedModal:reserved, openModal:open, closedModal:closed});
   }
   render () {
-    const { navigate } = this.props.navigation
+    const { navigate } = this.props.navigation;
+    const menu = <SideBar navigator={navigate} close={()=>this.sideMenuToggle(false)}/>;
+
     return (
       <View style={styles.mainView}>
-      <Image source={Images.overlay} style={styles.bg}>
 
+      <SideMenu menu={menu} isOpen={this.state.isOpenSideMenu}>
+      <Image source={Images.overlay} style={styles.bg}>
+      <View style={styles.cNavigation}>
+
+      <TouchableOpacity onPress={() => {this.sideMenuToggle(true)}}>
+          <Image source={Images.menuList} style={styles.menuIconNav} />
+          </TouchableOpacity>
+          <Text style={styles.refedText}>Refeed America</Text>
+          <Image source={Images.whiteNot} style={styles.whiteNot} />
+      </View>
         <View style={styles.menu}>
 
           <TouchableOpacity onPress={() => { this.modal(!this.state.reservedModal, !!this.state.reservedModal, !!this.state.reservedModal) }}>
@@ -137,8 +142,8 @@ export default class MainScreen extends Component {
             </View>
           </View>
       </Modal>
+      </SideMenu>
       </View>
-
     )
   }
 }
