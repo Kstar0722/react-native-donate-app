@@ -46,8 +46,9 @@ export default StyleSheet.create({
     headertitle: {
         color: '#dd8d6c',
         fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: '600',
         marginVertical: 18,
+        fontFamily: 'Avenir'
         
         //marginLeft: Dimensions.get('window').width/2-80
     },
@@ -62,6 +63,7 @@ export default StyleSheet.create({
         color: 'white',
         fontSize: 16,
         marginTop: 9,
+       
         
     },
     pictureimage: {
@@ -86,6 +88,11 @@ export default StyleSheet.create({
         position: 'absolute',
         top: 18,
         fontSize: 18,
-        alignSelf: 'center'
-    }
+        alignSelf: 'center',
+        color: 'gray'
+    },
+    delivericon: {
+        marginRight: 24,
+        marginVertical: 3
+    },
 })
