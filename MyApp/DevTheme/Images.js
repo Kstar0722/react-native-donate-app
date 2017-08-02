@@ -30,8 +30,9 @@ const images = {
   CONTINUE: require('../Images/CONTINUE.png'),
   devide: require('../Images/divide.png'),
   libphoto: require('../Images/libphoto.png'),
-  takepicture: require('../Images/takepicture.png')
-
+  takepicture: require('../Images/takepicture.png'),
+  deliverBG: require('../Images/deliverBG.png'),
+  setButton: require('../Images/setButton.png')
 }
 
 export default images
