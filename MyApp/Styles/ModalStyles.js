@@ -18,9 +18,8 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
-        
     },
+
     headerleft: {
         position: 'absolute',
         zIndex: 10,
@@ -49,7 +48,7 @@ export default StyleSheet.create({
         fontWeight: '600',
         marginVertical: 18,
         fontFamily: 'Avenir'
-        
+
         //marginLeft: Dimensions.get('window').width/2-80
     },
     picturemodal_container: {
@@ -63,16 +62,17 @@ export default StyleSheet.create({
         color: 'white',
         fontSize: 16,
         marginTop: 9,
-       
-        
+
+
     },
     pictureimage: {
         marginTop:15
     },
+
     deliverlist: {
         flexDirection: 'row',
         marginBottom: 30
-        
+
     },
     deliverType: {
         fontSize: 22,
@@ -95,4 +95,59 @@ export default StyleSheet.create({
         marginRight: 24,
         marginVertical: 3
     },
+    dContainer:{
+        height:Dimensions.get('window').height,
+        width:Dimensions.get('window').width,
+        backgroundColor: '#FFFFFF',
+        alignItems: 'center'
+    },
+    dHeader: {
+        backgroundColor: '#dd8d6c',
+        width:Dimensions.get('window').width,
+        height: 20,
+    },
+    dHeaderInner: {
+        width:Dimensions.get('window').width,
+        height: 44,
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
+    },
+    dLeftHeader: {
+        position: 'absolute',
+        zIndex: 10,
+        left: 10
+    },
+    dLeftHeader: {
+        position: 'absolute',
+        zIndex: 10,
+        left: 15
+    },
+    dRightHeader: {
+        position: 'absolute',
+        zIndex: 10,
+        right: 15,
+    },
+    dTitle: {
+        color: '#dd8d6c',
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginVertical: 18,
+    },
+    entryTxt:{
+      color:'#D8D8d8',
+      fontSize:8,
+      paddingHorizontal:15,
+    },
+    mLineText:{
+        color:'#D8D8d8',
+        fontSize:12,
+        padding:15,
+        height:100,
+        marginTop:50,
+        height:Dimensions.get('window').height-(100)
+    }
 })

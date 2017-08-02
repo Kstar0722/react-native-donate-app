@@ -15,7 +15,7 @@ import styles from '../Styles/LaunchScreenStyles'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import PictureModal from './Modals/pictureModal'
 import DeliverTypeModal from './Modals/DeliverTypeModal'
-
+import DescriptionModal from './Modals/descriptionModal'
 
 
 export default class HomeScreen extends React.Component {
@@ -31,7 +31,9 @@ export default class HomeScreen extends React.Component {
       picturemodalVisible: false,
       date: new Date(),
       deliverModalVisible: false,
-      deliverType: -1
+      deliverType: -1,
+      descriptionModalVisible:false,
+      date: new Date()
     }
     this.toggleSwitch = this.toggleSwitch.bind(this)
   }
@@ -106,6 +108,12 @@ export default class HomeScreen extends React.Component {
       deliverModalVisible: false
     })
   }
+  closeDescriptionModal = () => {
+    this.setState({
+      descriptionModalVisible: false
+    })
+  }
+
   setModalVisible = (visible) => {
     this.setState({
       modalVisible: visible
@@ -200,18 +208,22 @@ export default class HomeScreen extends React.Component {
           <DateTimePicker
             isVisible={this.state.isDateTImePickerVisible}
             onConfirm={this._handleDatePicked}
-            onCancel={this._hideDateTimerPicker} 
+            onCancel={this._hideDateTimerPicker}
             mode={'time'}
             />
           <Image source={Images.bg1} style={styles.footer}>
             <View style={styles.description}>
               <Text style={styles.slide_text2}>Description:</Text>
             </View>
-            <TextInput placeholder='WRITE HERE' placeholderTextColor='#dd8d6c' style={styles.write} />
+            <TouchableOpacity onPress={()=>this.setState({descriptionModalVisible: true})}>
+            <Text style={styles.write}>WRITE HERE</Text>
+            </TouchableOpacity>
+
           </Image>
+           <DescriptionModal descriptionModalVisible={this.state.descriptionModalVisible} close={this.closeDescriptionModal}/>
            <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal}/>
-           <DeliverTypeModal 
-            deliverModalVisible={this.state.deliverModalVisible} 
+           <DeliverTypeModal
+            deliverModalVisible={this.state.deliverModalVisible}
             close={this.closedeliverModal}
             deliverType={this.state.deliverType}
             setType1={this.setdeliverType1}

@@ -25,11 +25,11 @@ export default StyleSheet.create({
     marginBottom: 50
   },
   write: {
-    flex: 1,
     justifyContent: 'center',
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginLeft: 40
+    paddingTop: 25,
+    paddingBottom: 25,
+    paddingLeft: 40,
+    color:'#dd8d6c',
   },
   menu: {
     flex: 1,
@@ -135,17 +135,23 @@ export default StyleSheet.create({
 
   },
   description: {
-    flex: 1, 
-    backgroundColor: '#ef8579', 
-    justifyContent: 'center', 
-    borderColor: '#e09579', 
-    borderWidth: 1, 
-    alignItems: 'center', 
+    flex: 1,
+    backgroundColor: '#ef8579',
+    justifyContent: 'center',
+    borderColor: '#e09579',
+    borderWidth: 1,
+    alignItems: 'center',
     paddingTop: 10
   },
   active:{
     width: 83,
-    height: 83
+    height: 83,
+    flex: 1,
+    backgroundColor: '#ef8579',
+    justifyContent: 'center',
+    borderColor: '#e09579',
+    borderWidth: 1,
+    alignItems: 'center',
   }
 
 })
