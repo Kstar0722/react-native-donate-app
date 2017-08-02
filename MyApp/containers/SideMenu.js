@@ -42,11 +42,6 @@ export default class MainScreen extends Component {
              <Text style={styles.sideMenuTextInput}>Profile</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.sideMenuRowCover1}>
-        <TouchableOpacity activeOpacity={1} style={styles.sideMenuRowCover}>
-           <Text style={styles.sideMenuTextInput}></Text>
-        </TouchableOpacity>
-      </View>
       <View style={styles.sideMenuRowCover1}>
           <TouchableOpacity style={styles.sideMenuRowCover}>
             <Image source={Images.notificationIcon} style={styles.notificationIcon} />
