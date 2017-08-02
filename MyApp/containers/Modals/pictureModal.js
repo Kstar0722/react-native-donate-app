@@ -7,7 +7,7 @@ import { Text,
   Modal,
   Dimensions
 } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/Ionicons'
 import { Images } from '../../DevTheme'
 import styles from '../../Styles/ModalStyles'
 
@@ -28,7 +28,7 @@ export default class PictureModal extends React.Component {
                     <View style={styles.header1}></View>
                     <View style={styles.header}>
                         <TouchableOpacity style={styles.headerleft} onPress={this.props.close}>
-                            <Icon name='arrow-left' size={20} color='#dd8d6c'/>
+                            <Icon name='md-arrow-back' size={20} color='#dd8d6c'/>
                         </TouchableOpacity>
                         <Text style={styles.headertitle}>Add photo</Text>
                     </View>
@@ -36,7 +36,7 @@ export default class PictureModal extends React.Component {
                         <Image source={Images.libphoto} />
                     </TouchableOpacity>
                     <Text style={styles.picturetext}>Add image from your photo</Text>
-                    <Text style={{color: 'white', fontSize: 16}}>library</Text>
+                    <Text style={{color: 'white', fontSize: 16,marginBottom:15}}>library</Text>
                     <TouchableOpacity style={styles.pictureimage}>
                         <Image source={Images.takepicture} />
                     </TouchableOpacity>
