@@ -53,7 +53,7 @@ export default StyleSheet.create({
     color: '#f3f3f3'
   },
   vehicle_img: {
-    flex:1,
+
     flexDirection: 'row',
     alignItems: 'center'
     // marginTop: 17,
@@ -163,7 +163,7 @@ export default StyleSheet.create({
     overflow:'hidden',
     paddingRight:20,
     flexWrap:'wrap',
-    width:Dimensions.get('window').width-(170),
+      width:Dimensions.get('window').width-(170),
   },
   editContent:{
       paddingVertical:5,

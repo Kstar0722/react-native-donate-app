@@ -29,7 +29,7 @@ export default class HomeScreen extends React.Component {
       isDateTImePickerVisible: false,
       picturemodalVisible: false,
       descriptionModalVisible:false,
-      date: new Date()
+      date: new Date(),
     }
     this.toggleSwitch = this.toggleSwitch.bind(this)
   }
@@ -142,7 +142,6 @@ export default class HomeScreen extends React.Component {
       </TouchableOpacity>);
     }
   }
-
 
   render () {
     return (
