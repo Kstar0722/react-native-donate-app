@@ -6,7 +6,7 @@ import { Text,
   Switch,
   Modal,
   Dimensions,
-  TextInput
+  TextInput,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { Images } from '../../DevTheme'
@@ -17,17 +17,20 @@ export default class DescriptionModal extends React.Component {
     constructor() {
         super ()
         this.state={
-          descriptionText:'',
+          descriptionText:_dText,
         }
 
     }
     shareMessage = (t) => {
-        let descriptionText='';
+      let p=_dText;
+      _dText=''
         if(t){
-            descriptionText=t.trim();
+              this.setState({descriptionText:t});
+        }else{
+            this.setState({descriptionText:''});
         }
+        _dText=t;
 
-        this.setState({descriptionText : descriptionText});
     }
 
     render () {
@@ -38,6 +41,7 @@ export default class DescriptionModal extends React.Component {
                 visible={this.props.descriptionModalVisible}
                 onRequestClose={() => alert()}
             >
+
                 <View style={styles.dContainer}>
                     <View style={styles.dHeader}></View>
                     <View style={styles.dHeaderInner}>
@@ -53,13 +57,15 @@ export default class DescriptionModal extends React.Component {
                     <View>
                       <Text style={styles.entryTxt}>Entry for January 4, 2017 | 10:30 PM</Text>
                     </View>
-                    <TextInput style={styles.mLineText} multiline={true} editable={true}
+                    <View style={{flex:1}}>
+                    <TextInput style={[styles.mLineText]} multiline={true} editable={true}
                         underlineColorAndroid="transparent"
+                        value={this.state.descriptionText}
                         onChangeText={(t) => this.shareMessage(t)}
                     />
-
+                    </View>
+                  <KeyboardSpacer />
                 </View>
-                <KeyboardSpacer />
             </Modal>
         );
     }

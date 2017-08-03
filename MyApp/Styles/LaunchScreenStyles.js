@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet,Dimensions } from 'react-native'
 
 export default StyleSheet.create({
   container: {
@@ -15,7 +15,7 @@ export default StyleSheet.create({
   footer: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
 
   },
   button: {
@@ -28,7 +28,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     paddingTop: 25,
     paddingBottom: 25,
-    paddingLeft: 40,
+    paddingLeft: 20,
     color:'#dd8d6c',
   },
   menu: {
@@ -53,7 +53,7 @@ export default StyleSheet.create({
     color: '#f3f3f3'
   },
   vehicle_img: {
-
+    flex:1,
     flexDirection: 'row',
     alignItems: 'center'
     // marginTop: 17,
@@ -141,6 +141,36 @@ export default StyleSheet.create({
     borderColor: '#e09579',
     borderWidth: 1,
     alignItems: 'center',
-  }
+  },
+  active:{
+    width: 83,
+    height: 83,
+    flex: 1,
+    backgroundColor: '#ef8579',
+    justifyContent: 'center',
+    borderColor: '#e09579',
+    borderWidth: 1,
+    alignItems: 'center',
+  },
+  write1: {
+    paddingHorizontal: 20,
+    width:80,
+    color:'#dd8d6c',
+    overflow:'hidden',
+  },
+  write3: {
+    color:'#dd8d6c',
+    overflow:'hidden',
+    paddingRight:20,
+    flexWrap:'wrap',
+    width:Dimensions.get('window').width-(170),
+  },
+  editContent:{
+      paddingVertical:5,
+    flexDirection:'row',
+    height:67,
+    alignItems:'center',
+    overflow:'hidden',
+}
 
 })

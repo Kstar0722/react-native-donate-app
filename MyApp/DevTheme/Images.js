@@ -42,7 +42,9 @@ const images = {
   logoutIcon: require('../Images/logout.png'),
   whiteNot: require('../Images/not.png'),
   menuList: require('../Images/list.png'),
-
+  markPostIcon: require('../Images/post.png'),
+  postIcon: require('../Images/pBack.png'),
+  bgImage: require('../Images/modalBg.png'),
 }
 
 export default images

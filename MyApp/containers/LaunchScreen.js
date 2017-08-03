@@ -15,7 +15,7 @@ import styles from '../Styles/LaunchScreenStyles'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import PictureModal from './Modals/pictureModal'
 import DescriptionModal from './Modals/descriptionModal'
-
+_dText='';
 
 export default class HomeScreen extends React.Component {
   constructor () {
@@ -77,7 +77,7 @@ export default class HomeScreen extends React.Component {
   }
   deliver_type () {
     return (
-      <TouchableOpacity style={styles.type}>
+      <TouchableOpacity style={styles.type} onPress={()=>this.setState({ deliverModalVisible: true })}>
         <Text style={styles.slide_text1}>Deliver Type:</Text>
         <Icon name='chevron-right' size={20} color='#f3f3f3' style={{backgroundColor: 'transparent'}} />
       </TouchableOpacity>
@@ -99,13 +99,16 @@ export default class HomeScreen extends React.Component {
       picturemodalVisible: false
     })
   }
-
+  closedeliverModal = () => {
+    this.setState({
+      deliverModalVisible: false
+    })
+  }
   closeDescriptionModal = () => {
     this.setState({
       descriptionModalVisible: false
     })
   }
-
 
   setModalVisible = (visible) => {
     this.setState({
@@ -115,6 +118,32 @@ export default class HomeScreen extends React.Component {
   onDateChange =(date) => {
     this.setState({date: date})
   }
+  writeHere = () => {
+    let t='';
+      if(_dText){
+          if(_dText.length>50){
+              t=_dText.substring(0, 49)+'...';
+          }else{
+            t=_dText;
+          }
+
+        return (
+          <View style={styles.editContent}>
+              <TouchableOpacity  onPress={()=>this.setState({descriptionModalVisible: true})}>
+                  <Text style={styles.write1}>EDIT</Text>
+              </TouchableOpacity>
+              <Text style={styles.write3}>{t}</Text>
+              <Image source={Images.markPostIcon}  style={{width: 130,height: 131, right:0, bottom:0, position:'absolute', zIndex:999999}}/>
+        </View>)
+    }else{
+      return (<TouchableOpacity onPress={()=>this.setState({descriptionModalVisible: true})}>
+          <Text style={styles.write}>WRITE HERE</Text>
+          <Image source={Images.postIcon}  style={{width: 81,height: 65, right:0, bottom:0, position:'absolute'}}/>
+      </TouchableOpacity>);
+    }
+  }
+
+
   render () {
     return (
       <View style={styles.container}>
@@ -144,13 +173,13 @@ export default class HomeScreen extends React.Component {
                     </Text>
             <View style={styles.vehicle_img}>
               <TouchableOpacity style={styles.menu_image} onPress={()=>this.setState({car:!this.state.car})}>
-                <Image source={this.state.car ? Images.car1 : Images.car} />
+                <Image source={this.state.car ? Images.car1 : Images.car} style={styles.active} />
               </TouchableOpacity>
               <TouchableOpacity style={styles.menu_image} onPress={() => this.van()}>
-                <Image source={this.state.van === 0 ? Images.van : Images.van1} />
+                <Image source={this.state.van === 0 ? Images.van : Images.van1} style={styles.active}/>
               </TouchableOpacity>
               <TouchableOpacity style={styles.menu_image} onPress={()=>this.setState({truck:!this.state.truck})}>
-                <Image source={this.state.truck ? Images.truck1 : Images.truck} />
+                <Image source={this.state.truck ? Images.truck1 : Images.truck} style={styles.active}/>
               </TouchableOpacity>
             </View>
           </View>
@@ -186,15 +215,14 @@ export default class HomeScreen extends React.Component {
           <DateTimePicker
             isVisible={this.state.isDateTImePickerVisible}
             onConfirm={this._handleDatePicked}
-            onCancel={this._hideDateTimerPicker} />
+            onCancel={this._hideDateTimerPicker}
+            mode={'time'}
+            />
           <Image source={Images.bg1} style={styles.footer}>
             <View style={styles.description}>
               <Text style={styles.slide_text2}>Description:</Text>
             </View>
-            <TouchableOpacity onPress={()=>this.setState({descriptionModalVisible: true})}>
-            <Text style={styles.write}>WRITE HERE</Text>
-            </TouchableOpacity>
-
+            {this.writeHere()}
           </Image>
            <DescriptionModal descriptionModalVisible={this.state.descriptionModalVisible} close={this.closeDescriptionModal}/>
            <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal}/>
