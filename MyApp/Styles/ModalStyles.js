@@ -103,7 +103,12 @@ export default StyleSheet.create({
     dHeader: {
         backgroundColor: '#dd8d6c',
         width:Dimensions.get('window').width,
-        height: 20,
+        height: 30,
+    },
+    dDoneBtn:{
+      color:'#7696F9',
+      fontSize: 12,
+      fontWeight:'bold',
     },
     dHeaderInner: {
         width:Dimensions.get('window').width,
@@ -114,6 +119,15 @@ export default StyleSheet.create({
         justifyContent: 'center',
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
+        top:-10,
+        borderBottomWidth:2,
+        borderBottomColor: 'rgba(216,216,216,0.8)',
+        shadowColor: '#D8D8D8',
+        shadowOffset: {
+        width:0,
+        height: 2,
+},
+shadowOpacity: 0.7,
     },
     dLeftHeader: {
         position: 'absolute',

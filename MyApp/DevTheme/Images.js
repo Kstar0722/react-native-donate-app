@@ -45,6 +45,10 @@ const images = {
   markPostIcon: require('../Images/post.png'),
   postIcon: require('../Images/pBack.png'),
   bgImage: require('../Images/modalBg.png'),
+  grayVan: require('../Images/grayVan.png'),
+  duplicate: require('../Images/duplicate.png'),
+  greenLock: require('../Images/greenLock.png'),
+
 }
 
 export default images
