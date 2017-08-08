@@ -48,6 +48,9 @@ const images = {
   grayVan: require('../Images/grayVan.png'),
   duplicate: require('../Images/duplicate.png'),
   greenLock: require('../Images/greenLock.png'),
+  cLock: require('../Images/cLock.png'),
+  upArrow: require('../Images/upArrow.png'),
+  downArrow: require('../Images/downArrow.png'),
 
 }
 

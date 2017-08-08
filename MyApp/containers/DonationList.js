@@ -6,7 +6,7 @@ import {
   Modal,
   Text
 } from 'react-native'
-import styles from '../Styles/DonationListStyles'
+import styles from '../Styles/DonationStyles'
 import { Images } from '../DevTheme'
 import TapBar from './Tapbar'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -17,11 +17,11 @@ export default class MainScreen extends Component {
   constructor () {
     super()
     this.state = {
-      tooltip: 0,
-      reservedModal: false,
-      openModal: false,
-      closedModal: false,
-      reservedDonation:true,
+        tooltip: 0,
+        reservedModal: false,
+        openModal: false,
+        closedModal: false,
+        reservedDonation:true,
     }
   }
 

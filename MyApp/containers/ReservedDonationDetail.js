@@ -6,7 +6,7 @@ import {
   Modal,
   Text
 } from 'react-native'
-import styles from '../Styles/DonationDetailStyles'
+import styles from '../Styles/ReservedDonationDetailStyles'
 import { Images } from '../DevTheme'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -22,6 +22,7 @@ export default class MainScreen extends Component {
       openModal: false,
       closedModal: false,
       reservedDonation:true,
+      isDetailShow:false
     }
   }
 
@@ -32,16 +33,32 @@ export default class MainScreen extends Component {
   modal = (reserved, open, closed) => {
       this.setState({reservedModal:reserved, openModal:open, closedModal:closed});
   }
+  descriptionDetail = () => {
+      if(this.state.isDetailShow){
+            return (
+                  <Text style={styles.ddDescription}>{'This is where the description will be the donation description will be continues and continues and continues and continues and continues and continues and continues and continues and continues and continues and continues and continues and continues and continues'}</Text>
+              )
+      }else{
+         return ;
+      }
+  }
+
+  arrowOnContent = () => {
+      if(this.state.isDetailShow){
+          return (<Image source={Images.upArrow} style={styles.cLockR} />);
+      }else{
+          return (<Image source={Images.downArrow} style={styles.cLockR} />)
+      }
+  }
   render () {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.mainView}>
-          <Image source={Images.overlay} style={styles.bg}>
               <View style={styles.cNavigation}>
-                  <TouchableOpacity onPress={() => {}}>
+                  <TouchableOpacity>
                       <Image source={Images.menuList} style={styles.menuIconNav} />
                   </TouchableOpacity>
-                  <Text style={styles.refedText}>Jan 11, 2017- 11:30 PM</Text>
+                  <Text style={styles.refedText}>Jan 101, 2017- 11:30 PM</Text>
                   <Image source={Images.whiteNot} style={styles.whiteNot} />
               </View>
               <View style={{backgroundColor: 'white'}}>
@@ -60,16 +77,26 @@ export default class MainScreen extends Component {
                       <Image source={Images.grayVan} style={styles.grayVan} />
                   </View>
                   <View style={styles.ddDescriptionBox}>
-                    <Text style={styles.ddTitle}>Description:</Text>
-                    <Text style={styles.ddDescription}>This is where the description will.be. the donation description will be continues and continues
-                     and continues and continues and continues and continues and continues and continues and continues
-                      and continues and continues and continues and continues and continues</Text>
-                      <TouchableOpacity style={styles.ddEditBtn}>
-                          <Text style={styles.ddEdit}>EDIT</Text>
-                      </TouchableOpacity>
+                    <TouchableOpacity style={styles.ddTitleRCover}  onPress={() => {this.setState({isDetailShow:!this.state.isDetailShow});}}>
+                          <Text style={styles.ddTitleR}>SHOW DESCRIPTION </Text>
+                          {this.arrowOnContent()}
+
+                    </TouchableOpacity>
+                    {this.descriptionDetail()}
                   </View>
               </View>
+              <Text  style={styles.ddReservedByLabel}>RESERVED BY:</Text>
+              <View style={styles.ddHope}>
+                <Text style={styles.ddHopeText}>Churs of Hope</Text>
+                <Text style={styles.ddHopeProfile}>CLICK TO VIEW PROFILE</Text>
+              </View>
               <View style={styles.ddBtnBox}>
+                  <View style={{flex:1, alignItems:'center'}}>
+                      <View style={styles.ddBtnCircle}>
+                          <Image source={Images.cLock} style={styles.cLock} />
+                      </View>
+                      <Text style={styles.ddBtnText}>Open</Text>
+                  </View>
                   <View style={{flex:1, alignItems:'center'}}>
                       <View style={styles.ddBtnCircle}>
                           <Image source={Images.duplicate} style={styles.ddDuplicate} />
@@ -83,7 +110,6 @@ export default class MainScreen extends Component {
                       <Text style={styles.ddBtnText}>Close</Text>
                   </View>
               </View>
-          </Image>
       </View>
     )
   }
