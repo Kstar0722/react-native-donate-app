@@ -51,6 +51,11 @@ const images = {
   cLock: require('../Images/cLock.png'),
   upArrow: require('../Images/upArrow.png'),
   downArrow: require('../Images/downArrow.png'),
+  fDonationheader: require('../Images/fDonationheader.png'),
+  fDbar: require('../Images/fDbar.png'),
+  fDsearch: require('../Images/fDsearch.png'),
+  fDowal: require('../Images/Oval.png'),
+  fDmessage: require('../Images/fDMesage.png'),
 
 }
 
