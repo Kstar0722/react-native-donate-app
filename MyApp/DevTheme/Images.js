@@ -56,6 +56,13 @@ const images = {
   fDsearch: require('../Images/fDsearch.png'),
   fDowal: require('../Images/Oval.png'),
   fDmessage: require('../Images/fDMesage.png'),
+  triangle: require('../Images/triangle.png'),
+  wCarRedBack: require('../Images/WhiteCarRedBack.png'),
+  wVanRedBack: require('../Images/WhiteVanRedBack.png'),
+  donaterName: require('../Images/donaterName.png'),
+  marker: require('../Images/marker.png'),
+  close: require('../Images/close.png'),
+  orangeLock: require('../Images/orangeCloseLock.png'),
 
 }
 

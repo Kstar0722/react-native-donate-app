@@ -1,6 +1,6 @@
 import { StackNavigator } from 'react-navigation'
 import LaunchScreen from './containers/LaunchScreen'
-import MainScreen from './containers/FindDonation'
+import MainScreen from './containers/EmptyDonation'
 import SplashScreen from './containers/SplashScreen'
 import SignupScreen from './containers/SignupScreen'
 import BusinessScreen from './containers/BusinessScreen'

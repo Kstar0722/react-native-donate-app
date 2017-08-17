@@ -8,6 +8,10 @@ export default StyleSheet.create({
     width:width,
     height:64,
   },
+  fDheadr2:{
+    width:width,
+    height:115,
+  },
   cNavigation:{
     flexDirection:'row',
     marginTop: 20,
@@ -42,9 +46,21 @@ export default StyleSheet.create({
       width:width,
       flexDirection:'row',
       alignItems:'center',
-      top:60,
-      //backgroundColor:'#979797',
-      //backgroundColor:'rgba(130, 131, 150, 0.8)',
+      backgroundColor:'transparent',
+      bottom:0,
+      position:'absolute',
+      zIndex:1
+  },
+  mainViewClone2:{
+      height:height,
+      width:width,
+      flexDirection:'row',
+      alignItems:'center',
+      backgroundColor:'rgba(0,0,0,0.3)',
+      bottom:0,
+      position:'absolute',
+      zIndex:1,
+      
   },
   opacityBtn:{
       height:height,
@@ -58,12 +74,21 @@ export default StyleSheet.create({
     width:width,
   },
   modalBody:{
+    alignSelf:'center',
+    backgroundColor:'#52536E',
+    padding:20,
+    alignItems:'center',
+    borderRadius:15,
+  },
+  modalBodyToggle:{
     width:294,
     alignSelf:'center',
     backgroundColor:'#52536E',
     padding:20,
     alignItems:'center',
     borderRadius:15,
+    bottom:90,
+    position:'absolute',
   },
   smallText:{
     fontSize:12,
@@ -78,14 +103,13 @@ export default StyleSheet.create({
       color:'#FFFFFF',
       textAlign:'center',
       fontWeight:'bold',
-      backgroundColor:'#FFB660',
-      width:115,
-      paddingVertical:10,
-      borderRadius:10,
       fontSize:9,
     },
     gotItBtn:{
-      borderRadius:10,
+      backgroundColor:'#FFB660',
+      width:115,
+      paddingVertical:10,
+      borderRadius:5,
     },
   fDsearch:{
     width:18,
@@ -100,7 +124,6 @@ export default StyleSheet.create({
     height:18,
   },
   fDfooter:{
-
     backgroundColor:'#ffffff',
   },
   fDfooterInner:{
@@ -125,10 +148,144 @@ export default StyleSheet.create({
        alignItems:'center',
   },
   fDcenterBtn:{
-      top:-12
+      top:-12,
   },
   searchBtnText:{
     color:'#666666',
     fontSize:14,
+  },
+  MapView:{
+    width:width,
+    height:height-110,
+  },
+  triangle:{
+    width:35,
+    height:16,
+    bottom:-33,
+  },
+  mapViewDetail:{
+      paddingHorizontal:15,
+      paddingTop:15,
+  },
+
+  listMapView:{
+    width:width-30,
+    height:105,
+    borderRadius:10
+  },
+  listMapViewText:{
+    padding:20,
+    backgroundColor:'#FFFFFF',
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    top:-10,
+  },
+  listMapViewTopRow:{
+      flexDirection:'row',
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10
+  },
+  donaterName:{
+    width:40,
+    height:40,
+    borderRadius:20,
+    marginRight:10,
+  },
+  name:{
+    fontSize:16,
+    color:'#2C2C3D',
+  },
+  nameText:{
+    color:'#666666',
+    fontSize:12,
+  },
+  distance:{
+    color:'#2C2C3D',
+    fontSize:16,
+    alignContent:'flex-end',
+    alignSelf:'flex-end'
+  },
+  description:{
+    fontSize:14,
+    color:'#2C2C3D',
+    marginTop:10,
+  },
+  vehicleIcon:{
+    width:94,
+    height:96,
+    position:'absolute',
+    right:0,
+    top:-30,
+    zIndex:1
+  },
+  markericon:{
+      width:14,
+      height:20,
+  },
+  absCover:{
+    width:width,
+    height:height-110,
+    position:'absolute',
+    top:0,
+  },
+  navigatioNsearch:{
+    backgroundColor:'#FFFFFF',
+    paddingVertical:0,
+    height:30,
+    borderRadius:5,
+    fontSize:14,
+    textAlign:'center',
+    width:width-20,
+    alignSelf:'center',
+    marginVertical:10,
+    color:'#8C8C8C',
+  },
+  textSmAdd:{
+    fontSize:8,
+    color:'#000000',
+    textAlign:'center',
+    top:-10,
+  },
+  close:{
+    width:40,
+    height:40,
+    right:5,
+    position:'absolute',
+    zIndex:99,
+  },
+  wCircle:{
+    width:66,
+    height:66,
+    borderRadius:33,
+    backgroundColor:'#FFFFFF',
+    alignItems:'center',
+    marginTop:20,
+  },
+  orangeLock:{
+    width:19,
+    height:24,
+    top:20,
+  },
+  rescue:{
+    color:'#FFFFFF',
+    fontSize:12,
+    marginTop:10,
+  },
+  timeSet:{
+    flexDirection:'row',
+  },
+  timeSetPart:{
+    flex:1,
+  },
+  timeSetPartTitle:{
+      color:'#2C2C3D',
+      fontSize:12,
+      textAlign:'center' ,
+  },
+  timeSetPartTitleValue:{
+    color:'#666666',
+    fontSize:12,
+    textAlign:'center' ,
+    marginTop:10,
   }
 })

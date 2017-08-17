@@ -6,19 +6,20 @@ import {
   Modal,
   Text,
   Switch,
+  ScrollView,
+  TextInput
 } from 'react-native'
 import styles from '../Styles/FindDonationStyles'
 import { Images } from '../DevTheme'
 import TapBar from './Tapbar'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Icon1 from 'react-native-vector-icons/Ionicons'
-
+import MapView from 'react-native-maps';
 
 export default class MainScreen extends Component {
   constructor () {
     super()
     this.state = {
-        closedModal: true,
         switchValue: false,
     }
     this.toggleSwitch = this.toggleSwitch.bind(this)
@@ -34,9 +35,21 @@ export default class MainScreen extends Component {
     header:null,
   }
 
-  modal = (closed) => {
-      this.setState({closedModal:closed});
+
+  mapView = () => {
+     if(this.state.switchValue){
+       return(<MapView style={styles.MapView}
+         initialRegion={{
+           latitude: 37.78825,
+           longitude: -122.4324,
+           latitudeDelta: 0.0922,
+           longitudeDelta: 0.0421,
+         }}/>);
+     }else{
+       return;
+     }
   }
+
   render () {
     const { navigate } = this.props.navigation;
 
@@ -50,44 +63,111 @@ export default class MainScreen extends Component {
               <Text style={styles.refedText}>Find a Donation</Text>
               <Text style={styles.refedSmallText}>Map View ?</Text>
               <Switch onValueChange={this.toggleSwitch} value={this.state.switchValue}
-              onTintColor='#FFFFFF'/>
+              onTintColor='#96A883'/>
           </View>
       </Image>
+      <View style={{backgroundColor: 'white', flex: 1,backgroundColor:'#EAEAEA'}}>
+        {this.mapView()}
 
-        <View style={{backgroundColor: 'white', flex: 1}}>
-        <Modal transparent={true}
-            visible={this.state.closedModal} onRequestClose={() => {this.modal(false)}}>
-            <View style={styles.mainViewClone}>
-              <View style={styles.modalCover}>
-              <View style={styles.modalBody}>
-                  <Text style={styles.smallText}>No donations available at this time. </Text>
-                  <TouchableOpacity style={styles.gotItBtn} onPress={() => { this.modal(false, false,false) }}>
-                      <Text style={styles.gotItBtnTxt}>Ok</Text>
-                  </TouchableOpacity>
-              </View>
-              </View>
+            <View>
+            <ScrollView>
+            <View style={styles.mapViewDetail}>
+                <MapView style={styles.listMapView}
+                  initialRegion={{
+                    latitude: 37.78825,
+                    longitude: -122.4324,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                  }}>
+                <MapView.Marker style={styles.markericon}
+                  coordinate={{
+                      latitude: 37.78825,
+                      longitude:-122.4324}}
+                      image={require('../Images/marker.png')} />
+                </MapView>
+                <View style={styles.listMapViewText}>
+                    <Image source={Images.wCarRedBack} style={styles.vehicleIcon} />
+                    <View style={styles.listMapViewTopRow}>
+                        <Image source={Images.donaterName} style={styles.donaterName} />
+                        <View style={{flex:1}}>
+                            <Text style={styles.name}>Donator Name</Text>
+                            <Text style={styles.nameText}>Perishable, Produce</Text>
+                        </View>
+                        <Text style={styles.distance}>2 mi</Text>
+                    </View>
+                    <Text style={styles.description}>Description of the donation goes here. Clicking on this will show more informaition</Text>
+                </View>
             </View>
-        </Modal>
-
-
-          {/*<TouchableOpacity onPress={() => navigate('LaunchScreen')} style={styles.addButton}>
-            <Image source={Images.addButton} />
-          </TouchableOpacity>
-          <TapBar />*/}
+            <View style={styles.mapViewDetail}>
+                <MapView style={styles.listMapView}
+                  initialRegion={{
+                    latitude: 37.78825,
+                    longitude: -122.4324,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                  }}>
+                <MapView.Marker style={styles.markericon}
+                  coordinate={{
+                      latitude: 37.78825,
+                      longitude:-122.4324}}
+                      image={require('../Images/marker.png')} />
+                </MapView>
+                <View style={styles.listMapViewText}>
+                    <Image source={Images.wVanRedBack} style={styles.vehicleIcon} />
+                    <View style={styles.listMapViewTopRow}>
+                        <Image source={Images.donaterName} style={styles.donaterName} />
+                        <View style={{flex:1}}>
+                            <Text style={styles.name}>Donator Name</Text>
+                            <Text style={styles.nameText}>Perishable, Produce</Text>
+                        </View>
+                        <Text style={styles.distance}>3 mi</Text>
+                    </View>
+                    <Text style={styles.description}>Description of the donation goes here. Clicking on this will show more informaition</Text>
+                </View>
+            </View>
+            <View style={styles.mapViewDetail}>
+                <MapView style={styles.listMapView}
+                  initialRegion={{
+                    latitude: 37.78825,
+                    longitude: -122.4324,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                  }}>
+                <MapView.Marker style={styles.markericon}
+                  coordinate={{
+                      latitude: 37.78825,
+                      longitude:-122.4324}}
+                      image={require('../Images/marker.png')} />
+                </MapView>
+                <View style={styles.listMapViewText}>
+                    <Image source={Images.wCarRedBack} style={styles.vehicleIcon} />
+                    <View style={styles.listMapViewTopRow}>
+                        <Image source={Images.donaterName} style={styles.donaterName} />
+                        <View style={{flex:1}}>
+                            <Text style={styles.name}>Donator Name</Text>
+                            <Text style={styles.nameText}>Perishable, Produce</Text>
+                        </View>
+                        <Text style={styles.distance}>2 mi</Text>
+                    </View>
+                    <Text style={styles.description}>Description of the donation goes here. Clicking on this will show more informaition</Text>
+                </View>
+            </View>
+            </ScrollView>
+            </View>
         </View>
         <View style={styles.fDfooter}>
         <View style={styles.fDfooterInner}>
             <View style={styles.fDBtnActive}>
-            <TouchableOpacity onPress={() => { this.modal(false, false,false) }} style={styles.fBtn}>
+            <TouchableOpacity style={styles.fBtn}>
                 <Image source={Images.fDsearch} style={styles.fDsearch} />
                 <Text style={styles.searchBtnText}>Search</Text>
             </TouchableOpacity>
             </View>
 
-            <TouchableOpacity onPress={() => { this.modal(false, false,false) }} style={styles.fDcenterBtn}>
+            <TouchableOpacity style={styles.fDcenterBtn}>
                 <Image source={Images.fDowal} style={styles.fDowal} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => { this.modal(false, false,false) }} style={{flex:1, alignItems:'center'}}>
+            <TouchableOpacity style={{flex:1, alignItems:'center'}}>
                 <Image source={Images.fDmessage} style={styles.fDmessage} />
                 <Text style={styles.searchBtnText}>Message</Text>
             </TouchableOpacity>
