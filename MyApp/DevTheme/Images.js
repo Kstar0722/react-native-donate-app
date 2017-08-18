@@ -63,6 +63,15 @@ const images = {
   marker: require('../Images/marker.png'),
   close: require('../Images/close.png'),
   orangeLock: require('../Images/orangeCloseLock.png'),
+  redOpenLock: require('../Images/redOpenLock.png'),
+  callIcon: require('../Images/callIcon.png'),
+  backIcon: require('../Images/backIcon.png'),
+  cancelIcon: require('../Images/cancelIcon.png'),
+  foodBoxes: require('../Images/foodboxes.png'),
+  flagIcon: require('../Images/flagIcon.png'),
+
+
+
 
 }
 

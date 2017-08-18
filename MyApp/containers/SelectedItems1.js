@@ -112,7 +112,7 @@ modal= (closed) =>{
                       latitudeDelta: 0.0922,
                       longitudeDelta: 0.0421,
                     }}>
-                  
+                
                   </MapView>
                   <View style={styles.listMapViewText}>
                       <Image source={Images.wVanRedBack} style={styles.vehicleIcon} />
@@ -135,25 +135,28 @@ modal= (closed) =>{
                         </TouchableOpacity>
                   </View>
               </View>
-              <TouchableOpacity>
-              <View style={styles.wCircle}>
-                <Image source={Images.orangeLock} style={styles.orangeLock} />
-              </View>
-              <Text style={styles.rescue}>Rescue</Text>
-              </TouchableOpacity>
-              <TouchableOpacity>
-              <View style={styles.wCircle}>
-                <Image source={Images.orangeLock} style={styles.orangeLock} />
-              </View>
-              <Text style={styles.rescue}>Rescue</Text>
-              </TouchableOpacity>
-              <TouchableOpacity>
-              <View style={styles.wCircle}>
-                <Image source={Images.orangeLock} style={styles.orangeLock} />
-              </View>
-              <Text style={styles.rescue}>Rescue</Text>
-              </TouchableOpacity>
+              <View style={styles.centerAllBtn}>
+                  <TouchableOpacity>
+                  <View style={styles.wCircle}>
+                    <Image source={Images.redOpenLock} style={styles.orangeLock} />
+                  </View>
+                  <Text style={styles.rescue}>Cancel{'\n'} Rescue</Text>
+                  </TouchableOpacity>
 
+                  <TouchableOpacity>
+                  <View style={styles.wCircle}>
+                    <Image source={Images.callIcon} style={styles.callIcon} />
+                  </View>
+                  <Text style={styles.rescue}>Contact</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity>
+                  <View style={styles.wCircle}>
+                    <Image source={Images.greenLock} style={styles.orangeLock} />
+                  </View>
+                  <Text style={styles.rescue}>Complete</Text>
+                  </TouchableOpacity>
+              </View>
               </View>
             </View>
 

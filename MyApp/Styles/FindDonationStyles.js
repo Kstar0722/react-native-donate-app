@@ -60,7 +60,6 @@ export default StyleSheet.create({
       bottom:0,
       position:'absolute',
       zIndex:1,
-      
   },
   opacityBtn:{
       height:height,
@@ -164,21 +163,23 @@ export default StyleSheet.create({
     bottom:-33,
   },
   mapViewDetail:{
-      paddingHorizontal:15,
-      paddingTop:15,
+      //paddingHorizontal:15,
+      //paddingTop:15,
   },
 
   listMapView:{
-    width:width-30,
-    height:105,
+    width:width,
+    height:130,
     borderRadius:10
   },
+  listMapView1:{
+    width:width,
+    height:130,
+  },
   listMapViewText:{
-    padding:20,
+    paddingVertical:20,
+    paddingHorizontal:15,
     backgroundColor:'#FFFFFF',
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    top:-10,
   },
   listMapViewTopRow:{
       flexDirection:'row',
@@ -201,9 +202,10 @@ export default StyleSheet.create({
   },
   distance:{
     color:'#2C2C3D',
-    fontSize:16,
-    alignContent:'flex-end',
-    alignSelf:'flex-end'
+    fontSize:8,
+    textAlign:'center',
+    //alignContent:'flex-end',
+    //alignSelf:'flex-end'
   },
   description:{
     fontSize:14,
@@ -214,9 +216,12 @@ export default StyleSheet.create({
     width:94,
     height:96,
     position:'absolute',
-    right:0,
+    right:10,
     top:-30,
     zIndex:1
+  },
+  awayMeter:{
+      marginTop:13,
   },
   markericon:{
       width:14,
@@ -240,18 +245,12 @@ export default StyleSheet.create({
     marginVertical:10,
     color:'#8C8C8C',
   },
-  textSmAdd:{
-    fontSize:8,
-    color:'#000000',
-    textAlign:'center',
-    top:-10,
-  },
   close:{
     width:40,
     height:40,
-    right:5,
-    position:'absolute',
-    zIndex:99,
+    alignSelf:'center',
+    bottom:-5,
+    zIndex:1,
   },
   wCircle:{
     width:66,
@@ -270,6 +269,8 @@ export default StyleSheet.create({
     color:'#FFFFFF',
     fontSize:12,
     marginTop:10,
+    alignSelf:'center',
+    textAlign:'center',
   },
   timeSet:{
     flexDirection:'row',
@@ -287,5 +288,30 @@ export default StyleSheet.create({
     fontSize:12,
     textAlign:'center' ,
     marginTop:10,
+  },
+  clickToOpen:{
+    color:'#666666',
+    fontSize:10,
+    textAlign:'center',
+
+  },
+  clickToOpenBtn:{
+      flexDirection:'row',
+      alignSelf:'center',
+  },
+  buttonCover:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    width:width-30,
+  },
+  callIcon:{
+    width:26,
+    height:25,
+    top:19,
+  },
+  centerAllBtn:{
+    flexDirection:'row',
+    justifyContent:'space-around',
+     width:width,
   }
 })
