@@ -69,6 +69,17 @@ const images = {
   cancelIcon: require('../Images/cancelIcon.png'),
   foodBoxes: require('../Images/foodboxes.png'),
   flagIcon: require('../Images/flagIcon.png'),
+  bgcircle: require('../Images/bg-circle.png'),
+  listingbg: require('../Images/listing-bg.png'),
+  profilebg1: require('../Images/profile-bg.png'),
+  profilebg2: require('../Images/profile-bg2.png'),
+  call: require('../Images/call.png'),
+  flag: require('../Images/flag.png'),
+  msg: require('../Images/msg.png'),
+  reactAngleModelBg: require('../Images/reactAngleModelBg.png'),
+  orangeBack: require('../Images/orangeBack.png'),
+
+
 
 
 

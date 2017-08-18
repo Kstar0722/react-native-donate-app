@@ -313,5 +313,56 @@ export default StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-around',
      width:width,
+  },
+  reactAngleModelBg:{
+    height:181,
+    width:295,
+  },
+  bgC:{
+    width:width,
+    height:height,
+    backgroundColor:'rgba(0,0,0,0.45)',
+    alignItems:'center',
+    flexDirection:'row'
+  },
+  bgCi:{
+    width:width,
+    alignItems:'center',
+  },
+  likeFlagCover:{
+    paddingVertical:30,
+  },
+  likeFlag:{
+      fontSize:17,
+      color:'#FFFFFF',
+      paddingHorizontal:20,
+      textAlign:'center',
+      width:200,
+      alignSelf:'center'
+  },
+  buttonC:{
+    flexDirection:'row',
+    paddingHorizontal:10,
+    justifyContent:'space-between',
+    marginTop:25,
+  },
+  contactBtnm:{
+    backgroundColor:'#FFB660',
+    width:125,
+    paddingVertical:10,
+    borderRadius:5,
+  },
+  contactBtnm1:{
+    backgroundColor:'#FFB660',
+    width:125,
+    paddingVertical:10,
+    borderRadius:5,
+    marginLeft:85,
+    marginTop:25,
+  },
+  contactBtnTextm:{
+      textAlign:'center',
+      color:'#FFFFFF',
+      fontSize:10,
   }
 })
