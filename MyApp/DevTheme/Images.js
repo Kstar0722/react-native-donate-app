@@ -78,6 +78,9 @@ const images = {
   msg: require('../Images/msg.png'),
   reactAngleModelBg: require('../Images/reactAngleModelBg.png'),
   orangeBack: require('../Images/orangeBack.png'),
+  mHeder: require('../Images/mHeder.png'),
+  sendButton: require('../Images/sendButton.png'),
+  avatar: require('../Images/avatar.png'),
 
 
 
