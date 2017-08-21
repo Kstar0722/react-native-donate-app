@@ -26,7 +26,7 @@ export default class DescriptionModal extends React.Component {
                           <Text style={styles.dDoneBtn}>CLOSE</Text>
                         </TouchableOpacity>
                     </View>
-                    <ScrollView>
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={{flex:1}}>
                             <View style={styles.commentRow}>
                                 <Image source={Images.avatar} style={styles.avatar}></Image>
