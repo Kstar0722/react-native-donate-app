@@ -24,7 +24,6 @@ export default StyleSheet.create({
         position: 'absolute',
         zIndex: 10,
         left: 10
-        //marginVertical: 25
     },
     deliverBG: {
         justifyContent: 'center',
@@ -48,8 +47,6 @@ export default StyleSheet.create({
         fontWeight: '600',
         marginVertical: 18,
         fontFamily: 'Avenir'
-
-        //marginLeft: Dimensions.get('window').width/2-80
     },
     picturemodal_container: {
         flex: 1,
@@ -117,17 +114,11 @@ export default StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
         top:-10,
-        borderBottomWidth:2,
+        borderBottomWidth:1,
         borderBottomColor: 'rgba(216,216,216,0.8)',
-        shadowColor: '#D8D8D8',
-        shadowOffset: {
-        width:0,
-        height: 2,
-},
-shadowOpacity: 0.7,
     },
     dLeftHeader: {
         position: 'absolute',
@@ -145,10 +136,10 @@ shadowOpacity: 0.7,
         right: 15,
     },
     dTitle: {
-        color: '#dd8d6c',
+        color: '#666666',
         fontSize: 20,
         fontWeight: 'bold',
-        marginVertical: 18,
+        marginVertical: 10,
     },
     entryTxt:{
       color:'#D8D8d8',
@@ -156,13 +147,71 @@ shadowOpacity: 0.7,
       paddingHorizontal:15,
     },
     mLineText:{
-        color:'#D8D8d8',
-        fontSize:12,
-        padding:15,
-        marginTop:30,
-        marginBottom:15,
-        width:Dimensions.get('window').width,
+        color:'#A6A6A6',
+        fontSize:14,
+        width:Dimensions.get('window').width-67,
         flexDirection: 'column',
-        flex:1,
+    },
+    footer:{
+      flexDirection:'row',
+      paddingHorizontal:15,
+      height:50,
+      alignItems:'center',
+      borderTopWidth:1,
+      borderTopColor: 'rgba(216,216,216,0.8)',
+      backgroundColor:'#FFFFFF',
+    },
+    sendButton:{
+      width:36,
+      height:36,
+    },
+    avatar:{
+        width:50,
+        height:50,
+        marginLeft:15,
+        marginTop:15,
+    },
+    commentRow:{
+      width:Dimensions.get('window').width,
+      flexDirection:'row',
+    },
+
+    rightBlock:{
+      paddingVertical:15,
+      paddingRight:15,
+      marginLeft:15,
+      borderBottomWidth:1,
+      borderBottomColor:'#E6E6E6',
+      flex:1,
+    },
+    lastRightBlock:{
+      paddingVertical:15,
+      paddingRight:15,
+      marginLeft:15,
+      flex:1,
+    },
+    titleName:{
+      fontSize:14,
+      color:'#666666',
+    },
+    subTitleName:{
+       fontSize:12,
+       color:999999,
+       marginVertical:10,
+    },
+    agoRow:{
+      flexDirection:'row',
+      justifyContent:'space-between'
+
+    },
+    replayLabel:{
+      color:'#666666',
+      fontSize:12,
+    },
+    replay:{
+      color:'#C8C8C8',
+      fontSize:12,
+      textAlign:'right',
+
     }
 })

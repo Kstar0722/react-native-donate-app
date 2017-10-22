@@ -1,10 +1,11 @@
 import { StackNavigator } from 'react-navigation'
 import LaunchScreen from './containers/LaunchScreen'
-import MainScreen from './containers/MainScreen'
+import MainScreen from './containers/MessageScreen'
 import SplashScreen from './containers/SplashScreen'
 import SignupScreen from './containers/SignupScreen'
 import BusinessScreen from './containers/BusinessScreen'
 import SideMenu from './containers/SideMenu'
+import FindDonation from './containers/FindDonation'
 
 import styles from './Styles/NavigationStyles'
 
