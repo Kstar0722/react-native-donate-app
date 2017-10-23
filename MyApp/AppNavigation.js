@@ -1,7 +1,7 @@
 import { StackNavigator } from 'react-navigation'
 import LaunchScreen from './containers/LaunchScreen'
 import MainScreen from './containers/MessageScreen'
-import SplashScreen from './containers/SplashScreen'
+import HomeScreen from './containers/HomeScreen'
 import SignupScreen from './containers/SignupScreen'
 import OnboardingScreen from './containers/OnboardingScreen'
 import BusinessScreen from './containers/BusinessScreen'
@@ -17,7 +17,7 @@ import styles from './Styles/NavigationStyles'
 const PrimaryNav = StackNavigator({
   LaunchScreen: { screen: LaunchScreen },
   MainScreen: { screen: MainScreen },
-  SplashScreen: { screen: SplashScreen },
+  HomeScreen: { screen: HomeScreen },
   SignupScreen: { screen: SignupScreen },
   BusinessScreen: { screen: BusinessScreen },
   RescueProgress: {screen: RescueProgress},
@@ -28,7 +28,7 @@ const PrimaryNav = StackNavigator({
   OnboardingScreen: { screen: OnboardingScreen }
 }, {
 
-    initialRouteName: 'OnboardingScreen',
+    initialRouteName: 'RescueProgress',
     heaerStyle: styles.header
   })
 export default PrimaryNav
