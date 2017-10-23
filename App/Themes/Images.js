@@ -88,7 +88,8 @@ const images = {
     cameraIcon : require('../Images/camera.png'),
     plusIcon : require('../Images/plusIcon.png'),
     logoBig : require('../Images/logo_big.png'),
-    tipIcon : require('../Images/tipIcon.png')
+    tipIcon : require('../Images/tipIcon.png'),
+    tipIcon1 : require('../Images/tipIcon_1.png')
   }
   
   export default images

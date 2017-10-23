@@ -8,10 +8,9 @@ import {
     Text
 } from 'react-native'
 import styles from '../Styles/SignupScreenStyles'
-import styles1 from '../Styles/HomeScreenStyles'
-import { Images } from '../DevTheme'
+import { Images } from '../../../Themes'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import PictureModal from './Modals/pictureModal'
+import PictureModal from '../../../Components/Modals/pictureModal'
 
 export default class SignupScreen extends Component {
     constructor() {
@@ -21,11 +20,13 @@ export default class SignupScreen extends Component {
             email: '',
             phone: '',
             password: '',
-            switchValue: false,
+            bRescueFood: false,
+            bCreateFoodDonation: false,
             picturemodalVisible: false,
-            avatar : null
+            avatar: null
         }
-        this.toggleSwitch = this.toggleSwitch.bind(this)
+        this.toggleRescue = this.toggleRescue.bind(this)
+        this.toggleCreate = this.toggleCreate.bind(this)
         this.chooseAvatar = this.chooseAvatar.bind(this)
     }
     static navigationOptions = {
@@ -37,29 +38,30 @@ export default class SignupScreen extends Component {
     }
 
     chooseAvatar = (avatar) => {
-        this.setState({avatar : avatar, picturemodalVisible : false})
+        this.setState({ avatar: avatar, picturemodalVisible: false })
     }
 
     closePictureModal = () => {
-        this.setState({
-            picturemodalVisible: false
-        })
+        this.setState({ picturemodalVisible: false })
     }
 
-    toggleSwitch(val) {
-        this.setState({
-            switchValue: val
-        })
+    toggleCreate(val) {
+        this.setState({ bCreateFoodDonation: val })
     }
+
+    toggleRescue(val) {
+        this.setState({ bRescueFood: val })
+    }
+
     render() {
-        const { navigate } = this.props.navigation
+        const { navigate, state } = this.props.navigation
         return (
             <View>
                 <Image source={Images.signbg} style={styles.container} >
-                    <TouchableOpacity  onPress = {() => this.setState({picturemodalVisible : true})} >
+                    <TouchableOpacity onPress={() => this.setState({ picturemodalVisible: true })} >
                         <Image source={this.state.avatar ? this.state.avatar : Images.cameraIcon} style={styles.camera} >
                         </Image>
-                        <Image source={Images.plusIcon} style={styles.plus}/>
+                        <Image source={Images.plusIcon} style={styles.plus} />
                     </TouchableOpacity>
 
                     <Text style={styles.subLabel}>ADD PHOTO</Text>
@@ -85,22 +87,39 @@ export default class SignupScreen extends Component {
                         onChangeText={(text) => this.setState({ password: text })}
                         value={this.state.password} secureTextEntry={true} />
                     <Image source={Images.underline} />
+
                     <View style={styles.option}>
-                        <Text style={styles1.slide_text1}>Are you a business?</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 30 }}>
-                            <Text style={styles1.text}>{this.state.switchValue ? 'YES' : 'NO'}</Text>
-                            <Switch onValueChange={this.toggleSwitch} value={this.state.switchValue}
-                                onTintColor='#ffb660'
-                            />
+                        <View style={styles.option_view} >
+                            <TouchableOpacity style={styles.tipIcon} >
+                                <Image source={Images.tipIcon1} style={{ width: '100%', height: '100%' }} />
+                            </TouchableOpacity>
+                            <View style={styles.toggleContainer}>
+                                <Text style={styles.toggleLabel}>Are you using this service for rescue food?</Text>
+                                <Text style={styles.toggle}>{this.state.bRescueFood ? "YES" : "NO"}</Text>
+                                <Switch onValueChange={this.toggleRescue} value={this.state.bRescueFood}
+                                    onTintColor='#FFFFFF' thumbTintColor="#FFB660" />
+                            </View>
                         </View>
+                        <View style={styles.option_view} >
+                            <TouchableOpacity style={styles.tipIcon} >
+                                <Image source={Images.tipIcon1} style={{ width: '100%', height: '100%' }} />
+                            </TouchableOpacity>
+                            <View style={styles.toggleContainer}>
+                                <Text style={styles.toggleLabel}>Will you use this system to create food donations?</Text>
+                                <Text style={styles.toggle}>{this.state.bCreateFoodDonation ? "YES" : "NO"}</Text>
+                                <Switch onValueChange={this.toggleCreate} value={this.state.bCreateFoodDonation}
+                                    onTintColor='#FFFFFF' thumbTintColor="#FFB660" />
+                            </View>
+                        </View>
+                        {
+                            state.params.bType === false ? this.switch_business() : this.switch_signup()
+                        }
                     </View>
-                    {
-                        this.state.switchValue ? this.switch_business() : this.switch_signup()
-                    }
+
                     <KeyboardSpacer />
                 </Image>
 
-                <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal} chooseAvatar = {this.chooseAvatar} />
+                <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal} chooseAvatar={this.chooseAvatar} />
 
 
             </View>

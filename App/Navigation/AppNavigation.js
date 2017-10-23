@@ -1,19 +1,15 @@
 import { StackNavigator } from 'react-navigation'
 import LaunchScreen from '../Containers/Registration/Screens/LaunchScreen'
-// import MainScreen from './containers/MessageScreen'
-// import SignupScreen from './containers/SignupScreen'
-// import OnboardingScreen from './containers/OnboardingScreen'
-// import BusinessScreen from './containers/BusinessScreen'
-// import SideMenu from './containers/SideMenu'
-// import FindDonation from './containers/FindDonation'
-// import SelectedItems from './containers/SelectedItems'
-// import OperationInformationScreen from './containers/OperationInformationScreen'
-// import AddItemsModal from './containers/AddItemsModal'
+import OnboardingScreen from '../Containers/Registration/Screens/OnboardingScreen'
+import SignupScreen from '../Containers/Registration/Screens/SignupScreen'
+
 
 import styles from './Styles/NavigationStyles'
 
 const PrimaryNav = StackNavigator({
   LaunchScreen: { screen: LaunchScreen },
+  OnboardingScreen: { screen: OnboardingScreen },
+  SignupScreen: { screen: SignupScreen },
   
   // LaunchScreen: { screen: LaunchScreen },
   // MainScreen: { screen: MainScreen },

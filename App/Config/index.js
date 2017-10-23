@@ -10,3 +10,5 @@ if (__DEV__) {
   // it off, but the healthier approach is to fix the warnings.  =)
   console.disableYellowBox = !DebugConfig.yellowBox
 }
+
+export default AppConfig

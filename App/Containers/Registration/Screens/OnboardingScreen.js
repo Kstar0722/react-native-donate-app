@@ -11,7 +11,7 @@ import { Images } from '../../../Themes'
 import { NavigationActions } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-export default class SignupOnboardingScreen extends Component {
+export default class OnboardingScreen extends Component {
     constructor() {
         super()
         this.state = {
@@ -45,10 +45,7 @@ export default class SignupOnboardingScreen extends Component {
                 </TouchableOpacity>
                 <Image source={Images.signbg} style={styles.container}>
                     <View style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-
-
                         <Image source={Images.logoBig} style={styles.logoBig} />
-                        <Text style={styles.info}>WE BELIEVE IN A FULL AMERICA</Text>
                     </View>
                 </Image>
                 <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>  
@@ -56,7 +53,7 @@ export default class SignupOnboardingScreen extends Component {
                         <TouchableOpacity style={styles.tipIcon} >
                             <Image source={Images.tipIcon} style={{ width: '100%', height: '100%' }} />
                         </TouchableOpacity>
-                        <TouchableOpacity  style={styles.option_button}>
+                        <TouchableOpacity  style={styles.option_button} onPress = {() => navigate("SignupScreen", {bType : false})}>
                             <Text  style={styles.option_text} >Sign Up As a Business</Text>
                             <Icon name="chevron-right" size={12} color="#666666" style={styles.options_next} />
                         </TouchableOpacity>
@@ -65,7 +62,7 @@ export default class SignupOnboardingScreen extends Component {
                         <TouchableOpacity style={styles.tipIcon} >
                             <Image source={Images.tipIcon} style={{ width: '100%', height: '100%' }} />
                         </TouchableOpacity>
-                        <TouchableOpacity  style={styles.option_button}>
+                        <TouchableOpacity  style={styles.option_button} onPress = {() => navigate("SignupScreen", {bType : true})}>
                             <Text  style={styles.option_text} >Sign Up As a Individual</Text>
                             <Icon name="chevron-right" size={12} color="#666666" style={styles.options_next} />
                         </TouchableOpacity>
