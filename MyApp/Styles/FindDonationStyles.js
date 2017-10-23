@@ -376,13 +376,16 @@ export default StyleSheet.create({
     marginLeft:10,
   },
   dayStyle:{
+    fontFamily: 'Ubuntu',
+    fontWeight:"500",
     backgroundColor:'rgba(0,0,0,0)',
-    fontSize:40,
+    fontSize:43,
     color:'#fff',
   },
   weekAndYearStyle:{
     backgroundColor:'rgba(0,0,0,0)',
-    fontSize:16,
+    fontSize:15,
+    fontWeight:'600',
     color:'#fff',
   }
 })

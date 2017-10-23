@@ -34,7 +34,7 @@ export default class MainScreen extends Component {
     
     
 
-    this.toggleSwitch = this.toggleSwitch.bind(this)
+this.toggleSwitch = this.toggleSwitch.bind(this)
   }
 
   toggleSwitch (val) {
@@ -46,7 +46,6 @@ export default class MainScreen extends Component {
   static navigationOptions = {
     header:null,
   }
-
 
   mapView = () => {
      if(this.state.switchValue){
@@ -82,7 +81,7 @@ export default class MainScreen extends Component {
 
     return (
       <View style={styles.mainView}>
-      <Image source={Images.fDonationheader} style={styles.fDheadr}>
+      <Image source={Images.rectangle} style={styles.fDheadr}>
           <View style={styles.cNavigation}>
               <TouchableOpacity onPress={() => {}}>
                   <Image source={Images.fDbar} style={styles.menuIconNav} />
