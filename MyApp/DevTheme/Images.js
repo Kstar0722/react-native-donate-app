@@ -98,7 +98,13 @@ const images = {
   key : require('../Images/key.png'),
   createdBy: require('../Images/createdBy.png'),
   get_bg: require('../Images/get_bg.png'),
-  pin: require('../Images/pin.png')
+  pin: require('../Images/pin.png'),
+  rescue_bg: require('../Images/rescue_bg.png'),
+  volunteer: require('../Images/volunteer.png'),
+  helpicon: require('../Images/helpicon.png'),
+  deliver_guy: require('../Images/delivery-guy.png'),
+  statusModal_bg: require('../Images/statusModal_bg.png'),
+  pinception: require('../Images/Pinception.png')
 }
 
 export default images
