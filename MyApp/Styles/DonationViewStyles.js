@@ -434,5 +434,9 @@ get_direction: {
   color: 'white',
   fontFamily: 'Helvetica',
   fontSize: 19,  
+},
+pin: {
+  width: 18,
+  height: 18*43/32
 }
 })

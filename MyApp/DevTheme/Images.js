@@ -97,8 +97,8 @@ const images = {
   search_small : require('../Images/search_small.png'),
   key : require('../Images/key.png'),
   createdBy: require('../Images/createdBy.png'),
-  get_bg: require('../Images/get_bg.png')
-
+  get_bg: require('../Images/get_bg.png'),
+  pin: require('../Images/pin.png')
 }
 
 export default images

@@ -138,7 +138,7 @@ export default class MainScreen extends Component {
                                     longitude: -122.406417,
                                 }}                                
                             >
-                                
+                                <Image source={Images.pin} style={styles.pin}/>
                             </MapView.Marker>
                         </MapView>
                         <TouchableHighlight>
