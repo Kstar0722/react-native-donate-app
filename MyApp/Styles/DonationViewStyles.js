@@ -30,23 +30,26 @@ export default StyleSheet.create({
     alignItems:'center',
     paddingHorizontal:15,
     backgroundColor:'#DD8D6C',
+    borderBottomColor: 'rgba(0,0,0,0.2)',
+    borderBottomWidth: 0
   },
   menuIconNav:{
-    height:16,
-    width:16,
+    height:18,
+    width:18,
   },
-  refedText:{
-    flex:1,
+  refedText:{    
     paddingHorizontal:10,
     textAlign:'center',
     color:'#fff',
-    fontWeight:'bold',
+    fontWeight:'500',
     fontSize:17,
     backgroundColor:'transparent',
   },
   foodBoxes:{
     width:width,
     height:251,
+    marginTop: -251,
+    zIndex: 1
   },
   dtBody:{
     paddingHorizontal:15,
@@ -265,5 +268,171 @@ ddBtnBoxInnner:{
     width:70,
     alignItems:'center',
      marginTop:20
+},
+gradient_bg: {
+  width: width,
+  height: width*407/750,
+  alignItems: 'center',
+  zIndex: 10
+},
+donatorname: {
+  alignSelf: 'center',
+  fontSize: 17,
+  backgroundColor: 'transparent',
+  color: 'white',
+  fontWeight: '500',
+  marginTop: 6
+},
+stars: {
+  width: width*175/750,
+  height: width*32/750,
+  alignSelf: 'center',
+  marginTop: 10
+},
+pickupView: {
+  width: width-50,
+  borderBottomColor: 'rgba(255,255,255,0.4)',
+  borderBottomWidth: 1,
+  backgroundColor: 'transparent',
+  marginTop: 12
+},
+pickup: {
+  color: 'white',
+  paddingBottom: 13,
+  fontSize: 13
+},
+time: {
+  fontSize: 12
+},
+apple: {
+  width: 18,
+  height: 18*35/32.8,
+  marginTop: 10
+},
+foodtype: {
+  fontSize: 13,
+  backgroundColor: 'transparent',
+  color: 'white'
+},
+vehicle: {
+  width: 18*84/32.8,
+  height: 18*35/32.8,
+  marginTop: 10
+},
+appleview: {
+  alignItems: 'center'  
+},
+shapeView: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  marginTop: 10,   
+},
+click_to_zoom: {
+  fontSize: 15,
+  color: 'white',
+  backgroundColor: 'transparent'
+},
+search_small: {
+  width: 17,
+  height: 17*31.5/30
+},
+transparent: {justifyContent:'center',
+alignItems:'center',
+backgroundColor:'rgba(0,0,0,0.4)',
+width: width,
+height: 131,
+zIndex: 10
+},
+key: {
+  width: 18,
+  height: 18*42.11/32.8,
+},
+keyAround: {
+  width: 70,
+  height: 70,
+  borderRadius: 35,
+  backgroundColor: 'white',
+  justifyContent: 'center',
+  alignItems: 'center',
+  shadowColor: 'black', 
+  shadowOffset: {
+    width: 0,
+    height: 3
+  },
+  shadowRadius: 3,
+  shadowOpacity: 0.2
+},
+rescue: {
+  fontSize: 15,
+  color: 'rgba(0,0,0,0.6)',
+  backgroundColor: 'transparent',
+  marginTop: 7,  
+},
+roundView: {
+  flexDirection: 'row',
+  width: width,
+  justifyContent: 'center',
+  marginTop: -20,
+  zIndex: 11
+},
+flagIcon: {
+  width: 19,
+  height: 19*90/69
+},
+donation_description: {
+  fontSize: 16,
+  backgroundColor: 'transparent',
+  marginTop: 35,
+  alignSelf: 'center'
+},
+donation_content: {
+  fontSize: 14,
+  backgroundColor: 'transparent',
+  width: width-50,
+  alignSelf: 'center',
+  marginTop: 15,
+  letterSpacing : 2,
+  lineHeight: 17,
+  fontFamily: 'Helvetica'
+},
+createdby_View: {
+  width: width-50,
+  borderTopColor: 'rgba(0,0,0,0.1)',
+  borderTopWidth: 1,
+  borderBottomColor: 'rgba(0,0,0,0.1)',
+  borderBottomWidth: 1,
+  alignSelf: 'center',
+  marginTop: 25,
+  marginBottom: 25
+},
+createdBy: {
+  width: 150,
+  height: 150,
+  alignSelf: 'center',
+  marginTop: 25,
+  marginBottom: 25
+},
+donator_name: {
+  fontFamily: 'Helvetica',
+  fontSize: 17,
+  color: 'rgba(0,0,0,0.7)',
+  alignSelf: 'center'
+},
+mapView: {
+  width: width,
+  height: 150,
+  marginBottom: 0,
+  marginTop: 25
+},
+get_bg: {
+  width: width,
+  height: width*106/750,
+  alignItems: 'center',
+  justifyContent: 'center'
+},
+get_direction: {
+  color: 'white',
+  fontFamily: 'Helvetica',
+  fontSize: 19,  
 }
 })
