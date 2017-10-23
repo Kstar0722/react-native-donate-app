@@ -3,6 +3,7 @@ import LaunchScreen from './containers/LaunchScreen'
 import MainScreen from './containers/MessageScreen'
 import SplashScreen from './containers/SplashScreen'
 import SignupScreen from './containers/SignupScreen'
+import OnboardingScreen from './containers/OnboardingScreen'
 import BusinessScreen from './containers/BusinessScreen'
 import SideMenu from './containers/SideMenu'
 import FindDonation from './containers/FindDonation'
@@ -21,10 +22,11 @@ const PrimaryNav = StackNavigator({
   SideMenu: { screen: SideMenu },
   SelectedItems: { screen: SelectedItems },
   OperationInformationScreen: { screen: OperationInformationScreen },
-  AddItemsModal: { screen: AddItemsModal }
+  AddItemsModal: { screen: AddItemsModal },
+  OnboardingScreen: { screen: OnboardingScreen }
 }, {
 
-    initialRouteName: 'SignupScreen',
+    initialRouteName: 'OnboardingScreen',
     heaerStyle: styles.header
   })
 export default PrimaryNav

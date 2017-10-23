@@ -1,41 +1,49 @@
 import React, { Component } from 'react';
-import ImageSlider from 'react-native-image-slider';
-import { 
-  Text,
-  View,  
-  Image,
-  TouchableOpacity,
+//import ImageSlider from 'react-native-image-slider';
+import {
+    Text,
+    View,
+    Image,
+    TouchableOpacity,
 } from 'react-native';
 import styles from '../Styles/SplashStyles';
 import { Images } from '../DevTheme'
 
 export default class SplashScreen extends Component {
-    constructor () {
-        super ()
+    constructor() {
+        super()
         this.state = {
             position: 0,
             interval: null
         }
     }
     static navigationOptions = {
-        header:<Text style={{display:'none'}}></Text>,
-            headerStyle: {
-        backgroundColor: '#dd8d6c'
+        header: <Text style={{ display: 'none' }}></Text>,
+        headerStyle: {
+            backgroundColor: '#dd8d6c'
         }
     }
 
-    componentWillMount () {
-        this.setState({ interval: setInterval(()=>{
-            this.setState({ position: this.state.position === 2 ? 0 : this.state.position+1});
-        }, 2000) });
+    componentWillMount() {
+        this.setState({
+            interval: setInterval(() => {
+                this.setState({ position: this.state.position === 2 ? 0 : this.state.position + 1 });
+            }, 2000)
+        });
     }
-    componentWillUnmount () {
+    componentWillUnmount() {
         clearInterval(this.state.interval);
     }
-    render () {
+    render() {
         const { navigate } = this.props.navigation
         return (
-            <View style={styles.container}>
+            <View style = {{width : '100%', height :'100%'}}>
+                <Image source={Images.signbg} style={styles.container}>
+                    <View style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                        <Image source = {Images.logoBig} style = {styles.logoBig} />
+                        <Text style = {styles.info}>WE BELIEVE IN A FULL AMERICA</Text>
+                    </View>
+                    {/*
                 <ImageSlider 
                     images={[
                         'https://firebasestorage.googleapis.com/v0/b/fir-test-a3cb2.appspot.com/o/Slide1.png?alt=media&token=b759b7dd-3dc5-488c-8469-2ed78237dfe7',
@@ -53,17 +61,19 @@ export default class SplashScreen extends Component {
                     <TouchableOpacity style={styles.google}>
                         <Image source={Images.google} />
                     </TouchableOpacity>
+                */}
                     <View style={styles.login}>
-                        <TouchableOpacity onPress={() => navigate('SignupScreen')} style={styles.button}>
+                        <TouchableOpacity onPress={() => navigate('OnboardingScreen')} style={styles.button}>
                             <Image source={Images.SINGUP1} />
                         </TouchableOpacity>
-                        <Image source={Images.devide} style={{marginBottom: 1}}/>
+                        <Image source={Images.devide} style={{ marginBottom: 1 }} />
                         <TouchableOpacity style={styles.button}>
                             <Image source={Images.LOGIN} />
                         </TouchableOpacity>
                     </View>
+                </Image>
             </View>
-          
+
         );
     }
 }

@@ -86,7 +86,9 @@ const images = {
   unchecked: require('../Images/unchecked.png'),
   trashIcon : require('../Images/trash_icon.png'),
   cameraIcon : require('../Images/camera.png'),
-  plusIcon : require('../Images/plusIcon.png')
+  plusIcon : require('../Images/plusIcon.png'),
+  logoBig : require('../Images/logo_big.png'),
+  tipIcon : require('../Images/tipIcon.png')
 
 
 
