@@ -383,6 +383,7 @@ export default StyleSheet.create({
     color:'#fff',
   },
   weekAndYearStyle:{
+    fontFamily: 'Ubuntu',
     backgroundColor:'rgba(0,0,0,0)',
     fontSize:15,
     fontWeight:'600',
