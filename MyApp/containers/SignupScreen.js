@@ -11,6 +11,7 @@ import styles from '../Styles/SignupScreenStyles'
 import styles1 from '../Styles/LaunchScreenStyles'
 import { Images } from '../DevTheme'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
+import PictureModal from './Modals/pictureModal'
 
 export default class SignupScreen extends Component {
     constructor() {
@@ -20,9 +21,12 @@ export default class SignupScreen extends Component {
             email: '',
             phone: '',
             password: '',
-            switchValue: false
+            switchValue: false,
+            picturemodalVisible: false,
+            avatar : null
         }
         this.toggleSwitch = this.toggleSwitch.bind(this)
+        this.chooseAvatar = this.chooseAvatar.bind(this)
     }
     static navigationOptions = {
         title: 'Sign Up',
@@ -31,6 +35,17 @@ export default class SignupScreen extends Component {
         },
         headerTintColor: 'white'
     }
+
+    chooseAvatar = (avatar) => {
+        this.setState({avatar : avatar, picturemodalVisible : false})
+    }
+
+    closePictureModal = () => {
+        this.setState({
+            picturemodalVisible: false
+        })
+    }
+
     toggleSwitch(val) {
         this.setState({
             switchValue: val
@@ -41,14 +56,14 @@ export default class SignupScreen extends Component {
         return (
             <View>
                 <Image source={Images.signbg} style={styles.container} >
-                    <View>
-                        <Image source={Images.cameraIcon} style={styles.camera} >
+                    <TouchableOpacity  onPress = {() => this.setState({picturemodalVisible : true})} >
+                        <Image source={this.state.avatar ? this.state.avatar : Images.cameraIcon} style={styles.camera} >
                         </Image>
-                        <Image source={Images.plusIcon} style={styles.plus} />
-                    </View>
+                        <Image source={Images.plusIcon} style={styles.plus}/>
+                    </TouchableOpacity>
 
-                    <Text style={styles1.text}>{this.state.switchValue ? 'YES' : 'NO'}</Text>
-                    
+                    <Text style={styles.subLabel}>ADD PHOTO</Text>
+
                     <TextInput placeholder='NAME'
                         placeholderTextColor='#f0b7ae' style={styles.text}
                         underlineColorAndroid='white'
@@ -85,6 +100,7 @@ export default class SignupScreen extends Component {
                     <KeyboardSpacer />
                 </Image>
 
+                <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal} chooseAvatar = {this.chooseAvatar} />
 
 
             </View>

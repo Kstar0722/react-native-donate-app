@@ -155,6 +155,14 @@ export default StyleSheet.create({
         right : 0,
         top : -5,
 
+    },
+
+    subLabel : {
+        fontSize : 10,
+        color : 'white',
+        marginTop : 20,
+        marginBottom : 40,
+        backgroundColor : 'transparent'
     }
 
 
