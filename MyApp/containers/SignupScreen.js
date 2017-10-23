@@ -8,7 +8,7 @@ import {
     Text
 } from 'react-native'
 import styles from '../Styles/SignupScreenStyles'
-import styles1 from '../Styles/LaunchScreenStyles'
+import styles1 from '../Styles/HomeScreenStyles'
 import { Images } from '../DevTheme'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import PictureModal from './Modals/pictureModal'

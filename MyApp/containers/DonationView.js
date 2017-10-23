@@ -5,11 +5,12 @@ import {
   TouchableOpacity,
   Modal,
   Text,
-  ScrollView
+  ScrollView,
+  TouchableHighlight
 } from 'react-native'
 import styles from '../Styles/DonationViewStyles'
 import { Images } from '../DevTheme'
-
+import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Icon1 from 'react-native-vector-icons/Ionicons'
 

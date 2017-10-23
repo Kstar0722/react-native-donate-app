@@ -19,9 +19,17 @@ import MapView from 'react-native-maps';
 export default class MainScreen extends Component {
   constructor () {
     super()
+    
     this.state = {
         switchValue: false,
+        currentDay: new Date().getDay(),
+        currentMonth: new Date().getMonth(),
+        currentYear: new Date().getFullYear(),
     }
+
+    
+    
+
     this.toggleSwitch = this.toggleSwitch.bind(this)
   }
 
@@ -66,10 +74,10 @@ export default class MainScreen extends Component {
               onTintColor='#96A883'/>
           </View>
           <View style={styles.dateLayout}>
-            <Text style={styles.dayStyle} >04</Text>
+            <Text style={styles.dayStyle} >{this.state.currentDay}</Text>
             <View style={styles.weekAndYearLayout}>
                 <Text style={styles.weekAndYearStyle}>Wednesday</Text>
-                <Text style={styles.weekAndYearStyle}>Jan 2017</Text>
+                <Text style={styles.weekAndYearStyle}>{this.state.currentMonth} {this.state.currentYear}</Text>
             </View>  
             <Image source={Images.ic_chevron_right} />
               
