@@ -73,7 +73,7 @@ export default class RescueProgress extends PureComponent {
             <Image source={Images.rectangle} style={styles.bg}>
                 <View style={styles.cNavigation}>
                     <TouchableOpacity onPress={() => {this.sideMenuToggle(true)}}>
-                        <Image source={Images.menuList} style={styles.menuIconNav} />
+                        <Image source={Images.menuIcon} style={[styles.menuIconNav,{width:23, height:14}]} />
                     </TouchableOpacity>
                     <Text style={styles.refedText}>Rescue in Progress</Text>
                     <Image source={Images.home2}/>
@@ -233,9 +233,9 @@ export default class RescueProgress extends PureComponent {
                     {this.state.segmentIndex === 1 &&
                         <ScrollView style={styles.container} >
                            <View>
-                               <Image source={Images.rectangle} style={styles.bg}>
+                               <Image source={Images.rectangle} style={[styles.bg,{height:280}]}>
                                    <View style={styles.cNavigation1}>
-                                       <Text style={styles.smallText}>DONATOR NAME</Text>
+                                       <Text style={styles.normalVCText}>DONATOR NAME</Text>
                                    </View>
                                    <View style={styles.rateStyle}>
                                        <Stars
@@ -267,7 +267,7 @@ export default class RescueProgress extends PureComponent {
                                    </View>
                                </Image>
                            </View>
-                           <Image source={Images.foodboxes} style={{flex:1}}/>
+                           <Image source={Images.foodboxes1} style={{flex:1}}/>
                            <View style={{backgroundColor:"#fff", flex: 1}}>
                                <View style={styles.buttonGroup}>
                                    <View style={{alignItems:'center'}}>

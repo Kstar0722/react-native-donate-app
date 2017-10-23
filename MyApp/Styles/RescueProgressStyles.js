@@ -58,6 +58,14 @@ export default StyleSheet.create({
     textAlign:'center',
     color:'#fff',
   },
+  normalVCText:{
+    flex:1,
+    paddingHorizontal:10,
+    backgroundColor:'rgba(0,0,0,0)',
+    textAlign:'center',
+    fontSize:15,
+    color:'#fff',
+  },
   locationNav1:{
     paddingTop: 20,
     height: 85,
@@ -70,6 +78,7 @@ export default StyleSheet.create({
   },
   normalTextWhite:{
     color:'#fff',
+    textAlign:'center',
     backgroundColor:'rgba(0,0,0,0)',
     marginBottom:10
   },

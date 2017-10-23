@@ -107,7 +107,8 @@ const images = {
   cameraIcon : require('../Images/camera.png'),
   plusIcon : require('../Images/plusIcon.png'),
   popScrIcon: require('../Images/popScrIcon.png'),
-
+  menuIcon: require('../Images/menuIcon.png'),
+  foodboxes1: require('../Images/foodboxes1.png')
 
 
 
