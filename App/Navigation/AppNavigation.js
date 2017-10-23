@@ -1,18 +1,29 @@
 import { StackNavigator } from 'react-navigation'
-import LaunchScreen from '../Containers/LaunchScreen'
+import LaunchScreen from '../Containers/Registration/Screens/LaunchScreen'
+import OnboardingScreen from '../Containers/Registration/Screens/OnboardingScreen'
+import SignupScreen from '../Containers/Registration/Screens/SignupScreen'
+
 
 import styles from './Styles/NavigationStyles'
 
-// Manifest of possible screens
 const PrimaryNav = StackNavigator({
-  LaunchScreen: { screen: LaunchScreen }
+  LaunchScreen: { screen: LaunchScreen },
+  OnboardingScreen: { screen: OnboardingScreen },
+  SignupScreen: { screen: SignupScreen },
+  
+  // LaunchScreen: { screen: LaunchScreen },
+  // MainScreen: { screen: MainScreen },
+  // SplashScreen: { screen: SplashScreen },
+  // BusinessScreen: { screen: BusinessScreen },
+  // SideMenu: { screen: SideMenu },
+  // SelectedItems: { screen: SelectedItems },
+  // OperationInformationScreen: { screen: OperationInformationScreen },
+  // AddItemsModal: { screen: AddItemsModal },
+  // OnboardingScreen: { screen: OnboardingScreen }
 }, {
-  // Default config for all screens
-  headerMode: 'none',
-  initialRouteName: 'LaunchScreen',
-  navigationOptions: {
-    headerStyle: styles.header
-  }
-})
 
+    initialRouteName: 'LaunchScreen',
+    headerStyle: styles.header
+  })
 export default PrimaryNav
+

@@ -1,10 +1,11 @@
 import { StackNavigator } from 'react-navigation'
 import LaunchScreen from './containers/LaunchScreen'
 import MainScreen from './containers/MessageScreen'
-import SplashScreen from './containers/SplashScreen'
+import HomeScreen from './containers/HomeScreen'
 import SignupScreen from './containers/SignupScreen'
 import OnboardingScreen from './containers/OnboardingScreen'
 import BusinessScreen from './containers/BusinessScreen'
+import RescueProgress from './containers/RescueProgress'
 import SideMenu from './containers/SideMenu'
 import FindDonation from './containers/FindDonation'
 import SelectedItems from './containers/SelectedItems'
@@ -17,9 +18,10 @@ import styles from './Styles/NavigationStyles'
 const PrimaryNav = StackNavigator({
   LaunchScreen: { screen: LaunchScreen },
   MainScreen: { screen: MainScreen },
-  SplashScreen: { screen: SplashScreen },
+  HomeScreen: { screen: HomeScreen },
   SignupScreen: { screen: SignupScreen },
   BusinessScreen: { screen: BusinessScreen },
+  RescueProgress: {screen: RescueProgress},
   SideMenu: { screen: SideMenu },
   SelectedItems: { screen: SelectedItems },
   OperationInformationScreen: { screen: OperationInformationScreen },
@@ -28,7 +30,7 @@ const PrimaryNav = StackNavigator({
   DonationView: { screen: DonationView}
 }, {
 
-    initialRouteName: 'OnboardingScreen',
+    initialRouteName: 'RescueProgress',
     heaerStyle: styles.header
   })
 export default PrimaryNav

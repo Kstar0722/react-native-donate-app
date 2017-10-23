@@ -6,7 +6,7 @@ import {
     Image,
     TouchableOpacity,
 } from 'react-native';
-import styles from '../Styles/SplashStyles';
+import styles from '../Styles/LaunchScreenStyles';
 import { Images } from '../DevTheme'
 import { NavigationActions } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -51,24 +51,36 @@ export default class OnboardingScreen extends Component {
                         <Text style={styles.info}>WE BELIEVE IN A FULL AMERICA</Text>
                     </View>
                 </Image>
-                <View style = {{position : 'absolute', bottom : 0, width : '100%'}}>
-                    <View style = {styles.option_view} >
-                        <Image source = {Images.tipIcon} style = {styles.tipIcon} />
-                        <Text style={styles.option_text}>Sign Up As a Business</Text>
-                        <Icon name = "chevron-right" size = {12 } color = "#666666" style = {styles.options_next}/>
+                <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>  
+                    <View style={styles.option_view} >
+                        <TouchableOpacity style={styles.tipIcon} >
+                            <Image source={Images.tipIcon} style={{ width: '100%', height: '100%' }} />
+                        </TouchableOpacity>
+                        <TouchableOpacity  style={styles.option_button}>
+                            <Text  style={styles.option_text} >Sign Up As a Business</Text>
+                            <Icon name="chevron-right" size={12} color="#666666" style={styles.options_next} />
+                        </TouchableOpacity>
                     </View>
-                    <View style = {styles.option_view} >
-                        <Image source = {Images.tipIcon} style = {styles.tipIcon} />
-                        <Text style={styles.option_text}>Sign Up As a Individual</Text>
-                        <Icon name = "chevron-right" size = {12 } color = "#666666" style = {styles.options_next}/>
+                    <View style={styles.option_view} >
+                        <TouchableOpacity style={styles.tipIcon} >
+                            <Image source={Images.tipIcon} style={{ width: '100%', height: '100%' }} />
+                        </TouchableOpacity>
+                        <TouchableOpacity  style={styles.option_button}>
+                            <Text  style={styles.option_text} >Sign Up As a Individual</Text>
+                            <Icon name="chevron-right" size={12} color="#666666" style={styles.options_next} />
+                        </TouchableOpacity>
                     </View>
-                    <View style = {styles.option_view} >
-                        <Image source = {Images.tipIcon} style = {styles.tipIcon} />
-                        <Text style={styles.option_text}>Sign Up As a Team Member</Text>
-                        <Icon name = "chevron-right" size = {12 } color = "#666666" style = {styles.options_next}/>
+                    <View style={styles.option_view} >
+                        <TouchableOpacity style={styles.tipIcon} >
+                            <Image source={Images.tipIcon} style={{ width: '100%', height: '100%' }} />
+                        </TouchableOpacity>
+                        <TouchableOpacity  style={styles.option_button}>
+                            <Text  style={styles.option_text} >Sign Up As a Team Member</Text>
+                            <Icon name="chevron-right" size={12} color="#666666" style={styles.options_next} />
+                        </TouchableOpacity>
                     </View>
                 </View>
-                
+
             </View>
 
         );
