@@ -108,7 +108,8 @@ const images = {
   plusIcon : require('../Images/plusIcon.png'),
   popScrIcon: require('../Images/popScrIcon.png'),
   menuIcon: require('../Images/menuIcon.png'),
-  foodboxes1: require('../Images/foodboxes1.png')
+  foodboxes1: require('../Images/foodboxes1.png'),
+  ic_chevron_right: require('../Images/ic_chevron_right.png')
 
 
 
