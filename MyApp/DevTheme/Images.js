@@ -31,6 +31,8 @@ const images = {
   devide: require('../Images/divide.png'),
   libphoto: require('../Images/libphoto.png'),
   takepicture: require('../Images/takepicture.png'),
+  deliverBG: require('../Images/deliverBG.png'),
+  setButton: require('../Images/setButton.png'),
   modalBg: require('../Images/modalBg.png'),
   closeLock: require('../Images/closeLock.png'),
   openLock: require('../Images/openLock.png'),
@@ -42,6 +44,23 @@ const images = {
   logoutIcon: require('../Images/logout.png'),
   whiteNot: require('../Images/not.png'),
   menuList: require('../Images/list.png'),
+  home2: require('../Images/home2.png'),
+  focus: require('../Images/focus.png'),
+  btnClose: require('../Images/btnClose.png'),
+  btnContact: require('../Images/btnContact.png'),
+  btnContact1: require('../Images/btnContact1.png'),
+  btnSwitchOff: require('../Images/btnSwitch.png'),
+  btnSwitchOn: require('../Images/btnSwitch1.png'),
+  rectangle: require('../Images/rectangle.png'),
+  starFilled: require('../Images/star_filled.png'),
+  starUnfilled: require('../Images/star_unfilled.png'),
+  car2: require('../Images/car2.png'),
+  apple: require('../Images/apple.png'),
+  foodboxes: require('../Images/foodboxes.png'),
+  btnCall: require('../Images/btnCall.png'),
+  btnMessage: require('../Images/btnMessage.png'),
+  btnReport: require('../Images/btnReport.png'),
+  adrianImg: require('../Images/adrianImg.png'),
   markPostIcon: require('../Images/post.png'),
   postIcon: require('../Images/pBack.png'),
   bgImage: require('../Images/modalBg.png'),
@@ -86,8 +105,8 @@ const images = {
   unchecked: require('../Images/unchecked.png'),
   trashIcon : require('../Images/trash_icon.png'),
   cameraIcon : require('../Images/camera.png'),
-  plusIcon : require('../Images/plusIcon.png')
-
+  plusIcon : require('../Images/plusIcon.png'),
+  popScrIcon: require('../Images/popScrIcon.png'),
 
 
 

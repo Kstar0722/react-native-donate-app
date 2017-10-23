@@ -4,6 +4,7 @@ import MainScreen from './containers/MessageScreen'
 import SplashScreen from './containers/SplashScreen'
 import SignupScreen from './containers/SignupScreen'
 import BusinessScreen from './containers/BusinessScreen'
+import RescueProgress from './containers/RescueProgress'
 import SideMenu from './containers/SideMenu'
 import FindDonation from './containers/FindDonation'
 import SelectedItems from './containers/SelectedItems'
@@ -18,13 +19,14 @@ const PrimaryNav = StackNavigator({
   SplashScreen: { screen: SplashScreen },
   SignupScreen: { screen: SignupScreen },
   BusinessScreen: { screen: BusinessScreen },
+  RescueProgress: {screen: RescueProgress},
   SideMenu: { screen: SideMenu },
   SelectedItems: { screen: SelectedItems },
   OperationInformationScreen: { screen: OperationInformationScreen },
   AddItemsModal: { screen: AddItemsModal }
 }, {
 
-    initialRouteName: 'SignupScreen',
+    initialRouteName: 'RescueProgress',
     heaerStyle: styles.header
   })
 export default PrimaryNav
