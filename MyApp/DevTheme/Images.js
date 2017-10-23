@@ -108,12 +108,25 @@ const images = {
   plusIcon : require('../Images/plusIcon.png'),
   logoBig : require('../Images/logo_big.png'),
   tipIcon : require('../Images/tipIcon.png'),
+<<<<<<< HEAD
   popScrIcon: require('../Images/popScrIcon.png'),
   menuIcon: require('../Images/menuIcon.png'),
   foodboxes1: require('../Images/foodboxes1.png')
 
 
 
+=======
+  back_new : require('../Images/back_new.png'),
+  gradient_bg : require('../Images/background.png'),
+  stars : require('../Images/Stars.png'),
+  apple : require('../Images/apple.png'),
+  vehicle : require('../Images/vehicle.png'), 
+  search_small : require('../Images/search_small.png'),
+  key : require('../Images/key.png'),
+  createdBy: require('../Images/createdBy.png'),
+  get_bg: require('../Images/get_bg.png'),
+  pin: require('../Images/pin.png')
+>>>>>>> egor_dev
 }
 
 export default images
