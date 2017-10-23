@@ -2,8 +2,8 @@ const images = {
 
   overlay: require('../Images/overlay.png'),
   add: require('../Images/add.png'),
-  data: require('../Images/date.png'),
-  data_copy: require('../Images/date-copy.png'),
+  date: require('../Images/date.png'),
+  date_copy: require('../Images/date-copy.png'),
   car: require('../Images/car.png'),
   car1: require('../Images/car1.png'),
   van: require('../Images/van.png'),
@@ -81,7 +81,12 @@ const images = {
   mHeder: require('../Images/mHeder.png'),
   sendButton: require('../Images/sendButton.png'),
   avatar: require('../Images/avatar.png'),
-
+  clockIcon: require('../Images/clock_icon.png'),
+  checked: require('../Images/checked.png'),
+  unchecked: require('../Images/unchecked.png'),
+  trashIcon : require('../Images/trash_icon.png'),
+  cameraIcon : require('../Images/camera.png'),
+  plusIcon : require('../Images/plusIcon.png')
 
 
 
