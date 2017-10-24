@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   ScrollView,
   Modal,
-  TextInput
+  TextInput,
+  TouchableHighlight
 } from 'react-native'
 
 {/*import Icon from 'react-native-vector-icons/FontAwesome'*/}
@@ -26,7 +27,7 @@ export default class ProfileScreen extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
-          modalVisible: true,
+          modalVisible: false,
           descriptionModalVisible:false,
           flagExplanationModal:false,
         }
@@ -41,23 +42,15 @@ export default class ProfileScreen extends React.Component {
     render(){
         return(
             <ScrollView bounces={false} style={styles.container}>
-                <Image style={styles.profilebg2} source={Images.profilebg2}>
-                    <Image style={styles.profilebg1} source={Images.profilebg1}>
-                        <View style={styles.header}>
-                        <TouchableOpacity>
-                            <Image source={Images.backIcon} style={styles.menuIconNav} />
-                        </TouchableOpacity>
-                        {/*<Icon style={styles.headerIcon} name='arrow-left'  onPress={()=>this.props.navigation.goBack()} />*/}
-
-                            <Text style={styles.headerTitle}>Profile</Text>
-                            <Image source={Images.cancelIcon} style={styles.menuIconNav} />
-                        </View>
-                    </Image>
-                    <View style={styles.profilePicView}>
-                        <Image style={styles.profilePic} source={{uri:'https://lh5.googleusercontent.com/-g3HglrR2uuI/AAAAAAAAAAI/AAAAAAAABUs/L1nlPBq-HTo/photo.jpg'}} />
-                    </View>
-                    <Text style={styles.profileTitle}>Church of Hope</Text>
-                    <Text style={styles.profileSubTitle}>10111 Welove street, Los Angeles, CA 90002{'\n'}323.777.1111</Text>
+                <View style={styles.header}>
+                    <TouchableOpacity style={{position:'absolute', left: 20}}>
+                        <Image source={Images.backIcon} style={styles.menuIconNav} />
+                    </TouchableOpacity>
+                    <Text style={styles.headerTitle}>Donator Name</Text>                            
+                </View> 
+                <Image style={styles.profilebg2} source={Images.gradient_bg}>
+                    <Image source={Images.stars} style={styles.stars}/> 
+                    <Text style={styles.time}>10111 Welove street, Los Angeles, CA 90002</Text>
                 </Image>
                 <View style={styles.menuTab}>
                     <TouchableOpacity style={styles.menuTabBtn}>
@@ -66,12 +59,7 @@ export default class ProfileScreen extends React.Component {
                         </Image>
                         <Text style={styles.menuTabBtnText}>Call</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuTabBtn}>
-                        <Image style={styles.menuTabBtnIconBg} source={Images.bgcircle}>
-                            <Image style={styles.menuTabBtnIcon} source={Images.msg} />
-                        </Image>
-                        <Text style={styles.menuTabBtnText}>Message</Text>
-                    </TouchableOpacity>
+                    
                     <TouchableOpacity style={styles.menuTabBtn} onPress={()=>{ this.setState({ modalVisible:!this.state.modalVisible})}}>
                         <Image style={styles.menuTabBtnIconBg} source={Images.bgcircle}>
                             <Image style={styles.menuTabBtnIcon} source={Images.flag} />
@@ -79,58 +67,76 @@ export default class ProfileScreen extends React.Component {
                         <Text style={styles.menuTabBtnText}>Report</Text>
                     </TouchableOpacity>
                 </View>
-                <Text style={styles.tabTitle}>Description:</Text>
-                <Text numberOfLines={3} style={styles.description}>Vestibulum rutrum quam vitae fringilla tincidunt. Suspendisse nec tortor urna. Ut laoreet sodales nisi, quis iaculis nulla iaculis vitae. Donec sagittis faucibus lacus eget blandit. Mauris vitae ultricies metus, at condimentum nulla. Donec quis ornare lacus. Etiam gravida mollis tortor quis porttitor.</Text>
-                {/*
-                <TouchableOpacity style={styles.readMoreBtn}>
-                    <Text style={styles.readMoreBtnTitle}>Read More</Text>
-                </TouchableOpacity>
-                <Text style={styles.tabTitle}>Listings:</Text>
-                <Image style={styles.listingTab} source={Images.listingbg}>
-                    <View style={styles.listingTabDate}>
-                        <Text style={styles.listingTabDateText}>03</Text>
-                        <Text style={styles.listingTabDateMonth}>JAN</Text>
+                <View style={styles.descriptionView}>
+                    <Text style={[styles.donation_description,{fontWeight: '700'}]}>WEBSITE:  WWW.DONATORNAME.COM</Text>
+                    <View style={styles.createdby_View}>
+                        <Text style={styles.donation_description}>HOURS OF OPERATION:</Text>
+                        <View style={{alignSelf:'center', paddingBottom: 25}}>
+                            <Text style={styles.hoursDescription}>Mon    closed</Text>
+                            <Text style={styles.hoursDescription}>Tue     8:00 pm - 2:00 am</Text>
+                            <Text style={styles.hoursDescription}>Wed   8:00 pm - 2:00 am</Text>
+                            <Text style={styles.hoursDescription}>Thi     8:00 pm - 2:00 am</Text>
+                            <Text style={styles.hoursDescription}>Fri      8:00 pm - 2:00 am</Text>
+                            <Text style={styles.hoursDescription}>Sat    8:00 pm - 2:00 am</Text>
+                            <Text style={styles.hoursDescription}>Sun   8:00 pm - 2:00 am</Text>
+                        </View>
                     </View>
-                    <View style={styles.listingTabDecription}>
-                        <Text numberOfLines={1} style={styles.listingTabDecriptionText}>Food Give-a-Way Lorem ipsum dolor sit amet, consectetur adipisicing.</Text>
-                        <Text style={styles.listingTabDecriptionTime}>Tuesday, 11:30 AM</Text>
+                    <Text style={{alignSelf: 'center', fontSize: 17, fontWeight: '600'}}>ORGANIZATION DESCRIPTION:</Text>
+                    <Text style={[styles.donation_content]}>Business Desctiption goes here tor urna. Ut laoreet sodales nisi, quis iaculis nulla iaculis vitae. Donec sagittis faucibus lacus eget blandit. Mauris vitae ultricies metus, at condimentum nulla. Donec quis ornare lacus. Etiam gravida mollis tortor quis porttitor. Vestibulum rutrum quam vitae fringilla tincidunt. Suspendisse nec tortor urna. Ut laoreet sodales nisi, quis iaculis nulla iaculis vitae. Donec sagittis faucibus lacus eget blandit. Mauris vitae ultricies metus, at condimentum nulla. </Text>
+                    <View style={styles.createdby_View}>
+                        <Text style={{alignSelf: 'center', fontSize: 16, fontWeight: '400', marginTop: 25}}>UPCOMING SERVICES:</Text>
+                        <Text style={{alignSelf: 'center', fontSize: 16, fontWeight: '400', marginTop: 18, color:'rgba(0,0,0,0.6)'}}>September 30, 2017</Text>
+                        <View style={styles.foodView}>
+                            <Image source={Images.food} style={styles.food}/>
+                            <View style={{alignItems: 'center',width:170, marginLeft:15}}>
+                                <Text style={{color: 'rgba(0,0,0,0.6)',fontSize: 16}}>Groceries Giveaway</Text>
+                                <Text style={{fontSize: 13, paddingVertical: 10}}>Description of the food give-a-way goes here….</Text>
+                                <Text style={{fontSize: 12, width:100,textAlign:'center'}}>Click to view this giveaway</Text>
+                            </View>
+                            <Image source={Images.oval1} style={styles.oval1} />
+                        </View>
+                    </View>                   
+                </View>
+                <View style={{flexDirection: 'row',justifyContent: 'space-around', marginBottom: 25}}>
+                    <View style={styles.rectagle}>
+                        <Image source={Images.food_donated} style={styles.food_donated}/>
+                        <Text style={{fontSize: 17,color: 'rgba(0,0,0,0.6)',marginTop:10}}>80<Text style={{fontSize: 13,color: 'rgba(0,0,0,0.6)'}}>LBS</Text></Text>
                     </View>
-                </Image>
-                <Image style={styles.listingTab} source={Images.listingbg}>
-                    <View style={styles.listingTabDate}>
-                        <Text style={styles.listingTabDateText}>02</Text>
-                        <Text style={styles.listingTabDateMonth}>JAN</Text>
+                    <View style={styles.rectagle}>
+                        <Image source={Images.People_Served} style={{width: 50,height:50*58/90}}/>
+                        <Text style={{fontSize: 17,color: 'rgba(0,0,0,0.6)',marginTop:10}}>800</Text>
                     </View>
-                    <View style={styles.listingTabDecription}>
-                        <Text numberOfLines={1} style={styles.listingTabDecriptionText}>Food Give-a-Way Lorem ipsum dolor sit amet, consectetur adipisicing.</Text>
-                        <Text style={styles.listingTabDecriptionTime}>Monday, 11:30 AM</Text>
+                    <View style={styles.rectagle}>
+                        <Image source={Images.Global_Impact} style={{width: 49,height:49*58/88}}/>
+                        <Text style={{fontSize: 17,color: 'rgba(0,0,0,0.6)',marginTop:10}}>GREAT</Text>
                     </View>
-                </Image>
-                <Image style={styles.listingTab} source={Images.listingbg}>
-                    <View style={styles.listingTabDate}>
-                        <Text style={styles.listingTabDateText}>01</Text>
-                        <Text style={styles.listingTabDateMonth}>JAN</Text>
-                    </View>
-                    <View style={styles.listingTabDecription}>
-                        <Text numberOfLines={1} style={styles.listingTabDecriptionText}>Food Give-a-Way Lorem ipsum dolor sit amet, consectetur adipisicing.</Text>
-                        <Text style={styles.listingTabDecriptionTime}>Tuesday, 11:30 AM</Text>
-                    </View>
-                </Image>
-                <Text style={styles.tabTitle}>Location:</Text>
-                */}
+                </View>
+                <Text style={{fontSize: 17,alignSelf: 'center',marginBottom:20}}>LOCATION:</Text>
                 <MapView
-                    style={styles.addressmap}
-                    initialRegion={{
-                      latitude: 37.6537547,
-                      longitude: -122.4580622,
-                      latitudeDelta: 0.0922,
-                      longitudeDelta: 0.0421,
-                    }}
-                  />
-                  {/*<TouchableOpacity activeOpacity={0.45} style={styles.contactBtn}>
-                      <Text style={styles.contactBtnText}>Contact Business Name</Text>
-                  </TouchableOpacity>*/}
-
+                        style={styles.mapView}
+                        region={{
+                            latitude: 37.785834,
+                            longitude: -122.406417,
+                            latitudeDelta: 0.0222,
+                            longitudeDelta: 0.0201
+                            }
+                        }
+                        zoomEnabled={true}
+                    >
+                        <MapView.Marker 
+                            coordinate={{
+                                latitude: 37.785834,
+                                longitude: -122.406417,
+                            }}                                
+                        >
+                            <Image source={Images.pin} style={styles.pin}/>
+                        </MapView.Marker>
+                    </MapView>
+                  <TouchableHighlight>
+                        <Image source={Images.get_bg} style={styles.get_bg} >
+                            <Text style={styles.get_direction}>Get Directions</Text>
+                        </Image>
+                    </TouchableHighlight>
                   <Modal animationType={"fade"} visible={this.state.modalVisible} transparent={true}
                       onRequestClose={() => {alert("Modal has been closed.")}}>
                       <View style={styles.bgC}>

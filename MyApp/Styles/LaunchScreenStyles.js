@@ -87,6 +87,33 @@ export default StyleSheet.create({
         height: 20,
         position: 'absolute',
         left: 40
+    },  
+
+    options_next: {
+        position: 'absolute',
+        right: 20
+    },
+
+    option_button: {
+        position: 'absolute',
+        left: 80,
+        right: 0,
+
+    },
+
+    option_text: {
+        backgroundColor: 'transparent',
+        fontSize: 16,
+        color: '#666666',
+        flexDirection: 'row'
+
+    },
+
+    tipIcon: {
+        width: 20,
+        height: 20,
+        position: 'absolute',
+        left: 40
     }
 
 })
