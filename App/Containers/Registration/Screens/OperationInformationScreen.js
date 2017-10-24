@@ -10,15 +10,20 @@ import {
 } from 'react-native'
 import CheckBox from 'react-native-checkbox';
 import styles from '../Styles/OperationInformationScreenStyles'
+import AlertModal from '../../../Components/AlertModal'
 import { Images } from '../../../Themes'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import AppConfig from '../../../Config'
+import Meteor from 'react-native-meteor'
+import { RNS3 } from 'react-native-aws3'
 import { guid, validateEmail } from '../../../Transforms'
 
 export default class OperationInformation extends Component {
     constructor() {
         super()
         this.state = {
+            msgBox: false,
+            msgText: "",
             bReceiveDonation: false,
             bContainer: false,
             bVehicles: false,
@@ -34,6 +39,7 @@ export default class OperationInformation extends Component {
         }
 
         this.onSignup = this.onSignup.bind(this)
+        this.showDialog = this.showDialog.bind(this);
     }
     static navigationOptions = {
         title: 'Operation Information',
@@ -48,6 +54,11 @@ export default class OperationInformation extends Component {
         // )
     }
 
+    showDialog = (show, title) => {
+        if (show) this.setState({ msgBox: show, msgText: title })
+        else this.setState({ msgBox: show })
+    }
+    
     onSignup() {
         var { avatar, user, businessInfo } = this.props.navigation.state.params
         businessInfo.bReceiveDonation = this.state.bReceiveDonation
@@ -74,11 +85,14 @@ export default class OperationInformation extends Component {
                 region: AppConfig.REGION
             }
             user.profile.businessInfo = businessInfo
+            console.log(user)
 
             RNS3.put(file, options).then(response => {
+                user.profile.image = response.body.postResponse.location
                 Meteor.call('onCreateUser', user, (err, res) => {
                     if (err) {
                         this.showDialog(true, err.message)
+                        console.log(err)
                     } else {
                         this.props.navigation.navigate('MainScreen')
                     }
@@ -184,6 +198,7 @@ export default class OperationInformation extends Component {
 
                     </View>
 
+                    <AlertModal show={this.state.msgBox} modal={() => this.showDialog(false)} title={this.state.msgText} />
                     <TouchableOpacity style={styles.but} onPress={() => this.onSignup()}>
                         <Text style={styles.but_continue}>{this.state.bItems ? "CONTINUE" : "SIGN UP"}</Text>
                     </TouchableOpacity>

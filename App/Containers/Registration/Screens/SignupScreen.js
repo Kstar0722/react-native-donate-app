@@ -9,9 +9,9 @@ import {
     Text
 } from 'react-native'
 import styles from '../Styles/SignupScreenStyles'
-import Meteor from 'react-native-meteor'
 import AlertModal from '../../../Components/AlertModal'
 import { Images } from '../../../Themes'
+import Meteor from 'react-native-meteor'
 import { RNS3 } from 'react-native-aws3'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import PictureModal from '../../../Components/Modals/pictureModal'
