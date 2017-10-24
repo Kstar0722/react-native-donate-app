@@ -51,7 +51,7 @@ export default class BusinessScreen extends Component {
     }
 
     validate() {
-        if (validateEmail(this.state.email) && this.state.name && this.state.address && this.state.phone && this.state.ein && this.state.description && this.state.startTime) {
+        if (this.state.name && this.state.address && this.state.phone && this.state.ein && this.state.description && this.state.startTime) {
             return true
         }
         return false
