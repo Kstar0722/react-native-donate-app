@@ -69,7 +69,7 @@ export default StyleSheet.create({
     padding: 15,
     flexDirection: 'row',
     backgroundColor: 'transparent',
-    color: 'white',
+   // color: 'white',
   },
 
   vehicleLabel: {

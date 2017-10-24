@@ -6,21 +6,32 @@ import styles from '../Styles/AddItemsModalStyle'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { guid, validateEmail } from '../../../Transforms'
 import AppConfig from '../../../Config'
+import Meteor from 'react-native-meteor'
+import { RNS3 } from 'react-native-aws3'
+import AlertModal from '../../../Components/AlertModal'
 
 export default class AddItemsModal extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            msgBox: false,
+            msgText: "",
             items: [],
             item: null
         }
         this.onAdd = this.onAdd.bind(this)
         this.onRemove = this.onRemove.bind(this)
         this.onSignup = this.onSignup.bind(this)
+        this.showDialog = this.showDialog.bind(this);
     }
 
     static navigationOptions = {
         header: null,
+    }
+
+    showDialog = (show, title) => {
+        if (show) this.setState({ msgBox: show, msgText: title })
+        else this.setState({ msgBox: show })
     }
 
     onAdd() {
@@ -50,10 +61,9 @@ export default class AddItemsModal extends React.Component {
             region: AppConfig.REGION
         }
         user.profile.businessInfo = businessInfo
-        console.log(user)
-        return
 
         RNS3.put(file, options).then(response => {
+            user.profile.image = response.body.postResponse.location
             Meteor.call('onCreateUser', user, (err, res) => {
                 if (err) {
                     this.showDialog(true, err.message)
@@ -103,6 +113,8 @@ export default class AddItemsModal extends React.Component {
 
                     </View>
                 </ScrollView>
+
+                <AlertModal show={this.state.msgBox} modal={() => this.showDialog(false)} title={this.state.msgText} />
                 <TouchableOpacity onPress={() => this.onSignup()}>
                     <Image style={styles.footer} source={Images.reactAngleModelBg}>
                         <Text style={styles.signup_btn}>SIGN UP</Text>

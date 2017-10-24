@@ -111,6 +111,7 @@ const images = {
   popScrIcon: require('../Images/popScrIcon.png'),
   menuIcon: require('../Images/menuIcon.png'),
   foodboxes1: require('../Images/foodboxes1.png'),
+  ic_chevron_right: require('../Images/ic_chevron_right.png'),
   back_new : require('../Images/back_new.png'),
   gradient_bg : require('../Images/background.png'),
   stars : require('../Images/Stars.png'),
@@ -121,6 +122,8 @@ const images = {
   createdBy: require('../Images/createdBy.png'),
   get_bg: require('../Images/get_bg.png'),
   pin: require('../Images/pin.png'),
+
+  
   rightArraw: require('../Images/rightArrow.png'),
   questionMark: require('../Images/questionMark.png'),
   deliver: require('../Images/deliver.png'),
@@ -137,7 +140,16 @@ const images = {
   voulunteer_heart_sel: require('../Images/volunteer-heart-sel.png'),
   cameraIcon: require('../Images/cameraIcon.png'),
   dateIcon: require('../Images/dateIcon.png'),
-  groceriesIcon: require('../Images/groceriesIcon.png')
+  groceriesIcon: require('../Images/groceriesIcon.png'),
+  rescue_bg: require('../Images/rescue_bg.png'),
+  volunteer: require('../Images/volunteer.png'),
+  helpicon: require('../Images/helpicon.png'),
+  deliver_guy: require('../Images/delivery-guy.png'),
+  statusModal_bg: require('../Images/statusModal_bg.png'),
+  pinception: require('../Images/Pinception.png'),
+  food: require('../Images/Food.png'),
+  oval1: require('../Images/oval1.png'),  
+  food_donated: require('../Images/Food_Donated.png'),
+  People_Served: require('../Images/People_Served.png'),
+  Global_Impact: require('../Images/Global_Impact.png')
 }
-
-export default images

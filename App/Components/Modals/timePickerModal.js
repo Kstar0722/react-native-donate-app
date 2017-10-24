@@ -32,31 +32,35 @@ export default class TimePickerModal extends React.Component {
     }
 
     render() {
-        return (
-            <View>
-                <Modal
-                    animationType={'fade'}
-                    transparent={true}
-                    visible={this.props.timepickerModal}
-                    onRequestClose={this.props.close}
-                >
-                    <View style={styles.picturemodal_container}>
-                        <View style={styles.timepicker_container}>
-                            <DatePickerIOS mode="time"
-                                date={this.state.startDate}
-                                style={{ width: "40%", height: 250 }}
-                                onDateChange={this.onStartDateChange} />
-                            <DatePickerIOS mode="time"
-                                date={this.state.endDate}
-                                style={{ width: "40%", height: 250 }}
-                                onDateChange={this.onEndDateChange} />
+        if (this.props.timepickerModal) {
+            return (
+                <View>
+                    <Modal
+                        animationType={'fade'}
+                        transparent={true}
+                        visible={this.props.timepickerModal}
+                        onRequestClose={this.props.close}
+                    >
+                        <View style={styles.picturemodal_container}>
+                            <View style={styles.timepicker_container}>
+                                <DatePickerIOS mode="time"
+                                    date={this.state.startDate}
+                                    style={{ width: "40%", height: 250 }}
+                                    onDateChange={this.onStartDateChange} />
+                                <DatePickerIOS mode="time"
+                                    date={this.state.endDate}
+                                    style={{ width: "40%", height: 250 }}
+                                    onDateChange={this.onEndDateChange} />
+                            </View>
+                            <TouchableOpacity onPress={() => this.props.chooseTime(this.state.startDate, this.state.endDate)}>
+                                <Text style={styles.picturetext}>Choose Time</Text>
+                            </TouchableOpacity>
                         </View>
-                        <TouchableOpacity onPress={() => this.props.chooseTime(this.state.startDate, this.state.endDate)}>
-                            <Text style={styles.picturetext}>Choose Time</Text>
-                        </TouchableOpacity>
-                    </View>
-                </Modal>
-            </View>
-        );
+                    </Modal>
+                </View>
+            );
+        } else {
+            return null
+        }
     }
 }

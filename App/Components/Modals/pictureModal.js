@@ -81,34 +81,38 @@ export default class PictureModal extends React.Component {
     }
 
     render() {
-        return (
-            <View>
-                <Modal
-                    animationType={'fade'}
-                    transparent={true}
-                    visible={this.props.picturemodalVisible}
-                    onRequestClose={this.props.close}
-                >
-                    <View style={styles.picturemodal_container}>
-                        <View style={styles.header1}></View>
-                        <View style={styles.header}>
-                            <TouchableOpacity style={styles.headerleft} onPress={this.props.close}>
-                                <Icon name='md-arrow-back' size={20} color='#dd8d6c' />
+        if (this.props.picturemodalVisible) {
+            return (
+                <View>
+                    <Modal
+                        animationType={'fade'}
+                        transparent={true}
+                        visible={this.props.picturemodalVisible}
+                        onRequestClose={this.props.close}
+                    >
+                        <View style={styles.picturemodal_container}>
+                            <View style={styles.header1}></View>
+                            <View style={styles.header}>
+                                <TouchableOpacity style={styles.headerleft} onPress={this.props.close}>
+                                    <Icon name='md-arrow-back' size={20} color='#dd8d6c' />
+                                </TouchableOpacity>
+                                <Text style={styles.headertitle}>Add photo</Text>
+                            </View>
+                            <TouchableOpacity style={styles.pictureimage} onPress={this.onLibrary}>
+                                <Image source={Images.libphoto} />
                             </TouchableOpacity>
-                            <Text style={styles.headertitle}>Add photo</Text>
+                            <Text style={styles.picturetext}>Add image from your photo</Text>
+                            <Text style={{ color: 'white', fontSize: 16, marginBottom: 15 }}>library</Text>
+                            <TouchableOpacity style={styles.pictureimage} onPress={this.onCamera}>
+                                <Image source={Images.takepicture} />
+                            </TouchableOpacity>
+                            <Text style={styles.picturetext}>Take a picture</Text>
                         </View>
-                        <TouchableOpacity style={styles.pictureimage} onPress={this.onLibrary}>
-                            <Image source={Images.libphoto} />
-                        </TouchableOpacity>
-                        <Text style={styles.picturetext}>Add image from your photo</Text>
-                        <Text style={{ color: 'white', fontSize: 16, marginBottom: 15 }}>library</Text>
-                        <TouchableOpacity style={styles.pictureimage} onPress={this.onCamera}>
-                            <Image source={Images.takepicture} />
-                        </TouchableOpacity>
-                        <Text style={styles.picturetext}>Take a picture</Text>
-                    </View>
-                </Modal>
-            </View>
-        );
+                    </Modal>
+                </View>
+            );
+        } else {
+            return null
+        }
     }
 }

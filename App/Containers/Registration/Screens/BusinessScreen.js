@@ -18,8 +18,9 @@ export default class BusinessScreen extends Component {
         super()
         this.state = {
             name: '',
-            email: '',
+            address: '',
             phone: '',
+            ein : '',
             description: '',
             weekday: [false, false, false, false, false, false, false],
             timepickerModal: false,
@@ -86,8 +87,8 @@ export default class BusinessScreen extends Component {
                     <Image source={Images.underline} />
                     <TextInput placeholder='ADDRESS'
                         placeholderTextColor='rgba(255, 255, 255, 0.5)' style={styles.text}
-                        onChangeText={(text) => this.setState({ email: text })}
-                        value={this.state.email} />
+                        onChangeText={(text) => this.setState({ address: text })}
+                        value={this.state.address} />
                     <Image source={Images.underline} />
                     <TextInput placeholder='PHONE'
                         placeholderTextColor='rgba(255, 255, 255, 0.5)' style={styles.text}
@@ -96,8 +97,8 @@ export default class BusinessScreen extends Component {
                     <Image source={Images.underline} />
                     <TextInput placeholder='EIN'
                         placeholderTextColor='rgba(255, 255, 255, 0.5)' style={styles.text}
-                        onChangeText={(text) => this.setState({ password: text })}
-                        value={this.state.password} />
+                        onChangeText={(text) => this.setState({ ein: text })}
+                        value={this.state.ein} />
                     <Image source={Images.underline} />
 
                     <TextInput placeholder='BUSINESS DESCRIPTION'
