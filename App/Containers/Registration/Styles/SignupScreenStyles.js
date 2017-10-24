@@ -6,7 +6,9 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         paddingTop: 25,
-        resizeMode: 'cover'
+        resizeMode: 'cover',
+        height : '100%',
+        zIndex : 1
 
     },
 
@@ -46,6 +48,15 @@ export default StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         paddingVertical: 25
+    },
+
+    but1: {
+        width: '100%',
+        borderWidth : 0,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        position : 'absolute',
+        bottom : 20
     },
 
     but_business: {
@@ -111,13 +122,13 @@ export default StyleSheet.create({
     },
 
     operation_hours_view: {
-        width: 230,
+        width: 280,
         height: 30,
         borderRadius: 15,
         backgroundColor: 'white',
         borderColor: 'white',
         borderWidth: 1,
-        marginBottom: 10
+        marginBottom: 60
     },
 
     operation_image: {
@@ -129,6 +140,16 @@ export default StyleSheet.create({
         /*
         alignItems : 'center',
         justifyContent : 'flex-end' */
+    },
+
+    operation_text : {
+        position: 'absolute',
+        left : '20%', 
+        top :'20%', 
+        width : "60%", 
+        textAlign: 'center',
+        color : "#E36679",
+        backgroundColor : 'transparent'
     },
 
     back_btn: {

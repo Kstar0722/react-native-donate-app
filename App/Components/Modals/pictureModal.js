@@ -14,14 +14,15 @@ import styles from '../Styles/ModalStyles'
 var ImagePicker = require('react-native-image-picker');
 
 export default class PictureModal extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.onLibrary = this.onLibrary.bind(this)
         this.onCamera = this.onCamera.bind(this)
         this.state = { avatarSource: null }
     }
 
     onLibrary() {
+        let self = this
         var options = {
             title: 'Select Avatar',
             customButtons: [
@@ -45,18 +46,13 @@ export default class PictureModal extends React.Component {
             }
             else {
                 let source = { uri: response.uri };
-
-                // You can also display the image using data:
-                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-
-                this.props.chooseAvatar(source)
+                self.props.chooseAvatar(source)
             }
         });
     }
 
     onCamera() {
-        console.log('camera');
+        let self = this
         var options = {
             title: 'Select Avatar',
             customButtons: [
@@ -68,7 +64,6 @@ export default class PictureModal extends React.Component {
             }
         };
         ImagePicker.launchCamera(options, (response) => {
-            // Same code as in above section!
             if (response.didCancel) {
                 console.log('User cancelled image picker');
             }
@@ -80,42 +75,40 @@ export default class PictureModal extends React.Component {
             }
             else {
                 let source = { uri: response.uri };
-
-                // You can also display the image using data:
-                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-                this.props.chooseAvatar(source)
+                self.props.chooseAvatar(source)
             }
         });
     }
 
     render() {
         return (
-            <Modal
-                animationType={'fade'}
-                transparent={true}
-                visible={this.props.picturemodalVisible}
-                onRequestClose={() => alert()}
-            >
-                <View style={styles.picturemodal_container}>
-                    <View style={styles.header1}></View>
-                    <View style={styles.header}>
-                        <TouchableOpacity style={styles.headerleft} onPress={this.props.close}>
-                            <Icon name='md-arrow-back' size={20} color='#dd8d6c' />
+            <View>
+                <Modal
+                    animationType={'fade'}
+                    transparent={true}
+                    visible={this.props.picturemodalVisible}
+                    onRequestClose={this.props.close}
+                >
+                    <View style={styles.picturemodal_container}>
+                        <View style={styles.header1}></View>
+                        <View style={styles.header}>
+                            <TouchableOpacity style={styles.headerleft} onPress={this.props.close}>
+                                <Icon name='md-arrow-back' size={20} color='#dd8d6c' />
+                            </TouchableOpacity>
+                            <Text style={styles.headertitle}>Add photo</Text>
+                        </View>
+                        <TouchableOpacity style={styles.pictureimage} onPress={this.onLibrary}>
+                            <Image source={Images.libphoto} />
                         </TouchableOpacity>
-                        <Text style={styles.headertitle}>Add photo</Text>
+                        <Text style={styles.picturetext}>Add image from your photo</Text>
+                        <Text style={{ color: 'white', fontSize: 16, marginBottom: 15 }}>library</Text>
+                        <TouchableOpacity style={styles.pictureimage} onPress={this.onCamera}>
+                            <Image source={Images.takepicture} />
+                        </TouchableOpacity>
+                        <Text style={styles.picturetext}>Take a picture</Text>
                     </View>
-                    <TouchableOpacity style={styles.pictureimage} onPress={this.onLibrary}>
-                        <Image source={Images.libphoto} />
-                    </TouchableOpacity>
-                    <Text style={styles.picturetext}>Add image from your photo</Text>
-                    <Text style={{ color: 'white', fontSize: 16, marginBottom: 15 }}>library</Text>
-                    <TouchableOpacity style={styles.pictureimage} onPress={this.onCamera}>
-                        <Image source={Images.takepicture} />
-                    </TouchableOpacity>
-                    <Text style={styles.picturetext}>Take a picture</Text>
-                </View>
-            </Modal>
+                </Modal>
+            </View>
         );
     }
 }

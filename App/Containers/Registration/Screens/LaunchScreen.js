@@ -3,6 +3,7 @@ import {
     Text,
     View,
     Image,
+    ImageBackground,
     TouchableOpacity,
 } from 'react-native';
 import styles from '../Styles/LaunchScreenStyles';
@@ -37,7 +38,7 @@ export default class LaunchScreen extends Component {
         const { navigate } = this.props.navigation
         return (
             <View style = {{width : '100%', height :'100%'}}>
-                <Image source={Images.signbg} style={styles.container}>
+                <ImageBackground source={Images.signbg} style={styles.container}>
                     <View style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
                         <Image source = {Images.logoBig} style = {styles.logoBig} />
                         <Text style = {styles.info}>WE BELIEVE IN A FULL AMERICA</Text>
@@ -51,7 +52,7 @@ export default class LaunchScreen extends Component {
                             <Image source={Images.LOGIN} />
                         </TouchableOpacity>
                     </View>
-                </Image>
+                </ImageBackground>
             </View>
 
         );

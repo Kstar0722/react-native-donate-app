@@ -4,6 +4,7 @@ import {
     Text,
     View,
     Image,
+    ImageBackground,
     TouchableOpacity,
 } from 'react-native';
 import styles from '../Styles/LaunchScreenStyles';
@@ -43,11 +44,11 @@ export default class OnboardingScreen extends Component {
                 <TouchableOpacity onPress={() => this.props.navigation.dispatch(NavigationActions.back())} style={{ zIndex: 1 }}>
                     <Image source={Images.backIcon} style={styles.back_btn} />
                 </TouchableOpacity>
-                <Image source={Images.signbg} style={styles.container}>
+                <ImageBackground source={Images.signbg} style={styles.container}>
                     <View style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
                         <Image source={Images.logoBig} style={styles.logoBig} />
                     </View>
-                </Image>
+                </ImageBackground>
                 <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>  
                     <View style={styles.option_view} >
                         <TouchableOpacity style={styles.tipIcon} >
