@@ -153,3 +153,4 @@ const images = {
   People_Served: require('../Images/People_Served.png'),
   Global_Impact: require('../Images/Global_Impact.png')
 }
+export default images
