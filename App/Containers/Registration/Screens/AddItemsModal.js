@@ -68,7 +68,7 @@ export default class AddItemsModal extends React.Component {
                 if (err) {
                     this.showDialog(true, err.message)
                 } else {
-                    this.props.navigation.navigate('MainScreen')
+                    this.props.navigation.navigate('FindDonation')
                 }
             })
         })

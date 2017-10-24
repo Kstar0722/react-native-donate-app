@@ -5,6 +5,9 @@ import SignupScreen from '../Containers/Registration/Screens/SignupScreen'
 import BusinessScreen from '../Containers/Registration/Screens/BusinessScreen'
 import OperationInformationScreen from '../Containers/Registration/Screens/OperationInformationScreen'
 import AddItemsModal from '../Containers/Registration/Screens/AddItemsModal'
+import LoginScreen from '../Containers/Registration/Screens/LoginScreen'
+import FindDonation from '../Containers/Home/Screens/FindDonation'
+import DonationView from '../Containers/Home/Screens/DonationView'
 
 import styles from './Styles/NavigationStyles'
 
@@ -14,7 +17,11 @@ const PrimaryNav = StackNavigator({
   SignupScreen: { screen: SignupScreen },
   BusinessScreen: { screen: BusinessScreen },
   OperationInformationScreen: { screen: OperationInformationScreen },
-  AddItemsModal: { screen: AddItemsModal }
+  AddItemsModal: { screen: AddItemsModal },
+  LoginScreen: { screen: LoginScreen },
+  /*===============================*/
+  FindDonation : {screen: FindDonation},
+  DonationView : {screen: DonationView},
 }, {
 
     initialRouteName: 'LaunchScreen',
