@@ -24,7 +24,9 @@ export default class MainScreen extends Component {
       openModal: false,
       closedModal: false,
       reservedDonation:true,
-      isDetailShow:false
+      isDetailShow:false,
+      rescueModal: false,
+      statusModal: false
     }
   }
 
@@ -100,7 +102,8 @@ export default class MainScreen extends Component {
                         <Image source={Images.foodBoxes} style={styles.foodBoxes} />
                         <View style={styles.roundView}>
                             <View style={{alignItems: 'center', marginRight: 70}}>
-                                <TouchableHighlight style={styles.keyAround}>
+                                <TouchableHighlight style={styles.keyAround} onPress={()=>this.setState({rescueModal: true})}>
+
                                     <Image source={Images.key} style={styles.key} />
                                 </TouchableHighlight>
                                 <Text style={styles.rescue}>Rescue</Text>
@@ -149,7 +152,84 @@ export default class MainScreen extends Component {
                     </View>
               
               </ScrollView>
-
+              <Modal
+                animationType={"slide"}
+                transparent={true}
+                visible={this.state.rescueModal}
+              >
+                    <View style={styles.rescueModal}>
+                        <Image source={Images.rescue_bg} style={styles.rescue_bg} >
+                            <Text style={styles.modalTitle}>Rescue This Donation</Text>
+                            <Text style={styles.modalContent}>Select how you’d like this donation to be delivered to your facility.</Text>
+                            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                                <Image source={Images.volunteer} style={styles.volunteer}/>
+                                <Image source={Images.helpicon} style={styles.helpicon} />
+                            </View>
+                            <TouchableHighlight style={styles.modaButton} onPress={()=>this.setState({rescueModal: false, statusModal: true})}>
+                                <Text style={styles.buttonText}>I am the Driver</Text>
+                            </TouchableHighlight>
+                            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                                <Image source={Images.deliver_guy} style={styles.deliver_guy}/>
+                                <Image source={Images.helpicon} style={styles.helpicon} />
+                            </View>
+                            <TouchableHighlight style={styles.modaButton} onPress={()=>this.setState({rescueModal: false})}>
+                                <Text style={styles.buttonText}>Assign to a Driver</Text>
+                            </TouchableHighlight>
+                        </Image>
+                    </View>
+              </Modal>
+              <Modal
+                animationType={"slide"}
+                transparent={true}
+                visible={this.state.statusModal}
+              >
+                    <View style={styles.rescueModal}>
+                        <Image source={Images.statusModal_bg} style={styles.statusModal_bg} >
+                            <Text style={[styles.modalTitle,{fontSize: 20}]}>Pickup Status</Text> 
+                            <Text style={[styles.modalContent,{fontSize: 13, fontWeight: '600'}]}>Select when you will begin this rescue</Text> 
+                            <MapView
+                                style={styles.mapView1}
+                                region={{
+                                    latitude: 37.785834,
+                                    longitude: -122.406417,
+                                    latitudeDelta: 0.00222,
+                                    longitudeDelta: 0.00201
+                                    }
+                                }
+                                zoomEnabled={true}
+                            >
+                                <MapView.Marker 
+                                    coordinate={{
+                                        latitude: 37.785834,
+                                        longitude: -122.406417,
+                                    }}                                
+                                >
+                                    <Image source={Images.pinception} style={styles.pinception}/>
+                                </MapView.Marker>
+                            </MapView> 
+                            <View style={styles.statusModal_to}>
+                                <Text style={styles.to}>To</Text>  
+                                <Text style={styles.name}>Donator Name</Text>                        
+                            </View>
+                            <View style={styles.statusModal_to}>
+                                <Text style={styles.to}>ETA</Text>  
+                                <Text style={styles.name}>5 minutes</Text>                        
+                            </View>
+                            <Text style={[styles.modalContent,{fontSize: 13, fontFamily: 'Avenir'}]}>When will you begin this rescue:</Text> 
+                            <View style={styles.aroundButtonView}>
+                                <TouchableHighlight style={[styles.statusModal_aroundButton,{left:23}]} onPress={()=>this.setState({statusModal: false})}>
+                                    <Text style={{color: 'white'}}>New</Text>
+                                </TouchableHighlight>
+                                <TouchableHighlight style={[styles.statusModal_aroundButton,{left: 98}]} onPress={()=>this.setState({statusModal: false})}>
+                                    <Text style={{color: 'white'}}>Later</Text>
+                                </TouchableHighlight>
+                                <TouchableHighlight style={[styles.statusModal_aroundButton,{right: 23, backgroundColor: '#fe5c47'}]} onPress={()=>this.setState({statusModal: false})}>
+                                    <Text style={{color: 'white'}}>Cancel</Text>
+                                </TouchableHighlight>
+                            </View>
+                        </Image>
+                    </View>
+              </Modal>
       </View>
     )
   }

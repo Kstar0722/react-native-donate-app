@@ -6,7 +6,7 @@ export default StyleSheet.create({
   },
   fDheadr:{
     width:width,
-    height:64,
+    height:128,
   },
   fDheadr2:{
     width:width,
@@ -364,5 +364,29 @@ export default StyleSheet.create({
       textAlign:'center',
       color:'#FFFFFF',
       fontSize:10,
+  },
+  dateLayout:{
+    flexDirection:'row',
+    alignItems:'center',
+    paddingHorizontal:15,
+    
+  },
+  weekAndYearLayout:{
+    flex:1,
+    marginLeft:10,
+  },
+  dayStyle:{
+    fontFamily: 'Ubuntu',
+    fontWeight:"500",
+    backgroundColor:'rgba(0,0,0,0)',
+    fontSize:43,
+    color:'#fff',
+  },
+  weekAndYearStyle:{
+    fontFamily: 'Ubuntu',
+    backgroundColor:'rgba(0,0,0,0)',
+    fontSize:15,
+    fontWeight:'600',
+    color:'#fff',
   }
 })

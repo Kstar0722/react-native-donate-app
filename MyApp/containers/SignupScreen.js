@@ -65,23 +65,23 @@ export default class SignupScreen extends Component {
                     <Text style={styles.subLabel}>ADD PHOTO</Text>
 
                     <TextInput placeholder='NAME'
-                        placeholderTextColor='#f0b7ae' style={styles.text}
+                        placeholderTextColor='rgba(255,255,255,0.5)' style={styles.text}
                         underlineColorAndroid='white'
                         onChangeText={(text) => this.setState({ name: text })}
                         value={this.state.name} />
                     <Image source={Images.underline} />
                     <TextInput placeholder='EMAIL'
-                        placeholderTextColor='#f0b7ae' style={styles.text}
+                        placeholderTextColor='rgba(255,255,255,0.5)' style={styles.text}
                         onChangeText={(text) => this.setState({ email: text })}
                         value={this.state.email} />
                     <Image source={Images.underline} />
                     <TextInput placeholder='PHONE'
-                        placeholderTextColor='#f0b7ae' style={styles.text}
+                        placeholderTextColor='rgba(255,255,255,0.5)' style={styles.text}
                         onChangeText={(text) => this.setState({ phone: text })}
                         value={this.state.phone} />
                     <Image source={Images.underline} />
                     <TextInput placeholder='PASSWORD'
-                        placeholderTextColor='#f0b7ae' style={styles.text}
+                        placeholderTextColor='rgba(255,255,255,0.5)' style={styles.text}
                         onChangeText={(text) => this.setState({ password: text })}
                         value={this.state.password} secureTextEntry={true} />
                     <Image source={Images.underline} />
@@ -90,7 +90,7 @@ export default class SignupScreen extends Component {
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 30 }}>
                             <Text style={styles1.text}>{this.state.switchValue ? 'YES' : 'NO'}</Text>
                             <Switch onValueChange={this.toggleSwitch} value={this.state.switchValue}
-                                onTintColor='#ffb660'
+                                onTintColor='rgba(255,255,255,0.5)'
                             />
                         </View>
                     </View>

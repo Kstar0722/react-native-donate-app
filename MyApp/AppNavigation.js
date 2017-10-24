@@ -12,6 +12,8 @@ import SelectedItems from './containers/SelectedItems'
 import OperationInformationScreen from './containers/OperationInformationScreen'
 import AddItemsModal from './containers/AddItemsModal'
 import EmptyDonation from './containers/EmptyDonation'
+import DonationView from './containers/DonationView'
+import ProfilScreen from './containers/ProfileScreen'
 
 import styles from './Styles/NavigationStyles'
 
@@ -22,6 +24,7 @@ const PrimaryNav = StackNavigator({
   SignupScreen: { screen: SignupScreen },
   BusinessScreen: { screen: BusinessScreen },
   RescueProgress: {screen: RescueProgress},
+  FindDonation: {screen: FindDonation},
   SideMenu: { screen: SideMenu },
   SelectedItems: { screen: SelectedItems },
   OperationInformationScreen: { screen: OperationInformationScreen },
