@@ -82,7 +82,7 @@ export default class AddItemsModal extends React.Component {
             <View style={[styles.dContainer]}>
                 <Image source={Images.mHeder} style={styles.dHeader}></Image>
                 <View style={styles.dHeaderInner}>
-                    <TouchableOpacity style={styles.dLeftHeader}>
+                    <TouchableOpacity style={styles.dLeftHeader} onPress = {() => this.props.navigation.goBack()}>
                         <Text style={styles.dCancelBtn}>CANCEL</Text>
                     </TouchableOpacity>
                     <Text style={styles.dTitle}>Items I can receive</Text>
