@@ -13,6 +13,7 @@ import OperationInformationScreen from './containers/OperationInformationScreen'
 import AddItemsModal from './containers/AddItemsModal'
 import DonationView from './containers/DonationView'
 import ProfilScreen from './containers/ProfileScreen'
+import EmptyDonation from './containers/EmptyDonation'
 
 import styles from './Styles/NavigationStyles'
 
