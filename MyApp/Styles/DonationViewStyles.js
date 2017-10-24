@@ -438,5 +438,129 @@ get_direction: {
 pin: {
   width: 18,
   height: 18*43/32
+},
+rescueModal: {
+  width: width,
+  height: height,
+  backgroundColor: 'rgba(0,0,0,0.4)',
+  alignItems: 'center'
+},
+rescue_bg: {
+  width: width-80,
+  height: (width-80)*832/580,
+  marginTop: 30,
+  alignItems: 'center',
+  paddingHorizontal: 30
+},
+modalTitle: {
+  fontFamily: 'Helvetica',
+  fontSize: 17,
+  fontWeight: 'bold',
+  color: 'white',
+  marginTop: 20
+},
+modalContent: {
+  fontFamily: 'Helvetica',
+  fontSize: 12,
+  textAlign: 'center',
+  lineHeight: 20,
+  color: 'white',
+  marginTop: 10,
+  marginBottom: 25
+},
+volunteer: {
+  width: 55,
+  height: 55*101.27/100,
+  paddingHorizontal: 20
+},
+helpicon: {
+  width: 17,
+  height: 17,
+  position: 'absolute',
+  right: -40,
+  top: 20
+},
+modaButton: {
+  width: width-170,
+  height: (width-150)*52.58/349.41,
+  backgroundColor: '#ffb660',
+  borderRadius: 3,
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginTop: 15,
+  marginBottom: 25
+},
+buttonText: {
+  fontFamily: 'Helvetica',
+  backgroundColor: 'transparent',
+  fontSize: 12,
+  color: 'white'
+},
+deliver_guy: {
+  width: 70,
+  height: 70*80/114
+},
+statusModal_bg: {
+  width: width-80,
+  height: (width-80)*962/580,
+  marginTop: 30,
+  alignItems: 'center',
+  paddingHorizontal: 0
+},
+mapView1: {
+  width: width-82,
+  height: (width-80)*311.34/580,  
+},
+pinception: {
+  width: 70,
+  height: 70*125/101
+},
+statusModal_to: {
+  width: width-82,
+  borderBottomColor: 'rgba(255,255,255,0.4)',
+  borderBottomWidth: 1,
+  backgroundColor: 'transparent',
+  marginTop: 12,
+  flexDirection: 'row',  
+  height: 30
+},
+to: {
+  fontFamily: 'Helvetica',
+  fontSize: 12,
+  color: 'white',
+  position: 'absolute',
+  left: 20,
+  marginTop: 8
+},
+name: {
+  fontFamily: 'Helvetica',
+  fontSize: 12,
+  color: 'white',
+  position: 'absolute',
+  right: 20
+},
+statusModal_aroundButton: {
+  width: 65,
+  height: 65,
+  borderRadius: 65/2,
+  backgroundColor: '#ffb660',
+  justifyContent: 'center',
+  alignItems: 'center',
+  shadowColor: 'black', 
+  shadowOffset: {
+    width: 0,
+    height: 3
+  },
+  shadowRadius: 3,
+  shadowOpacity: 0.2,
+  borderWidth: 0.4,
+  borderColor: 'rgba(255,255,255,0.3)',
+  position: 'absolute'
+},
+aroundButtonView: {
+  flexDirection: 'row',
+  width: width-82,
+  marginTop: -10
+
 }
 })

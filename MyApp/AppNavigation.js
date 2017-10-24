@@ -11,6 +11,8 @@ import FindDonation from './containers/FindDonation'
 import SelectedItems from './containers/SelectedItems'
 import OperationInformationScreen from './containers/OperationInformationScreen'
 import AddItemsModal from './containers/AddItemsModal'
+import DonationView from './containers/DonationView'
+import ProfilScreen from './containers/ProfileScreen'
 
 import styles from './Styles/NavigationStyles'
 
@@ -26,9 +28,11 @@ const PrimaryNav = StackNavigator({
   SelectedItems: { screen: SelectedItems },
   OperationInformationScreen: { screen: OperationInformationScreen },
   AddItemsModal: { screen: AddItemsModal },
-  OnboardingScreen: { screen: OnboardingScreen }
+  OnboardingScreen: { screen: OnboardingScreen },
+  DonationView: { screen: DonationView},
+  ProfilScreen: {screen: ProfilScreen}
 }, {
-    initialRouteName: 'FindDonation',
+    initialRouteName: 'ProfilScreen',
     heaerStyle: styles.header
   })
 export default PrimaryNav

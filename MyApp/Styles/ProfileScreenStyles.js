@@ -7,13 +7,13 @@ export default StyleSheet.create({
   },
     container:{
         flex: 1,
-        backgroundColor: 'transparent',
+        backgroundColor: 'white',
         height,
         width
     },
     profilebg2:{
         width,
-        height: width*700/750,
+        height: width*216/750,
         backgroundColor: 'transparent',
         alignItems: 'center',
     },
@@ -21,17 +21,18 @@ export default StyleSheet.create({
         width,
         height: width*400/750,
     },
-    header:{
-        flexDirection: 'row',
+    header:{  
+        flexDirection:'row',
+        paddingTop: 0,
+        height: 64,
         alignItems:'center',
-        marginTop: 20,
-        padding: 10,
-        height: 40,
+        paddingHorizontal:15,
+        backgroundColor:'#DD8D6C',
+        borderBottomColor: 'rgba(255,255,255,0.2)',
+        borderBottomWidth: 1,
+        justifyContent: 'center'
     },
-    headerTitle:{
-        width: 40,
-        paddingRight: 10,
-        width: width-55,
+    headerTitle:{                      
         textAlign: 'center',
         fontSize: 18,
         fontWeight: '600',
@@ -70,10 +71,10 @@ export default StyleSheet.create({
     },
     menuTab:{
         marginHorizontal: 20,
-        marginTop: -50,
+        marginTop: -20,
         marginBottom: 20,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
     },
     menuTabBtn:{
         alignItems: 'center',
@@ -652,5 +653,116 @@ shadowOpacity: 0.7,
         textAlign:'center',
         color:'#FFFFFF',
         fontSize:10,
-    }
+    },
+    stars: {
+        width: width*175/750,
+        height: width*32/750,
+        alignSelf: 'center',
+        marginTop: 10
+      },
+    time: {
+        fontSize: 13,
+        color: 'white',
+        marginTop:15
+      },
+    createdby_View: {
+        width: width-50,
+        borderTopColor: 'rgba(0,0,0,0.1)',
+        borderTopWidth: 1,
+        borderBottomColor: 'rgba(0,0,0,0.1)',
+        borderBottomWidth: 1,
+        alignSelf: 'center',
+        marginTop: 25,
+        marginBottom: 25
+      },
+    donation_description: {
+        fontSize: 16,
+        backgroundColor: 'transparent',
+        marginTop: 35,
+        alignSelf: 'flex-start'
+      },
+    descriptionView: {
+        width,
+        paddingHorizontal: 25
+    },
+    hoursDescription: {
+        fontSize: 16,
+        marginTop: 20,
+        alignSelf: 'flex-start'
+    },
+    donation_content: {
+        fontSize: 14,
+        backgroundColor: 'transparent',
+        width: width-50,
+        alignSelf: 'center',
+        marginTop: 15,
+        letterSpacing : 2,
+        lineHeight: 17,
+        fontFamily: 'Helvetica'
+      },
+    foodView: {
+        width: width-50,
+        borderRadius: 10,
+        height: (width-50)*205.7/630,
+        shadowColor: 'black', 
+        shadowOffset: {
+          width: 0,
+          height: 3
+        },
+        shadowRadius: 3,
+        shadowOpacity: 0.2,
+        flexDirection: 'row',
+        marginVertical: 25,
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    food: {
+        width: 55,
+        height: 55,
+        marginLeft: 20
+    },
+    oval1: {
+        width: 30,
+        height: 30,
+        position: 'absolute',
+        right: -15
+    },
+    rectagle: {
+        width: 100,
+        height: 100,
+        shadowOffset: {
+        width: 0,
+        height: 3
+        },
+        shadowRadius: 3,
+        shadowOpacity: 0.2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 5
+    },
+    food_donated:{
+        width: 55,
+        height: 55*58/110
+    },
+    mapView: {
+        width: width,
+        height: 150,
+        marginBottom: 0,
+        marginTop: 25
+      },
+      pin: {
+        width: 18,
+        height: 18*43/32
+      },
+      get_bg: {
+        width: width,
+        height: width*106/750,
+        alignItems: 'center',
+        justifyContent: 'center'
+      },
+      get_direction: {
+        color: 'white',
+        fontFamily: 'Helvetica',
+        fontSize: 19,  
+      },
 })
