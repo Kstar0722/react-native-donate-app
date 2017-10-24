@@ -52,7 +52,7 @@
     "react-native-keyboard-spacer": "^0.3.1",
     "react-native-maps": "^0.15.3",
     "react-native-meteor": "^1.1.0",
-    "react-native-modal-datetime-picker": "^4.13.0",
+    "react-native-modal-datetime-picker": "^4.9.0",
     "react-native-popup-menu": "^0.8.3",
     "react-native-rating": "^2.0.4",
     "react-native-rating-star": "^0.2.1",

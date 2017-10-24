@@ -30,11 +30,7 @@ export default class MainScreen extends Component {
         currentYear: cDate[3],
         isDateTimePickerVisible: false,
     }
-
-    
-    
-
-this.toggleSwitch = this.toggleSwitch.bind(this)
+    this.toggleSwitch = this.toggleSwitch.bind(this)
   }
 
   toggleSwitch (val) {
