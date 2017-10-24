@@ -121,7 +121,24 @@ const images = {
   key : require('../Images/key.png'),
   createdBy: require('../Images/createdBy.png'),
   get_bg: require('../Images/get_bg.png'),
-  pin: require('../Images/pin.png')
+  pin: require('../Images/pin.png'),
+  rightArraw: require('../Images/rightArrow.png'),
+  questionMark: require('../Images/questionMark.png'),
+  deliver: require('../Images/deliver.png'),
+  deliver_sel: require('../Images/deliver-sel.png'),
+  non_perishable_new: require('../Images/non-perishable-new.png'),
+  non_perishable_new_sel: require('../Images/non-perishable-new-sel.png'),
+  paid_pickup: require('../Images/paid-pickup.png'),
+  paid_pickup_sel: require('../Images/paid-picjup-sel.png'),
+  perishable_new: require('../Images/perishable-new.png'),
+  perishable_new_sel: require('../Images/perishable-new-sel.png'),
+  prepared: require('../Images/prepared.png'),
+  prepared_sel: require('../Images/prepared-sel.png'),
+  voulunteer_heart: require('../Images/volunteer-heart.png'),
+  voulunteer_heart_sel: require('../Images/volunteer-heart-sel.png'),
+  cameraIcon: require('../Images/cameraIcon.png'),
+  dateIcon: require('../Images/dateIcon.png'),
+  groceriesIcon: require('../Images/groceriesIcon.png')
 }
 
 export default images
