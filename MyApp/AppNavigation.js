@@ -44,7 +44,7 @@ const PrimaryNav = StackNavigator({
 
   completedDonationScreen: { screen: completedDonationScreen},
 }, {
-    initialRouteName: 'completedDonationScreen',
+    initialRouteName: 'ProfilScreen',
     heaerStyle: styles.header
   })
 export default PrimaryNav

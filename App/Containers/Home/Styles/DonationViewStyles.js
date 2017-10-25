@@ -594,6 +594,7 @@ createdby_View: {
 createdBy: {
   width: 150,
   height: 150,
+  borderRadius : 75,
   alignSelf: 'center',
   marginTop: 25,
   marginBottom: 25
