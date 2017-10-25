@@ -5,8 +5,12 @@ import { Slider } from 'react-native-elements'
 import { Images } from '../DevTheme'
 import styles from '../Styles/CompletedDonationScreenStyles'
 import DateTimePicker from 'react-native-modal-datetime-picker'
-
 import PictureModal from './Modals/pictureModal'
+
+import DatePicker from 'react-native-datepicker'
+import DescriptionModal from './Modals/descriptionModal'
+import dateFormat from 'dateformat';
+_dText='';
 
 export default class HomeScreen extends React.Component {
     constructor () {
@@ -28,7 +32,7 @@ export default class HomeScreen extends React.Component {
             deliveryOptionToggle2: false,
             deliveryOptionToggle3: false,
 
-            showDescription: false,
+            //showDescription: false,
             showPremium: false,
             showDistributor: false,
             showVolunteer: false,
@@ -39,6 +43,10 @@ export default class HomeScreen extends React.Component {
 
             picturemodalVisible: false,
             avatar : null,
+
+            isDateTimePickerVisible: false,
+            startDate:"",
+            descriptionModalVisible:false,
 
         }
         this.toggleSwitch = this.toggleSwitch.bind(this);
@@ -82,6 +90,68 @@ export default class HomeScreen extends React.Component {
         })
     }
 
+
+    _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+    
+    _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+    _handleDatePicked = (date) => {
+        
+        cDate = dateFormat(date, 'mmm, dd, yyyy')
+        this.setState({
+           startDate: cDate
+        })
+        this._hideDateTimePicker();
+        this.setState({showDateImage: false})
+
+    };
+
+    closeDescriptionModal = () => {
+        this.setState({
+          descriptionModalVisible: false
+        })
+    }
+
+    writeHere = () => {
+        let t='';
+          if(_dText){
+              if(_dText.length>50){
+                  t=_dText.substring(0, 49)+'...';
+              }else{
+                t=_dText;
+              }
+    
+            return (
+                <View style={styles.setBottomPost}>
+                <View style={styles.editContent}>                                
+                    <Text style={styles.write3}>{t}</Text>
+                    <TouchableOpacity  onPress={()=>this.setState({descriptionModalVisible: true})}>
+                        <Text style={styles.write1}>EDIT</Text>
+                    </TouchableOpacity>
+                </View>
+                <Image source={Images.markPostIcon}  style={styles.bottomPostBtn} />
+                </View>
+            );
+        }else{
+            return (           
+
+                <TouchableOpacity onPress={()=>this.setState({descriptionModalVisible: true})}>
+                <View style={[styles.vDetsilSElection ,styles.vDetsilSElectionSL, {opacity: 1, paddingVertical: 50}]} >
+                    <Text style={styles.vehicleTitleSw}>Description</Text>
+                    <TouchableOpacity style={styles.sSection} onPress={()=>this.setState({descriptionModalVisible: true})} >
+                        <Image
+                            source={Images.rightArraw}
+                            style={{width: 11, height: 18}}
+                        />
+                    </TouchableOpacity>
+                </View>
+                </TouchableOpacity>
+                );
+            }
+        }
+
+
+
     render () {
         return (
           <View style={styles.container}>
@@ -103,7 +173,7 @@ export default class HomeScreen extends React.Component {
                                 {this.state.avatar &&
                                 <View style={{alignItems: 'center'}} >
                                     <View style={styles.pImgB}><Image source={this.state.avatar ? this.state.avatar : Images.bgImage} style={styles.pImg} /></View>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity onPress={()=>{this.setState({picturemodalVisible:true})}} >
                                         <Text style={styles.btnEdit}>Edit</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -115,26 +185,34 @@ export default class HomeScreen extends React.Component {
                                     </TouchableOpacity>
                                     <Text style={styles.foodTypeText} >Image</Text>
                                 </View>
-                                }                                
+                                }                                                                
                             </View>
 
                             <View style={styles.boxCover}>
                                 {!this.state.showDateImage &&
                                 <View style={{alignItems: 'center'}} >
-                                    <Text style={styles.btnEtxt}>Jan, 11, 2017</Text>
-                                    <TouchableOpacity>
+                                    <Text style={styles.btnEtxt}>{this.state.startDate}</Text>
+                                    <TouchableOpacity onPress={()=>{this._showDateTimePicker()}} >
                                         <Text style={styles.btnEdit}>Edit</Text>
                                     </TouchableOpacity>
                                 </View>
                                 }
                                 {this.state.showDateImage &&
                                 <View style={{alignItems: 'center', flex: 1}} >
-                                    <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({showDateImage:false})}}>
+                                    <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this._showDateTimePicker()}}>
                                         <Image source={Images.date} style={[styles.vImgBoxCover, !this.state.foodTypeToggle1&& {}]} resizeMode={'contain'} />
                                     </TouchableOpacity>
                                     <Text style={styles.foodTypeText} >Date</Text>
                                 </View>
                                 } 
+                                <DateTimePicker
+                                isVisible={this.state.isDateTimePickerVisible}
+                                onConfirm={this._handleDatePicked}
+                                onCancel={this._hideDateTimePicker}
+                                datePickerModeAndroid='calendar'
+                                confirmTextIOS="Ok"
+                                titleIOS='Select Date'
+                                /> 
                                 
                             </View>
                             
@@ -272,33 +350,13 @@ export default class HomeScreen extends React.Component {
                             {this.state.switchValue && this.sliderValue()}                            
                         </View>
 
-                        {!this.state.showDescription ?
-                        <View style={[styles.vDetsilSElection ,styles.vDetsilSElectionSL, {opacity: 1, paddingVertical: 50}]} >
-                            <Text style={styles.vehicleTitleSw}>Description</Text>
-                            <TouchableOpacity style={styles.sSection} onPress={()=>this.setState({showDescription: true})} >
-                                <Image
-                                    source={Images.rightArraw}
-                                    style={{width: 11, height: 18}}
-                                />
-                            </TouchableOpacity>
-
-                        </View>
-                        :
-                        <View style={styles.setBottomPost}>
-                            <View style={styles.editContent}>                                
-                                <Text style={styles.write3}>{'We will be giving apples, oranges and carrots. Please...'}</Text>
-                                <TouchableOpacity  onPress={()=>this.setState({descriptionModalVisible: true})}>
-                                    <Text style={styles.write1}>EDIT</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <Image source={Images.markPostIcon}  style={styles.bottomPostBtn} />
-                        </View>
-                        }
+                        {this.writeHere()}
 
                   </ScrollView>
               </ImageBackground>
 
               <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal} chooseAvatar = {this.chooseAvatar} />
+              <DescriptionModal descriptionModalVisible={this.state.descriptionModalVisible} close={this.closeDescriptionModal}/>
           </View>
         )
     }
