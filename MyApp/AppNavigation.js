@@ -21,6 +21,8 @@ import MessageScreen from './containers/MessageScreen'
 import ReservedDonationDetail from './containers/ReservedDonationDetail'
 import CreateListing from './containers/CreateListing'
 
+import completedDonationScreen  from './containers/completedDonationScreen'
+
 import styles from './Styles/NavigationStyles'
 
 const PrimaryNav = StackNavigator({
@@ -38,9 +40,11 @@ const PrimaryNav = StackNavigator({
   OnboardingScreen: { screen: OnboardingScreen },
   DonationView: { screen: DonationView},
   ProfilScreen: {screen: ProfilScreen},
-  ReservedDonationDetail: {screen: ReservedDonationDetail}
+  ReservedDonationDetail: {screen: ReservedDonationDetail},
+
+  completedDonationScreen: { screen: completedDonationScreen},
 }, {
-    initialRouteName: 'ReservedDonationDetail',
+    initialRouteName: 'completedDonationScreen',
     heaerStyle: styles.header
   })
 export default PrimaryNav
