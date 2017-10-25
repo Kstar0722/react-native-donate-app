@@ -68,7 +68,7 @@ export default class ProfileScreen extends React.Component {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.descriptionView}>
-                    <Text style={[styles.donation_description,{fontWeight: '700'}]}>WEBSITE:  WWW.DONATORNAME.COM</Text>
+                    <Text style={[styles.donation_description,{fontWeight: '700',fontFamily: 'Ubuntu'}]}>WEBSITE:  WWW.DONATORNAME.COM</Text>
                     <View style={styles.createdby_View}>
                         <Text style={styles.donation_description}>HOURS OF OPERATION:</Text>
                         <View style={{alignSelf:'center', paddingBottom: 25}}>
@@ -81,17 +81,17 @@ export default class ProfileScreen extends React.Component {
                             <Text style={styles.hoursDescription}>Sun   8:00 pm - 2:00 am</Text>
                         </View>
                     </View>
-                    <Text style={{alignSelf: 'center', fontSize: 17, fontWeight: '600'}}>ORGANIZATION DESCRIPTION:</Text>
+                    <Text style={{alignSelf: 'center', fontSize: 17, fontWeight: '600',fontFamily: 'Ubuntu'}}>ORGANIZATION DESCRIPTION:</Text>
                     <Text style={[styles.donation_content]}>Business Desctiption goes here tor urna. Ut laoreet sodales nisi, quis iaculis nulla iaculis vitae. Donec sagittis faucibus lacus eget blandit. Mauris vitae ultricies metus, at condimentum nulla. Donec quis ornare lacus. Etiam gravida mollis tortor quis porttitor. Vestibulum rutrum quam vitae fringilla tincidunt. Suspendisse nec tortor urna. Ut laoreet sodales nisi, quis iaculis nulla iaculis vitae. Donec sagittis faucibus lacus eget blandit. Mauris vitae ultricies metus, at condimentum nulla. </Text>
                     <View style={styles.createdby_View}>
-                        <Text style={{alignSelf: 'center', fontSize: 16, fontWeight: '400', marginTop: 25}}>UPCOMING SERVICES:</Text>
-                        <Text style={{alignSelf: 'center', fontSize: 16, fontWeight: '400', marginTop: 18, color:'rgba(0,0,0,0.6)'}}>September 30, 2017</Text>
+                        <Text style={{alignSelf: 'center', fontSize: 16, fontWeight: '400', marginTop: 25, fontFamily: 'Ubuntu'}}>UPCOMING SERVICES:</Text>
+                        <Text style={{alignSelf: 'center', fontSize: 16, fontWeight: '400', marginTop: 18, color:'rgba(0,0,0,0.6)', fontFamily: 'Ubuntu'}}>September 30, 2017</Text>
                         <View style={styles.foodView}>
                             <Image source={Images.food} style={styles.food}/>
                             <View style={{alignItems: 'center',width:170, marginLeft:15}}>
-                                <Text style={{color: 'rgba(0,0,0,0.6)',fontSize: 16}}>Groceries Giveaway</Text>
-                                <Text style={{fontSize: 13, paddingVertical: 10}}>Description of the food give-a-way goes here….</Text>
-                                <Text style={{fontSize: 12, width:100,textAlign:'center'}}>Click to view this giveaway</Text>
+                                <Text style={{color: 'rgba(0,0,0,0.6)',fontSize: 16, fontFamily: 'Ubuntu'}}>Groceries Giveaway</Text>
+                                <Text style={{fontSize: 13, paddingVertical: 10, fontFamily: 'Ubuntu'}}>Description of the food give-a-way goes here….</Text>
+                                <Text style={{fontSize: 12, width:100,textAlign:'center', fontFamily: 'Ubuntu'}}>Click to view this giveaway</Text>
                             </View>
                             <Image source={Images.oval1} style={styles.oval1} />
                         </View>
@@ -111,7 +111,7 @@ export default class ProfileScreen extends React.Component {
                         <Text style={{fontSize: 17,color: 'rgba(0,0,0,0.6)',marginTop:10}}>GREAT</Text>
                     </View>
                 </View>
-                <Text style={{fontSize: 17,alignSelf: 'center',marginBottom:20}}>LOCATION:</Text>
+                <Text style={{fontSize: 17,alignSelf: 'center',marginBottom:20, fontFamily: 'Ubuntu'}}>LOCATION:</Text>
                 <MapView
                         style={styles.mapView}
                         region={{

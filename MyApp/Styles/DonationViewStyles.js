@@ -467,7 +467,8 @@ donatorname: {
   backgroundColor: 'transparent',
   color: 'white',
   fontWeight: '500',
-  marginTop: 6
+  marginTop: 6,
+  fontFamily: 'Ubuntu'
 },
 stars: {
   width: width*175/750,
@@ -485,10 +486,12 @@ pickupView: {
 pickup: {
   color: 'white',
   paddingBottom: 13,
-  fontSize: 13
+  fontSize: 13,
+  fontFamily: 'Ubuntu'
 },
 time: {
-  fontSize: 12
+  fontSize: 12,
+  fontFamily: 'Ubuntu'
 },
 apple: {
   width: 18,
@@ -498,7 +501,8 @@ apple: {
 foodtype: {
   fontSize: 13,
   backgroundColor: 'transparent',
-  color: 'white'
+  color: 'white',
+  fontFamily: 'Ubuntu'
 },
 vehicle: {
   width: 18*84/32.8,
@@ -516,7 +520,8 @@ shapeView: {
 click_to_zoom: {
   fontSize: 15,
   color: 'white',
-  backgroundColor: 'transparent'
+  backgroundColor: 'transparent',
+  fontFamily: 'Ubuntu'
 },
 search_small: {
   width: 17,
@@ -553,6 +558,7 @@ rescue: {
   color: 'rgba(0,0,0,0.6)',
   backgroundColor: 'transparent',
   marginTop: 7,  
+  fontFamily: 'Ubuntu'
 },
 roundView: {
   flexDirection: 'row',
@@ -569,7 +575,8 @@ donation_description: {
   fontSize: 16,
   backgroundColor: 'transparent',
   marginTop: 35,
-  alignSelf: 'center'
+  alignSelf: 'center',
+  fontFamily: 'Ubuntu'
 },
 donation_content: {
   fontSize: 14,
@@ -579,7 +586,7 @@ donation_content: {
   marginTop: 15,
   letterSpacing : 2,
   lineHeight: 17,
-  fontFamily: 'Helvetica'
+  fontFamily: 'Ubuntu'
 },
 createdby_View: {
   width: width-50,
@@ -599,7 +606,7 @@ createdBy: {
   marginBottom: 25
 },
 donator_name: {
-  fontFamily: 'Helvetica',
+  fontFamily: 'Ubuntu',
   fontSize: 17,
   color: 'rgba(0,0,0,0.7)',
   alignSelf: 'center'
@@ -618,7 +625,7 @@ get_bg: {
 },
 get_direction: {
   color: 'white',
-  fontFamily: 'Helvetica',
+  fontFamily: 'Ubuntu',
   fontSize: 19,  
 },
 pin: {
@@ -639,14 +646,14 @@ rescue_bg: {
   paddingHorizontal: 30
 },
 modalTitle: {
-  fontFamily: 'Helvetica',
+  fontFamily: 'Ubuntu',
   fontSize: 17,
   fontWeight: 'bold',
   color: 'white',
   marginTop: 20
 },
 modalContent: {
-  fontFamily: 'Helvetica',
+  fontFamily: 'Ubuntu',
   fontSize: 12,
   textAlign: 'center',
   lineHeight: 20,
@@ -677,7 +684,7 @@ modaButton: {
   marginBottom: 25
 },
 buttonText: {
-  fontFamily: 'Helvetica',
+  fontFamily: 'Ubuntu',
   backgroundColor: 'transparent',
   fontSize: 12,
   color: 'white'
@@ -711,7 +718,7 @@ statusModal_to: {
   height: 30
 },
 to: {
-  fontFamily: 'Helvetica',
+  fontFamily: 'Ubuntu',
   fontSize: 12,
   color: 'white',
   position: 'absolute',
@@ -719,7 +726,7 @@ to: {
   marginTop: 8
 },
 name: {
-  fontFamily: 'Helvetica',
+  fontFamily: 'Ubuntu',
   fontSize: 12,
   color: 'white',
   position: 'absolute',

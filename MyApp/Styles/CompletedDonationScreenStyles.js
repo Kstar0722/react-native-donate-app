@@ -5,6 +5,64 @@ function netWidth(data){
      return (width-data);
 }
 export default StyleSheet.create({
+
+   vehicleTitleDescription:{
+        backgroundColor: 'transparent',
+        color:'#FFFFFF',
+        fontSize:12,
+        textAlign:'center',
+        marginBottom:5,
+    },
+
+    foodTypeText: {
+        color: 'white', 
+        backgroundColor: 'transparent', 
+        textAlign: 'center', 
+        fontSize: 13,
+        paddingBottom: 8,
+    },
+
+    deliverOptionFrame: {
+        flex:1, 
+        flexDirection:'row', 
+        alignItems:'center',
+        paddingVertical: 5,
+    },
+
+    deliverOptionRightFrame: {
+        paddingVertical:15, 
+        paddingRight:25, 
+        marginLeft:-10, 
+        flex:1, 
+        borderBottomColor: '#e09579', 
+        borderBottomWidth: 1,
+    },
+
+    deliverOptionDetailText: {
+        fontWeight: 'bold', 
+        fontSize: 14, 
+        color: 'white', 
+        textAlign: 'center', 
+        backgroundColor: 'transparent', 
+        marginLeft: -25
+    },
+
+    questionMarkImage: {
+        width:15, 
+        height:15, 
+        marginRight: 20
+    },
+
+    deliverOptionImageFrame: {
+        width:130, 
+        alignItems: 'center'
+    },
+
+
+
+
+
+
     cNavigation:{
         flexDirection:'row',
         marginTop: 20,
@@ -18,7 +76,7 @@ export default StyleSheet.create({
     },
     menuIconNav:{
         height:20,
-        width:15,
+        width:20,
     },
     refedText:{
         flex:1,
@@ -40,8 +98,9 @@ export default StyleSheet.create({
         flexDirection:'row',
     },
     boxCover:{
-        width:125,
-        height:145,
+        //width:125,
+        flex:1,
+        height:125,
         alignItems:'center',
         backgroundColor: 'transparent',
         borderBottomColor: '#e09579',
@@ -51,25 +110,26 @@ export default StyleSheet.create({
         paddingTop:20,
     },
     pImgB:{
-        width:90,
-        height:90,
-        borderRadius:45,
+        width:70,
+        height:70,
+        borderRadius:35,
         borderColor:'#EABBA9',
         borderWidth:5,
-        marginBottom:10
+        marginBottom:10,
     },
     pImg:{
-        width:80,
-        height:80,
-        borderRadius:40,
+        width:60,
+        height:60,
+        borderRadius:30,
     },
     btnEdit:{
         backgroundColor: 'transparent',
         color: '#f3f3f3',
         fontSize:15,
+        textAlign: 'center',
     },
     btnEtxt:{
-        lineHeight:100,
+        lineHeight:80,
         color:'#FFFFFF',
         fontSize:14,
         fontWeight:'bold'
@@ -77,12 +137,13 @@ export default StyleSheet.create({
     vehicleTitle:{
         backgroundColor: 'transparent',
         color:'#FFFFFF',
-        fontSize:14,
+        fontSize:17,
         fontWeight:'bold',
         textAlign:'center',
         marginTop:8,
         marginBottom:5,
     },
+
     vehicleTitleV:{
         backgroundColor: 'transparent',
         color:'#FFFFFF',
@@ -93,12 +154,13 @@ export default StyleSheet.create({
         marginBottom:13,
     },
     imgBoxCover:{
-        width:125,
+        //width:125,
+        flex:1,
         alignItems:'center',
     },
     vImgBoxCover:{
-        width:83,
-        height:83,
+        width:75,
+        height:75,
         alignSelf:'center',
     },
     vDetsilSElection:{
@@ -147,7 +209,7 @@ export default StyleSheet.create({
     vehicleTitleSw:{
         backgroundColor: 'transparent',
         color:'#FFFFFF',
-        fontSize:14,
+        fontSize:17,
         fontWeight:'bold',
         textAlign:'left',
         alignSelf:'center',
@@ -174,18 +236,21 @@ export default StyleSheet.create({
         paddingVertical:17,
     },
     write1: {
-        paddingHorizontal: 20,
-        width:80,
-        color:'#dd8d6c',
+        paddingRight: 50,
+        width:100,
+        color:'white',
         overflow:'hidden',
+        fontSize: 16,
+        fontWeight: 'bold',
     },
     write3: {
-        color:'rgba(102, 102, 102, 0.6)',
+        color:'white',
         overflow:'hidden',
-        paddingRight:20,
+        paddingLeft:20,
         flexWrap:'wrap',
         width:netWidth(180),
-        fontSize:10,
+        fontSize:15,
+        fontWeight: 'bold',
     },
     editContent:{
         paddingVertical:5,
@@ -193,13 +258,15 @@ export default StyleSheet.create({
         alignItems:'center',
         overflow:'hidden',
         height:65,
+        marginBottom: 40,
     },
     setBottomPost:{
-        bottom:0,
-        position:'absolute',
-        width:375,
-        backgroundColor:'#FFFFFF',
+        //bottom:0,
+        //position:'absolute',
+        width:width,
+        backgroundColor:'transparent',
         minHeight:65,
+        marginTop: 40,
     },
     bottomPostBtn:{
         width: 130,

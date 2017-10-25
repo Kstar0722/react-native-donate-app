@@ -37,6 +37,7 @@ export default StyleSheet.create({
         fontSize: 18,
         fontWeight: '600',
         color: '#fff',
+        fontFamily: 'Ubuntu'
     },
     headerIcon:{
         fontSize: 20,
@@ -92,9 +93,10 @@ export default StyleSheet.create({
         height: 30,
     },
     menuTabBtnText:{
-        fontSize: 12,
+        fontSize: 14,
         letterSpacing: 0.6,
         color: '#666666',
+        fontFamily: 'Ubuntu-Bold'
     },
     tabTitle:{
         alignSelf: 'center',
@@ -278,7 +280,7 @@ export default StyleSheet.create({
         fontSize: 20,
         fontWeight: '600',
         marginVertical: 18,
-        fontFamily: 'Avenir'
+        fontFamily: 'Ubuntu'
 
         //marginLeft: Dimensions.get('window').width/2-80
     },
@@ -305,12 +307,12 @@ export default StyleSheet.create({
     },
     deliverType: {
         fontSize: 22,
-        fontFamily: 'Avenir',
+        fontFamily: 'Ubuntu',
         color: 'gray'
     },
     deliverType1: {
         fontSize: 22,
-        fontFamily: 'Avenir',
+        fontFamily: 'Ubuntu',
         color: '#dd8d6c'
     },
     title_: {
@@ -489,7 +491,7 @@ shadowOpacity: 0.7,
         fontSize: 20,
         fontWeight: '600',
         marginVertical: 18,
-        fontFamily: 'Avenir'
+        fontFamily: 'Ubuntu'
 
         //marginLeft: Dimensions.get('window').width/2-80
     },
@@ -516,12 +518,12 @@ shadowOpacity: 0.7,
     },
     deliverType: {
         fontSize: 22,
-        fontFamily: 'Avenir',
+        fontFamily: 'Ubuntu',
         color: 'gray'
     },
     deliverType1: {
         fontSize: 22,
-        fontFamily: 'Avenir',
+        fontFamily: 'Ubuntu',
         color: '#dd8d6c'
     },
     title_: {
@@ -663,7 +665,8 @@ shadowOpacity: 0.7,
     time: {
         fontSize: 13,
         color: 'white',
-        marginTop:15
+        marginTop:15,
+        fontFamily: 'Ubuntu'
       },
     createdby_View: {
         width: width-50,
@@ -679,7 +682,8 @@ shadowOpacity: 0.7,
         fontSize: 16,
         backgroundColor: 'transparent',
         marginTop: 35,
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
+        fontFamily: 'Ubuntu'
       },
     descriptionView: {
         width,
@@ -688,7 +692,8 @@ shadowOpacity: 0.7,
     hoursDescription: {
         fontSize: 16,
         marginTop: 20,
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
+        fontFamily: 'Ubuntu'
     },
     donation_content: {
         fontSize: 14,
@@ -698,7 +703,7 @@ shadowOpacity: 0.7,
         marginTop: 15,
         letterSpacing : 2,
         lineHeight: 17,
-        fontFamily: 'Helvetica'
+        fontFamily: 'Ubuntu'
       },
     foodView: {
         width: width-50,
@@ -762,7 +767,7 @@ shadowOpacity: 0.7,
       },
       get_direction: {
         color: 'white',
-        fontFamily: 'Helvetica',
+        fontFamily: 'Ubuntu',
         fontSize: 19,  
       },
 })
