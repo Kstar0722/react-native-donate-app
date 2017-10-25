@@ -154,5 +154,7 @@ const images = {
   Global_Impact: require('../Images/Global_Impact.png'),
 
   date_smallIcon: require('../Images/date_smallIcon.png'),
+  location_n: require('../Images/location_n.png'),
+  location: require('../Images/location.png'),
 }
 export default images
