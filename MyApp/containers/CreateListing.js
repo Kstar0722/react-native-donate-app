@@ -239,7 +239,6 @@ export default class CreateListing extends React.Component {
                                                 },
                                                 
                                                 dateInput: {
-                                                    color:'#E48971',
                                                     borderRadius:50,
                                                     borderColor:'#fff',
                                                 }
@@ -302,7 +301,6 @@ export default class CreateListing extends React.Component {
                                                             marginLeft: 0
                                                         },
                                                         dateInput: {
-                                                            color:'#E48971',
                                                             borderRadius:50,
                                                             borderColor:'#fff',
                                                         }
