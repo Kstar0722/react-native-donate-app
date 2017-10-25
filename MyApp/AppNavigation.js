@@ -19,6 +19,7 @@ import DonationDetail from './containers/DonationDetail'
 import DonationList from './containers/DonationList'
 import MessageScreen from './containers/MessageScreen'
 import ReservedDonationDetail from './containers/ReservedDonationDetail'
+import CreateListing from './containers/CreateListing'
 
 import styles from './Styles/NavigationStyles'
 

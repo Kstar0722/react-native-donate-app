@@ -17,7 +17,8 @@ import Icon1 from 'react-native-vector-icons/Ionicons'
 import MapView from 'react-native-maps';
 import dateFormat from 'dateformat';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-export default class MainScreen extends Component {
+import SideHOC from '../../../Components/SideMenuHOC'
+class MainScreen extends Component {
     constructor() {
         super()
         currentDate = new Date()
@@ -79,7 +80,7 @@ export default class MainScreen extends Component {
             <View style={styles.mainView}>
                 <Image source={Images.rectangle} style={styles.fDheadr}>
                     <View style={styles.cNavigation}>
-                        <TouchableOpacity onPress={() => { }}>
+                        <TouchableOpacity onPress={() => {this.props.sideMenuToggle(true)}}>
                             <Image source={Images.fDbar} style={styles.menuIconNav} />
                         </TouchableOpacity>
                         <Text style={styles.refedText}>Find a Donation</Text>
@@ -219,3 +220,5 @@ export default class MainScreen extends Component {
         )
     }
 }
+
+export default SideHOC(MainScreen)
