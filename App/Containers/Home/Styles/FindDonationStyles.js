@@ -210,7 +210,7 @@ export default StyleSheet.create({
   description:{
     fontSize:14,
     color:'#2C2C3D',
-    marginTop:10,
+    marginTop:10
   },
   vehicleIcon:{
     width:94,

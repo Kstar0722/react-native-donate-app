@@ -123,18 +123,22 @@ export default StyleSheet.create({
     width:250
   },
   sidemenuInner:{
-    paddingHorizontal:5,
+    //paddingHorizontal:5,
+    flex: 1
   },
   sideMneuClose:{
     width:25,
-    height:24,
-    marginTop:10
+    height:25,
+    marginTop:10,
+    marginBottom: 37
   },
   profileName:{
     fontSize:36,
     color:'#1d1d26',
     marginTop:15,
-    marginBottom:5,
+    marginBottom:50,
+    width : "100%",
+    textAlign : "center"
   },
   profileEmail:{
     fontSize:16,
@@ -148,42 +152,35 @@ export default StyleSheet.create({
 
   },
   sideMenuRowCover1:{
+    marginLeft : 25,
+    marginRight : 25,
     borderBottomColor:'rgba(29, 29, 38, 0.1)',
     borderBottomWidth:2,
 
   },
   lastSideMenuRowCover:{
+    width: "80%",
+    paddingRight : 25,
+    marginLeft : 25,
     flexDirection:'row',
-    paddingBottom:20,
+    borderTopWidth : 1,
+    borderTopColor : 'rgba(29, 29, 38, 0.1)',
+    paddingTop : 15,
     marginBottom:20,
+    position: 'absolute',
+    bottom : 0,
     alignItems:'center',
   },
   donationIcon:{
-    width:33.33,
-    height:29.33,
-  },
-  impactIcon:{
-    width:29.33,
-    height:29.33,
-  },
-  profileIcon:{
-    width:26.67,
-    height:25.33,
-  },
-  notificationIcon:{
-    width:26,
-    height:30,
-  },
-  logoutIcon:{
-    width:26.67,
-    height:28,
+    width:25,
+    height:25,
   },
   sideMenuTextInput:{
     paddingVertical:0,
     paddingHorizontal:15,
-    height:40,
-    lineHeight:40,
-    fontSize:22,
+    height:25,
+    lineHeight:25,
+    fontSize:14,
     flexDirection:'column',
     marginLeft:10,
     color:'#1d1d26',
