@@ -48,7 +48,7 @@ export default class LaunchScreen extends Component {
                             <Image source={Images.SINGUP1} />
                         </TouchableOpacity>
                         <Image source={Images.devide} style={{ marginBottom: 1 }} />
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity onPress={() => navigate('LoginScreen')} style={styles.button}>
                             <Image source={Images.LOGIN} />
                         </TouchableOpacity>
                     </View>

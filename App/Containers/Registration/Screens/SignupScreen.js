@@ -56,7 +56,7 @@ export default class SignupScreen extends Component {
     }
 
     showModal() {
-        this.setState({picturemodalVisible : true})
+        this.setState({ picturemodalVisible: true })
     }
 
     chooseAvatar = (avatar) => {
@@ -193,10 +193,10 @@ export default class SignupScreen extends Component {
 
     }
     signupIndividual() {
-        // if (!this.validate()) {
-        //     this.showDialog(true, "You have to provide correct information")
-        //     return
-        // }
+        if (!this.validate()) {
+            this.showDialog(true, "You have to provide correct information")
+            return
+        }
         let self = this
         const file = {
             uri: this.state.avatar,
@@ -231,7 +231,7 @@ export default class SignupScreen extends Component {
                 if (err) {
                     this.showDialog(true, err.message)
                 } else {
-                    this.props.navigation.navigate('MainScreen')
+                    this.props.navigation.navigate('FindDonation')
                 }
             })
         })

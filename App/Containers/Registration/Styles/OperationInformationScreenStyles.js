@@ -5,7 +5,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     //justifyContent: 'flex-end',
     //paddingTop: 70,
-    resizeMode: 'cover'
+    resizeMode: 'cover',
+    width : '100%',
+    height : '100%'
 
   },
 

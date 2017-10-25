@@ -12,15 +12,19 @@ import styles from '../Styles/SignupScreenStyles'
 import { Images } from '../../../Themes'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import TimePickerModal from '../../../Components/Modals/timePickerModal'
+import { guid, validateEmail } from '../../../Transforms'
+import AlertModal from '../../../Components/AlertModal'
 
 export default class BusinessScreen extends Component {
     constructor() {
         super()
         this.state = {
+            msgBox: false,
+            msgText: "",
             name: '',
             address: '',
             phone: '',
-            ein : '',
+            ein: '',
             description: '',
             weekday: [false, false, false, false, false, false, false],
             timepickerModal: false,
@@ -30,6 +34,8 @@ export default class BusinessScreen extends Component {
         this.chooseTime = this.chooseTime.bind(this)
         this.onContinue = this.onContinue.bind(this)
         this.showModal = this.showModal.bind(this)
+        this.showDialog = this.showDialog.bind(this)
+        this.validate = this.validate.bind(this)
     }
     static navigationOptions = {
         title: 'Business Information',
@@ -39,7 +45,23 @@ export default class BusinessScreen extends Component {
         headerTintColor: 'white'
     }
 
+    showDialog = (show, title) => {
+        if (show) this.setState({ msgBox: show, msgText: title })
+        else this.setState({ msgBox: show })
+    }
+
+    validate() {
+        if (this.state.name && this.state.address && this.state.phone && this.state.ein && this.state.description && this.state.startTime) {
+            return true
+        }
+        return false
+    }
+
     onContinue() {
+        if (!this.validate()){
+            this.showDialog(true, "You have to provide correct information")
+            return
+        }
         const { avatar, user } = this.props.navigation.state.params
         const businessInfo = {
             name: this.state.name,
@@ -150,6 +172,7 @@ export default class BusinessScreen extends Component {
                         <Text style={styles.but_continue}>CONTINUE</Text>
                     </TouchableOpacity>
                     <KeyboardSpacer />
+                    <AlertModal show={this.state.msgBox} modal={() => this.showDialog(false)} title={this.state.msgText} />
                     <TimePickerModal timepickerModal={this.state.timepickerModal} chooseTime={this.chooseTime} />
                 </ImageBackground>
             </View>

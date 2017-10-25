@@ -94,7 +94,7 @@ export default class OperationInformation extends Component {
                         this.showDialog(true, err.message)
                         console.log(err)
                     } else {
-                        this.props.navigation.navigate('MainScreen')
+                        this.props.navigation.navigate('FindDonation')
                     }
                 })
             })
