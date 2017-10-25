@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import styles from './Styles/SideMenuStyles'
 import { Images } from '../Themes'
+import Meteor from 'react-native-meteor'
 export default class MainScreen extends Component {
   constructor() {
     super()
@@ -21,36 +22,33 @@ export default class MainScreen extends Component {
           <Image source={Images.sideMenuClose} style={styles.sideMneuClose} />
         </TouchableOpacity>
         <View style={styles.sidemenuInner}>
-          <Text style={styles.profileName}>Profile Name</Text>
-          <Text style={styles.profileEmail}>email@invisionapp.com</Text>
+          <Text style={styles.profileName}>{Meteor.user().profile.name}</Text>
           <View style={styles.sideMenuRowCover1}>
             <TouchableOpacity style={styles.sideMenuRowCover}>
               <Image source={Images.donationIcon} style={styles.donationIcon} />
               <Text style={styles.sideMenuTextInput}>My Donations</Text>
-              <Text style={styles.dCount}>5</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.sideMenuRowCover1}>
             <TouchableOpacity style={styles.sideMenuRowCover}>
-              <Image source={Images.impactIcon} style={styles.impactIcon} />
+              <Image source={Images.impactIcon} style={styles.donationIcon} />
               <Text style={styles.sideMenuTextInput}>My Impact</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.sideMenuRowCover1}>
             <TouchableOpacity style={styles.sideMenuRowCover}>
-              <Image source={Images.profileIcon} style={styles.profileIcon} />
+              <Image source={Images.profileIcon} style={styles.donationIcon} />
               <Text style={styles.sideMenuTextInput}>Profile</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.sideMenuRowCover1}>
             <TouchableOpacity style={styles.sideMenuRowCover}>
-              <Image source={Images.notificationIcon} style={styles.notificationIcon} />
+              <Image source={Images.notificationIcon} style={styles.donationIcon} />
               <Text style={styles.sideMenuTextInput}>Notifications</Text>
-              <Text style={styles.dCount}>16</Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity style={styles.lastSideMenuRowCover}>
-            <Image source={Images.logoutIcon} style={styles.logoutIcon} />
+            <Image source={Images.logoutIcon} style={styles.donationIcon} />
             <Text style={styles.sideMenuTextInput}>Logout</Text>
           </TouchableOpacity>
         </View>

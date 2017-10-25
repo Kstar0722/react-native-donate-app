@@ -8,7 +8,8 @@ import DatePicker from 'react-native-datepicker'
 import PictureModal from './Modals/pictureModal'
 import DescriptionModal from './Modals/descriptionModal'
 import dateFormat from 'dateformat';
-import DateTimePicker from 'react-native-modal-datetime-picker';
+import DateTimePicker from 'react-native-modal-datetime-picker'
+import Prompt from 'react-native-prompt'
 _dText='';
 export default class CreateListing extends React.Component {
     constructor () {
@@ -25,7 +26,9 @@ export default class CreateListing extends React.Component {
             descriptionModalVisible:false,
             avatar : null,
             startDate:"",
-            isDateTimePickerVisible: false
+            isDateTimePickerVisible: false,
+            Address: "",
+            isAddressPromptVisible : false
         }
         this.toggleSwitch = this.toggleSwitch.bind(this);
     }
@@ -98,7 +101,7 @@ export default class CreateListing extends React.Component {
                     <Text style={styles.write1}>EDIT</Text>
                 </TouchableOpacity>
                 <Text style={styles.write3}>{t}</Text>
-                <Image source={Images.markPostIcon}  style={{width: 70,height: 70, right:0, bottom:0, position:'absolute', zIndex:999999}}/>
+                <Image source={Images.markPostIcon}  style={{width: 80,height: 80, right:0, bottom:0, position:'absolute', zIndex:999999}}/>
           </View>
         );
     }else{
@@ -139,40 +142,20 @@ export default class CreateListing extends React.Component {
                    </View>
 
                   <ScrollView>   
-                        
-                        
-                            {/* <View style={{alignItems:'center'}}>
-                                <Image source={this.state.avatar ? this.state.avatar : Images.cameraIcon} style={this.state.avatar?styles.camera:""}></Image>
+                        <View style={styles.buttonGroup}>
+                            <View style={{alignItems:'center'}}>
+                                <View style={{width:width/3,height:71, alignItems:'center',justifyContent: 'space-around'}}>
+                                    <Image source={this.state.avatar ? this.state.avatar : Images.cameraIcon} style={this.state.avatar?styles.camera:""}></Image>
+                                </View>
+                                
                                 <TouchableOpacity onPress = {() => this.setState({picturemodalVisible : true})} >
                                     {this.state.avatar ?<Text style={styles.btnTopEdit}>Edit</Text>:<Text style={styles.btnTopEdit}>Upload Image</Text>}
                                 </TouchableOpacity>
-                                <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal} chooseAvatar = {this.chooseAvatar} />
-                            </View>
-                            <View style= {styles.hLine}/>
-                            <View style={{alignItems:'center'}}>
-                                {this.state.startDate==""?<Image source={Images.date}/>:<Text style ={styles.stateDateText}>{this.state.startDate}</Text>}
-                                <TouchableOpacity onPress={this._showDateTimePicker} >
-                                    {this.state.startDate==""?<Text style={styles.btnTopEdit}>Set Date</Text>:<Text style={styles.btnTopEdit}>Edit</Text>}
-                                </TouchableOpacity>
-                            </View>
-                            <DateTimePicker
-                                isVisible={this.state.isDateTimePickerVisible}
-                                onConfirm={this._handleDatePicked}
-                                onCancel={this._hideDateTimePicker}
-                                datePickerModeAndroid='calendar'
-                                confirmTextIOS="Ok"
-                                titleIOS='Select Date'
-                                /> 
-                        </View>*/}
-                        <View style={styles.buttonGroup}>
-                            <View style={{alignItems:'center'}}>
-                                <Image source={this.state.avatar ? this.state.avatar : Images.cameraIcon} style={this.state.avatar?styles.camera:""}></Image>
-                                <TouchableOpacity onPress = {() => this.setState({picturemodalVisible : true})} >
-                                    {this.state.avatar ?<Text style={[styles.btnTopEdit,{marginLeft:10}]}>Edit</Text>:<Text style={styles.btnTopEdit}>Upload Image</Text>}
-                                </TouchableOpacity>
                             </View>
                             <View style={{alignItems:'center'}}>
-                                {this.state.startDate==""?<Image source={Images.date}/>:<Text style ={styles.stateDateText}>{this.state.startDate}</Text>}
+                                <View style={{width:width/3,height:71, alignItems:'center'}}>
+                                    {this.state.startDate==""?<Image source={Images.date}/>:<Text style ={styles.stateDateText}>{this.state.startDate}</Text>}
+                                </View>
                                 <TouchableOpacity onPress={this._showDateTimePicker} >
                                     {this.state.startDate==""?<Text style={styles.btnTopEdit}>Set Date</Text>:<Text style={styles.btnTopEdit}>Edit</Text>}
                                 </TouchableOpacity>
@@ -186,18 +169,30 @@ export default class CreateListing extends React.Component {
                                 /> 
                             </View>
                             <View style={{alignItems:'center'}}>
-                                <Image source={Images.location_n}/>
+                                <View style={{width:width/3,height:71, alignItems:'center'}}>
+                                    <Image source={this.state.Address==""?Images.location_n:Images.location} style={this.state.Address!=""&&{marginVertical:20}}/>
+                                </View>                                
                                 
-                                    <Text style={styles.contentText}>Location</Text>
-                                
+                                <TouchableOpacity onPress={() => this.setState({isAddressPromptVisible: true})} style={{flex:1}}>
+                                    {this.state.Address==""?<Text style={styles.contentText}>Location</Text>:<Text style={styles.contentText}>Edit</Text>}
+                                </TouchableOpacity>
                             </View>
+                            <Prompt
+                                title="Your Address"
+                                placeholder="Start typing"
+                                defaultValue={this.state.Address}
+                                visible={ this.state.isAddressPromptVisible }
+                                onCancel={ (value) => this.setState({
+                                    isAddressPromptVisible: false,
+                                    Address: value
+                                }) }
+                                    onSubmit={ (value) => this.setState({
+                                    isAddressPromptVisible: false,
+                                    Address: value
+                                }) }/>
                         </View>
                         
                         <View style={styles.bottomLine}/>
-                        {/* <View style={styles.rowStyle}>
-                            <Text style={styles.contentText}><Image source={Images.focus}/>  Add a Location</Text>                            
-                            <Image source={Images.rightArraw}></Image>
-                        </View> */}
                         <View style={{borderBottomColor: '#e09579',borderBottomWidth: 2}}>
                             <View style={styles.rowRecurrStyle}>
                                 <Text style={styles.contentText}>Is this a recurring event?</Text>                            
@@ -346,10 +341,6 @@ export default class CreateListing extends React.Component {
                                 thumbStyle={{width: 30, height: 30, borderRadius: 15}}/>
                             {this.sliderValue()}                        
                         </View>
-                        {/* <View style={styles.rowStyle}>
-                            <Text style={styles.contentText}>Eligibility Requirements</Text>                            
-                            <Image source={Images.rightArraw}></Image>
-                        </View> */}
                         {this.writeHere()}
                         
                         <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal} chooseAvatar = {this.chooseAvatar} />

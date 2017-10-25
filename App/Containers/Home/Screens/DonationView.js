@@ -63,12 +63,22 @@ export default class MainScreen extends Component {
             )
         }
     }
+
+    dateToString(date){
+        const hour = date / 60, min = date % 60
+        const dateObj = new Date()
+        dateObj.setHours(hour) , dateObj.setMinutes(min)
+        return dateObj.toLocaleTimeString('en-US', { hour: "2-digit", minute: "2-digit" })
+    }
     render() {
         const { navigate } = this.props.navigation;
+        const { user, donation } = this.props.navigation.state.params
+        if (!(user && donation)) return <View />
+        const hour = donation.date.startTime / 60 , minutes = donation.date.start
         return (
             <View style={styles.mainView}>
                 <View style={styles.cNavigation}>
-                    <TouchableOpacity onPress = {() => this.props.navigation.goBack()}>
+                    <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                         <Image source={Images.backIcon} style={styles.menuIconNav} />
                     </TouchableOpacity>
                     <Text style={styles.refedText}>Food Donation</Text>
@@ -76,13 +86,13 @@ export default class MainScreen extends Component {
                 <ScrollView style={{ backgroundColor: '#F4F3F4' }}>
                     <View style={{ backgroundColor: 'white' }}>
                         <Image source={Images.gradient_bg} style={styles.gradient_bg}>
-                            <Text style={styles.donatorname}>DONATOR NAME</Text>
+                            <Text style={styles.donatorname}>{user.profile.name}</Text>
                             <Image source={Images.stars} style={styles.stars} />
                             <View style={styles.pickupView}>
-                                <Text style={styles.pickup}>PICKUP TIME:  <Text style={styles.time}>8:00 am - 10:00 am</Text></Text>
+                                <Text style={styles.pickup}>PICKUP TIME:  <Text style={styles.time}>{this.dateToString(donation.date.startTime)} - {this.dateToString(donation.date.endTime)}</Text></Text>
                             </View>
                             <View style={styles.pickupView}>
-                                <Text style={styles.pickup}>ADDRESS:  <Text style={styles.time}>10111 Welove street, Los Angeles, CA 90002</Text></Text>
+                                <Text style={styles.pickup}>ADDRESS:  <Text style={styles.time}>{donation.location.address}</Text></Text>
                             </View>
                             <View style={styles.shapeView}>
                                 <View style={[styles.appleview, { marginRight: 40 }]}>
@@ -99,7 +109,7 @@ export default class MainScreen extends Component {
                             <Image source={Images.search_small} style={styles.search_small} />
                             <Text style={styles.click_to_zoom}>CLICK TO ZOOM</Text>
                         </View>
-                        <Image source={Images.foodBoxes} style={styles.foodBoxes} />
+                        <Image source={{ uri: donation.image }} style={styles.foodBoxes} />
                         <View style={styles.roundView}>
                             <View style={{ alignItems: 'center', marginRight: 70 }}>
                                 <TouchableHighlight style={styles.keyAround} onPress={() => this.setState({ rescueModal: true })}>
@@ -116,12 +126,16 @@ export default class MainScreen extends Component {
                             </View>
                         </View>
                         <Text style={styles.donation_description}>DONATION DESCRIPTION:</Text>
-                        <Text style={styles.donation_content}>Vestibulum rutrum quam vitae fringilla tincidunt. Suspendisse nec tortor urna. Ut laoreet sodales nisi, quis iaculis nulla iaculis vitae. Donec sagittis faucibus lacus eget blandit. Mauris vitae ultricies metus, at condimentum nulla. Donec quis ornare lacus. Etiam gravida mollis tortor quis porttitor. Vestibulum rutrum quam vitae fringilla tincidunt. Suspendisse nec tortor urna. Ut laoreet sodales nisi, quis iaculis nulla iaculis vitae. Donec sagittis faucibus lacus eget blandit. Mauris vitae ultricies metus, at condimentum nulla. </Text>
+                        <Text style={styles.donation_content}>{donation.description}</Text>
                         <View style={styles.createdby_View}>
                             <Text style={styles.donation_description}>CREATED BY:</Text>
-                            <Image source={Images.createdBy} style={styles.createdBy} />
-                            <Text style={styles.donator_name}>Donator Name</Text>
-                            <Text style={[styles.donation_content, { textAlign: 'center', paddingBottom: 25 }]}>Business Desctiption goes here tor urna. Ut laoreet sodales nisi, quis iaculis nulla iaculis vitae. Donec sagittis faucibus lacus eget blandit. Mauris vitae ultricies metus, at condimentum nulla. Donec quis ornare lacus. Etiam gravida mollis tortor quis porttitor. Vestibulum rutrum quam vitae fringilla tincidunt. Suspendisse nec tortor urna. Ut laoreet sodales nisi, quis iaculis nulla iaculis vitae. Donec sagittis faucibus lacus eget blandit. Mauris vitae ultricies metus, at condimentum nulla. </Text>
+                            <Image source={{uri : user.profile.image}} style={styles.createdBy} />
+                            <Text style={styles.donator_name}>{user.name}</Text>
+                            {
+                                user.profile.businessInfo ?
+                                    <Text style={[styles.donation_content, { textAlign: 'center', paddingBottom: 25 }]}>{user.profile.businessInfo.description}</Text>
+                                    : null
+                            }
                         </View>
                         <Text style={styles.donator_name}>LOCATION:</Text>
                         <MapView

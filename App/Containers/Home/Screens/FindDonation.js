@@ -18,6 +18,8 @@ import MapView from 'react-native-maps';
 import dateFormat from 'dateformat';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import SideHOC from '../../../Components/SideMenuHOC'
+import AlertModal from '../../../Components/AlertModal'
+import Meteor, { createContainer } from 'react-native-meteor'
 class MainScreen extends Component {
     constructor() {
         super()
@@ -29,6 +31,7 @@ class MainScreen extends Component {
             currentDay: cDate[2],
             currentMonth: cDate[1],
             currentYear: cDate[3],
+            currentDate: currentDate,
             isDateTimePickerVisible: false,
         }
         this.toggleSwitch = this.toggleSwitch.bind(this)
@@ -44,19 +47,6 @@ class MainScreen extends Component {
         header: null,
     }
 
-    mapView = () => {
-        if (this.state.switchValue) {
-            return (<MapView style={styles.MapView}
-                initialRegion={{
-                    latitude: 37.78825,
-                    longitude: -122.4324,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
-                }} />);
-        } else {
-            return;
-        }
-    }
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
 
     _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
@@ -70,6 +60,7 @@ class MainScreen extends Component {
             currentDay: cDate[2],
             currentMonth: cDate[1],
             currentYear: cDate[3],
+            currentDate: date
         })
         this._hideDateTimePicker();
     };
@@ -80,7 +71,7 @@ class MainScreen extends Component {
             <View style={styles.mainView}>
                 <Image source={Images.rectangle} style={styles.fDheadr}>
                     <View style={styles.cNavigation}>
-                        <TouchableOpacity onPress={() => {this.props.sideMenuToggle(true)}}>
+                        <TouchableOpacity onPress={() => { this.props.sideMenuToggle(true) }}>
                             <Image source={Images.fDbar} style={styles.menuIconNav} />
                         </TouchableOpacity>
                         <Text style={styles.refedText}>Find a Donation</Text>
@@ -106,98 +97,8 @@ class MainScreen extends Component {
                         titleIOS='Select Date'
                     />
                 </Image>
-                <View style={{ backgroundColor: 'white', flex: 1, backgroundColor: '#EAEAEA' }}>
-                    {this.mapView()}
-
-                    <View>
-                        <ScrollView>
-                            <View style={styles.mapViewDetail}>
-                                <MapView style={styles.listMapView}
-                                    initialRegion={{
-                                        latitude: 37.78825,
-                                        longitude: -122.4324,
-                                        latitudeDelta: 0.0922,
-                                        longitudeDelta: 0.0421,
-                                    }}>
-                                    <MapView.Marker style={styles.markericon}
-                                        coordinate={{
-                                            latitude: 37.78825,
-                                            longitude: -122.4324
-                                        }}
-                                        image={Images.marker} />
-                                </MapView>
-                                <TouchableOpacity style={styles.listMapViewText}  onPress={() => navigate("DonationView")}>
-                                    <Image source={Images.wCarRedBack} style={styles.vehicleIcon} />
-                                    <View style={styles.listMapViewTopRow}>
-                                        <Image source={Images.donaterName} style={styles.donaterName} />
-                                        <View style={{ flex: 1 }}>
-                                            <Text style={styles.name}>Donator Name</Text>
-                                            <Text style={styles.nameText}>Perishable, Produce</Text>
-                                        </View>
-                                        <Text style={styles.distance}>2 mi</Text>
-                                    </View>
-                                    <Text style={styles.description}>Description of the donation goes here. Clicking on this will show more informaition</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={styles.mapViewDetail} onPress={() => navigate("DonationView")}>
-                                <MapView style={styles.listMapView}
-                                    initialRegion={{
-                                        latitude: 37.78825,
-                                        longitude: -122.4324,
-                                        latitudeDelta: 0.0922,
-                                        longitudeDelta: 0.0421,
-                                    }}>
-                                    <MapView.Marker style={styles.markericon}
-                                        coordinate={{
-                                            latitude: 37.78825,
-                                            longitude: -122.4324
-                                        }}
-                                        image={Images.marker} />
-                                </MapView>
-                                <TouchableOpacity style={styles.listMapViewText}  onPress={() => navigate("DonationView")}>
-                                    <Image source={Images.wVanRedBack} style={styles.vehicleIcon} />
-                                    <View style={styles.listMapViewTopRow}>
-                                        <Image source={Images.donaterName} style={styles.donaterName} />
-                                        <View style={{ flex: 1 }}>
-                                            <Text style={styles.name}>Donator Name</Text>
-                                            <Text style={styles.nameText}>Perishable, Produce</Text>
-                                        </View>
-                                        <Text style={styles.distance}>3 mi</Text>
-                                    </View>
-                                    <Text style={styles.description}>Description of the donation goes here. Clicking on this will show more informaition</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={styles.mapViewDetail} onPress={() => navigate("DonationView")}>
-                                <MapView style={styles.listMapView}
-                                    initialRegion={{
-                                        latitude: 37.78825,
-                                        longitude: -122.4324,
-                                        latitudeDelta: 0.0922,
-                                        longitudeDelta: 0.0421,
-                                    }}>
-                                    <MapView.Marker style={styles.markericon}
-                                        coordinate={{
-                                            latitude: 37.78825,
-                                            longitude: -122.4324
-                                        }}
-                                        image={Images.marker} />
-                                </MapView>
-                                <TouchableOpacity style={styles.listMapViewText}  onPress={() => navigate("DonationView")}>
-                                    <Image source={Images.wCarRedBack} style={styles.vehicleIcon} />
-                                    <View style={styles.listMapViewTopRow}>
-                                        <Image source={Images.donaterName} style={styles.donaterName} />
-                                        <View style={{ flex: 1 }}>
-                                            <Text style={styles.name}>Donator Name</Text>
-                                            <Text style={styles.nameText}>Perishable, Produce</Text>
-                                        </View>
-                                        <Text style={styles.distance}>2 mi</Text>
-                                    </View>
-                                    <Text style={styles.description}>Description of the donation goes here. Clicking on this will show more informaition</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </ScrollView>
-                    </View>
-                </View>
+                <DonationListViewContainer switchValue={this.state.switchValue} date={this.state.currentDate}
+                    navigate={navigate} />
                 <View style={styles.fDfooter}>
                     <View style={styles.fDfooterInner}>
                         <View style={styles.fDBtnActive}>
@@ -220,5 +121,117 @@ class MainScreen extends Component {
         )
     }
 }
+
+class DonationListView extends React.Component {
+    constructor() {
+        super()
+        this.mapView = this.mapView.bind(this)
+        this.state = {
+            msgBox: true,
+            msgText: ""
+        }
+        this.showDialog = this.showDialog.bind(this)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({ msgBox: true })
+    }
+
+
+    showDialog = (show, title) => {
+        if (show) this.setState({ msgBox: show, msgText: title })
+        else this.setState({ msgBox: show })
+    }
+
+    mapView = () => {
+        if (this.props.switchValue) {
+            const { donations } = this.props
+            return (<MapView style={styles.MapView}
+                initialRegion={{
+                    latitude: 37.78825,
+                    longitude: -122.4324,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                }} >
+                {
+                    donations.map((donation) => {
+                        return (
+                            <MapView.Marker style={styles.markericon}
+                                coordinate={{
+                                    latitude: donation.location.lat,
+                                    longitude: donation.location.lon
+                                }}
+                                image={Images.marker} />
+                        )
+                    })
+                }
+
+            </MapView>);
+        } else {
+            return;
+        }
+    }
+
+    render() {
+        const { donations, navigate, users } = this.props
+        return (
+            <View style={{ backgroundColor: 'white', flex: 1, backgroundColor: '#EAEAEA' }}>
+                {this.mapView()}
+                <View>
+                    <ScrollView>
+                        {
+                            donations.map(donation => {
+                                var user = users.filter(user => { return (user._id === donation.userId) })
+                                if (user.length === 0) return <View />
+                                user = user[0]
+                                return (
+                                    <View style={styles.mapViewDetail}>
+                                        <MapView style={styles.listMapView}
+                                            initialRegion={{
+                                                latitude: donation.location.lat,
+                                                longitude: donation.location.lon,
+                                                latitudeDelta: 0.0922,
+                                                longitudeDelta: 0.0421,
+                                            }}>
+                                            <MapView.Marker style={styles.markericon}
+                                                coordinate={{
+                                                    latitude: donation.location.lat,
+                                                    longitude: donation.location.lon
+                                                }}
+                                                image={Images.marker} />
+                                        </MapView>
+                                        <TouchableOpacity style={styles.listMapViewText} onPress={() => navigate("DonationView", { user, donation })}>
+                                            <Image source={Images.wCarRedBack} style={styles.vehicleIcon} />
+                                            <View style={styles.listMapViewTopRow}>
+                                                <Image source={{ uri: user.profile.image }} style={styles.donaterName} />
+                                                <View style={{ flex: 1 }}>
+                                                    <Text style={styles.name}>{user.profile.name}</Text>
+                                                    <Text style={styles.nameText}>Perishable, Produce</Text>
+                                                </View>
+                                                <Text style={styles.distance}>2 mi</Text>
+                                            </View>
+                                            <Text style={styles.description} numberOfLines={3}>{donation.description}</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                )
+                            })
+                        }
+                    </ScrollView>
+                </View>
+                <AlertModal show={donations.length === 0 && this.state.msgBox} modal={() => this.showDialog(false)} title="No donations available at this time" />
+
+            </View>
+        )
+    }
+}
+
+const DonationListViewContainer = createContainer((params) => {
+    cDate = dateFormat(params.date, 'yyyy-mm-dd')
+    Meteor.subscribe('donation.list', cDate)
+    return ({
+        donations: Meteor.collection('Donations').find({ "date.date": cDate, status: 0 }),
+        users: Meteor.collection('users').find({})
+    })
+}, DonationListView)
 
 export default SideHOC(MainScreen)
