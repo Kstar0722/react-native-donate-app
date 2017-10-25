@@ -41,6 +41,7 @@
     "react-native-checkbox": "^1.2.0",
     "react-native-config": "^0.2.1",
     "react-native-customisable-switch": "^0.1.0",
+    "react-native-datepicker": "^1.6.0",
     "react-native-device-info": "0.10.2",
     "react-native-devtools": "0.0.1",
     "react-native-drawer": "^2.3.0",

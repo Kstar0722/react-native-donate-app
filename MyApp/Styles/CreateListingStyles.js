@@ -58,8 +58,43 @@ export default StyleSheet.create({
         borderBottomColor: '#e09579',
         borderBottomWidth: 2,
     },
+    rowStyle1:{
+        flexDirection:'row',
+        alignItems:'center',
+        paddingHorizontal:20,
+        paddingVertical:25,
+    },
+    rowStyleRepeat:{
+        flexDirection:'column',
+        alignItems:'center'
+    },
+
+    rowStyleRepeat_1:{
+        flexDirection:'row',
+        alignItems:'center',
+        paddingHorizontal:20,
+        paddingVertical:25,
+    },
+    rowStyleRepeat_2:{
+        flexDirection:'column',
+    },
+
+    rowStyle2:{
+        flex:1,
+        flexDirection:'row',
+        alignItems:'center',
+        alignSelf:'center',
+        marginLeft:30,
+        paddingHorizontal:20,
+    },
     contentText:{
         flex:1,
+        backgroundColor: 'transparent',
+        color: '#f3f3f3',
+        fontSize: 16, 
+    },    
+    contentText1:{
+
         backgroundColor: 'transparent',
         color: '#f3f3f3',
         fontSize: 16, 
@@ -68,6 +103,7 @@ export default StyleSheet.create({
     btnTopEdit:{
         backgroundColor: 'transparent',
         color: '#f3f3f3',
+        textAlign:'center',
         fontSize:16,
     },
     foodTypeText:{
@@ -116,7 +152,43 @@ export default StyleSheet.create({
         borderBottomWidth: 2,
         paddingVertical:25,
     },
-
+    repeatOffStyles:{
+        width: 46,
+        height: 46,
+        borderColor:'#fff',
+        borderWidth:2,
+        borderRadius: 23,
+        marginRight: 20
+    },
+    repeatOnStyles:{
+        width: 46,
+        height: 46,
+        backgroundColor:'#fff',
+        borderColor:'#fff',
+        borderWidth:2,
+        borderRadius: 23,
+        marginRight: 20
+    },
+    repeatOffText:{
+        textAlign:'center',
+        marginTop:15,
+        backgroundColor: 'transparent',
+        fontSize: 10,
+        color:'#fff'
+    },
+    repeatOnText:{
+        textAlign:'center',
+        marginTop:15,
+        backgroundColor: 'transparent',
+        fontSize: 10,
+        color:'#DD8D6C'
+    },
+    datePickerStyle:{
+        width: width*0.8, 
+        backgroundColor:'#fff',
+        borderRadius:50,
+        marginVertical: 20
+    },
     container: {
         width:netWidth(0),
         height:height,
