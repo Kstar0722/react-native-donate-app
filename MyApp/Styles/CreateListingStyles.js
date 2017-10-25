@@ -28,15 +28,13 @@ export default StyleSheet.create({
         color:'#fff',
         fontWeight:'bold',
         fontSize:20,
+        fontFamily: 'Ubuntu',
         backgroundColor:'transparent',
     },
     camera : {
         alignItems:'center',
         width : 55,
         height : 55,
-        marginTop:8,
-        marginLeft:10,
-        marginBottom:10,
         borderRadius : 27.5,
         borderWidth : 2,
         borderColor : 'white'
@@ -47,7 +45,8 @@ export default StyleSheet.create({
         paddingRight:20,
         flexWrap:'wrap',
         width:Dimensions.get('window').width-(170),
-        backgroundColor:'transparent'
+        backgroundColor:'transparent',
+        fontFamily: 'Ubuntu',
     },
     write1: {
         paddingHorizontal: 20,
@@ -55,14 +54,17 @@ export default StyleSheet.create({
         width:80,
         color:'#fff',
         overflow:'hidden',
-        backgroundColor:'transparent'
+        backgroundColor:'transparent',
+        fontFamily: 'Ubuntu',
       },
     editContent:{
-        paddingVertical:5,
+      paddingVertical:5,
       flexDirection:'row',
-      height:67,
+      height:80,
       alignItems:'center',
       overflow:'hidden',
+      borderBottomColor:'#e09579',
+      borderBottomWidth:2
     },
     detsilSElection:{
         flexDirection:'row',
@@ -137,12 +139,13 @@ export default StyleSheet.create({
         backgroundColor: 'transparent',
         color: '#f3f3f3',
         fontSize: 16, 
+        fontFamily: 'Ubuntu',
     },    
     contentText1:{
-
         backgroundColor: 'transparent',
         color: '#f3f3f3',
         fontSize: 16, 
+        fontFamily: 'Ubuntu',
     },
 
     btnTopEdit:{
@@ -150,12 +153,13 @@ export default StyleSheet.create({
         color: '#f3f3f3',
         textAlign:'center',
         fontSize:16,
+        fontFamily: 'Ubuntu'
     },
     foodTypeText:{
         backgroundColor: 'transparent',
         color: '#f3f3f3',
         fontSize:14,
- 
+        fontFamily: 'Ubuntu'
     },
 
     vehicleTitleV:{
@@ -166,6 +170,7 @@ export default StyleSheet.create({
         textAlign:'center',
         marginTop:7,
         marginBottom:13,
+        fontFamily: 'Ubuntu'
     },
 
     vImgBoxCover:{
@@ -188,10 +193,10 @@ export default StyleSheet.create({
     stateDateText:{
         textAlign:'center',
         marginTop:15,
-        marginBottom:35,
         backgroundColor: 'transparent',
         fontSize: 16,
-        color:'#fff'
+        color:'#fff',
+        fontFamily: 'Ubuntu'
     },
     sliderS:{
         width:netWidth(30),
@@ -234,7 +239,8 @@ export default StyleSheet.create({
         marginTop:15,
         backgroundColor: 'transparent',
         fontSize: 10,
-        color:'#DD8D6C'
+        color:'#DD8D6C',
+        fontFamily: 'Ubuntu'
     },
     datePickerStyle:{
         width: width*0.7,
@@ -277,12 +283,14 @@ export default StyleSheet.create({
     operation_label: {
         fontSize: 10,
         backgroundColor: 'transparent',
-        color: 'white'
+        color: 'white',
+        fontFamily: 'Ubuntu'
     },
     slVs:{
         fontSize:12,
         backgroundColor: 'transparent',
         color:'#FFFFFF',
+        fontFamily: 'Ubuntu',
         marginRight:15,
     },
     container: {

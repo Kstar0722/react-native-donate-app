@@ -55,6 +55,7 @@
     "react-native-meteor": "^1.1.0",
     "react-native-modal-datetime-picker": "^4.9.0",
     "react-native-popup-menu": "^0.8.3",
+    "react-native-prompt": "^1.0.0",
     "react-native-rating": "^2.0.4",
     "react-native-rating-star": "^0.2.1",
     "react-native-segment-tab": "^0.1.1",
