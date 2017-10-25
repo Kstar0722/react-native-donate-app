@@ -30,7 +30,40 @@ export default StyleSheet.create({
         fontSize:20,
         backgroundColor:'transparent',
     },
-
+    camera : {
+        alignItems:'center',
+        width : 55,
+        height : 55,
+        marginTop:8,
+        marginLeft:10,
+        marginBottom:10,
+        borderRadius : 27.5,
+        borderWidth : 2,
+        borderColor : 'white'
+    },
+    write3: {
+        color:'#fff',
+        overflow:'hidden',
+        paddingRight:20,
+        flexWrap:'wrap',
+        width:Dimensions.get('window').width-(170),
+        backgroundColor:'transparent'
+    },
+    write1: {
+        paddingHorizontal: 20,
+        fontWeight:'bold',
+        width:80,
+        color:'#fff',
+        overflow:'hidden',
+        backgroundColor:'transparent'
+      },
+    editContent:{
+        paddingVertical:5,
+      flexDirection:'row',
+      height:67,
+      alignItems:'center',
+      overflow:'hidden',
+    },
     detsilSElection:{
         flexDirection:'row',
         justifyContent: 'space-around',
@@ -39,11 +72,13 @@ export default StyleSheet.create({
     hLine:{
         position:"absolute",
         height: 120,
+        width:1,
         top: 0, 
         left: width*0.5, 
         right: 0, 
         borderLeftWidth:2,
         borderColor:'#e09579',
+        zIndex:999
     },
     bottomLine:{
         width:width,
@@ -64,16 +99,26 @@ export default StyleSheet.create({
         paddingHorizontal:20,
         paddingVertical:25,
     },
+    rowRecurrStyle:{
+        flexDirection:'row',
+        alignItems:'center',
+        paddingHorizontal:20,
+        paddingVertical:15,
+    },
     rowStyleRepeat:{
         flexDirection:'column',
         alignItems:'center'
     },
-
+    buttonGroup:{
+        marginVertical: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+      },
     rowStyleRepeat_1:{
         flexDirection:'row',
         alignItems:'center',
         paddingHorizontal:20,
-        paddingVertical:25,
+        paddingVertical:20,
     },
     rowStyleRepeat_2:{
         flexDirection:'column',
@@ -140,14 +185,22 @@ export default StyleSheet.create({
         borderBottomColor: '#e09579',
         borderBottomWidth: 2,
     },
-   
+    stateDateText:{
+        textAlign:'center',
+        marginTop:15,
+        marginBottom:35,
+        backgroundColor: 'transparent',
+        fontSize: 16,
+        color:'#fff'
+    },
     sliderS:{
         width:netWidth(30),
+        marginHorizontal:30,
         alignSelf:'center',
         marginTop:20,
     },
     sliderCover:{
-        alignItems:'center',
+        
         borderBottomColor: '#e09579',
         borderBottomWidth: 2,
         paddingVertical:25,
@@ -184,10 +237,53 @@ export default StyleSheet.create({
         color:'#DD8D6C'
     },
     datePickerStyle:{
-        width: width*0.8, 
+        width: width*0.7,
         backgroundColor:'#fff',
         borderRadius:50,
         marginVertical: 20
+    },
+
+    operation_view: {
+        flexDirection: 'row',
+        marginBottom: 10
+    },
+    operation_button_active: {
+        width: 40,
+        height: 40,
+        marginLeft: 5,
+        backgroundColor: '#fff',
+        borderColor: "#fff",
+        borderWidth: 1,
+        borderRadius: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    operation_button: {
+        width: 40,
+        height: 40,
+        marginLeft: 5,
+        borderColor: "#fff",
+        borderWidth: 1,
+        borderRadius: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'transparent'
+    },
+    operation_label_active: {
+        fontSize: 10,
+        backgroundColor: 'transparent',
+        color: '#DD8D6C'
+    },
+    operation_label: {
+        fontSize: 10,
+        backgroundColor: 'transparent',
+        color: 'white'
+    },
+    slVs:{
+        fontSize:12,
+        backgroundColor: 'transparent',
+        color:'#FFFFFF',
+        marginRight:15,
     },
     container: {
         width:netWidth(0),
