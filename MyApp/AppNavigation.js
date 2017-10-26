@@ -20,8 +20,9 @@ import DonationList from './containers/DonationList'
 import MessageScreen from './containers/MessageScreen'
 import ReservedDonationDetail from './containers/ReservedDonationDetail'
 import CreateListing from './containers/CreateListing'
-
 import completedDonationScreen  from './containers/completedDonationScreen'
+
+import ViewListings from './containers/ViewListings'
 
 import styles from './Styles/NavigationStyles'
 
@@ -41,11 +42,15 @@ const PrimaryNav = StackNavigator({
   DonationView: { screen: DonationView},
   ProfilScreen: {screen: ProfilScreen},
   ReservedDonationDetail: {screen: ReservedDonationDetail},
-
   completedDonationScreen: { screen: completedDonationScreen},
-  CreateListing: {screen:CreateListing}
+  CreateListing: {screen:CreateListing},
+
+  DonationList: {screen: DonationList},
+
+  ViewListings: {screen: ViewListings},
+  
 }, {
-    initialRouteName: 'CreateListing',
+    initialRouteName: 'ViewListings',
     heaerStyle: styles.header
   })
 export default PrimaryNav

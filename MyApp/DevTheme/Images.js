@@ -155,6 +155,9 @@ const images = {
   date_smallIcon: require('../Images/date_smallIcon.png'),
   location_sel: require('../Images/location-sel.png'),
   location_n: require('../Images/location_n.png'),
-  location: require('../Images/location.png')
+  location: require('../Images/location.png'),
+
+  viewListingHeader: require('../Images/viewListingHeader.png'),
+  car_black: require('../Images/car_black.png')
 }
 export default images
