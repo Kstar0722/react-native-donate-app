@@ -150,7 +150,13 @@ const images = {
   oval1: require('../Images/oval1.png'),  
   food_donated: require('../Images/Food_Donated.png'),
   People_Served: require('../Images/People_Served.png'),
-  Global_Impact: require('../Images/Global_Impact.png')
+  Global_Impact: require('../Images/Global_Impact.png'),
+
+  caemraIcon_small: require("../Images/cameraIcon.png"),
+  location_n: require('../Images/location_n.png'),
+  location: require('../Images/location.png'),
+  rightArraw_small: require('../Images/rightArrow_small.png'),
+  date_smallIcon: require('../Images/date_smallIcon.png'),
   }
   
   export default images

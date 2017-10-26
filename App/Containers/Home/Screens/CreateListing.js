@@ -2,15 +2,16 @@ import React from 'react'
 import { Text, View, Image, TextInput, TouchableOpacity, Switch, Modal, Dimensions, ScrollView } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { Slider } from 'react-native-elements'
-import { Images } from '../DevTheme'
+import { Images } from '../../../Themes'
 import styles from '../Styles/CreateListingStyles'
 import DatePicker from 'react-native-datepicker'
-import PictureModal from './Modals/pictureModal'
-import DescriptionModal from './Modals/descriptionModal'
+import PictureModal from '../../../Components/Modals/pictureModal'
+import DescriptionModal from '../../../Components/Modals/descriptionModal'
 import dateFormat from 'dateformat';
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import Prompt from 'react-native-prompt'
 import { RNS3 } from 'react-native-aws3'
+import AppConfig from '../../../Config'
 import { guid, validateEmail } from '../../../Transforms'
 _dText='';
 export default class CreateListing extends React.Component {
@@ -40,7 +41,12 @@ export default class CreateListing extends React.Component {
     }
 
     toggleSwitch (val) {
-        this.setState({switchValue: val});
+        this.setState({
+            weekday: [false, false, false, false, false, false, false],
+            endDate: '',
+            repeatFlag:'',
+            switchValue: val
+        })
     }
     
     switchToggle(){
@@ -60,10 +66,21 @@ export default class CreateListing extends React.Component {
     }
     repeatEvent(val)
     {
+        this.setState({
+            
+        })
         if(this.state.repeatFlag == val)
-            this.setState({repeatFlag:0});
+            this.setState({
+                repeatFlag:0,
+                weekday: [false, false, false, false, false, false, false],
+                endDate: ''
+            });
         else
-            this.setState({repeatFlag:val})
+            this.setState({
+                repeatFlag:val,
+                weekday: [false, false, false, false, false, false, false],
+                endDate: ''
+            })
     }
     onWeekDayPress(val) {
         var tmp_weekday = this.state.weekday.slice()
@@ -89,9 +106,42 @@ export default class CreateListing extends React.Component {
 
     dataPost()
     {
-        postData = {
-            
+        let self = this
+        const file = {
+            uri: this.state.avatar,
+            name: guid() + ".png",
+            type: "image/png"
         }
+        const options = {
+            keyPrefix: AppConfig.KEY_PREFIX,
+            bucket: AppConfig.BUCKET,
+            accessKey: AppConfig.ACCESS_KEY,
+            secretKey: AppConfig.SECRET_KEY,
+            region: AppConfig.REGION
+        }
+        postData = {
+            startdate: this.state.startDate,
+            location: this.state.location,
+            recurstate: this.state.switchValue,
+            repeatstate: this.state.repeatFlag,
+            weekdaystate: this.state.weekday,
+            enddate: this.state.endDate,
+            foodTypeToggle1: this.state.foodTypeToggle1,
+            foodTypeToggle2: this.state.foodTypeToggle2,
+            peoplecount: this.state.sliderValue,
+            description: _dText
+        }
+
+        RNS3.put(file, options).then(response => {
+            postData.image = response.body.postResponse.location
+            Meteor.call('createGivefood', postData, (err, res) => {
+                if (err) {
+                    this.showDialog(true, err.message)
+                    console.log(err)
+                } else {
+                }
+            })
+        })
     }
 
     
@@ -121,7 +171,7 @@ export default class CreateListing extends React.Component {
                 <TouchableOpacity  onPress={()=>this.setState({descriptionModalVisible: true})}>
                 <View style={styles.rowStyle}>
                     <Text style={styles.contentText}>Description</Text>                            
-                    <Image source={Images.rightArraw}></Image>
+                    <Image source={Images.rightArraw_small}></Image>
                 </View>
                 </TouchableOpacity>
             </View>
@@ -156,7 +206,7 @@ export default class CreateListing extends React.Component {
                         <View style={styles.buttonGroup}>
                             <View style={{alignItems:'center'}}>
                                 <View style={{width:width/3,height:71, alignItems:'center',justifyContent: 'space-around'}}>
-                                    <Image source={this.state.avatar ? this.state.avatar : Images.cameraIcon} style={this.state.avatar?styles.camera:""}></Image>
+                                    <Image source={this.state.avatar ? this.state.avatar : Images.caemraIcon_small} style={this.state.avatar?styles.camera:""}></Image>
                                 </View>
                                 
                                 <TouchableOpacity onPress = {() => this.setState({picturemodalVisible : true})} >
