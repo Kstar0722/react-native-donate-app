@@ -5,6 +5,7 @@ import { Slider } from 'react-native-elements'
 import { Images } from '../../../Themes'
 import styles from '../Styles/CreateListingStyles'
 import DatePicker from 'react-native-datepicker'
+import AlertModal from '../../../Components/AlertModal'
 import PictureModal from '../../../Components/Modals/pictureModal'
 import DescriptionModal from '../../../Components/Modals/descriptionModal'
 import dateFormat from 'dateformat';
@@ -18,11 +19,12 @@ export default class CreateListing extends React.Component {
     constructor () {
         super()
         this.state = {
+            msgBox: false,
+            msgText: "",
             sliderValue: 0,
-            foodTypeToggle1: false,
-            foodTypeToggle2: false,
+            foodTypeToggle: false,
             toggleSwitch: false,
-            repeatFlag: 0,
+            repeatFlag: 3,
             endDate:'',
             weekday: [false, false, false, false, false, false, false],
             picturemodalVisible: false,
@@ -44,7 +46,7 @@ export default class CreateListing extends React.Component {
         this.setState({
             weekday: [false, false, false, false, false, false, false],
             endDate: '',
-            repeatFlag:'',
+            repeatFlag:3,
             switchValue: val
         })
     }
@@ -71,7 +73,7 @@ export default class CreateListing extends React.Component {
         })
         if(this.state.repeatFlag == val)
             this.setState({
-                repeatFlag:0,
+                repeatFlag:3,
                 weekday: [false, false, false, false, false, false, false],
                 endDate: ''
             });
@@ -103,9 +105,24 @@ export default class CreateListing extends React.Component {
           descriptionModalVisible: false
         })
     }
+    showDialog = (show, title) => {
+        if (show) this.setState({ msgBox: show, msgText: title })
+        else this.setState({ msgBox: show })
+    }
+
+    validate() {
+        if (this.state.startDate && this.state.Address && _dText && this.state.avatar) {
+            return true
+        }
+        return false
+    }
 
     dataPost()
     {
+        if (!this.validate()) {
+            this.showDialog(true, "You have to provide correct information")
+            return
+        }
         let self = this
         const file = {
             uri: this.state.avatar,
@@ -120,15 +137,12 @@ export default class CreateListing extends React.Component {
             region: AppConfig.REGION
         }
         postData = {
-            startdate: this.state.startDate,
-            location: this.state.location,
-            recurstate: this.state.switchValue,
-            repeatstate: this.state.repeatFlag,
-            weekdaystate: this.state.weekday,
-            enddate: this.state.endDate,
-            foodTypeToggle1: this.state.foodTypeToggle1,
-            foodTypeToggle2: this.state.foodTypeToggle2,
-            peoplecount: this.state.sliderValue,
+            date: this.state.startDate,
+            location: {address:this.state.location},
+            bRecurringEvent: this.state.switchValue,
+            repeatType: this.state.repeatFlag,
+            foodType: this.state.foodTypeToggle,
+            servePeopleNumber: this.state.sliderValue,
             description: _dText
         }
 
@@ -139,6 +153,7 @@ export default class CreateListing extends React.Component {
                     this.showDialog(true, err.message)
                     console.log(err)
                 } else {
+                    
                 }
             })
         })
@@ -160,8 +175,8 @@ export default class CreateListing extends React.Component {
                     <Text style={styles.write1}>EDIT</Text>
                 </TouchableOpacity>
                 <Text style={styles.write3}>{t}</Text>
-                <TouchableOpacity onPress={() => this.dataPost()}>
-                    <Image source={Images.markPostIcon}  style={{width: 80,height: 80, right:0, bottom:0, position:'absolute', zIndex:999999}}/>
+                <TouchableOpacity onPress={() => this.dataPost()} style={{width: 80,height: 80, right:0, bottom:0, position:'absolute', zIndex:999999}}>
+                    <Image source={Images.markPostIcon}  style={{width: 80,height: 80}}/>
                 </TouchableOpacity>
           </View>
         );
@@ -266,13 +281,13 @@ export default class CreateListing extends React.Component {
                                 <View style={styles.rowStyleRepeat_1}>
                                     <Text style={styles.contentText1}>Repeat:</Text>
                                     <View style={styles.rowStyle2}>
-                                        <TouchableOpacity style={this.state.repeatFlag=="daily"?styles.repeatOnStyles:styles.repeatOffStyles} onPress={() => {this.repeatEvent("daily")}}><Text style={this.state.repeatFlag=="daily"?styles.repeatOnText:styles.repeatOffText}>Daily</Text></TouchableOpacity>
-                                        <TouchableOpacity style={this.state.repeatFlag=="weekly"?styles.repeatOnStyles:styles.repeatOffStyles} onPress={() => {this.repeatEvent("weekly")}}><Text style={this.state.repeatFlag=="weekly"?styles.repeatOnText:styles.repeatOffText}>Weekly</Text></TouchableOpacity>
-                                        <TouchableOpacity style={this.state.repeatFlag=="monthly"?styles.repeatOnStyles:styles.repeatOffStyles} onPress={() => {this.repeatEvent("monthly")}}><Text style={this.state.repeatFlag=="monthly"?styles.repeatOnText:styles.repeatOffText}>Monthly</Text></TouchableOpacity>
+                                        <TouchableOpacity style={this.state.repeatFlag==0?styles.repeatOnStyles:styles.repeatOffStyles} onPress={() => {this.repeatEvent(0)}}><Text style={this.state.repeatFlag==0?styles.repeatOnText:styles.repeatOffText}>Daily</Text></TouchableOpacity>
+                                        <TouchableOpacity style={this.state.repeatFlag==1?styles.repeatOnStyles:styles.repeatOffStyles} onPress={() => {this.repeatEvent(1)}}><Text style={this.state.repeatFlag==1?styles.repeatOnText:styles.repeatOffText}>Weekly</Text></TouchableOpacity>
+                                        <TouchableOpacity style={this.state.repeatFlag==2?styles.repeatOnStyles:styles.repeatOffStyles} onPress={() => {this.repeatEvent(2)}}><Text style={this.state.repeatFlag==2?styles.repeatOnText:styles.repeatOffText}>Monthly</Text></TouchableOpacity>
                                     </View>
                                 </View>
                                 <View style={styles.rowStyleRepeat_2}>
-                                    {(this.state.repeatFlag == "daily" || this.state.repeatFlag == "monthly") &&
+                                    {(this.state.repeatFlag == 0 || this.state.repeatFlag == 2) &&
                                         <View>
                                             <Text style={styles.btnTopEdit}>End Date:</Text>
                                             <DatePicker
@@ -302,7 +317,7 @@ export default class CreateListing extends React.Component {
                                                 onDateChange={(date) => {this.setState({endDate: date})}}
                                             />
                                         </View>}
-                                        {this.state.repeatFlag == "weekly" &&
+                                        {this.state.repeatFlag == 1 &&
                                             <View style={{marginTop:0}}>
                                                 <Text style={styles.btnTopEdit}>Day(s):</Text>
                                                 <Text style={styles.btnTopEdit}>:</Text>
@@ -374,17 +389,17 @@ export default class CreateListing extends React.Component {
                             <Text style={[styles.btnTopEdit,{textAlign:'center', marginTop:20}]}>Select Food Type(s)</Text>
                             <View style={styles.vDetsilSElection}>
                                 <View style={{alignItems: 'center'}} >
-                                    <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({foodTypeToggle1:!this.state.foodTypeToggle1})}}>
-                                        <Image source={this.state.foodTypeToggle1?Images.non_perishable_new:Images.non_perishable_new_sel} style={[styles.vImgBoxCover, !this.state.foodTypeToggle1&& {}]} resizeMode={'contain'} />
+                                    <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({foodTypeToggle:false})}}>
+                                        <Image source={this.state.foodTypeToggle==false?Images.non_perishable_new_sel:Images.non_perishable_new} style={[styles.vImgBoxCover, !this.state.foodTypeToggle1&& {}]} resizeMode={'contain'} />
                                     </TouchableOpacity>
-                                    <Text style={styles.foodTypeText} >Non-Perishable</Text>
+                                    <Text style={styles.foodTypeText} >Groceries</Text>
                                 </View>
                                 
                                 <View style={{alignItems: 'center'}} >
-                                    <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({foodTypeToggle2:!this.state.foodTypeToggle2})}}>
-                                        <Image source={this.state.foodTypeToggle2?Images.prepared_sel:Images.prepared} style={styles.vImgBoxCover} resizeMode={'contain'} />
+                                    <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({foodTypeToggle:true})}}>
+                                        <Image source={this.state.foodTypeToggle?Images.prepared_sel:Images.prepared} style={styles.vImgBoxCover} resizeMode={'contain'} />
                                     </TouchableOpacity>
-                                    <Text style={styles.foodTypeText} >Prepared</Text>
+                                    <Text style={styles.foodTypeText} >Hot meal</Text>
                                 </View>
                             </View>
                         </View>
@@ -405,9 +420,9 @@ export default class CreateListing extends React.Component {
                         {this.writeHere()}
                   </ScrollView>
                </Image>
-
+               <AlertModal show={this.state.msgBox} modal={() => this.showDialog(false)} title={this.state.msgText} />
                <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal} chooseAvatar = {this.chooseAvatar} />
-                <DescriptionModal descriptionModalVisible={this.state.descriptionModalVisible} close={this.closeDescriptionModal}/>
+               <DescriptionModal descriptionModalVisible={this.state.descriptionModalVisible} close={this.closeDescriptionModal}/>
            </View>
          )
      }
