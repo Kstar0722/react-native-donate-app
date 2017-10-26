@@ -140,12 +140,15 @@ export default class CreateListing extends React.Component {
             date: this.state.startDate,
             location: {address:this.state.location},
             bRecurringEvent: this.state.switchValue,
-            repeatType: this.state.repeatFlag,
             foodType: this.state.foodTypeToggle,
             servePeopleNumber: this.state.sliderValue,
-            description: _dText
+            description: _dText,
+            operationDays: this.state.weekday
         }
-
+        if(this.state.repeatFlag != 3)
+            postData.repeatType = this.state.repeatFlag
+        if(this.state.endDate != "")
+            postData.endDate = this.state.endDate,
         RNS3.put(file, options).then(response => {
             postData.image = response.body.postResponse.location
             Meteor.call('createGivefood', postData, (err, res) => {
