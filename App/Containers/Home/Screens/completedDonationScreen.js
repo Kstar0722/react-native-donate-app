@@ -2,17 +2,23 @@ import React from 'react'
 import { Text, View, Image, TextInput, TouchableOpacity, Switch, Modal, Dimensions, ScrollView, ImageBackground } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { Slider } from 'react-native-elements'
-import { Images } from '../DevTheme'
+import { Images } from '../../../Themes'
 import styles from '../Styles/CompletedDonationScreenStyles'
 import DateTimePicker from 'react-native-modal-datetime-picker'
-import PictureModal from './Modals/pictureModal'
+import PictureModal from '../../../Components/Modals/pictureModal'
 
 import DatePicker from 'react-native-datepicker'
-import DescriptionModal from './Modals/descriptionModal'
-import DonationDateModal from './Modals/DonationDateModal'
-import SelectPremiumModal from './Modals/SelectPremiumModal'
-import PostDonationModal from './Modals/PostDonationModal'
+import DescriptionModal from '../../../Components/Modals/descriptionModal'
+import DonationDateModal from '../../../Components/Modals/DonationDateModal'
+import SelectPremiumModal from '../../../Components/Modals/SelectPremiumModal'
+import PostDonationModal from '../../../Components/Modals/PostDonationModal'
 import dateFormat from 'dateformat';
+import Prompt from 'react-native-prompt'
+import { RNS3 } from 'react-native-aws3'
+import Meteor, { createContainer } from 'react-native-meteor'
+import AlertModal from '../../../Components/AlertModal'
+import AppConfig from '../../../Config'
+import { guid, validateEmail } from '../../../Transforms'
 _dText='';
 
 export default class HomeScreen extends React.Component {
@@ -39,19 +45,23 @@ export default class HomeScreen extends React.Component {
             showDistributor: false,
             showVolunteer: false,
 
-            showLocationImage: true,
-
             picturemodalVisible: false,
             avatar : null,
 
             isDateTimePickerVisible: false,
-            startDate:"",
+            date: null,
             descriptionModalVisible:false,
 
             donationDateModalVisible: false,
             showPostButton: false,
             selectPremiumModalVisible: false,
             postDonationModalVisible: false,
+
+            address: "",
+            isAddressPromptVisible : false,
+
+            msgBox: false,
+            msgText: "",
 
         }
         this.toggleSwitch = this.toggleSwitch.bind(this);
@@ -141,7 +151,7 @@ export default class HomeScreen extends React.Component {
                         <Text style={styles.write1}>EDIT</Text>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity onPress={() => {this.setState({selectPremiumModalVisible: true})}} disabled={this.state.showPostButton ? false : true}>
+                <TouchableOpacity onPress={() => {this.dataPost()}} disabled={this.state.showPostButton ? false : true}>
                     <Image source={Images.markPostIcon}  style={[styles.bottomPostBtn, this.state.showPostButton ? {opacity: 1} : {opacity : 0}]} />
                 </TouchableOpacity>
                 </View>
@@ -168,12 +178,13 @@ export default class HomeScreen extends React.Component {
             this.setState({
                 donationDateModalVisible: false
             })
+            _dText = ''
             this.checkAllDataSelected()
         }
 
-        handleDatePicked = (dateString) => {
+        handleDatePicked = (date) => {
             this.setState({
-                startDate: dateString
+                date: date
             }, function() {
                 this.closeDonationDateModal()
             })
@@ -199,41 +210,94 @@ export default class HomeScreen extends React.Component {
             })
         }
 
+        showDialog = (show, title) => {
+            if (show) this.setState({ msgBox: show, msgText: title })
+            else this.setState({ msgBox: show })
+        }
+
 
         checkAllDataSelected() {
-            if (!this.state.avatar) {
-                return
-            }
-            console.log('Here.............1')
-            if (this.state.startDate == "") {
-                return
-            }
-            console.log('Here.............2')
-            if (!this.state.cToggle && !this.state.vToggle && !this.state.tToggle) {
-                return
-            }
-            console.log('Here.............3')
+            if (!this.state.avatar) return
+            if (!this.state.date) return
+            if (this.state.address == "") return
+            if (!this.state.cToggle && !this.state.vToggle && !this.state.tToggle) return
             if (!this.state.foodTypeToggle1 && !this.state.foodTypeToggle2 && !this.state.foodTypeToggle3) {
                 return
             }
-            console.log('Here.............4')
             if (!this.state.deliveryOptionToggle1 && !this.state.deliveryOptionToggle2 && !this.state.deliveryOptionToggle3) {
                 return
             }
-            console.log('Here.............5')
-            if (this.state.value == 0) {
-                return
-            }
-            console.log('Here.............6')
-            if(!_dText) {
-                return
-            }
-            console.log('Here.............7')
+            if (this.state.value == 0) return
+            if(!_dText) return
 
             this.setState({
                 showPostButton: true
-            })
-            
+            })            
+        }
+
+        dataPost() {
+            let self = this
+
+            const file = {
+                uri: this.state.avatar,
+                name: guid() + ".png",
+                type: "image/png"
+            }
+            const options = {
+                keyPrefix: AppConfig.KEY_PREFIX,
+                bucket: AppConfig.BUCKET,
+                accessKey: AppConfig.ACCESS_KEY,
+                secretKey: AppConfig.SECRET_KEY,
+                region: AppConfig.REGION
+            }
+
+            vehicleSize = 0
+            if (this.state.cToggle) {
+                vehicleSize = 0
+            } else if (this.state.vToggle) {
+                vehicleSize = 1
+            } else {
+                vehicleSize = 2
+            }
+
+            deliveryOption = 0
+            if (this.state.deliveryOptionToggle1) {
+                deliveryOption = 0
+            } else if (this.state.deliveryOptionToggle2) {
+                deliveryOption = 1
+            } else {
+                deliveryOption = 2
+            }
+
+
+            postData = {
+                date: this.state.date,
+                location: {address:this.state.address},
+                vehicleSize: vehicleSize,
+                foodTypes_NonPerishable: this.state.foodTypeToggle1,
+                foodTypes_Prepared: this.state.foodTypeToggle2,
+                foodTypes_Perishable: this.state.foodTypeToggle3,
+                deliveryOption: deliveryOption,
+                bWeight: true,
+                weight: (this.state.value).toFixed(0),
+                description: _dText,
+            }
+
+            console.log(postData)
+
+            RNS3.put(file, options).then(response => {
+                postData.image = response.body.postResponse.location
+                Meteor.call('createDonation', postData, (err, res) => {
+                    console.log('Data Post Called...')
+                    if (err) {
+                        this.showDialog(true, err.message)
+                        console.log(err)
+                    } else {
+                        console.log("Data Post Success...")
+                        this.setState({selectPremiumModalVisible: true})
+                    }
+                })
+            })            
         }
 
 
@@ -247,7 +311,7 @@ export default class HomeScreen extends React.Component {
                           <Image source={Images.backIcon} style={styles.menuIconNav} />
                       </TouchableOpacity>
                       <Text style={styles.refedText}>Create a Donation</Text>
-                      <TouchableOpacity onPress={() => {this.setState({selectPremiumModalVisible: true})}} disabled={this.state.showPostButton ? false : true}>
+                      <TouchableOpacity onPress={() => {this.dataPost()}} disabled={this.state.showPostButton ? false : true}>
                           <Text style={[styles.postBtnText, this.state.showPostButton ? {opacity : 1} : {opacity: 0}]}>POST</Text>
                       </TouchableOpacity>
                   </View>
@@ -275,15 +339,15 @@ export default class HomeScreen extends React.Component {
                             </View>
 
                             <View style={styles.boxCover}>
-                                {this.state.startDate != "" &&
+                                {this.state.date &&
                                 <View style={{alignItems: 'center'}} >
-                                    <Text style={styles.btnEtxt}>{this.state.startDate}</Text>
+                                    <Text style={styles.btnEtxt}>{this.state.date.date}</Text>
                                     <TouchableOpacity onPress={()=>{this.setState({donationDateModalVisible: true})}} >
                                         <Text style={styles.btnEdit}>Edit</Text>
                                     </TouchableOpacity>
                                 </View>
                                 }
-                                {this.state.startDate == "" &&
+                                {!this.state.date &&
                                 <View style={{alignItems: 'center', flex: 1}} >
                                     <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({donationDateModalVisible: true})}}>
                                         <Image source={Images.date} style={[styles.vImgBoxCover, !this.state.foodTypeToggle1&& {}]} resizeMode={'contain'} />
@@ -303,22 +367,37 @@ export default class HomeScreen extends React.Component {
                             </View>
                             
                             <View style={styles.boxCover}>
-                                {!this.state.showLocationImage &&
-                                <View style={{alignItems: 'center'}} >
-                                    <Text style={styles.btnEtxt}>2: 10 PM</Text>
-                                    <TouchableOpacity>
-                                        <Text style={styles.btnEdit}>Edit</Text>
+                                {this.state.address != "" &&
+                                <View style={{alignItems: 'center', flex: 1}} >
+                                    <TouchableOpacity style={styles.imgBoxCover} disabled={true}>
+                                        <Image source={Images.location} style={{width:40, height:40, alignSelf:'center',}} resizeMode={'contain'} />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={()=>{this.setState({isAddressPromptVisible:true})}}>
+                                        <Text style={styles.foodTypeText}>Edit</Text>
                                     </TouchableOpacity>
                                 </View>
                                 }
-                                {this.state.showLocationImage &&
+                                {this.state.address == "" &&
                                 <View style={{alignItems: 'center', flex: 1}} >
-                                    <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({showLocationImage:false})}}>
+                                    <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({isAddressPromptVisible:true})}}>
                                         <Image source={Images.location_sel} style={[styles.vImgBoxCover, !this.state.foodTypeToggle1&& {}]} resizeMode={'contain'} />
                                     </TouchableOpacity>
                                     <Text style={styles.foodTypeText} >Location</Text>
                                 </View>
-                                }                                
+                                }
+                                <Prompt
+                                title="Your Address"
+                                placeholder="Start typing"
+                                defaultValue={this.state.address}
+                                visible={ this.state.isAddressPromptVisible }
+                                onCancel={ (value) => this.setState({
+                                    isAddressPromptVisible: false,
+                                    address: value
+                                }) }
+                                    onSubmit={ (value) => this.setState({
+                                    isAddressPromptVisible: false,
+                                    address: value
+                                }) }/>                                
                             </View>
                         </View>
 
@@ -356,7 +435,7 @@ export default class HomeScreen extends React.Component {
                                 <TouchableOpacity style={styles.imgBoxCover} onPress={()=> this.setState({foodTypeToggle3:!this.state.foodTypeToggle3}, function(){this.checkAllDataSelected()})}>
                                     <Image resizeMode={'contain'} source={this.state.foodTypeToggle3?Images.perishable_new_sel:Images.perishable_new} style={styles.vImgBoxCover} />
                                 </TouchableOpacity>
-                                <Text style={styles.foodTypeText} >Prepared</Text>
+                                <Text style={styles.foodTypeText} >Perishable</Text>
                             </View>
                         </View>
 
@@ -443,9 +522,10 @@ export default class HomeScreen extends React.Component {
 
               <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal} chooseAvatar = {this.chooseAvatar} />
               <DescriptionModal descriptionModalVisible={this.state.descriptionModalVisible} close={this.closeDescriptionModal}/>
-              <DonationDateModal donationDateModalVisible={this.state.donationDateModalVisible} close={this.closeDonationDateModal} handleDatePicked={this.handleDatePicked} selectedDate={this.state.startDate} />
+              <DonationDateModal donationDateModalVisible={this.state.donationDateModalVisible} close={this.closeDonationDateModal} handleDatePicked={this.handleDatePicked} selectedDate={this.state.date ? this.state.date.date : ""} />
               <SelectPremiumModal selectPremiumModalVisible={this.state.selectPremiumModalVisible} close={this.closeSelectPremiumModal} next={this.handleSelectPremiumModalNext} />
               <PostDonationModal postDonationModalVisible={this.state.postDonationModalVisible} close={this.closePostDonationModal}/>
+              <AlertModal show={this.state.msgBox} modal={() => this.showDialog(false)} title={this.state.msgText} />
           </View>
         )
     }
