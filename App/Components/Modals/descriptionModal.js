@@ -47,7 +47,7 @@ export default class DescriptionModal extends React.Component {
                                 underlineColorAndroid="transparent" value={this.state.descriptionText}
                                 selectionColor={'#dd8d6c'} onChangeText={(t) => this.shareMessage(t)} />
                         </View>
-                        <KeyboardSpacer />
+                        
                     </View>
                 </Modal>
             </View>
