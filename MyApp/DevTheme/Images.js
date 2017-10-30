@@ -173,5 +173,8 @@ const images = {
   popup_bg: require('../Images/popup-bg.png'),
   plus_1: require('../Images/plus-1.png'),
 
+  donate_excess_food: require('../Images/donate_excess_food.png'),
+  feed_community: require('../Images/feed_community.png'),
+
 }
 export default images

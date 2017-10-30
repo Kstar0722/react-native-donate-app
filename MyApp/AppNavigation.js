@@ -24,6 +24,8 @@ import completedDonationScreen  from './containers/completedDonationScreen'
 
 import ViewListings from './containers/ViewListings'
 
+import CircularMenuTest from './containers/CircularMenuTest'
+
 import styles from './Styles/NavigationStyles'
 
 const PrimaryNav = StackNavigator({
@@ -48,9 +50,10 @@ const PrimaryNav = StackNavigator({
   DonationList: {screen: DonationList},
 
   ViewListings: {screen: ViewListings},
+  CircularMenuTest: {screen: CircularMenuTest},
   
 }, {
-    initialRouteName: 'ViewListings',
+    initialRouteName: 'CircularMenuTest',
     heaerStyle: styles.header
   })
 export default PrimaryNav
