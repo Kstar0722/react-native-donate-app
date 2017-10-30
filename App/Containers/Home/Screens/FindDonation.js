@@ -7,7 +7,8 @@ import {
     Text,
     Switch,
     ScrollView,
-    TextInput
+    TextInput,
+    Dimensions,
 } from 'react-native'
 import styles from '../Styles/FindDonationStyles'
 import { Images } from '../../../Themes'
@@ -20,6 +21,15 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import SideHOC from '../../../Components/SideMenuHOC'
 import AlertModal from '../../../Components/AlertModal'
 import Meteor, { createContainer } from 'react-native-meteor'
+
+import CircularMenu from '../../../Components/Modals/CircularMenu'
+var {height, width} = Dimensions.get('window');
+const reactMixin = require('react-mixin')
+import TimerMixin from 'react-timer-mixin'
+
+const ANIMATION_DURATION = 300
+const TRANSITION_BUFFER = 10
+
 class MainScreen extends Component {
     constructor() {
         super()
@@ -35,6 +45,9 @@ class MainScreen extends Component {
             isDateTimePickerVisible: false,
         }
         this.toggleSwitch = this.toggleSwitch.bind(this)
+
+        this.handlePress = this.handlePress.bind(this)
+        this.callback = this.callback.bind(this)
     }
 
     toggleSwitch(val) {
@@ -64,6 +77,31 @@ class MainScreen extends Component {
         })
         this._hideDateTimePicker();
     };
+
+    callback() {
+        /*this.setTimeout(() => {
+            this.setState({
+                circleColor: 'white'
+            })
+        }, TRANSITION_BUFFER + 5)*/
+    }
+
+
+
+    handlePress() {
+        this.setState(this.circleTransition.start(this.callback))
+    }
+
+    handleMenuRightItem = () => {
+        console.log('Right Menu Button Clicked...')
+    }
+
+    handleMenuLeftItem = () => {
+        console.log('Left Menu Button Clicked...')
+    }
+
+
+
     render() {
         const { navigate } = this.props.navigation;
 
@@ -101,20 +139,31 @@ class MainScreen extends Component {
                     navigate={navigate} />
                 <View style={styles.fDfooter}>
                     <View style={styles.fDfooterInner}>
-                        <View style={styles.fDBtnActive}>
-                            <TouchableOpacity style={styles.fBtn} onPress={() => navigate('CreateListing')} >
-                                <Image source={Images.fDsearch} style={styles.fDsearch} />
-                                <Text style={styles.searchBtnText}>Search</Text>
+                        <View style={{flex: 1, alignItems: 'center'}}>
+                            <TouchableOpacity style={[styles.addButton, {backgroundColor: '#7d9eff', borderColor: '#7d9eff'}]} underlayColor='#7d9eff' onPress={() => navigate('CreateListing')}> 
+                                <Image source={Images.fDsearch} style={styles.addButtonImage} />          
                             </TouchableOpacity>
                         </View>
 
-                        <TouchableOpacity style={styles.fDcenterBtn}>
-                            <Image source={Images.fDowal} style={styles.fDowal} />
+                        <TouchableOpacity style={styles.addButton} underlayColor='#ffb660' onPress={this.handlePress}> 
+                            <Image source={Images.plus_1} style={styles.addButtonImage} />          
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ flex: 1, alignItems: 'center' }} onPress={() => navigate('CompletedDonationScreen')} >
-                            <Image source={Images.fDmessage} style={styles.fDmessage} />
-                            <Text style={styles.searchBtnText}>Message</Text>
-                        </TouchableOpacity>
+                        
+                        <View style={{ flex: 1, alignItems: 'center' }} >
+                            <TouchableOpacity style={[styles.addButton, {backgroundColor: '#7d9eff', borderColor: '#7d9eff'}]} underlayColor='#7d9eff' onPress={() => navigate('CompletedDonationScreen')}> 
+                                <Image source={Images.message} style={styles.messageButtonImage} />          
+                            </TouchableOpacity>
+                        </View>
+
+
+                        <CircularMenu
+                            ref={(circle) => {this.circleTransition = circle}}                    
+                            duration={ANIMATION_DURATION}
+                            size = {width}
+                            transitionBuffer={TRANSITION_BUFFER}
+                            rightPress={this.handleMenuRightItem}
+                            leftPress={this.handleMenuLeftItem}
+                        />
                     </View>
                 </View>
             </View>
@@ -233,5 +282,8 @@ const DonationListViewContainer = createContainer((params) => {
         users: Meteor.collection('users').find({})
     })
 }, DonationListView)
+
+
+reactMixin(MainScreen.prototype, TimerMixin)
 
 export default SideHOC(MainScreen)

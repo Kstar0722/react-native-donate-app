@@ -180,7 +180,11 @@ const images = {
   gray_vann: require('../Images/gray_vann.png'),
   gray_tmpn: require('../Images/gray_tmpn.png'),
 
-  groceriesIcon: require('../Images/groceriesIcon.png')
+  groceriesIcon: require('../Images/groceriesIcon.png'),
+
+  donate_excess_food: require('../Images/donate_excess_food.png'),
+  feed_community: require('../Images/feed_community.png'),
+  message: require('../Images/message.png'),
 
   }
 
