@@ -1,5 +1,5 @@
 const images = {
-  
+
   overlay: require('../Images/overlay.png'),
   add: require('../Images/add.png'),
   date: require('../Images/date.png'),
@@ -116,13 +116,13 @@ const images = {
   gradient_bg : require('../Images/background.png'),
   stars : require('../Images/Stars.png'),
   apple : require('../Images/apple.png'),
-  vehicle : require('../Images/vehicle.png'), 
+  vehicle : require('../Images/vehicle.png'),
   search_small : require('../Images/search_small.png'),
   key : require('../Images/key.png'),
   createdBy: require('../Images/createdBy.png'),
   get_bg: require('../Images/get_bg.png'),
   pin: require('../Images/pin.png'),
-  
+
 
   rightArraw: require('../Images/rightArrow.png'),
   questionMark: require('../Images/questionMark.png'),
@@ -138,8 +138,8 @@ const images = {
   prepared_sel: require('../Images/prepared-sel.png'),
   voulunteer_heart: require('../Images/volunteer-heart.png'),
   voulunteer_heart_sel: require('../Images/volunteer-heart-sel.png'),
-  
-  
+
+
   rescue_bg: require('../Images/rescue_bg.png'),
   volunteer: require('../Images/volunteer.png'),
   helpicon: require('../Images/helpicon.png'),
@@ -147,7 +147,7 @@ const images = {
   statusModal_bg: require('../Images/statusModal_bg.png'),
   pinception: require('../Images/Pinception.png'),
   food: require('../Images/Food.png'),
-  oval1: require('../Images/oval1.png'),  
+  oval1: require('../Images/oval1.png'),
   food_donated: require('../Images/Food_Donated.png'),
   People_Served: require('../Images/People_Served.png'),
   Global_Impact: require('../Images/Global_Impact.png'),
@@ -167,9 +167,20 @@ const images = {
   hand_shake: require('../Images/hand-shake.png'),
   popup_bg: require('../Images/popup-bg.png'),
   plus_1: require('../Images/plus-1.png'),
+  settingBackground: require('../Images/settingbg.png'),
+  nuser: require('../Images/nuser.png'),
+  nemail: require('../Images/nemail.png'),
+  nlocks: require('../Images/nlocks.png'),
+  ncallico: require('../Images/ncallicon.png'),
+  nlocation: require('../Images/nlocation.png'),
+  camera_new: require('../Images/camera_1.png'),
+  prImg: require('../Images/prImg.png'),
+  right_gray: require('../Images/right_gray.png'),
+  gray_carn: require('../Images/gray_carn.png'),
+  gray_vann: require('../Images/gray_vann.png'),
+  gray_tmpn: require('../Images/gray_tmpn.png'),
 
 
   }
-  
+
   export default images
-  

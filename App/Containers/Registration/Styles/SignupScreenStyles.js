@@ -144,9 +144,9 @@ export default StyleSheet.create({
 
     operation_text : {
         position: 'absolute',
-        left : '20%', 
-        top :'20%', 
-        width : "60%", 
+        left : '20%',
+        top :'20%',
+        width : "60%",
         textAlign: 'center',
         color : "#E36679",
         backgroundColor : 'transparent'
@@ -226,7 +226,7 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         flexDirection: 'row'
       },
-    
+
       toggleLabel: {
         color: 'white',
         fontSize: 14,
@@ -234,7 +234,7 @@ export default StyleSheet.create({
         marginLeft : 20,
         width: '65%'
       },
-    
+
       toggle: {
         width: '15%',
         height: '100%',
