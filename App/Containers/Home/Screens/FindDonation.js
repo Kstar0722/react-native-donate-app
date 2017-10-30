@@ -102,7 +102,7 @@ class MainScreen extends Component {
                 <View style={styles.fDfooter}>
                     <View style={styles.fDfooterInner}>
                         <View style={styles.fDBtnActive}>
-                            <TouchableOpacity style={styles.fBtn}>
+                            <TouchableOpacity style={styles.fBtn} onPress={() => navigate('CreateListing')} >
                                 <Image source={Images.fDsearch} style={styles.fDsearch} />
                                 <Text style={styles.searchBtnText}>Search</Text>
                             </TouchableOpacity>
@@ -111,7 +111,7 @@ class MainScreen extends Component {
                         <TouchableOpacity style={styles.fDcenterBtn}>
                             <Image source={Images.fDowal} style={styles.fDowal} />
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ flex: 1, alignItems: 'center' }}>
+                        <TouchableOpacity style={{ flex: 1, alignItems: 'center' }} onPress={() => navigate('CompletedDonationScreen')} >
                             <Image source={Images.fDmessage} style={styles.fDmessage} />
                             <Text style={styles.searchBtnText}>Message</Text>
                         </TouchableOpacity>

@@ -229,6 +229,7 @@ export default class SignupScreen extends Component {
 
             Meteor.call('onCreateUser', user, (err, res) => {
                 if (err) {
+                    console.log(err.message)
                     this.showDialog(true, err.message)
                 } else {
                     this.props.navigation.navigate('FindDonation')

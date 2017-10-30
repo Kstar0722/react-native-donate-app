@@ -295,6 +295,7 @@ export default class HomeScreen extends React.Component {
                     } else {
                         console.log("Data Post Success...")
                         this.setState({selectPremiumModalVisible: true})
+                        this.props.navigation.navigate('FindDonation')
                     }
                 })
             })            
@@ -303,11 +304,12 @@ export default class HomeScreen extends React.Component {
 
 
     render () {
+        const { navigate } = this.props.navigation;
         return (
           <View style={styles.container}>
               <ImageBackground source={Images.overlay} style={styles.body}>
                   <View style={styles.cNavigation}>
-                      <TouchableOpacity onPress={() => {}}>
+                      <TouchableOpacity onPress={() => navigate('FindDonation')}>
                           <Image source={Images.backIcon} style={styles.menuIconNav} />
                       </TouchableOpacity>
                       <Text style={styles.refedText}>Create a Donation</Text>

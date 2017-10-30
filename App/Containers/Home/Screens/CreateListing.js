@@ -12,20 +12,23 @@ import dateFormat from 'dateformat';
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import Prompt from 'react-native-prompt'
 import { RNS3 } from 'react-native-aws3'
+import Meteor from 'react-native-meteor'
 import AppConfig from '../../../Config'
 import { guid, validateEmail } from '../../../Transforms'
 _dText='';
 export default class CreateListing extends React.Component {
     constructor () {
         super()
+        currentDate = new Date()
         this.state = {
+            value: 0,
             msgBox: false,
             msgText: "",
             sliderValue: 0,
             foodTypeToggle: false,
             toggleSwitch: false,
             repeatFlag: 3,
-            endDate:'',
+            endDate:dateFormat(currentDate, 'mmm d, yyyy   HH:MM TT'),
             weekday: [false, false, false, false, false, false, false],
             picturemodalVisible: false,
             descriptionModalVisible:false,
@@ -33,7 +36,8 @@ export default class CreateListing extends React.Component {
             startDate:"",
             isDateTimePickerVisible: false,
             Address: "",
-            isAddressPromptVisible : false
+            isAddressPromptVisible : false,
+            switchValue: false
         }
         this.toggleSwitch = this.toggleSwitch.bind(this);
     }
@@ -138,25 +142,28 @@ export default class CreateListing extends React.Component {
         }
         postData = {
             date: this.state.startDate,
-            location: {address:this.state.location},
+            location: {address:this.state.Address},
             bRecurringEvent: this.state.switchValue,
             foodType: this.state.foodTypeToggle,
-            servePeopleNumber: this.state.sliderValue,
+            servePeopleNumber: this.state.value.toFixed(0),
             description: _dText,
-            operationDays: this.state.weekday
+            operationDays: this.state.weekday,
+            endDate: this.state.endDate
         }
         if(this.state.repeatFlag != 3)
             postData.repeatType = this.state.repeatFlag
-        if(this.state.endDate != "")
-            postData.endDate = this.state.endDate,
+        else
+            postData.repeatType = 0          
+    
         RNS3.put(file, options).then(response => {
             postData.image = response.body.postResponse.location
-            Meteor.call('createGivefood', postData, (err, res) => {
+            console.log(postData)
+            Meteor.call('createGiveFood', postData, (err, res) => {
                 if (err) {
                     this.showDialog(true, err.message)
                     console.log(err)
                 } else {
-                    
+                    this.props.navigation.navigate('FindDonation')
                 }
             })
         })
@@ -210,11 +217,12 @@ export default class CreateListing extends React.Component {
       };
 
     render () {
+        const { navigate } = this.props.navigation;
         return (
           <View style={styles.container}>
               <Image source={Images.overlay} style={styles.body}>
                   <View style={styles.cNavigation}>
-                      <TouchableOpacity onPress={() => {}}>
+                      <TouchableOpacity onPress={() => navigate('FindDonation')}>
                           <Image source={Images.backIcon} style={styles.menuIconNav} />
                        </TouchableOpacity>
                        <Text style={styles.refedText}>Give Food</Text>
@@ -283,7 +291,7 @@ export default class CreateListing extends React.Component {
                             <View style={styles.rowStyleRepeat}>
                                 <View style={styles.rowStyleRepeat_1}>
                                     <Text style={styles.contentText1}>Repeat:</Text>
-                                    <View style={styles.rowStyle2}>
+                                    <View style={styles.rowStyle2}>                                                 
                                         <TouchableOpacity style={this.state.repeatFlag==0?styles.repeatOnStyles:styles.repeatOffStyles} onPress={() => {this.repeatEvent(0)}}><Text style={this.state.repeatFlag==0?styles.repeatOnText:styles.repeatOffText}>Daily</Text></TouchableOpacity>
                                         <TouchableOpacity style={this.state.repeatFlag==1?styles.repeatOnStyles:styles.repeatOffStyles} onPress={() => {this.repeatEvent(1)}}><Text style={this.state.repeatFlag==1?styles.repeatOnText:styles.repeatOffText}>Weekly</Text></TouchableOpacity>
                                         <TouchableOpacity style={this.state.repeatFlag==2?styles.repeatOnStyles:styles.repeatOffStyles} onPress={() => {this.repeatEvent(2)}}><Text style={this.state.repeatFlag==2?styles.repeatOnText:styles.repeatOffText}>Monthly</Text></TouchableOpacity>
@@ -298,7 +306,7 @@ export default class CreateListing extends React.Component {
                                                 date={this.state.endDate}
                                                 mode="datetime"
                                                 placeholder=" "
-                                                format="MMM D, YYYY hh:mm A"
+                                                format="                                                                                                                                            "
                                                 confirmBtnText="Confirm"
                                                 cancelBtnText="Cancel"
                                                 iconSource = {Images.date_smallIcon}   
