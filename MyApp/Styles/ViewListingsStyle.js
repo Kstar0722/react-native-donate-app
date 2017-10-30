@@ -63,12 +63,16 @@ dtDesEditBtn:{
     marginHorizontal:20
 },
 dtDate:{
+  fontFamily: 'ubuntu',
+  fontWeight: 'bold',
   color:'#96A883',
   fontSize:28,
 },
 dtMonth:{
   color:'#96A883',
+  fontFamily: 'ubuntu',
   fontSize:12,
+  marginLeft: 5
 },
 dtDescription:{
     flex:1,
@@ -77,10 +81,14 @@ dtDescription:{
     
 },
 dtText:{
+  fontFamily: 'ubuntu',
+  fontWeight:'bold',
   color:'#666666',
   fontSize:18,
 },
 dtEditText:{
+  fontFamily: 'ubuntu',
+  fontWeight: 'bold',
   color:'#DD8D6C',
   fontSize:14,
 },
@@ -107,9 +115,18 @@ activeTabStyle:{
     borderWidth:1,
 },
 textWhite14:{
+    fontFamily: 'ubuntu',
+    fontWeight: 'bold',
     fontSize:14,
     color:'#fff',
     backgroundColor:'transparent',
+},
+textNotActive14:{
+  fontFamily: 'ubuntu',
+  fontSize:14,
+  fontWeight: 'bold',
+  color:'#666666',
+  backgroundColor:'transparent',
 },
 dtListings:{
     flexDirection: 'row',

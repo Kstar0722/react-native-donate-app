@@ -58,26 +58,26 @@ export default class ViewListings extends Component {
                 tabsContainerStyle={{ backgroundColor:'rgba(255, 255, 255, 0)', marginTop:5, marginHorizontal: 60, borderRadius:5 }}
                 tabStyle={{ backgroundColor:'rgba(255, 255, 255, 0)', borderWidth: 1, borderColor:'white' }}
                 activeTabStyle={{ backgroundColor:'white'}}
-                tabTextStyle={{ color: '#fff'}}
-                activeTabTextStyle={{ color: '#243B53' }} 
+                tabTextStyle={{fontFamily:'ubuntu', color: '#fff'}}
+                activeTabTextStyle={{fontFamily:'ubuntu', color: '#243B53' }} 
             />
 
           <Image source={Images.whiteNot} style={styles.whiteNot} />
       </View>
         <View style={styles.menu}>
           <TouchableOpacity style={this.state.headerTab==0?styles.activeTabStyle:styles.tabStyle} onPress={() => { this.setState({headerTab:0})}}>
-            <Text style={this.state.headerTab==0?styles.textWhite14:{color:'#666666'}}>Created</Text>
+            <Text style={this.state.headerTab==0?styles.textWhite14:styles.textNotActive14}>Created</Text>
           </TouchableOpacity>
           <TouchableOpacity style={this.state.headerTab==1?styles.activeTabStyle:styles.tabStyle} onPress={() => { this.setState({headerTab:1})}}>
-            <Text style={this.state.headerTab==1?styles.textWhite14:{color:'#666666'}}>Reserved</Text>
+            <Text style={this.state.headerTab==1?styles.textWhite14:styles.textNotActive14}>Reserved</Text>
           </TouchableOpacity>
           <TouchableOpacity style={this.state.headerTab==2?styles.activeTabStyle:styles.tabStyle} onPress={() => { this.setState({headerTab:2})}}>
-            <Text style={this.state.headerTab==2?styles.textWhite14:{color:'#666666'}}>Canceled</Text>
+            <Text style={this.state.headerTab==2?styles.textWhite14:styles.textNotActive14}>Canceled</Text>
           </TouchableOpacity>
        
         </View>
-
-        <ScrollView style={{backgroundColor: 'white', flex: 1}}>
+        {this.state.segmentIndex == 0?
+            <ScrollView style={{backgroundColor: 'white', flex: 1}}>
             <View style={styles.dtBody}>
                 <View style={styles.dtListings}>
                     <View style={styles.dtDAte}>
@@ -154,8 +154,82 @@ export default class ViewListings extends Component {
                 </View>
             </View>
             
+        </ScrollView>:
+        <ScrollView style={{backgroundColor: 'white', flex: 1}}>
+            <View style={styles.dtBody}>
+                <View style={styles.dtListings}>
+                    <View style={styles.dtDAte}>
+                        <Text style={styles.dtDate}>11</Text>
+                        <Text style={styles.dtMonth}>JAN</Text>
+                    </View>
+                    <View style={styles.dtDescription}>
+                        <Text style={styles.dtText}>Groceries</Text>
+                    </View>
+                    <TouchableOpacity style={styles.dtDesEditBtn}>
+                        <Text style={styles.dtEditText}>EDIT</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={styles.dtBody}>
+                <View style={styles.dtListings}>
+                    <View style={styles.dtDAte}>
+                        <Text style={styles.dtDate}>01</Text>
+                        <Text style={styles.dtMonth}>JAN</Text>
+                    </View>
+                    <View style={styles.dtDescription}>
+                        <Text style={styles.dtText}>Groceries</Text>
+                    </View>
+                    <TouchableOpacity style={styles.dtDesEditBtn}>
+                        <Text style={styles.dtEditText}>EDIT</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={styles.dtBody}>
+                <View style={styles.dtListings}>
+                    <View style={styles.dtDAte}>
+                        <Text style={styles.dtDate}>12</Text>
+                        <Text style={styles.dtMonth}>JUN</Text>
+                    </View>
+                    <View style={styles.dtDescription}>
+                        <Text style={styles.dtText}>Groceries</Text>
+                    </View>
+                    <TouchableOpacity style={styles.dtDesEditBtn}>
+                        <Text style={styles.dtEditText}>EDIT</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={styles.dtBody}>
+                <View style={styles.dtListings}>
+                    <View style={styles.dtDAte}>
+                        <Text style={styles.dtDate}>11</Text>
+                        <Text style={styles.dtMonth}>JAN</Text>
+                    </View>
+                    <View style={styles.dtDescription}>
+                        <Text style={styles.dtText}>Groceries</Text>
+                    </View>
+                    <TouchableOpacity style={styles.dtDesEditBtn}>
+                        <Text style={styles.dtEditText}>EDIT</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={styles.dtBody}>
+                <View style={styles.dtListings}>
+                    <View style={styles.dtDAte}>
+                        <Text style={styles.dtDate}>11</Text>
+                        <Text style={styles.dtMonth}>JAN</Text>
+                    </View>
+                    <View style={styles.dtDescription}>
+                        <Text style={styles.dtText}>Groceries</Text>
+                    </View>
+                    <TouchableOpacity style={styles.dtDesEditBtn}>
+                        <Text style={styles.dtEditText}>EDIT</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            
         </ScrollView>
-        
+            
+        }
       </Image>
         <TouchableOpacity onPress={() => navigate('LaunchScreen')} style={styles.addButton}>
         <Image source={Images.addButton} />

@@ -157,14 +157,12 @@ const images = {
   location_n: require('../Images/location_n.png'),
   location: require('../Images/location.png'),
 
-<<<<<<< HEAD
   viewListingHeader: require('../Images/viewListingHeader.png'),
   car_black: require('../Images/car_black.png'),
   pin_green: require('../Images/pin_green.png'),
   pin_blue: require('../Images/pin_blue.png'),
   pin_orange: require('../Images/pin_orange.png'),
-  close_blue: require('../Images/close_blue.png')
-=======
+  close_blue: require('../Images/close_blue.png'),
 
   clock_icon_start: require('../Images/clock_icon-start.png'),
   clock_icon_end: require('../Images/clock_icon-end.png'),
@@ -175,6 +173,5 @@ const images = {
   popup_bg: require('../Images/popup-bg.png'),
   plus_1: require('../Images/plus-1.png'),
 
->>>>>>> 6ac21674ef1462c4718ee328878089d7aa9f9f43
 }
 export default images
