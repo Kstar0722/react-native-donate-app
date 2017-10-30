@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { View, StatusBar } from 'react-native'
 // App directory AppNavigation
-import AppNavigation from '../Navigation/AppNavigation'
+//import AppNavigation from '../Navigation/AppNavigation'
 // MyApp directory AppNavigation
-// import AppNavigation from '../../MyApp/AppNavigation'
+import AppNavigation from '../../MyApp/AppNavigation'
 import { connect } from 'react-redux'
 import StartupActions from '../Redux/StartupRedux'
 

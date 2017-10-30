@@ -116,14 +116,14 @@ const images = {
   gradient_bg : require('../Images/background.png'),
   stars : require('../Images/Stars.png'),
   apple : require('../Images/apple.png'),
-  vehicle : require('../Images/vehicle.png'), 
+  vehicle : require('../Images/vehicle.png'),
   search_small : require('../Images/search_small.png'),
   key : require('../Images/key.png'),
   createdBy: require('../Images/createdBy.png'),
   get_bg: require('../Images/get_bg.png'),
   pin: require('../Images/pin.png'),
 
-  
+
   rightArraw: require('../Images/rightArrow.png'),
   questionMark: require('../Images/questionMark.png'),
   deliver: require('../Images/deliver.png'),
@@ -148,7 +148,7 @@ const images = {
   statusModal_bg: require('../Images/statusModal_bg.png'),
   pinception: require('../Images/Pinception.png'),
   food: require('../Images/Food.png'),
-  oval1: require('../Images/oval1.png'),  
+  oval1: require('../Images/oval1.png'),
   food_donated: require('../Images/Food_Donated.png'),
   People_Served: require('../Images/People_Served.png'),
   Global_Impact: require('../Images/Global_Impact.png'),
@@ -172,6 +172,9 @@ const images = {
   hand_shake: require('../Images/hand-shake.png'),
   popup_bg: require('../Images/popup-bg.png'),
   plus_1: require('../Images/plus-1.png'),
+
+  donate_excess_food: require('../Images/donate_excess_food.png'),
+  feed_community: require('../Images/feed_community.png'),
 
 }
 export default images
