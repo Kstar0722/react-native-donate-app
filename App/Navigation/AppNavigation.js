@@ -12,6 +12,8 @@ import CreateListing from '../Containers/Home/Screens/CreateListing'
 import Meteor from 'react-native-meteor'
 import styles from './Styles/NavigationStyles'
 
+import CompletedDonationScreen from '../Containers/Home/Screens/completedDonationScreen'
+
 const PrimaryNav = StackNavigator({
   LaunchScreen: { screen: LaunchScreen },
   OnboardingScreen: { screen: OnboardingScreen },
@@ -24,9 +26,15 @@ const PrimaryNav = StackNavigator({
   FindDonation: { screen: FindDonation },
   DonationView: { screen: DonationView },
   CreateListing: {screen: CreateListing},
+  CompletedDonationScreen: { screen: CompletedDonationScreen },
 }, {
+<<<<<<< HEAD
 //    initialRouteName: Meteor.userId() !== null ? 'FindDonation' : 'CreateListing',
     initialRouteName: 'LaunchScreen',
+=======
+    //initialRouteName: Meteor.userId() !== null ? 'FindDonation' : 'CreateListing',
+    initialRouteName: Meteor.userId() !== null ? 'FindDonation' : 'CompletedDonationScreen',
+>>>>>>> 6ac21674ef1462c4718ee328878089d7aa9f9f43
     headerStyle: styles.header
   })
 export default PrimaryNav

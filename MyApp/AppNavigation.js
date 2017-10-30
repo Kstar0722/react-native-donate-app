@@ -50,7 +50,7 @@ const PrimaryNav = StackNavigator({
   ViewListings: {screen: ViewListings},
   
 }, {
-    initialRouteName: 'ViewListings',
+    initialRouteName: 'completedDonationScreen',
     heaerStyle: styles.header
   })
 export default PrimaryNav

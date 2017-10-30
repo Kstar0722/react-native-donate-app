@@ -157,6 +157,18 @@ const images = {
   location: require('../Images/location.png'),
   rightArraw_small: require('../Images/rightArrow_small.png'),
   date_smallIcon: require('../Images/date_smallIcon.png'),
+
+  location_sel: require('../Images/location-sel.png'),
+  clock_icon_start: require('../Images/clock_icon-start.png'),
+  clock_icon_end: require('../Images/clock_icon-end.png'),
+  arrow_right: require('../Images/arrow_right.png'),
+  arrow_left: require('../Images/arrow_left.png'),
+  plus: require('../Images/plus.png'),
+  hand_shake: require('../Images/hand-shake.png'),
+  popup_bg: require('../Images/popup-bg.png'),
+  plus_1: require('../Images/plus-1.png'),
+
+
   }
   
   export default images
