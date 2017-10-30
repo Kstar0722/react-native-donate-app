@@ -158,6 +158,10 @@ const images = {
   location: require('../Images/location.png'),
 
   viewListingHeader: require('../Images/viewListingHeader.png'),
-  car_black: require('../Images/car_black.png')
+  car_black: require('../Images/car_black.png'),
+  pin_green: require('../Images/pin_green.png'),
+  pin_blue: require('../Images/pin_blue.png'),
+  pin_orange: require('../Images/pin_orange.png'),
+  close_blue: require('../Images/close_blue.png')
 }
 export default images

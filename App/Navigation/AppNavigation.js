@@ -25,7 +25,8 @@ const PrimaryNav = StackNavigator({
   DonationView: { screen: DonationView },
   CreateListing: {screen: CreateListing},
 }, {
-    initialRouteName: Meteor.userId() !== null ? 'FindDonation' : 'CreateListing',
+//    initialRouteName: Meteor.userId() !== null ? 'FindDonation' : 'CreateListing',
+    initialRouteName: 'LaunchScreen',
     headerStyle: styles.header
   })
 export default PrimaryNav
