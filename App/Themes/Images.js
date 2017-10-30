@@ -168,6 +168,7 @@ const images = {
   popup_bg: require('../Images/popup-bg.png'),
   plus_1: require('../Images/plus-1.png'),
 
+  groceriesIcon: require('../Images/groceriesIcon.png')
 
   }
   

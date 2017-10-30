@@ -300,4 +300,12 @@ export default StyleSheet.create({
     body: {
         flex: 6
     },
+
+    addressModalStyle:{
+        marginTop:100,
+        marginHorizontal:20,
+        height:250,
+        borderRadius:5,
+        backgroundColor:'#fff'
+    }
 });

@@ -209,7 +209,7 @@ export default class CreateListing extends React.Component {
   
     _handleDatePicked = (date) => {
           
-          cDate = dateFormat(date, 'mmm, dd, yyyy')
+          cDate = dateFormat(date, 'mmm d, yyyy HH:MM TT')
           this.setState({
              startDate: cDate
           })
@@ -247,6 +247,7 @@ export default class CreateListing extends React.Component {
                                     {this.state.startDate==""?<Text style={styles.btnTopEdit}>Set Date</Text>:<Text style={styles.btnTopEdit}>Edit</Text>}
                                 </TouchableOpacity>
                                 <DateTimePicker
+                                mode='datetime'
                                 isVisible={this.state.isDateTimePickerVisible}
                                 onConfirm={this._handleDatePicked}
                                 onCancel={this._hideDateTimePicker}
@@ -401,7 +402,7 @@ export default class CreateListing extends React.Component {
                             <View style={styles.vDetsilSElection}>
                                 <View style={{alignItems: 'center'}} >
                                     <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({foodTypeToggle:false})}}>
-                                        <Image source={this.state.foodTypeToggle==false?Images.non_perishable_new_sel:Images.non_perishable_new} style={[styles.vImgBoxCover, !this.state.foodTypeToggle1&& {}]} resizeMode={'contain'} />
+                                        <Image source={this.state.foodTypeToggle==false?Images.non_perishable_new_sel:Images.groceriesIcon} style={[styles.vImgBoxCover, !this.state.foodTypeToggle1&& {}]} resizeMode={'contain'} />
                                     </TouchableOpacity>
                                     <Text style={styles.foodTypeText} >Groceries</Text>
                                 </View>
