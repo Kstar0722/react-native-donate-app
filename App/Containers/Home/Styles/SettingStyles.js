@@ -59,11 +59,18 @@ export default StyleSheet.create({
       paddingHorizontal:12,
       paddingVertical:10,
       backgroundColor:'#FFF',
+
+      shadowColor: '#000000',
+      shadowOffset: {
+      width:1,
+      height: 2,
+      },
+      shadowOpacity: 0.5,
   },
   tabmenuText:{
       color:'#FFF',
       fontSize:14,
-      fontFamily:'Avenir',
+      fontFamily:'Ubuntu',
   },
   tabmenuactiveText:{
       color:'#000',
@@ -84,6 +91,7 @@ export default StyleSheet.create({
       alignItems:'center',
   },
   profileImage:{
+    borderRadius:40,
     width:80,
     height:80,
   },
@@ -133,26 +141,30 @@ export default StyleSheet.create({
   },
   bussinesstabsmTitle:{
     color:'#98989c',
-    fontFamily: 'Avenir',
+    fontFamily: 'Ubuntu',
     fontSize:16,
   },
   bussinesstabsmLabel:{
     color:'#000',
-    fontFamily: 'Avenir',
-      fontSize:20,
+    fontFamily: 'Ubuntu',
+    fontSize:20,
   },
   right_gray:{
     width:15,
     height:24,
   },
   arrowSpace:{justifyContent:'space-between',
-flexDirection:'row',},
+    flexDirection:'row',
+    alignItems:'center',
+    height: 100
+  },
 toggleContainer: {
     width: '100%',
     padding: 20,
     borderBottomColor: 'rgba(255, 255, 255, 0.3)',
     borderBottomWidth: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent:'space-between'
   },
 
   toggleLabel: {
@@ -166,6 +178,7 @@ toggleContainer: {
     width:Dimensions.get('window').width-(120)
   },
   toggle: {
+    marginTop:7,
     color: '#000',
     fontSize: 14,
     marginHorizontal: 5
@@ -176,11 +189,25 @@ toggleContainer: {
   gray_tmpn:{flex:1,width:50, height:50, marginHorizontal:10,},
   bussinesstabsmTitleone:{
     color:'#98989c',
-    fontFamily: 'Avenir',
+    fontFamily: 'Ubuntu',
     fontSize:16,
     flex:1,
   },
-  txtCenter:{textAlign:'center',}
-
-
+  txtCenter:{textAlign:'center',},
+  vDetsilSElection:{
+    flexDirection:'row',
+    alignItems:'center',
+    paddingHorizontal:15
+},
+imgBoxCover:{
+  flex:1,
+  alignItems:'center',
+  justifyContent: 'center'
+},
+vImgBoxCover:{
+  flex:1,
+  width:75,
+  height:75,
+  alignSelf:'center',
+},
 })
