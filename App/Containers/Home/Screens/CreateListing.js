@@ -12,20 +12,23 @@ import dateFormat from 'dateformat';
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import Prompt from 'react-native-prompt'
 import { RNS3 } from 'react-native-aws3'
+import Meteor from 'react-native-meteor'
 import AppConfig from '../../../Config'
 import { guid, validateEmail } from '../../../Transforms'
 _dText = '';
 export default class CreateListing extends React.Component {
     constructor() {
         super()
+        currentDate = new Date()
         this.state = {
+            value: 0,
             msgBox: false,
             msgText: "",
             sliderValue: 0,
             foodTypeToggle: false,
             toggleSwitch: false,
             repeatFlag: 3,
-            endDate: '',
+            endDate:dateFormat(currentDate, 'mmm d, yyyy   HH:MM TT'),
             weekday: [false, false, false, false, false, false, false],
             picturemodalVisible: false,
             descriptionModalVisible: false,
@@ -33,7 +36,8 @@ export default class CreateListing extends React.Component {
             startDate: "",
             isDateTimePickerVisible: false,
             Address: "",
-            isAddressPromptVisible: false
+            isAddressPromptVisible : false,
+            switchValue: false
         }
         this.toggleSwitch = this.toggleSwitch.bind(this);
     }
@@ -136,28 +140,31 @@ export default class CreateListing extends React.Component {
         }
         postData = {
             date: this.state.startDate,
-            location: { address: this.state.location },
+            location: {address:this.state.Address},
             bRecurringEvent: this.state.switchValue,
             foodType: this.state.foodTypeToggle,
-            servePeopleNumber: this.state.sliderValue,
+            servePeopleNumber: this.state.value.toFixed(0),
             description: _dText,
-            operationDays: this.state.weekday
+            operationDays: this.state.weekday,
+            endDate: this.state.endDate
         }
         if (this.state.repeatFlag != 3)
             postData.repeatType = this.state.repeatFlag
-        if (this.state.endDate != "")
-            postData.endDate = this.state.endDate,
-                RNS3.put(file, options).then(response => {
-                    postData.image = response.body.postResponse.location
-                    Meteor.call('createGivefood', postData, (err, res) => {
-                        if (err) {
-                            this.showDialog(true, err.message)
-                            console.log(err)
-                        } else {
-
-                        }
-                    })
-                })
+        else
+            postData.repeatType = 0          
+    
+        RNS3.put(file, options).then(response => {
+            postData.image = response.body.postResponse.location
+            console.log(postData)
+            Meteor.call('createGiveFood', postData, (err, res) => {
+                if (err) {
+                    this.showDialog(true, err.message)
+                    console.log(err)
+                } else {
+                    this.props.navigation.navigate('FindDonation')
+                }
+            })
+        })
     }
 
 
@@ -199,24 +206,25 @@ export default class CreateListing extends React.Component {
     _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
     _handleDatePicked = (date) => {
+          
+          cDate = dateFormat(date, 'mmm d, yyyy HH:MM TT')
+          this.setState({
+             startDate: cDate
+          })
+          this._hideDateTimePicker();
+      };
 
-        cDate = dateFormat(date, 'mmm, dd, yyyy')
-        this.setState({
-            startDate: cDate
-        })
-        this._hideDateTimePicker();
-    };
-
-    render() {
+    render () {
+        const { navigate } = this.props.navigation;
         return (
-            <View style={styles.container}>
-                <Image source={Images.overlay} style={styles.body}>
-                    <View style={styles.cNavigation}>
-                        <TouchableOpacity onPress={() => { }}>
-                            <Image source={Images.backIcon} style={styles.menuIconNav} />
-                        </TouchableOpacity>
-                        <Text style={styles.refedText}>Give Food</Text>
-                    </View>
+          <View style={styles.container}>
+              <Image source={Images.overlay} style={styles.body}>
+                  <View style={styles.cNavigation}>
+                      <TouchableOpacity onPress={() => navigate('FindDonation')}>
+                          <Image source={Images.backIcon} style={styles.menuIconNav} />
+                       </TouchableOpacity>
+                       <Text style={styles.refedText}>Give Food</Text>
+                   </View>
 
                     <ScrollView>
                         <View style={styles.buttonGroup}>
@@ -237,13 +245,14 @@ export default class CreateListing extends React.Component {
                                     {this.state.startDate == "" ? <Text style={styles.btnTopEdit}>Set Date</Text> : <Text style={styles.btnTopEdit}>Edit</Text>}
                                 </TouchableOpacity>
                                 <DateTimePicker
-                                    isVisible={this.state.isDateTimePickerVisible}
-                                    onConfirm={this._handleDatePicked}
-                                    onCancel={this._hideDateTimePicker}
-                                    datePickerModeAndroid='calendar'
-                                    confirmTextIOS="Ok"
-                                    titleIOS='Select Date'
-                                />
+                                mode='datetime'
+                                isVisible={this.state.isDateTimePickerVisible}
+                                onConfirm={this._handleDatePicked}
+                                onCancel={this._hideDateTimePicker}
+                                datePickerModeAndroid='calendar'
+                                confirmTextIOS="Ok"
+                                titleIOS='Select Date'
+                                /> 
                             </View>
                             <View style={{ alignItems: 'center' }}>
                                 <View style={{ width: width / 3, height: 71, alignItems: 'center' }}>
@@ -277,47 +286,47 @@ export default class CreateListing extends React.Component {
                                     onTintColor="#FFFFFF"
                                     thumbTintColor="#FFAD55" />
                             </View>
-                            {this.state.switchValue ?
-                                <View style={styles.rowStyleRepeat}>
-                                    <View style={styles.rowStyleRepeat_1}>
-                                        <Text style={styles.contentText1}>Repeat:</Text>
-                                        <View style={styles.rowStyle2}>
-                                            <TouchableOpacity style={this.state.repeatFlag == 0 ? styles.repeatOnStyles : styles.repeatOffStyles} onPress={() => { this.repeatEvent(0) }}><Text style={this.state.repeatFlag == 0 ? styles.repeatOnText : styles.repeatOffText}>Daily</Text></TouchableOpacity>
-                                            <TouchableOpacity style={this.state.repeatFlag == 1 ? styles.repeatOnStyles : styles.repeatOffStyles} onPress={() => { this.repeatEvent(1) }}><Text style={this.state.repeatFlag == 1 ? styles.repeatOnText : styles.repeatOffText}>Weekly</Text></TouchableOpacity>
-                                            <TouchableOpacity style={this.state.repeatFlag == 2 ? styles.repeatOnStyles : styles.repeatOffStyles} onPress={() => { this.repeatEvent(2) }}><Text style={this.state.repeatFlag == 2 ? styles.repeatOnText : styles.repeatOffText}>Monthly</Text></TouchableOpacity>
-                                        </View>
+                            {this.state.switchValue?
+                            <View style={styles.rowStyleRepeat}>
+                                <View style={styles.rowStyleRepeat_1}>
+                                    <Text style={styles.contentText1}>Repeat:</Text>
+                                    <View style={styles.rowStyle2}>                                                 
+                                        <TouchableOpacity style={this.state.repeatFlag==0?styles.repeatOnStyles:styles.repeatOffStyles} onPress={() => {this.repeatEvent(0)}}><Text style={this.state.repeatFlag==0?styles.repeatOnText:styles.repeatOffText}>Daily</Text></TouchableOpacity>
+                                        <TouchableOpacity style={this.state.repeatFlag==1?styles.repeatOnStyles:styles.repeatOffStyles} onPress={() => {this.repeatEvent(1)}}><Text style={this.state.repeatFlag==1?styles.repeatOnText:styles.repeatOffText}>Weekly</Text></TouchableOpacity>
+                                        <TouchableOpacity style={this.state.repeatFlag==2?styles.repeatOnStyles:styles.repeatOffStyles} onPress={() => {this.repeatEvent(2)}}><Text style={this.state.repeatFlag==2?styles.repeatOnText:styles.repeatOffText}>Monthly</Text></TouchableOpacity>
                                     </View>
-                                    <View style={styles.rowStyleRepeat_2}>
-                                        {(this.state.repeatFlag == 0 || this.state.repeatFlag == 2) &&
-                                            <View>
-                                                <Text style={styles.btnTopEdit}>End Date:</Text>
-                                                <DatePicker
-                                                    style={styles.datePickerStyle}
-                                                    date={this.state.endDate}
-                                                    mode="datetime"
-                                                    placeholder=" "
-                                                    format="MMM D, YYYY hh:mm A"
-                                                    confirmBtnText="Confirm"
-                                                    cancelBtnText="Cancel"
-                                                    iconSource={Images.date_smallIcon}
-                                                    customStyles={{
-                                                        dateIcon: {
-                                                            position: 'absolute',
-                                                            right: 10,
-                                                            top: 10,
-                                                            width: 17,
-                                                            height: 17,
-                                                            marginLeft: 0
-                                                        },
-
-                                                        dateInput: {
-                                                            borderRadius: 50,
-                                                            borderColor: '#fff',
-                                                        }
-                                                    }}
-                                                    onDateChange={(date) => { this.setState({ endDate: date }) }}
-                                                />
-                                            </View>}
+                                </View>
+                                <View style={styles.rowStyleRepeat_2}>
+                                    {(this.state.repeatFlag == 0 || this.state.repeatFlag == 2) &&
+                                        <View>
+                                            <Text style={styles.btnTopEdit}>End Date:</Text>
+                                            <DatePicker
+                                                style={styles.datePickerStyle}
+                                                date={this.state.endDate}
+                                                mode="datetime"
+                                                placeholder=" "
+                                                format="                                                                                                                                            "
+                                                confirmBtnText="Confirm"
+                                                cancelBtnText="Cancel"
+                                                iconSource = {Images.date_smallIcon}   
+                                                customStyles={{                                                                                         
+                                                dateIcon: {
+                                                    position: 'absolute',
+                                                    right: 10,
+                                                    top: 10,
+                                                    width:17,
+                                                    height:17,
+                                                    marginLeft: 0
+                                                },
+                                                
+                                                dateInput: {
+                                                    borderRadius:50,
+                                                    borderColor:'#fff',
+                                                }
+                                                }}
+                                                onDateChange={(date) => {this.setState({endDate: date})}}
+                                            />
+                                        </View>}
                                         {this.state.repeatFlag == 1 &&
                                             <View style={{ marginTop: 0 }}>
                                                 <Text style={styles.btnTopEdit}>Day(s):</Text>
@@ -389,9 +398,9 @@ export default class CreateListing extends React.Component {
                         <View>
                             <Text style={[styles.btnTopEdit, { textAlign: 'center', marginTop: 20 }]}>Select Food Type(s)</Text>
                             <View style={styles.vDetsilSElection}>
-                                <View style={{ alignItems: 'center' }} >
-                                    <TouchableOpacity style={styles.imgBoxCover} onPress={() => { this.setState({ foodTypeToggle: false }) }}>
-                                        <Image source={this.state.foodTypeToggle == false ? Images.non_perishable_new_sel : Images.non_perishable_new} style={[styles.vImgBoxCover, !this.state.foodTypeToggle1 && {}]} resizeMode={'contain'} />
+                                <View style={{alignItems: 'center'}} >
+                                    <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({foodTypeToggle:false})}}>
+                                        <Image source={this.state.foodTypeToggle==false?Images.non_perishable_new_sel:Images.groceriesIcon} style={[styles.vImgBoxCover, !this.state.foodTypeToggle1&& {}]} resizeMode={'contain'} />
                                     </TouchableOpacity>
                                     <Text style={styles.foodTypeText} >Groceries</Text>
                                 </View>

@@ -9,6 +9,9 @@ import PictureModal from './Modals/pictureModal'
 
 import DatePicker from 'react-native-datepicker'
 import DescriptionModal from './Modals/descriptionModal'
+import DonationDateModal from './Modals/DonationDateModal'
+import SelectPremiumModal from './Modals/SelectPremiumModal'
+import PostDonationModal from './Modals/PostDonationModal'
 import dateFormat from 'dateformat';
 _dText='';
 
@@ -19,7 +22,7 @@ export default class HomeScreen extends React.Component {
             cToggle:false,
             vToggle:false,
             tToggle:false,
-            value: 60,
+            value: 0,
             car: false,
             truck: false,
             switchValue: false,
@@ -32,13 +35,10 @@ export default class HomeScreen extends React.Component {
             deliveryOptionToggle2: false,
             deliveryOptionToggle3: false,
 
-            //showDescription: false,
             showPremium: false,
             showDistributor: false,
             showVolunteer: false,
 
-            //showAddImage: true,
-            showDateImage: true,
             showLocationImage: true,
 
             picturemodalVisible: false,
@@ -47,6 +47,11 @@ export default class HomeScreen extends React.Component {
             isDateTimePickerVisible: false,
             startDate:"",
             descriptionModalVisible:false,
+
+            donationDateModalVisible: false,
+            showPostButton: false,
+            selectPremiumModalVisible: false,
+            postDonationModalVisible: false,
 
         }
         this.toggleSwitch = this.toggleSwitch.bind(this);
@@ -81,13 +86,17 @@ export default class HomeScreen extends React.Component {
 
 
     chooseAvatar = (avatar) => {
-        this.setState({avatar : avatar, picturemodalVisible : false})
+        console.log('Avatar', avatar.uri)
+        this.setState({avatar : avatar}, function() {
+            this.closePictureModal()
+        })
     }
 
     closePictureModal = () => {
         this.setState({
             picturemodalVisible: false
         })
+        this.checkAllDataSelected()
     }
 
 
@@ -102,17 +111,20 @@ export default class HomeScreen extends React.Component {
            startDate: cDate
         })
         this._hideDateTimePicker();
-        this.setState({showDateImage: false})
 
     };
+
+    
 
     closeDescriptionModal = () => {
         this.setState({
           descriptionModalVisible: false
         })
+        this.checkAllDataSelected()
     }
 
     writeHere = () => {
+        
         let t='';
           if(_dText){
               if(_dText.length>50){
@@ -129,7 +141,9 @@ export default class HomeScreen extends React.Component {
                         <Text style={styles.write1}>EDIT</Text>
                     </TouchableOpacity>
                 </View>
-                <Image source={Images.markPostIcon}  style={styles.bottomPostBtn} />
+                <TouchableOpacity onPress={() => {this.setState({selectPremiumModalVisible: true})}} disabled={this.state.showPostButton ? false : true}>
+                    <Image source={Images.markPostIcon}  style={[styles.bottomPostBtn, this.state.showPostButton ? {opacity: 1} : {opacity : 0}]} />
+                </TouchableOpacity>
                 </View>
             );
         }else{
@@ -150,6 +164,78 @@ export default class HomeScreen extends React.Component {
             }
         }
 
+        closeDonationDateModal = () => {
+            this.setState({
+                donationDateModalVisible: false
+            })
+            this.checkAllDataSelected()
+        }
+
+        handleDatePicked = (dateString) => {
+            this.setState({
+                startDate: dateString
+            }, function() {
+                this.closeDonationDateModal()
+            })
+            
+        }
+
+        closeSelectPremiumModal = () => {
+            this.setState({
+                selectPremiumModalVisible: false
+            })
+        }
+
+        handleSelectPremiumModalNext = () => {
+            this.closeSelectPremiumModal()
+            this.setState({
+                postDonationModalVisible: true
+            })
+        }
+
+        closePostDonationModal = () => {
+            this.setState({
+                postDonationModalVisible: false
+            })
+        }
+
+
+        checkAllDataSelected() {
+            if (!this.state.avatar) {
+                return
+            }
+            console.log('Here.............1')
+            if (this.state.startDate == "") {
+                return
+            }
+            console.log('Here.............2')
+            if (!this.state.cToggle && !this.state.vToggle && !this.state.tToggle) {
+                return
+            }
+            console.log('Here.............3')
+            if (!this.state.foodTypeToggle1 && !this.state.foodTypeToggle2 && !this.state.foodTypeToggle3) {
+                return
+            }
+            console.log('Here.............4')
+            if (!this.state.deliveryOptionToggle1 && !this.state.deliveryOptionToggle2 && !this.state.deliveryOptionToggle3) {
+                return
+            }
+            console.log('Here.............5')
+            if (this.state.value == 0) {
+                return
+            }
+            console.log('Here.............6')
+            if(!_dText) {
+                return
+            }
+            console.log('Here.............7')
+
+            this.setState({
+                showPostButton: true
+            })
+            
+        }
+
 
 
     render () {
@@ -161,8 +247,8 @@ export default class HomeScreen extends React.Component {
                           <Image source={Images.backIcon} style={styles.menuIconNav} />
                       </TouchableOpacity>
                       <Text style={styles.refedText}>Create a Donation</Text>
-                      <TouchableOpacity>
-                          <Text style={styles.postBtnText}>POST</Text>
+                      <TouchableOpacity onPress={() => {this.setState({selectPremiumModalVisible: true})}} disabled={this.state.showPostButton ? false : true}>
+                          <Text style={[styles.postBtnText, this.state.showPostButton ? {opacity : 1} : {opacity: 0}]}>POST</Text>
                       </TouchableOpacity>
                   </View>
 
@@ -189,17 +275,17 @@ export default class HomeScreen extends React.Component {
                             </View>
 
                             <View style={styles.boxCover}>
-                                {!this.state.showDateImage &&
+                                {this.state.startDate != "" &&
                                 <View style={{alignItems: 'center'}} >
                                     <Text style={styles.btnEtxt}>{this.state.startDate}</Text>
-                                    <TouchableOpacity onPress={()=>{this._showDateTimePicker()}} >
+                                    <TouchableOpacity onPress={()=>{this.setState({donationDateModalVisible: true})}} >
                                         <Text style={styles.btnEdit}>Edit</Text>
                                     </TouchableOpacity>
                                 </View>
                                 }
-                                {this.state.showDateImage &&
+                                {this.state.startDate == "" &&
                                 <View style={{alignItems: 'center', flex: 1}} >
-                                    <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this._showDateTimePicker()}}>
+                                    <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({donationDateModalVisible: true})}}>
                                         <Image source={Images.date} style={[styles.vImgBoxCover, !this.state.foodTypeToggle1&& {}]} resizeMode={'contain'} />
                                     </TouchableOpacity>
                                     <Text style={styles.foodTypeText} >Date</Text>
@@ -239,13 +325,13 @@ export default class HomeScreen extends React.Component {
                         <Text style={styles.vehicleTitle}>Vehicle size for rescue</Text>
                         <Text style={styles.vehicleTitleDescription}>Please select the vehicle required to retrieve this donation:</Text>
                         <View style={styles.vDetsilSElection}>
-                            <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({cToggle:true, vToggle: false, tToggle: false})}}>
+                            <TouchableOpacity style={styles.imgBoxCover} onPress={()=> this.setState({cToggle:true, vToggle: false, tToggle: false}, function(){this.checkAllDataSelected()})}>
                                     <Image source={this.state.cToggle?Images.car1:Images.car} style={styles.vImgBoxCover} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({cToggle:false, vToggle: true, tToggle: false})}}>
+                            <TouchableOpacity style={styles.imgBoxCover} onPress={()=> this.setState({cToggle:false, vToggle: true, tToggle: false}, function(){this.checkAllDataSelected()})}>
                                     <Image source={this.state.vToggle?Images.van1:Images.van} style={styles.vImgBoxCover} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({cToggle:false, vToggle: false, tToggle: true})}}>
+                            <TouchableOpacity style={styles.imgBoxCover} onPress={()=> this.setState({cToggle:false, vToggle: false, tToggle: true}, function(){this.checkAllDataSelected()})}>
                                     <Image source={this.state.tToggle?Images.truck1:Images.truck} style={styles.vImgBoxCover} />
                             </TouchableOpacity>
                         </View>
@@ -253,21 +339,21 @@ export default class HomeScreen extends React.Component {
                         <Text style={styles.vehicleTitle}>Select Food Type(s)</Text>
                         <View style={[styles.vDetsilSElection, {marginTop: 8}]}>
                             <View style={{alignItems: 'center', flex: 1}} >
-                                <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({foodTypeToggle1:!this.state.foodTypeToggle1})}}>
+                                <TouchableOpacity style={styles.imgBoxCover} onPress={()=> this.setState({foodTypeToggle1:!this.state.foodTypeToggle1}, function(){this.checkAllDataSelected()})}>
                                     <Image source={this.state.foodTypeToggle1?Images.non_perishable_new_sel:Images.non_perishable_new} style={[styles.vImgBoxCover, !this.state.foodTypeToggle1&& {}]} resizeMode={'contain'} />
                                 </TouchableOpacity>
                                 <Text style={styles.foodTypeText} >Non-Perishable</Text>
                             </View>
                             
                             <View style={{alignItems: 'center', flex: 1}} >
-                                <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({foodTypeToggle2:!this.state.foodTypeToggle2})}}>
+                                <TouchableOpacity style={styles.imgBoxCover} onPress={()=> this.setState({foodTypeToggle2:!this.state.foodTypeToggle2}, function(){this.checkAllDataSelected()})}>
                                     <Image source={this.state.foodTypeToggle2?Images.prepared_sel:Images.prepared} style={styles.vImgBoxCover} resizeMode={'contain'} />
                                 </TouchableOpacity>
                                 <Text style={styles.foodTypeText} >Prepared</Text>
                             </View>
 
                             <View style={{alignItems: 'center', flex: 1}} >
-                                <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({foodTypeToggle3:!this.state.foodTypeToggle3})}}>
+                                <TouchableOpacity style={styles.imgBoxCover} onPress={()=> this.setState({foodTypeToggle3:!this.state.foodTypeToggle3}, function(){this.checkAllDataSelected()})}>
                                     <Image resizeMode={'contain'} source={this.state.foodTypeToggle3?Images.perishable_new_sel:Images.perishable_new} style={styles.vImgBoxCover} />
                                 </TouchableOpacity>
                                 <Text style={styles.foodTypeText} >Prepared</Text>
@@ -278,7 +364,7 @@ export default class HomeScreen extends React.Component {
                         <Text style={styles.vehicleTitleDescription}>Please choose how you'd like this donation to be retrieved.</Text>
                         <View style={[styles.vDetsilSElection, {flexDirection: 'column'}]}>
                             <View style={[styles.deliverOptionFrame]} >
-                                <TouchableOpacity style={styles.deliverOptionImageFrame} onPress={()=>{this.setState({deliveryOptionToggle1:true, deliveryOptionToggle2: false, deliveryOptionToggle3: false})}}>
+                                <TouchableOpacity style={styles.deliverOptionImageFrame} onPress={()=> this.setState({deliveryOptionToggle1:true, deliveryOptionToggle2: false, deliveryOptionToggle3: false}, function(){this.checkAllDataSelected()})}>
                                     <Image resizeMode={'contain'} source={this.state.deliveryOptionToggle1?Images.paid_pickup_sel:Images.paid_pickup} style={styles.vImgBoxCover} />
                                 </TouchableOpacity>
 
@@ -294,7 +380,7 @@ export default class HomeScreen extends React.Component {
                             </View>
 
                             <View style={styles.deliverOptionFrame} >
-                                <TouchableOpacity style={styles.deliverOptionImageFrame} onPress={()=>{this.setState({deliveryOptionToggle1:false, deliveryOptionToggle2: true, deliveryOptionToggle3: false})}}>
+                                <TouchableOpacity style={styles.deliverOptionImageFrame} onPress={()=> this.setState({deliveryOptionToggle1:false, deliveryOptionToggle2: true, deliveryOptionToggle3: false}, function(){this.checkAllDataSelected()})}>
                                     <Image resizeMode={'contain'} source={this.state.deliveryOptionToggle2?Images.deliver_sel:Images.deliver} style={styles.vImgBoxCover} />
                                 </TouchableOpacity>
                                 <View style={styles.deliverOptionRightFrame} >
@@ -309,7 +395,7 @@ export default class HomeScreen extends React.Component {
                             </View>
 
                             <View style={styles.deliverOptionFrame} >
-                                <TouchableOpacity style={styles.deliverOptionImageFrame} onPress={()=>{this.setState({deliveryOptionToggle1:false, deliveryOptionToggle2: false, deliveryOptionToggle3: true})}}>
+                                <TouchableOpacity style={styles.deliverOptionImageFrame} onPress={()=> this.setState({deliveryOptionToggle1:false, deliveryOptionToggle2: false, deliveryOptionToggle3: true}, function(){this.checkAllDataSelected()})}>
                                     <Image resizeMode={'contain'} source={this.state.deliveryOptionToggle3?Images.voulunteer_heart_sel:Images.voulunteer_heart} style={styles.vImgBoxCover} />
                                 </TouchableOpacity>
                                 <View style={[styles.deliverOptionRightFrame, {borderBottomWidth: 0}]} >
@@ -337,7 +423,7 @@ export default class HomeScreen extends React.Component {
                             {this.state.switchValue && 
                                 <Slider
                                     value={this.state.value}
-                                    onValueChange={(value) => this.setState({value})}
+                                    onValueChange={(value) => this.setState({value}, function(){this.checkAllDataSelected()})}
                                     style={styles.sliderS}
                                     maximumTrackTintColor='#f4b9b2'
                                     minimumTrackTintColor='#fff'
@@ -357,6 +443,9 @@ export default class HomeScreen extends React.Component {
 
               <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal} chooseAvatar = {this.chooseAvatar} />
               <DescriptionModal descriptionModalVisible={this.state.descriptionModalVisible} close={this.closeDescriptionModal}/>
+              <DonationDateModal donationDateModalVisible={this.state.donationDateModalVisible} close={this.closeDonationDateModal} handleDatePicked={this.handleDatePicked} selectedDate={this.state.startDate} />
+              <SelectPremiumModal selectPremiumModalVisible={this.state.selectPremiumModalVisible} close={this.closeSelectPremiumModal} next={this.handleSelectPremiumModalNext} />
+              <PostDonationModal postDonationModalVisible={this.state.postDonationModalVisible} close={this.closePostDonationModal}/>
           </View>
         )
     }

@@ -166,11 +166,24 @@ export default StyleSheet.create({
       //paddingHorizontal:15,
       //paddingTop:15,
   },
-
+  closeModal:{
+    flexDirection:'column',
+    alignItems:'center',
+    position:'absolute',
+    top:-40,
+    zIndex:1,
+    width:width,
+    left:0,
+    right:0
+  },
   listMapView:{
     width:width,
     height:130,
     borderRadius:10
+  },
+  listModalMapView:{
+    width:width,
+    height:130,
   },
   listMapView1:{
     width:width,
