@@ -45,11 +45,11 @@ export default class LaunchScreen extends Component {
                     </View>
                     <View style={styles.login}>
                         <TouchableOpacity onPress={() => navigate('OnboardingScreen')} style={styles.button}>
-                            <Image source={Images.SINGUP1} />
+                            <Text style = {styles.button_txt} >SIGN UP</Text>
                         </TouchableOpacity>
                         <Image source={Images.devide} style={{ marginBottom: 1 }} />
                         <TouchableOpacity onPress={() => navigate('LoginScreen')} style={styles.button}>
-                            <Image source={Images.LOGIN} />
+                            <Image source={Images.LOGIN} style = {styles.button_login_txt} />
                         </TouchableOpacity>
                     </View>
                 </ImageBackground>

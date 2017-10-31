@@ -9,14 +9,12 @@ import LoginScreen from '../Containers/Registration/Screens/LoginScreen'
 import FindDonation from '../Containers/Home/Screens/FindDonation'
 import DonationView from '../Containers/Home/Screens/DonationView'
 import CreateListing from '../Containers/Home/Screens/CreateListing'
-<<<<<<< HEAD
-import RescueProgress from '../Containers/Home/Screens/RescueProgress'
-=======
 import Description from '../Containers/Home/Screens/Description'
 import Setting from '../Containers/Home/Screens/Setting'
 import Bussiness from '../Containers/Home/Screens/Bussiness'
 import Operation from '../Containers/Home/Screens/Operation'
->>>>>>> eduardo
+import TeamScreen from '../Containers/Home/Screens/TeamScreen'
+import AddMemberScreen from '../Containers/Home/Screens/AddMemberScreen'
 import Meteor from 'react-native-meteor'
 import styles from './Styles/NavigationStyles'
 
@@ -31,24 +29,19 @@ const PrimaryNav = StackNavigator({
   AddItemsModal: { screen: AddItemsModal },
   LoginScreen: { screen: LoginScreen },
   /*===============================*/
-  FindDonation: { screen: /*FindDonation*/ RescueProgress },
+  FindDonation: { screen: /*FindDonation*/ FindDonation },
   DonationView: { screen: DonationView },
   CreateListing: {screen: CreateListing},
-<<<<<<< HEAD
-  RescueProgress : {screen: RescueProgress}
-  
-}, {
-    initialRouteName: 'LaunchScreen',//'LaunchScreen',
-=======
   Description: {screen: Description},
   Setting:{screen:Setting},
   Bussiness:{screen:Bussiness},
   Operation:{screen:Operation},
   CompletedDonationScreen: { screen: CompletedDonationScreen },
+  TeamScreen : {screen : TeamScreen},
+  AddMemberScreen : {screen : AddMemberScreen}
 }, {
 //    initialRouteName: Meteor.userId() !== null ? 'FindDonation' : 'CreateListing',
     initialRouteName: 'LaunchScreen',
->>>>>>> eduardo
     headerStyle: styles.header
   })
 export default PrimaryNav

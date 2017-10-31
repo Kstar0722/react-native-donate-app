@@ -22,7 +22,7 @@ export default class LaunchScreen extends Component {
             msgText: "",
             position: 0,
             interval: null,
-            email: "faridkamil.it@gmail.com",
+            email: "",
             password: ""
         }
         this.showDialog = this.showDialog.bind(this);
@@ -53,7 +53,7 @@ export default class LaunchScreen extends Component {
             if (err) {
                 this.showDialog(true, err.message)
             } else {
-                this.props.navigation.navigate("Setting")
+                this.props.navigation.navigate("TeamScreen")
             }
         
         })
@@ -99,7 +99,7 @@ export default class LaunchScreen extends Component {
 
                     <View style={styles.login}>
                         <TouchableOpacity style={styles.button} onPress={this.login}>
-                            <Image source={Images.LOGIN} />
+                            <Image source={Images.LOGIN} style = {styles.button_login_txt}  />
                         </TouchableOpacity>
                     </View>
                 </Image>

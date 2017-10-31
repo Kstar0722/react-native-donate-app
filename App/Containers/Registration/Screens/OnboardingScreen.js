@@ -54,7 +54,7 @@ export default class OnboardingScreen extends Component {
                         <TouchableOpacity style={styles.tipIcon} >
                             <Image source={Images.tipIcon} style={{ width: '100%', height: '100%' }} />
                         </TouchableOpacity>
-                        <TouchableOpacity  style={styles.option_button} onPress = {() => navigate("SignupScreen", {bType : false})}>
+                        <TouchableOpacity  style={styles.option_button} onPress = {() => navigate("SignupScreen", {bType : 0})}>
                             <Text  style={styles.option_text} >Sign Up As a Business</Text>
                             <Icon name="chevron-right" size={12} color="#666666" style={styles.options_next} />
                         </TouchableOpacity>
@@ -63,7 +63,7 @@ export default class OnboardingScreen extends Component {
                         <TouchableOpacity style={styles.tipIcon} >
                             <Image source={Images.tipIcon} style={{ width: '100%', height: '100%' }} />
                         </TouchableOpacity>
-                        <TouchableOpacity  style={styles.option_button} onPress = {() => navigate("SignupScreen", {bType : true})}>
+                        <TouchableOpacity  style={styles.option_button} onPress = {() => navigate("SignupScreen", {bType : 1})}>
                             <Text  style={styles.option_text} >Sign Up As a Individual</Text>
                             <Icon name="chevron-right" size={12} color="#666666" style={styles.options_next} />
                         </TouchableOpacity>
@@ -72,7 +72,7 @@ export default class OnboardingScreen extends Component {
                         <TouchableOpacity style={styles.tipIcon} >
                             <Image source={Images.tipIcon} style={{ width: '100%', height: '100%' }} />
                         </TouchableOpacity>
-                        <TouchableOpacity  style={styles.option_button}>
+                        <TouchableOpacity  style={styles.option_button} onPress = {() => navigate("SignupScreen", {bType : 2})}>
                             <Text  style={styles.option_text} >Sign Up As a Team Member</Text>
                             <Icon name="chevron-right" size={12} color="#666666" style={styles.options_next} />
                         </TouchableOpacity>
