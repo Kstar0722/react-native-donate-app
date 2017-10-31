@@ -30,6 +30,7 @@ export default StyleSheet.create({
     flexDirection:'row',
   },
   scTitle:{
+      fontFamily: 'Ubuntu',
       color: '#1D1D26',
       fontSize: 14,
       backgroundColor:'#F8F8F9',
@@ -75,7 +76,7 @@ export default StyleSheet.create({
   tabmenuactiveText:{
       color:'#000',
       fontSize:14,
-      fontFamily:'Avenir',
+      fontFamily:'Ubuntu',
   },
   inputContainer:{
       marginHorizontal:15,
@@ -112,8 +113,8 @@ export default StyleSheet.create({
   inputc:{
       color:'#1D1D26',
       fontSize:18,
-      fontFamily: 'Avenir',
-      paddingLeft:35,
+      fontFamily: 'Ubuntu',
+      paddingLeft:50,
       height:40,
   },
   borderBottom:{
@@ -130,12 +131,10 @@ export default StyleSheet.create({
   },
   saveBtn_button:{
     color:'#FFF',
-    fontFamily: 'Avenir',
+    fontFamily: 'Ubuntu',
     fontSize:20,
   },
   bussinesstab:{
-     borderBottomColor:'#B0B0B3',
-     borderBottomWidth:1,
      paddingHorizontal:15,
      paddingVertical:10,
   },
@@ -178,9 +177,11 @@ toggleContainer: {
     width:Dimensions.get('window').width-(120)
   },
   toggle: {
+    fontFamily:'Ubuntu',
     marginTop:7,
     color: '#000',
     fontSize: 14,
+    fontWeight:'bold',
     marginHorizontal: 5
   },
   coverInner:{flexDirection:'row', paddingVertical:20, alignItems:'center', paddingHorizontal:15,},

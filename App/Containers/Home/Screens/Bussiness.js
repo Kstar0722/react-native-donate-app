@@ -7,6 +7,8 @@ import Meteor from 'react-native-meteor';
 import { RNS3 } from 'react-native-aws3';
 import PictureModal from '../../../Components/Modals/pictureModal';
 import DescriptionModal from '../../../Components/Modals/descriptionModal';
+import { guid, validateEmail } from '../../../Transforms';
+import AppConfig from '../../../Config';
 _dText='';
 
 export default class MainScreen extends Component {
@@ -75,6 +77,34 @@ export default class MainScreen extends Component {
             }
         }
 
+        upDateData = () => {
+          
+            const file = {
+                uri: this.state.avatar,
+                name: guid() + ".png",
+                type: "image/png"
+            }
+            const options = {
+                keyPrefix: AppConfig.KEY_PREFIX,
+                bucket: AppConfig.BUCKET,
+                accessKey: AppConfig.ACCESS_KEY,
+                secretKey: AppConfig.SECRET_KEY,
+                region: AppConfig.REGION
+            }
+            RNS3.put(file, options).then(response => {
+                image = response.body.postResponse.location
+                Meteor.collection('users').update(Meteor.userId(),
+                { $set: { 'profile.bRescueFood': this.state.bRescueFood,
+                    'profile.bCreateFoodDonation': this.state.bCreateFoodDonation,
+                    'profile.businessInfo.name':this.state.bussinessName,
+                    'profile.businessInfo.address':this.state.businessAddress,
+                    'profile.businessInfo.ein': this.state.businessEIN,
+                    'profile.businessInfo.description': _dText,
+                    'profile.image':image,
+                }});
+            });
+        }
+
     render() {
         const { navigate } = this.props.navigation;
         return (
@@ -108,7 +138,7 @@ export default class MainScreen extends Component {
             <ScrollView bounces={false}>
             <Text style={styles.scTitle}>BUSINESS INFORMATION</Text>
               <View style={styles.bussinesstab}>
-                  <Text style={styles.bussinesstabsmTitle}>Business Name</Text>
+                <Text style={[styles.bussinesstabsmTitle, {fontSize:14, marginBottom:10}]}>Business Name</Text>
                   <TextInput
                     placeholder="Business Name"
                     editable = {true}
@@ -118,7 +148,7 @@ export default class MainScreen extends Component {
                     />
               </View>
               <View style={styles.bussinesstab}>
-                  <Text style={styles.bussinesstabsmTitle}>Business Address</Text>
+                <Text style={[styles.bussinesstabsmTitle, {fontSize:14, marginBottom:10}]}>Business Address</Text>
                   <TextInput
                     placeholder="Business Address"
                     editable = {true}
@@ -128,7 +158,7 @@ export default class MainScreen extends Component {
                     />
               </View>
               <View style={styles.bussinesstab}>
-                  <Text style={styles.bussinesstabsmTitle}>Business-EIN</Text>
+                  <Text style={[styles.bussinesstabsmTitle, {fontSize:14, marginBottom:10}]}>Business-EIN</Text>
                   <TextInput
                     placeholder="Business-EIN"
                     editable = {true}
@@ -151,7 +181,7 @@ export default class MainScreen extends Component {
                   <Switch onValueChange={(val) => this.setState({toggleRescueone:val})} value={this.state.toggleRescueone}
                       onTintColor='#FFFFFF' thumbTintColor="#FFB660" />
               </View>
-            <TouchableOpacity style={styles.saveBtn}>
+              <TouchableOpacity style={styles.saveBtn} onPress={() => this.upDateData()}>
                 <Text style={styles.saveBtn_button}>SAVE</Text>
             </TouchableOpacity>
             </ScrollView>

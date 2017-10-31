@@ -188,7 +188,8 @@ const images = {
 
   search_white : require('../Images/search_white.png'),
   circle : require('../Images/circle.png'),
-  setting : require('../Images/setting.png')
+  setting : require('../Images/setting.png'),
+  phone: require('../Images/phone.png')
 
   }
 
