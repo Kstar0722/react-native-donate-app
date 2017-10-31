@@ -416,6 +416,12 @@ export default StyleSheet.create({
     tintColor: 'white'
   },
 
+  searchButtonImage: {
+    width: 30*54/57,
+    height: 30,
+    tintColor: 'white',
+  },
+
   messageButtonImage: {
     width: 25,
     height: 34,
