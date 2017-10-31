@@ -108,7 +108,7 @@ class MainScreen extends Component {
                             </TouchableOpacity>
                         </View>
 
-                        <TouchableOpacity style={styles.fDcenterBtn}>
+                        <TouchableOpacity style={styles.fDcenterBtn} onPress={() => navigate('Setting')}>
                             <Image source={Images.fDowal} style={styles.fDowal} />
                         </TouchableOpacity>
                         <TouchableOpacity style={{ flex: 1, alignItems: 'center' }} onPress={() => navigate('CompletedDonationScreen')} >
