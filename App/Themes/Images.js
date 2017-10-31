@@ -186,6 +186,8 @@ const images = {
   feed_community: require('../Images/feed_community.png'),
   message: require('../Images/message.png'),
 
+  phone: require('../Images/phone.png')
+
   }
 
   export default images

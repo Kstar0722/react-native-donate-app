@@ -138,7 +138,7 @@ export default class MainScreen extends Component {
             <ScrollView bounces={false}>
             <Text style={styles.scTitle}>BUSINESS INFORMATION</Text>
               <View style={styles.bussinesstab}>
-                  <Text style={styles.bussinesstabsmTitle}>Business Name</Text>
+                <Text style={[styles.bussinesstabsmTitle, {fontSize:14, marginBottom:10}]}>Business Name</Text>
                   <TextInput
                     placeholder="Business Name"
                     editable = {true}
@@ -148,7 +148,7 @@ export default class MainScreen extends Component {
                     />
               </View>
               <View style={styles.bussinesstab}>
-                  <Text style={styles.bussinesstabsmTitle}>Business Address</Text>
+                <Text style={[styles.bussinesstabsmTitle, {fontSize:14, marginBottom:10}]}>Business Address</Text>
                   <TextInput
                     placeholder="Business Address"
                     editable = {true}
@@ -158,7 +158,7 @@ export default class MainScreen extends Component {
                     />
               </View>
               <View style={styles.bussinesstab}>
-                  <Text style={styles.bussinesstabsmTitle}>Business-EIN</Text>
+                  <Text style={[styles.bussinesstabsmTitle, {fontSize:14, marginBottom:10}]}>Business-EIN</Text>
                   <TextInput
                     placeholder="Business-EIN"
                     editable = {true}

@@ -103,7 +103,6 @@ export default class MainScreen extends Component {
                     value={this.state.userName}
                     />
                 </View>
-                <Text style={styles.borderBottom} ></Text>
             </View>
 
             <View style={styles.inputContainer}>
@@ -118,7 +117,6 @@ export default class MainScreen extends Component {
                 
                     />
                 </View>
-                <Text style={styles.borderBottom} ></Text>
             </View>
             <View style={styles.inputContainer}>
                 <View style={styles.inputContainerInner}>
@@ -131,21 +129,18 @@ export default class MainScreen extends Component {
                     value={this.state.userPassword} secureTextEntry
                     />
                 </View>
-                <Text style={styles.borderBottom} ></Text>
             </View>
             <View style={styles.inputContainer}>
                 <View style={styles.inputContainerInner}>
-                  <Image source={Images.nlocation} style={styles.lIcon} />
+                  <Image source={Images.phone} style={styles.lIcon} />
                   <TextInput
                     placeholder="User PhoneNumber"
                     editable = {true}
-                    
                     onChangeText={(text) => this.setState({userPhoneNumber: text})}
                     style={styles.inputc} 
                     value={this.state.userPhoneNumber}
                     />
                 </View>
-                <Text style={styles.borderBottom} ></Text>
             </View>
             <View style={styles.inputContainer}>
                 <View style={styles.inputContainerInner}>
@@ -158,7 +153,6 @@ export default class MainScreen extends Component {
                     value={this.state.userAddress} 
                     />
                 </View>
-                <Text style={styles.borderBottom} ></Text>
             </View>
             <TouchableOpacity style={styles.saveBtn} onPress={() => this.upDateData()}>
                 <Text style={styles.saveBtn_button}>SAVE</Text>
