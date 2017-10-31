@@ -139,9 +139,9 @@ class MainScreen extends Component {
                     navigate={navigate} />
                 <View style={styles.fDfooter}>
                     <View style={styles.fDfooterInner}>
-                        <View style={{flex: 1, alignItems: 'center'}}>
+                        <View style={{flex: 1, alignItems: 'center', opacity: 1}}>
                             <TouchableOpacity style={[styles.addButton, {backgroundColor: '#7d9eff', borderColor: '#7d9eff'}]} underlayColor='#7d9eff' onPress={() => navigate('CreateListing')}> 
-                                <Image source={Images.fDsearch} style={styles.addButtonImage} />          
+                                <Image source={Images.fDsearch} style={styles.addButtonImage} resizeMode={'contain'} />          
                             </TouchableOpacity>
                         </View>
 
@@ -149,9 +149,9 @@ class MainScreen extends Component {
                             <Image source={Images.plus_1} style={styles.addButtonImage} />          
                         </TouchableOpacity>
                         
-                        <View style={{ flex: 1, alignItems: 'center' }} >
+                        <View style={{ flex: 1, alignItems: 'center', opacity: 1 }} >
                             <TouchableOpacity style={[styles.addButton, {backgroundColor: '#7d9eff', borderColor: '#7d9eff'}]} underlayColor='#7d9eff' onPress={() => navigate('CompletedDonationScreen')}> 
-                                <Image source={Images.message} style={styles.messageButtonImage} />          
+                                <Image source={Images.message} style={styles.messageButtonImage} resizeMode={'contain'}/>          
                             </TouchableOpacity>
                         </View>
 

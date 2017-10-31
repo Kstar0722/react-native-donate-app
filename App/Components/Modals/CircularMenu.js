@@ -1,5 +1,16 @@
 import React, { Component, PropTypes } from 'react'
-import { Easing, Modal, Dimensions, Animated, Text, View, StyleSheet, TouchableOpacity, Image, } from 'react-native'
+import { 
+    Easing, 
+    Modal, 
+    Dimensions, 
+    Animated, 
+    Text, 
+    View, 
+    StyleSheet, 
+    TouchableOpacity, 
+    Image,
+    TouchableWithoutFeedback, 
+} from 'react-native'
 const { width, height } = Dimensions.get('window')
 const reactMixin = require('react-mixin')
 import TimerMixin from 'react-timer-mixin'
@@ -18,6 +29,7 @@ class CircularMenu extends Component {
           leftButtonVisible: false,
       }
       this.setVisible = this.setVisible.bind(this)
+      this.handlePress = this.handlePress.bind(this)
     }
 
     componentDidMount() {
@@ -99,6 +111,22 @@ class CircularMenu extends Component {
         return height - halfSize
     }
 
+    handlePress(event) {
+        console.log('Press..............')
+        let pageX = event.nativeEvent.pageX
+        let pageY = event.nativeEvent.pageY
+        console.log('pageX', pageX)
+        console.log('pageY', pageY)
+        console.log('Radius', width/2)
+        let deltaX = Math.abs(pageX - width/2)
+        let deltaY = Math.abs(pageY - height)
+        console.log('deltaX', deltaX)
+        console.log('deltaY', deltaY)        
+        let distance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2))
+        console.log('distance', distance) 
+        if (distance > width/2 + 10)  this.dismiss()
+    }
+
     render () {
         const {scale, visible} = this.state
         const { size} = this.props
@@ -110,7 +138,10 @@ class CircularMenu extends Component {
                 transparent
                 visible={visible}
                 onRequestClose={() => {}}>
+                
+                <TouchableWithoutFeedback onPress={this.handlePress} style={{flex: 1}} >
                 <View style={styles.container}>
+                               
                     <Animated.View style={{
                         backgroundColor: 'white',
                         top: topPosition,
@@ -123,8 +154,8 @@ class CircularMenu extends Component {
                         }],                        
                       }}                      
                     >
-                        <Image source={Images.modalBg} style={{width: size - 10, height: size - 10, borderRadius: (size - 10) / 2, marginLeft: 5, marginTop: 5}} />                   
-                    </Animated.View>                    
+                    <Image source={Images.modalBg} style={{width: size - 10, height: size - 10, borderRadius: (size - 10) / 2, marginLeft: 5, marginTop: 5}} />                                           
+                    </Animated.View>                                   
                   
 
                      <View style={styles.content}>
@@ -154,10 +185,13 @@ class CircularMenu extends Component {
                             <Text style={styles.menuCenterTopText} >Create a post:</Text>
                             <Text style={styles.menuCenterBottomText} >SELECT AN OPTION BELOW</Text>
                         </View>
-                    </View>
-                  
 
-              </View>
+                        
+                    </View> 
+                                     
+                
+                </View>
+                </TouchableWithoutFeedback>
               
           </Modal>
         )
@@ -170,6 +204,24 @@ const styles = StyleSheet.create({
     container: {
         flex: 1, 
         backgroundColor: 'rgba(0,0,0,0.5)',
+        justifyContent: 'center',
+        alignItems: 'stretch',
+    },
+
+    touchable: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+    },
+
+    touchableView: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'red',
+        width: width,
+        height: height,
     },
 
     content: {
