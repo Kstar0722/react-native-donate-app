@@ -5,12 +5,15 @@ import styles from '../Styles/SettingStyles';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import Meteor from 'react-native-meteor';
 import { RNS3 } from 'react-native-aws3';
+import { guid, validateEmail } from '../../../Transforms';
+import AppConfig from '../../../Config';
 import PictureModal from '../../../Components/Modals/pictureModal';
 
 export default class MainScreen extends Component {
     constructor() {
         super()
         profile = Meteor.user().profile
+        console.log(profile.businessInfo.vehicles.vans)
         this.state = { 
             toggleRescue:profile.businessInfo.bContainer,
             toggleRescueone:profile.businessInfo.bReceiveDonation,
@@ -22,7 +25,7 @@ export default class MainScreen extends Component {
             cToggle:profile.businessInfo.vehicles.cars,
             vToggle:profile.businessInfo.vehicles.vans,
             tToggle:profile.businessInfo.vehicles.trucks,
-            avatar: profile.Image,
+            avatar: profile.image,
             picturemodalVisible: false,
         }
     }
@@ -39,6 +42,36 @@ export default class MainScreen extends Component {
             picturemodalVisible: false
         })
     }
+
+    upDateData = () => {
+        const file = {
+            uri: this.state.avatar,
+            name: guid() + ".png",
+            type: "image/png"
+        }
+        const options = {
+            keyPrefix: AppConfig.KEY_PREFIX,
+            bucket: AppConfig.BUCKET,
+            accessKey: AppConfig.ACCESS_KEY,
+            secretKey: AppConfig.SECRET_KEY,
+            region: AppConfig.REGION
+        }
+    
+        RNS3.put(file, options).then(response => {
+            image = response.body.postResponse.location
+            Meteor.collection('users').update(Meteor.userId(),
+            { $set: { 'profile.businessInfo.bContainer': this.state.toggleRescue,
+                'profile.businessInfo.bReceiveDonation': this.state.toggleRescueone,
+                'profile.businessInfo.bVehicles':this.state.toggleRescuetwo,
+                'profile.businessInfo.vehicles.cars':Number.parseInt(this.state.countOne, 10),
+                'profile.businessInfo.vehicles.vans': Number.parseInt(this.state.countTwo, 10),
+                'profile.businessInfo.vehicles.trucks': Number.parseInt(this.state.countThree, 10),
+                'profile.image':image,
+            }});
+        });
+    }
+
+
     render() {
         const { navigate } = this.props.navigation;
         return (
@@ -124,7 +157,7 @@ export default class MainScreen extends Component {
                 />
               </View>
 
-            <TouchableOpacity style={styles.saveBtn}>
+              <TouchableOpacity style={styles.saveBtn} onPress={() => this.upDateData()}>
                 <Text style={styles.saveBtn_button}>SAVE</Text>
             </TouchableOpacity>
             <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal} chooseAvatar = {this.chooseAvatar} />

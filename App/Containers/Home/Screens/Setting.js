@@ -5,6 +5,8 @@ import styles from '../Styles/SettingStyles';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import Meteor from 'react-native-meteor';
 import { RNS3 } from 'react-native-aws3';
+import { guid, validateEmail } from '../../../Transforms'
+import AppConfig from '../../../Config'
 import PictureModal from '../../../Components/Modals/pictureModal';
 
 export default class MainScreen extends Component {
@@ -14,7 +16,7 @@ export default class MainScreen extends Component {
         this.state = { 
             userName: profile.name,
             userEmail: profile.email,
-            userPassword: '',
+            userPassword: 'kingstar601',
             userPhoneNumber: profile.phone,
             userAddress: profile.businessInfo.address,
             picturemodalVisible: false,
@@ -36,15 +38,28 @@ export default class MainScreen extends Component {
         })
     }
     upDateData = () => {
-        updateData = {
-            profile:{
-                name:this.state.userName,
-                email:this.state.userEmail,
-
-            }
+        
+        const file = {
+            uri: this.state.avatar,
+            name: guid() + ".png",
+            type: "image/png"
         }
-        Meteor.collection('users').update(Meteor.userId(),
-        { $set: { 'profile.name': this.state.userName, 'profile.email': this.state.userEmail}});
+        const options = {
+            keyPrefix: AppConfig.KEY_PREFIX,
+            bucket: AppConfig.BUCKET,
+            accessKey: AppConfig.ACCESS_KEY,
+            secretKey: AppConfig.SECRET_KEY,
+            region: AppConfig.REGION
+        }
+        RNS3.put(file, options).then(response => {
+            image = response.body.postResponse.location
+            Meteor.collection('users').update(Meteor.userId(),
+            { $set: { 'profile.name': this.state.userName,
+                'profile.email': this.state.userEmail,
+                'profile.phone':this.state.userPhoneNumber,
+                'profile.image':image,
+                'profile.businessInfo.address':this.state.userAddress}});
+        });
     }
 
     render() {
