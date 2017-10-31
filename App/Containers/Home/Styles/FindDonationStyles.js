@@ -137,6 +137,7 @@ export default StyleSheet.create({
       shadowOpacity: 0.7,
       alignItems:'center',
       height:53,
+      justifyContent: 'space-around',
   },
   fDBtnActive:{
       borderBottomWidth:3, borderBottomColor:'#DD8D6C',
@@ -388,5 +389,39 @@ export default StyleSheet.create({
     fontSize:15,
     fontWeight:'600',
     color:'#fff',
+  },
+
+  addButton: {
+    backgroundColor: '#ffb660',
+    borderColor: '#ffb660',
+    borderWidth: 1,
+    height: 60,
+    width: 60,
+    borderRadius: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: "#000000",
+    shadowOpacity: 0.7,
+    shadowRadius: 3,
+    shadowOffset: {
+      height: 3,
+      width: 0
+    },
+    top: -15,
+  },
+
+  addButtonImage: {
+    width: 30, 
+    height: 30, 
+    tintColor: 'white'
+  },
+
+  messageButtonImage: {
+    width: 25,
+    height: 34,
+    tintColor: 'white',
   }
+
+
+
 })
