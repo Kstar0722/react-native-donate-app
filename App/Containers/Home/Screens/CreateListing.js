@@ -14,9 +14,9 @@ import Prompt from 'react-native-prompt'
 import { RNS3 } from 'react-native-aws3'
 import AppConfig from '../../../Config'
 import { guid, validateEmail } from '../../../Transforms'
-_dText='';
+_dText = '';
 export default class CreateListing extends React.Component {
-    constructor () {
+    constructor() {
         super()
         this.state = {
             msgBox: false,
@@ -25,61 +25,60 @@ export default class CreateListing extends React.Component {
             foodTypeToggle: false,
             toggleSwitch: false,
             repeatFlag: 3,
-            endDate:'',
+            endDate: '',
             weekday: [false, false, false, false, false, false, false],
             picturemodalVisible: false,
-            descriptionModalVisible:false,
-            avatar : null,
-            startDate:"",
+            descriptionModalVisible: false,
+            avatar: null,
+            startDate: "",
             isDateTimePickerVisible: false,
             Address: "",
-            isAddressPromptVisible : false
+            isAddressPromptVisible: false
         }
         this.toggleSwitch = this.toggleSwitch.bind(this);
     }
 
     static navigationOptions = {
-      header:null,
+        header: null,
     }
 
-    toggleSwitch (val) {
+    toggleSwitch(val) {
         this.setState({
             weekday: [false, false, false, false, false, false, false],
             endDate: '',
-            repeatFlag:3,
+            repeatFlag: 3,
             switchValue: val
         })
     }
-    
-    switchToggle(){
-        let t=this.state.switchValue?'Yes':'No';
-        if(t){
-            return(<Text style={styles.btnEdit}>{t}</Text>);
+
+    switchToggle() {
+        let t = this.state.switchValue ? 'Yes' : 'No';
+        if (t) {
+            return (<Text style={styles.btnEdit}>{t}</Text>);
         }
     }
-    sliderValue (){
-        if(this.state.value){
-            let netWidth=Dimensions.get('window').width-(55);
-            let leftValueSPace=(netWidth*this.state.value)/500;
-            return(<Text style={[styles.slVs, {marginLeft:leftValueSPace+15}]}>{this.state.value.toFixed(0)}</Text>);
-        }else{
-            return(<Text style={[styles.slVs, {marginLeft:25}]}>{0}</Text>);
+    sliderValue() {
+        if (this.state.value) {
+            let netWidth = Dimensions.get('window').width - (55);
+            let leftValueSPace = (netWidth * this.state.value) / 500;
+            return (<Text style={[styles.slVs, { marginLeft: leftValueSPace + 15 }]}>{this.state.value.toFixed(0)}</Text>);
+        } else {
+            return (<Text style={[styles.slVs, { marginLeft: 25 }]}>{0}</Text>);
         }
     }
-    repeatEvent(val)
-    {
+    repeatEvent(val) {
         this.setState({
-            
+
         })
-        if(this.state.repeatFlag == val)
+        if (this.state.repeatFlag == val)
             this.setState({
-                repeatFlag:3,
+                repeatFlag: 3,
                 weekday: [false, false, false, false, false, false, false],
                 endDate: ''
             });
         else
             this.setState({
-                repeatFlag:val,
+                repeatFlag: val,
                 weekday: [false, false, false, false, false, false, false],
                 endDate: ''
             })
@@ -91,7 +90,7 @@ export default class CreateListing extends React.Component {
     }
     // chooseImage
     chooseAvatar = (avatar) => {
-        this.setState({avatar : avatar, picturemodalVisible : false})
+        this.setState({ avatar: avatar, picturemodalVisible: false })
     }
 
     closePictureModal = () => {
@@ -102,7 +101,7 @@ export default class CreateListing extends React.Component {
 
     closeDescriptionModal = () => {
         this.setState({
-          descriptionModalVisible: false
+            descriptionModalVisible: false
         })
     }
     showDialog = (show, title) => {
@@ -117,8 +116,7 @@ export default class CreateListing extends React.Component {
         return false
     }
 
-    dataPost()
-    {
+    dataPost() {
         if (!this.validate()) {
             this.showDialog(true, "You have to provide correct information")
             return
@@ -138,190 +136,190 @@ export default class CreateListing extends React.Component {
         }
         postData = {
             date: this.state.startDate,
-            location: {address:this.state.location},
+            location: { address: this.state.location },
             bRecurringEvent: this.state.switchValue,
             foodType: this.state.foodTypeToggle,
             servePeopleNumber: this.state.sliderValue,
             description: _dText,
             operationDays: this.state.weekday
         }
-        if(this.state.repeatFlag != 3)
+        if (this.state.repeatFlag != 3)
             postData.repeatType = this.state.repeatFlag
-        if(this.state.endDate != "")
+        if (this.state.endDate != "")
             postData.endDate = this.state.endDate,
-        RNS3.put(file, options).then(response => {
-            postData.image = response.body.postResponse.location
-            Meteor.call('createGivefood', postData, (err, res) => {
-                if (err) {
-                    this.showDialog(true, err.message)
-                    console.log(err)
-                } else {
-                    
-                }
-            })
-        })
+                RNS3.put(file, options).then(response => {
+                    postData.image = response.body.postResponse.location
+                    Meteor.call('createGivefood', postData, (err, res) => {
+                        if (err) {
+                            this.showDialog(true, err.message)
+                            console.log(err)
+                        } else {
+
+                        }
+                    })
+                })
     }
 
-    
-  writeHere = () => {
-    let t='';
-      if(_dText){
-          if(_dText.length>50){
-              t=_dText.substring(0, 49)+'...';
-          }else{
-            t=_dText;
-          }
 
-        return (
-            <View style={styles.editContent}>
-                <TouchableOpacity  onPress={()=>this.setState({descriptionModalVisible: true})}>
-                    <Text style={styles.write1}>EDIT</Text>
-                </TouchableOpacity>
-                <Text style={styles.write3}>{t}</Text>
-                <TouchableOpacity onPress={() => this.dataPost()} style={{width: 80,height: 80, right:0, bottom:0, position:'absolute', zIndex:999999}}>
-                    <Image source={Images.markPostIcon}  style={{width: 80,height: 80}}/>
-                </TouchableOpacity>
-          </View>
-        );
-    }else{
-        return (
-            <View >
-                <TouchableOpacity  onPress={()=>this.setState({descriptionModalVisible: true})}>
-                <View style={styles.rowStyle}>
-                    <Text style={styles.contentText}>Description</Text>                            
-                    <Image source={Images.rightArraw_small}></Image>
+    writeHere = () => {
+        let t = '';
+        if (_dText) {
+            if (_dText.length > 50) {
+                t = _dText.substring(0, 49) + '...';
+            } else {
+                t = _dText;
+            }
+
+            return (
+                <View style={styles.editContent}>
+                    <TouchableOpacity onPress={() => this.setState({ descriptionModalVisible: true })}>
+                        <Text style={styles.write1}>EDIT</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.write3}>{t}</Text>
+                    <TouchableOpacity onPress={() => this.dataPost()} style={{ width: 80, height: 80, right: 0, bottom: 0, position: 'absolute', zIndex: 999999 }}>
+                        <Image source={Images.markPostIcon} style={{ width: 80, height: 80 }} />
+                    </TouchableOpacity>
                 </View>
-                </TouchableOpacity>
-            </View>
+            );
+        } else {
+            return (
+                <View >
+                    <TouchableOpacity onPress={() => this.setState({ descriptionModalVisible: true })}>
+                        <View style={styles.rowStyle}>
+                            <Text style={styles.contentText}>Description</Text>
+                            <Image source={Images.rightArraw_small}></Image>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             );
         }
     }
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
-    
+
     _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
-  
+
     _handleDatePicked = (date) => {
-          
-          cDate = dateFormat(date, 'mmm, dd, yyyy')
-          this.setState({
-             startDate: cDate
-          })
-          this._hideDateTimePicker();
-      };
 
-    render () {
+        cDate = dateFormat(date, 'mmm, dd, yyyy')
+        this.setState({
+            startDate: cDate
+        })
+        this._hideDateTimePicker();
+    };
+
+    render() {
         return (
-          <View style={styles.container}>
-              <Image source={Images.overlay} style={styles.body}>
-                  <View style={styles.cNavigation}>
-                      <TouchableOpacity onPress={() => {}}>
-                          <Image source={Images.backIcon} style={styles.menuIconNav} />
-                       </TouchableOpacity>
-                       <Text style={styles.refedText}>Give Food</Text>
-                   </View>
+            <View style={styles.container}>
+                <Image source={Images.overlay} style={styles.body}>
+                    <View style={styles.cNavigation}>
+                        <TouchableOpacity onPress={() => { }}>
+                            <Image source={Images.backIcon} style={styles.menuIconNav} />
+                        </TouchableOpacity>
+                        <Text style={styles.refedText}>Give Food</Text>
+                    </View>
 
-                  <ScrollView>   
+                    <ScrollView>
                         <View style={styles.buttonGroup}>
-                            <View style={{alignItems:'center'}}>
-                                <View style={{width:width/3,height:71, alignItems:'center',justifyContent: 'space-around'}}>
-                                    <Image source={this.state.avatar ? this.state.avatar : Images.caemraIcon_small} style={this.state.avatar?styles.camera:""}></Image>
+                            <View style={{ alignItems: 'center' }}>
+                                <View style={{ width: width / 3, height: 71, alignItems: 'center', justifyContent: 'space-around' }}>
+                                    <Image source={this.state.avatar ? this.state.avatar : Images.caemraIcon_small} style={this.state.avatar ? styles.camera : ""}></Image>
                                 </View>
-                                
-                                <TouchableOpacity onPress = {() => this.setState({picturemodalVisible : true})} >
-                                    {this.state.avatar ?<Text style={styles.btnTopEdit}>Edit</Text>:<Text style={styles.btnTopEdit}>Upload Image</Text>}
+
+                                <TouchableOpacity onPress={() => this.setState({ picturemodalVisible: true })} >
+                                    {this.state.avatar ? <Text style={styles.btnTopEdit}>Edit</Text> : <Text style={styles.btnTopEdit}>Upload Image</Text>}
                                 </TouchableOpacity>
                             </View>
-                            <View style={{alignItems:'center'}}>
-                                <View style={{width:width/3,height:71, alignItems:'center'}}>
-                                    {this.state.startDate==""?<Image source={Images.date}/>:<Text style ={styles.stateDateText}>{this.state.startDate}</Text>}
+                            <View style={{ alignItems: 'center' }}>
+                                <View style={{ width: width / 3, height: 71, alignItems: 'center' }}>
+                                    {this.state.startDate == "" ? <Image source={Images.date} /> : <Text style={styles.stateDateText}>{this.state.startDate}</Text>}
                                 </View>
                                 <TouchableOpacity onPress={this._showDateTimePicker} >
-                                    {this.state.startDate==""?<Text style={styles.btnTopEdit}>Set Date</Text>:<Text style={styles.btnTopEdit}>Edit</Text>}
+                                    {this.state.startDate == "" ? <Text style={styles.btnTopEdit}>Set Date</Text> : <Text style={styles.btnTopEdit}>Edit</Text>}
                                 </TouchableOpacity>
                                 <DateTimePicker
-                                isVisible={this.state.isDateTimePickerVisible}
-                                onConfirm={this._handleDatePicked}
-                                onCancel={this._hideDateTimePicker}
-                                datePickerModeAndroid='calendar'
-                                confirmTextIOS="Ok"
-                                titleIOS='Select Date'
-                                /> 
+                                    isVisible={this.state.isDateTimePickerVisible}
+                                    onConfirm={this._handleDatePicked}
+                                    onCancel={this._hideDateTimePicker}
+                                    datePickerModeAndroid='calendar'
+                                    confirmTextIOS="Ok"
+                                    titleIOS='Select Date'
+                                />
                             </View>
-                            <View style={{alignItems:'center'}}>
-                                <View style={{width:width/3,height:71, alignItems:'center'}}>
-                                    <Image source={this.state.Address==""?Images.location_n:Images.location} style={this.state.Address!=""&&{marginVertical:20}}/>
-                                </View>                                
-                                
-                                <TouchableOpacity onPress={() => this.setState({isAddressPromptVisible: true})} style={{flex:1}}>
-                                    {this.state.Address==""?<Text style={styles.contentText}>Location</Text>:<Text style={styles.contentText}>Edit</Text>}
+                            <View style={{ alignItems: 'center' }}>
+                                <View style={{ width: width / 3, height: 71, alignItems: 'center' }}>
+                                    <Image source={this.state.Address == "" ? Images.location_n : Images.location} style={this.state.Address != "" && { marginVertical: 20 }} />
+                                </View>
+
+                                <TouchableOpacity onPress={() => this.setState({ isAddressPromptVisible: true })} style={{ flex: 1 }}>
+                                    {this.state.Address == "" ? <Text style={styles.contentText}>Location</Text> : <Text style={styles.contentText}>Edit</Text>}
                                 </TouchableOpacity>
                             </View>
                             <Prompt
                                 title="Your Address"
                                 placeholder="Start typing"
                                 defaultValue={this.state.Address}
-                                visible={ this.state.isAddressPromptVisible }
-                                onCancel={ (value) => this.setState({
+                                visible={this.state.isAddressPromptVisible}
+                                onCancel={(value) => this.setState({
                                     isAddressPromptVisible: false,
                                     Address: value
-                                }) }
-                                    onSubmit={ (value) => this.setState({
+                                })}
+                                onSubmit={(value) => this.setState({
                                     isAddressPromptVisible: false,
                                     Address: value
-                                }) }/>
+                                })} />
                         </View>
-                        
-                        <View style={styles.bottomLine}/>
-                        <View style={{borderBottomColor: '#e09579',borderBottomWidth: 2}}>
+
+                        <View style={styles.bottomLine} />
+                        <View style={{ borderBottomColor: '#e09579', borderBottomWidth: 2 }}>
                             <View style={styles.rowRecurrStyle}>
-                                <Text style={styles.contentText}>Is this a recurring event?</Text>                            
+                                <Text style={styles.contentText}>Is this a recurring event?</Text>
                                 <Switch onValueChange={this.toggleSwitch} value={this.state.switchValue}
                                     onTintColor="#FFFFFF"
-                                    thumbTintColor="#FFAD55"/>
+                                    thumbTintColor="#FFAD55" />
                             </View>
-                            {this.state.switchValue?
-                            <View style={styles.rowStyleRepeat}>
-                                <View style={styles.rowStyleRepeat_1}>
-                                    <Text style={styles.contentText1}>Repeat:</Text>
-                                    <View style={styles.rowStyle2}>
-                                        <TouchableOpacity style={this.state.repeatFlag==0?styles.repeatOnStyles:styles.repeatOffStyles} onPress={() => {this.repeatEvent(0)}}><Text style={this.state.repeatFlag==0?styles.repeatOnText:styles.repeatOffText}>Daily</Text></TouchableOpacity>
-                                        <TouchableOpacity style={this.state.repeatFlag==1?styles.repeatOnStyles:styles.repeatOffStyles} onPress={() => {this.repeatEvent(1)}}><Text style={this.state.repeatFlag==1?styles.repeatOnText:styles.repeatOffText}>Weekly</Text></TouchableOpacity>
-                                        <TouchableOpacity style={this.state.repeatFlag==2?styles.repeatOnStyles:styles.repeatOffStyles} onPress={() => {this.repeatEvent(2)}}><Text style={this.state.repeatFlag==2?styles.repeatOnText:styles.repeatOffText}>Monthly</Text></TouchableOpacity>
+                            {this.state.switchValue ?
+                                <View style={styles.rowStyleRepeat}>
+                                    <View style={styles.rowStyleRepeat_1}>
+                                        <Text style={styles.contentText1}>Repeat:</Text>
+                                        <View style={styles.rowStyle2}>
+                                            <TouchableOpacity style={this.state.repeatFlag == 0 ? styles.repeatOnStyles : styles.repeatOffStyles} onPress={() => { this.repeatEvent(0) }}><Text style={this.state.repeatFlag == 0 ? styles.repeatOnText : styles.repeatOffText}>Daily</Text></TouchableOpacity>
+                                            <TouchableOpacity style={this.state.repeatFlag == 1 ? styles.repeatOnStyles : styles.repeatOffStyles} onPress={() => { this.repeatEvent(1) }}><Text style={this.state.repeatFlag == 1 ? styles.repeatOnText : styles.repeatOffText}>Weekly</Text></TouchableOpacity>
+                                            <TouchableOpacity style={this.state.repeatFlag == 2 ? styles.repeatOnStyles : styles.repeatOffStyles} onPress={() => { this.repeatEvent(2) }}><Text style={this.state.repeatFlag == 2 ? styles.repeatOnText : styles.repeatOffText}>Monthly</Text></TouchableOpacity>
+                                        </View>
                                     </View>
-                                </View>
-                                <View style={styles.rowStyleRepeat_2}>
-                                    {(this.state.repeatFlag == 0 || this.state.repeatFlag == 2) &&
-                                        <View>
-                                            <Text style={styles.btnTopEdit}>End Date:</Text>
-                                            <DatePicker
-                                                style={styles.datePickerStyle}
-                                                date={this.state.endDate}
-                                                mode="datetime"
-                                                placeholder=" "
-                                                format="MMM D, YYYY hh:mm A"
-                                                confirmBtnText="Confirm"
-                                                cancelBtnText="Cancel"
-                                                iconSource = {Images.date_smallIcon}   
-                                                customStyles={{                                                                                         
-                                                dateIcon: {
-                                                    position: 'absolute',
-                                                    right: 10,
-                                                    top: 10,
-                                                    width:17,
-                                                    height:17,
-                                                    marginLeft: 0
-                                                },
-                                                
-                                                dateInput: {
-                                                    borderRadius:50,
-                                                    borderColor:'#fff',
-                                                }
-                                                }}
-                                                onDateChange={(date) => {this.setState({endDate: date})}}
-                                            />
-                                        </View>}
+                                    <View style={styles.rowStyleRepeat_2}>
+                                        {(this.state.repeatFlag == 0 || this.state.repeatFlag == 2) &&
+                                            <View>
+                                                <Text style={styles.btnTopEdit}>End Date:</Text>
+                                                <DatePicker
+                                                    style={styles.datePickerStyle}
+                                                    date={this.state.endDate}
+                                                    mode="datetime"
+                                                    placeholder=" "
+                                                    format="MMM D, YYYY hh:mm A"
+                                                    confirmBtnText="Confirm"
+                                                    cancelBtnText="Cancel"
+                                                    iconSource={Images.date_smallIcon}
+                                                    customStyles={{
+                                                        dateIcon: {
+                                                            position: 'absolute',
+                                                            right: 10,
+                                                            top: 10,
+                                                            width: 17,
+                                                            height: 17,
+                                                            marginLeft: 0
+                                                        },
+
+                                                        dateInput: {
+                                                            borderRadius: 50,
+                                                            borderColor: '#fff',
+                                                        }
+                                                    }}
+                                                    onDateChange={(date) => { this.setState({ endDate: date }) }}
+                                                />
+                                            </View>}
                                         {this.state.repeatFlag == 1 &&
-                                            <View style={{marginTop:0}}>
+                                            <View style={{ marginTop: 0 }}>
                                                 <Text style={styles.btnTopEdit}>Day(s):</Text>
                                                 <Text style={styles.btnTopEdit}>:</Text>
                                                 <View style={styles.operation_view}>
@@ -354,7 +352,7 @@ export default class CreateListing extends React.Component {
                                                         <Text style={this.state.weekday[6] ? styles.operation_label_active : styles.operation_label}>SAT</Text>
                                                     </TouchableOpacity>
                                                 </View>
-                                                <View style={{alignItems:'center'}}>
+                                                <View style={{ alignItems: 'center' }}>
                                                     <Text style={styles.btnTopEdit}>End Date:</Text>
                                                     <DatePicker
                                                         style={styles.datePickerStyle}
@@ -364,43 +362,43 @@ export default class CreateListing extends React.Component {
                                                         format="MMM D, YYYY   hh:mm A"
                                                         confirmBtnText="Confirm"
                                                         cancelBtnText="Cancel"
-                                                        iconSource = {Images.date_smallIcon}   
-                                                        customStyles={{                                                                                         
-                                                        dateIcon: {
-                                                            position: 'absolute',
-                                                            right: 10,
-                                                            top: 10,
-                                                            width:17,
-                                                            height:17,
-                                                            marginLeft: 0
-                                                        },
-                                                        dateInput: {
-                                                            borderRadius:50,
-                                                            borderColor:'#fff',
-                                                        }
+                                                        iconSource={Images.date_smallIcon}
+                                                        customStyles={{
+                                                            dateIcon: {
+                                                                position: 'absolute',
+                                                                right: 10,
+                                                                top: 10,
+                                                                width: 17,
+                                                                height: 17,
+                                                                marginLeft: 0
+                                                            },
+                                                            dateInput: {
+                                                                borderRadius: 50,
+                                                                borderColor: '#fff',
+                                                            }
                                                         }}
-                                                        onDateChange={(date) => {this.setState({endDate: date})}}
+                                                        onDateChange={(date) => { this.setState({ endDate: date }) }}
                                                     />
                                                 </View>
                                             </View>
                                         }
-                                </View>
-                            </View>:<View></View>}
+                                    </View>
+                                </View> : <View></View>}
                         </View>
-                        
+
                         <View>
-                            <Text style={[styles.btnTopEdit,{textAlign:'center', marginTop:20}]}>Select Food Type(s)</Text>
+                            <Text style={[styles.btnTopEdit, { textAlign: 'center', marginTop: 20 }]}>Select Food Type(s)</Text>
                             <View style={styles.vDetsilSElection}>
-                                <View style={{alignItems: 'center'}} >
-                                    <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({foodTypeToggle:false})}}>
-                                        <Image source={this.state.foodTypeToggle==false?Images.non_perishable_new_sel:Images.non_perishable_new} style={[styles.vImgBoxCover, !this.state.foodTypeToggle1&& {}]} resizeMode={'contain'} />
+                                <View style={{ alignItems: 'center' }} >
+                                    <TouchableOpacity style={styles.imgBoxCover} onPress={() => { this.setState({ foodTypeToggle: false }) }}>
+                                        <Image source={this.state.foodTypeToggle == false ? Images.non_perishable_new_sel : Images.non_perishable_new} style={[styles.vImgBoxCover, !this.state.foodTypeToggle1 && {}]} resizeMode={'contain'} />
                                     </TouchableOpacity>
                                     <Text style={styles.foodTypeText} >Groceries</Text>
                                 </View>
-                                
-                                <View style={{alignItems: 'center'}} >
-                                    <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({foodTypeToggle:true})}}>
-                                        <Image source={this.state.foodTypeToggle?Images.prepared_sel:Images.prepared} style={styles.vImgBoxCover} resizeMode={'contain'} />
+
+                                <View style={{ alignItems: 'center' }} >
+                                    <TouchableOpacity style={styles.imgBoxCover} onPress={() => { this.setState({ foodTypeToggle: true }) }}>
+                                        <Image source={this.state.foodTypeToggle ? Images.prepared_sel : Images.prepared} style={styles.vImgBoxCover} resizeMode={'contain'} />
                                     </TouchableOpacity>
                                     <Text style={styles.foodTypeText} >Hot meal</Text>
                                 </View>
@@ -410,23 +408,23 @@ export default class CreateListing extends React.Component {
                             <Text style={styles.btnTopEdit}>How many people can you serve?</Text>
                             <Slider
                                 value={this.state.value}
-                                onValueChange={(value) => this.setState({value})}
+                                onValueChange={(value) => this.setState({ value })}
                                 style={styles.sliderS}
                                 maximumTrackTintColor='#f4b9b2'
                                 minimumTrackTintColor='#fff'
                                 thumbTintColor='#ffb660'
                                 maximumValue={500}
-                                trackStyle={{height: 10}}
-                                thumbStyle={{width: 30, height: 30, borderRadius: 15}}/>
-                            {this.sliderValue()}                        
+                                trackStyle={{ height: 10 }}
+                                thumbStyle={{ width: 30, height: 30, borderRadius: 15 }} />
+                            {this.sliderValue()}
                         </View>
                         {this.writeHere()}
-                  </ScrollView>
-               </Image>
-               <AlertModal show={this.state.msgBox} modal={() => this.showDialog(false)} title={this.state.msgText} />
-               <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal} chooseAvatar = {this.chooseAvatar} />
-               <DescriptionModal descriptionModalVisible={this.state.descriptionModalVisible} close={this.closeDescriptionModal}/>
-           </View>
-         )
-     }
- }
+                    </ScrollView>
+                </Image>
+                <AlertModal show={this.state.msgBox} modal={() => this.showDialog(false)} title={this.state.msgText} />
+                <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal} chooseAvatar={this.chooseAvatar} />
+                <DescriptionModal descriptionModalVisible={this.state.descriptionModalVisible} close={this.closeDescriptionModal} />
+            </View>
+        )
+    }
+}
