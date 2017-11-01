@@ -19,14 +19,13 @@ export default class MainScreen extends Component {
 
 
   render() {
-
     return (
       <View style={styles.sidemenuBody}>
         <TouchableOpacity style={styles.sideMneuClose} onPress={() => { this.props.close() }}>
           <Image source={Images.sideMenuClose} style={styles.sideMneuClose} />
         </TouchableOpacity>
         <View style={styles.sidemenuInner}>
-          <Text style={styles.profileName}>{Meteor.user().profile.name}</Text>
+          <Text style={styles.profileName}>{Meteor.user()? Meteor.user().profile.name : null}</Text>
           <View style={styles.sideMenuRowCover1}>
             <TouchableOpacity style={styles.sideMenuRowCover}>
               <Image source={Images.donationIcon} style={styles.donationIcon} />

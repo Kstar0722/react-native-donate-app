@@ -24,33 +24,38 @@ export default class DescriptionModal extends React.Component {
     }
 
     render() {
-        return (
-            <View>
-                <Modal animationType={'fade'} transparent={true} visible={this.props.descriptionModalVisible}
-                    onRequestClose={() => alert()}>
-                    <View style={styles.dContainer}>
-                        <View style={styles.dHeader}></View>
-                        <View style={styles.dHeaderInner}>
-                            <TouchableOpacity style={styles.dLeftHeader} onPress={this.props.close}>
-                                <Icon name='arrow-left' size={20} color='#dd8d6c' />
-                            </TouchableOpacity>
-                            <Text style={styles.dTitle}>Description:</Text>
-                            <TouchableOpacity style={styles.dRightHeader} onPress={this.props.close}>
-                                <Text style={styles.dDoneBtn}>DONE</Text>
-                            </TouchableOpacity>
+        if (this.props.descriptionModalVisible){
+            return (
+                <View>
+                    <Modal animationType={'fade'} transparent={true} visible
+                        onRequestClose={() => alert()}>
+                        <View style={styles.dContainer}>
+                            <View style={styles.dHeader}></View>
+                            <View style={styles.dHeaderInner}>
+                                <TouchableOpacity style={styles.dLeftHeader} onPress={this.props.close}>
+                                    <Icon name='arrow-left' size={20} color='#dd8d6c' />
+                                </TouchableOpacity>
+                                <Text style={styles.dTitle}>Description:</Text>
+                                <TouchableOpacity style={styles.dRightHeader} onPress={this.props.close}>
+                                    <Text style={styles.dDoneBtn}>DONE</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View>
+                                <Text style={styles.entryTxt}>Entry for January 4, 2017 | 10:30 PM</Text>
+                            </View>
+                            <View style={{ flex: 1 }}>
+                                <TextInput style={[styles.mLineText]} multiline={true} editable={true}
+                                    underlineColorAndroid="transparent" value={this.state.descriptionText}
+                                    selectionColor={'#dd8d6c'} onChangeText={(t) => this.shareMessage(t)} />
+                            </View>
+                            <KeyboardSpacer />
                         </View>
-                        <View>
-                            <Text style={styles.entryTxt}>Entry for January 4, 2017 | 10:30 PM</Text>
-                        </View>
-                        <View style={{ flex: 1 }}>
-                            <TextInput style={[styles.mLineText]} multiline={true} editable={true}
-                                underlineColorAndroid="transparent" value={this.state.descriptionText}
-                                selectionColor={'#dd8d6c'} onChangeText={(t) => this.shareMessage(t)} />
-                        </View>
-                        
-                    </View>
-                </Modal>
-            </View>
-        );
+                    </Modal>
+                </View>
+            );
+        } else {
+            return <View />
+        }
+        
     }
 }

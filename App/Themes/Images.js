@@ -186,8 +186,10 @@ const images = {
   feed_community: require('../Images/feed_community.png'),
   message: require('../Images/message.png'),
 
-  phone: require('../Images/phone.png'),
-  groceries_active: require('../Images/groceries_active.png')
+  search_white : require('../Images/search_white.png'),
+  circle : require('../Images/circle.png'),
+  setting : require('../Images/setting.png'),
+  phone: require('../Images/phone.png')
 
   }
 

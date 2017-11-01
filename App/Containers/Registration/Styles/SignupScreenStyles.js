@@ -21,7 +21,9 @@ export default StyleSheet.create({
         borderBottomColor: '#fff',
         borderBottomWidth: 0,
         opacity: 1,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        fontFamily: 'Ubuntu',
+        fontWeight : '600'
     },
 
     multi_text: {
@@ -36,6 +38,8 @@ export default StyleSheet.create({
         borderWidth: 1,
         opacity: 1,
         alignSelf: 'center',
+        fontFamily: 'Ubuntu',
+        fontWeight : '600'
         //    marginBottom : 130
     },
 
@@ -69,7 +73,9 @@ export default StyleSheet.create({
     },
 
     but_continue: {
-        opacity: 0.3
+        opacity: 0.7,
+        fontFamily: 'Ubuntu',
+        fontWeight : '600'
     },
 
     label: {
@@ -77,7 +83,9 @@ export default StyleSheet.create({
         marginBottom: 10,
         fontSize: 16,
         backgroundColor: 'transparent',
-        color: 'white'
+        color: 'white',
+        fontFamily: 'Ubuntu',
+        fontWeight : '600'
     },
 
     operation_button: {
@@ -107,13 +115,17 @@ export default StyleSheet.create({
     operation_label: {
         fontSize: 10,
         backgroundColor: 'transparent',
-        color: 'white'
+        color: 'white',
+        fontFamily: 'Ubuntu',
+        fontWeight : '600'
     },
 
     operation_label_active: {
         fontSize: 10,
         backgroundColor: 'transparent',
-        color: '#E36679'
+        color: '#E36679',
+        fontFamily: 'Ubuntu',
+        fontWeight : '600'
     },
 
     operation_view: {
@@ -149,7 +161,9 @@ export default StyleSheet.create({
         width : "60%",
         textAlign: 'center',
         color : "#E36679",
-        backgroundColor : 'transparent'
+        backgroundColor : 'transparent',
+        fontFamily: 'Ubuntu',
+        fontWeight : '600'
     },
 
     back_btn: {
@@ -180,7 +194,9 @@ export default StyleSheet.create({
         color: 'white',
         marginTop: 10,
         marginBottom: 30,
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        fontFamily: 'Ubuntu',
+        fontWeight : '600'
     },
 
     slide_text1: {
@@ -232,7 +248,9 @@ export default StyleSheet.create({
         fontSize: 14,
         backgroundColor: 'transparent',
         marginLeft : 20,
-        width: '65%'
+        width: '65%',
+        fontFamily: 'Ubuntu',
+        fontWeight : '600'
       },
 
       toggle: {
@@ -243,7 +261,9 @@ export default StyleSheet.create({
         backgroundColor: 'transparent',
         lineHeight: 30,
         textAlign: 'right',
-        marginRight: 5
+        marginRight: 5,
+        fontFamily: 'Ubuntu',
+        fontWeight : '600'
       },
 
 })

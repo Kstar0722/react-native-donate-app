@@ -17,7 +17,10 @@ export default StyleSheet.create({
         fontSize: 15,
         color: 'white',
         position: 'absolute',
-        bottom: 40
+        bottom: 40,
+        fontFamily : 'Ubuntu',
+        fontWeight : 'bold',
+        fontStyle : 'italic'
     },
     login: {
         alignItems: 'center',
@@ -37,7 +40,9 @@ export default StyleSheet.create({
         borderBottomColor:'#fff',
         borderBottomWidth: 1,
         opacity: 1,
-        alignSelf: 'center'  
+        alignSelf: 'center' ,
+        fontFamily : 'Ubuntu',
+        fontWeight: '600'
     },
     bodyContainer: {
        alignItems: 'center',
@@ -45,6 +50,12 @@ export default StyleSheet.create({
        paddingTop: 70,
        resizeMode: 'cover'
      
+    }  ,
+      button_login_txt : {
+        width : 42,
+        height : 14,
+        resizeMode : 'contain'
+
     }
     
 })

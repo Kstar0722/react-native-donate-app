@@ -40,7 +40,10 @@ export default StyleSheet.create({
         fontSize: 15,
         color: 'white',
         position: 'absolute',
-        bottom: 40
+        bottom: 40,
+        fontFamily : 'Ubuntu',
+        fontWeight : 'bold',
+        fontStyle : 'italic'
     },
 
     back_btn: {
@@ -78,7 +81,9 @@ export default StyleSheet.create({
         backgroundColor: 'transparent',
         fontSize: 16,
         color: '#666666',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        fontFamily : 'Ubuntu',
+        fontWeight : '600'
 
     },
 
@@ -87,6 +92,20 @@ export default StyleSheet.create({
         height: 20,
         position: 'absolute',
         left: 40
+    },
+
+    button_txt : {
+        width : '100%',
+        backgroundColor : 'transparent',
+        fontFamily : 'Ubuntu',
+        fontSize : 14
+    },
+
+    button_login_txt : {
+        width : 42,
+        height : 14,
+        resizeMode : 'contain'
+
     }
 
 })

@@ -13,6 +13,8 @@ import Description from '../Containers/Home/Screens/Description'
 import Setting from '../Containers/Home/Screens/Setting'
 import Bussiness from '../Containers/Home/Screens/Bussiness'
 import Operation from '../Containers/Home/Screens/Operation'
+import TeamScreen from '../Containers/Home/Screens/TeamScreen'
+import AddMemberScreen from '../Containers/Home/Screens/AddMemberScreen'
 import Meteor from 'react-native-meteor'
 import styles from './Styles/NavigationStyles'
 
@@ -27,7 +29,7 @@ const PrimaryNav = StackNavigator({
   AddItemsModal: { screen: AddItemsModal },
   LoginScreen: { screen: LoginScreen },
   /*===============================*/
-  FindDonation: { screen: FindDonation },
+  FindDonation: { screen: /*FindDonation*/ FindDonation },
   DonationView: { screen: DonationView },
   CreateListing: {screen: CreateListing},
   Description: {screen: Description},
@@ -35,6 +37,8 @@ const PrimaryNav = StackNavigator({
   Bussiness:{screen:Bussiness},
   Operation:{screen:Operation},
   CompletedDonationScreen: { screen: CompletedDonationScreen },
+  TeamScreen : {screen : TeamScreen},
+  AddMemberScreen : {screen : AddMemberScreen}
 }, {
 //    initialRouteName: Meteor.userId() !== null ? 'FindDonation' : 'CreateListing',
     initialRouteName: 'LaunchScreen',

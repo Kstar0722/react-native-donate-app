@@ -15,9 +15,9 @@ import { RNS3 } from 'react-native-aws3'
 import Meteor from 'react-native-meteor'
 import AppConfig from '../../../Config'
 import { guid, validateEmail } from '../../../Transforms'
-_dText='';
+_dText = '';
 export default class CreateListing extends React.Component {
-    constructor () {
+    constructor() {
         super()
         currentDate = new Date()
         this.state = {
@@ -31,9 +31,9 @@ export default class CreateListing extends React.Component {
             endDate:dateFormat(currentDate, 'mmm d, yyyy   HH:MM TT'),
             weekday: [false, false, false, false, false, false, false],
             picturemodalVisible: false,
-            descriptionModalVisible:false,
-            avatar : null,
-            startDate:"",
+            descriptionModalVisible: false,
+            avatar: null,
+            startDate: "",
             isDateTimePickerVisible: false,
             Address: "",
             isAddressPromptVisible : false,
@@ -43,47 +43,46 @@ export default class CreateListing extends React.Component {
     }
 
     static navigationOptions = {
-      header:null,
+        header: null,
     }
 
-    toggleSwitch (val) {
+    toggleSwitch(val) {
         this.setState({
             weekday: [false, false, false, false, false, false, false],
             endDate: '',
-            repeatFlag:3,
+            repeatFlag: 3,
             switchValue: val
         })
     }
-    
-    switchToggle(){
-        let t=this.state.switchValue?'Yes':'No';
-        if(t){
-            return(<Text style={styles.btnEdit}>{t}</Text>);
+
+    switchToggle() {
+        let t = this.state.switchValue ? 'Yes' : 'No';
+        if (t) {
+            return (<Text style={styles.btnEdit}>{t}</Text>);
         }
     }
-    sliderValue (){
-        if(this.state.value){
-            let netWidth=Dimensions.get('window').width-(55);
-            let leftValueSPace=(netWidth*this.state.value)/500;
-            return(<Text style={[styles.slVs, {marginLeft:leftValueSPace+15}]}>{this.state.value.toFixed(0)}</Text>);
-        }else{
-            return(<Text style={[styles.slVs, {marginLeft:25}]}>{0}</Text>);
+    sliderValue() {
+        if (this.state.value) {
+            let netWidth = Dimensions.get('window').width - (55);
+            let leftValueSPace = (netWidth * this.state.value) / 500;
+            return (<Text style={[styles.slVs, { marginLeft: leftValueSPace + 15 }]}>{this.state.value.toFixed(0)}</Text>);
+        } else {
+            return (<Text style={[styles.slVs, { marginLeft: 25 }]}>{0}</Text>);
         }
     }
-    repeatEvent(val)
-    {
+    repeatEvent(val) {
         this.setState({
-            
+
         })
-        if(this.state.repeatFlag == val)
+        if (this.state.repeatFlag == val)
             this.setState({
-                repeatFlag:3,
+                repeatFlag: 3,
                 weekday: [false, false, false, false, false, false, false],
                 endDate: ''
             });
         else
             this.setState({
-                repeatFlag:val,
+                repeatFlag: val,
                 weekday: [false, false, false, false, false, false, false],
                 endDate: ''
             })
@@ -95,7 +94,7 @@ export default class CreateListing extends React.Component {
     }
     // chooseImage
     chooseAvatar = (avatar) => {
-        this.setState({avatar : avatar, picturemodalVisible : false})
+        this.setState({ avatar: avatar, picturemodalVisible: false })
     }
 
     closePictureModal = () => {
@@ -106,7 +105,7 @@ export default class CreateListing extends React.Component {
 
     closeDescriptionModal = () => {
         this.setState({
-          descriptionModalVisible: false
+            descriptionModalVisible: false
         })
     }
     showDialog = (show, title) => {
@@ -121,8 +120,7 @@ export default class CreateListing extends React.Component {
         return false
     }
 
-    dataPost()
-    {
+    dataPost() {
         if (!this.validate()) {
             this.showDialog(true, "You have to provide correct information")
             return
@@ -150,7 +148,7 @@ export default class CreateListing extends React.Component {
             operationDays: this.state.weekday,
             endDate: this.state.endDate
         }
-        if(this.state.repeatFlag != 3)
+        if (this.state.repeatFlag != 3)
             postData.repeatType = this.state.repeatFlag
         else
             postData.repeatType = 0          
@@ -169,44 +167,44 @@ export default class CreateListing extends React.Component {
         })
     }
 
-    
-  writeHere = () => {
-    let t='';
-      if(_dText){
-          if(_dText.length>50){
-              t=_dText.substring(0, 49)+'...';
-          }else{
-            t=_dText;
-          }
 
-        return (
-            <View style={styles.editContent}>
-                <TouchableOpacity  onPress={()=>this.setState({descriptionModalVisible: true})}>
-                    <Text style={styles.write1}>EDIT</Text>
-                </TouchableOpacity>
-                <Text style={styles.write3}>{t}</Text>
-                <TouchableOpacity onPress={() => this.dataPost()} style={{width: 80,height: 80, right:0, bottom:0, position:'absolute', zIndex:999999}}>
-                    <Image source={Images.markPostIcon}  style={{width: 80,height: 80}}/>
-                </TouchableOpacity>
-          </View>
-        );
-    }else{
-        return (
-            <View >
-                <TouchableOpacity  onPress={()=>this.setState({descriptionModalVisible: true})}>
-                <View style={styles.rowStyle}>
-                    <Text style={styles.contentText}>Description</Text>                            
-                    <Image source={Images.rightArraw_small}></Image>
+    writeHere = () => {
+        let t = '';
+        if (_dText) {
+            if (_dText.length > 50) {
+                t = _dText.substring(0, 49) + '...';
+            } else {
+                t = _dText;
+            }
+
+            return (
+                <View style={styles.editContent}>
+                    <TouchableOpacity onPress={() => this.setState({ descriptionModalVisible: true })}>
+                        <Text style={styles.write1}>EDIT</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.write3}>{t}</Text>
+                    <TouchableOpacity onPress={() => this.dataPost()} style={{ width: 80, height: 80, right: 0, bottom: 0, position: 'absolute', zIndex: 999999 }}>
+                        <Image source={Images.markPostIcon} style={{ width: 80, height: 80 }} />
+                    </TouchableOpacity>
                 </View>
-                </TouchableOpacity>
-            </View>
+            );
+        } else {
+            return (
+                <View >
+                    <TouchableOpacity onPress={() => this.setState({ descriptionModalVisible: true })}>
+                        <View style={styles.rowStyle}>
+                            <Text style={styles.contentText}>Description</Text>
+                            <Image source={Images.rightArraw_small}></Image>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             );
         }
     }
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
-    
+
     _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
-  
+
     _handleDatePicked = (date) => {
           
           cDate = dateFormat(date, 'mmm d, yyyy HH:MM TT')
@@ -228,23 +226,23 @@ export default class CreateListing extends React.Component {
                        <Text style={styles.refedText}>Give Food</Text>
                    </View>
 
-                  <ScrollView>   
+                    <ScrollView>
                         <View style={styles.buttonGroup}>
-                            <View style={{alignItems:'center'}}>
-                                <View style={{width:width/3,height:71, alignItems:'center',justifyContent: 'space-around'}}>
-                                    <Image source={this.state.avatar ? this.state.avatar : Images.caemraIcon_small} style={this.state.avatar?styles.camera:""}></Image>
+                            <View style={{ alignItems: 'center' }}>
+                                <View style={{ width: width / 3, height: 71, alignItems: 'center', justifyContent: 'space-around' }}>
+                                    <Image source={this.state.avatar ? this.state.avatar : Images.caemraIcon_small} style={this.state.avatar ? styles.camera : ""}></Image>
                                 </View>
-                                
-                                <TouchableOpacity onPress = {() => this.setState({picturemodalVisible : true})} >
-                                    {this.state.avatar ?<Text style={styles.btnTopEdit}>Edit</Text>:<Text style={styles.btnTopEdit}>Upload Image</Text>}
+
+                                <TouchableOpacity onPress={() => this.setState({ picturemodalVisible: true })} >
+                                    {this.state.avatar ? <Text style={styles.btnTopEdit}>Edit</Text> : <Text style={styles.btnTopEdit}>Upload Image</Text>}
                                 </TouchableOpacity>
                             </View>
-                            <View style={{alignItems:'center'}}>
-                                <View style={{width:width/3,height:71, alignItems:'center'}}>
-                                    {this.state.startDate==""?<Image source={Images.date}/>:<Text style ={styles.stateDateText}>{this.state.startDate}</Text>}
+                            <View style={{ alignItems: 'center' }}>
+                                <View style={{ width: width / 3, height: 71, alignItems: 'center' }}>
+                                    {this.state.startDate == "" ? <Image source={Images.date} /> : <Text style={styles.stateDateText}>{this.state.startDate}</Text>}
                                 </View>
                                 <TouchableOpacity onPress={this._showDateTimePicker} >
-                                    {this.state.startDate==""?<Text style={styles.btnTopEdit}>Set Date</Text>:<Text style={styles.btnTopEdit}>Edit</Text>}
+                                    {this.state.startDate == "" ? <Text style={styles.btnTopEdit}>Set Date</Text> : <Text style={styles.btnTopEdit}>Edit</Text>}
                                 </TouchableOpacity>
                                 <DateTimePicker
                                 mode='datetime'
@@ -256,37 +254,37 @@ export default class CreateListing extends React.Component {
                                 titleIOS='Select Date'
                                 /> 
                             </View>
-                            <View style={{alignItems:'center'}}>
-                                <View style={{width:width/3,height:71, alignItems:'center'}}>
-                                    <Image source={this.state.Address==""?Images.location_n:Images.location} style={this.state.Address!=""&&{marginVertical:20}}/>
-                                </View>                                
-                                
-                                <TouchableOpacity onPress={() => this.setState({isAddressPromptVisible: true})} style={{flex:1}}>
-                                    {this.state.Address==""?<Text style={styles.contentText}>Location</Text>:<Text style={styles.contentText}>Edit</Text>}
+                            <View style={{ alignItems: 'center' }}>
+                                <View style={{ width: width / 3, height: 71, alignItems: 'center' }}>
+                                    <Image source={this.state.Address == "" ? Images.location_n : Images.location} style={this.state.Address != "" && { marginVertical: 20 }} />
+                                </View>
+
+                                <TouchableOpacity onPress={() => this.setState({ isAddressPromptVisible: true })} style={{ flex: 1 }}>
+                                    {this.state.Address == "" ? <Text style={styles.contentText}>Location</Text> : <Text style={styles.contentText}>Edit</Text>}
                                 </TouchableOpacity>
                             </View>
                             <Prompt
                                 title="Your Address"
                                 placeholder="Start typing"
                                 defaultValue={this.state.Address}
-                                visible={ this.state.isAddressPromptVisible }
-                                onCancel={ (value) => this.setState({
+                                visible={this.state.isAddressPromptVisible}
+                                onCancel={(value) => this.setState({
                                     isAddressPromptVisible: false,
                                     Address: value
-                                }) }
-                                    onSubmit={ (value) => this.setState({
+                                })}
+                                onSubmit={(value) => this.setState({
                                     isAddressPromptVisible: false,
                                     Address: value
-                                }) }/>
+                                })} />
                         </View>
-                        
-                        <View style={styles.bottomLine}/>
-                        <View style={{borderBottomColor: '#e09579',borderBottomWidth: 2}}>
+
+                        <View style={styles.bottomLine} />
+                        <View style={{ borderBottomColor: '#e09579', borderBottomWidth: 2 }}>
                             <View style={styles.rowRecurrStyle}>
-                                <Text style={styles.contentText}>Is this a recurring event?</Text>                            
+                                <Text style={styles.contentText}>Is this a recurring event?</Text>
                                 <Switch onValueChange={this.toggleSwitch} value={this.state.switchValue}
                                     onTintColor="#FFFFFF"
-                                    thumbTintColor="#FFAD55"/>
+                                    thumbTintColor="#FFAD55" />
                             </View>
                             {this.state.switchValue?
                             <View style={styles.rowStyleRepeat}>
@@ -330,7 +328,7 @@ export default class CreateListing extends React.Component {
                                             />
                                         </View>}
                                         {this.state.repeatFlag == 1 &&
-                                            <View style={{marginTop:0}}>
+                                            <View style={{ marginTop: 0 }}>
                                                 <Text style={styles.btnTopEdit}>Day(s):</Text>
                                                 <Text style={styles.btnTopEdit}>:</Text>
                                                 <View style={styles.operation_view}>
@@ -363,7 +361,7 @@ export default class CreateListing extends React.Component {
                                                         <Text style={this.state.weekday[6] ? styles.operation_label_active : styles.operation_label}>SAT</Text>
                                                     </TouchableOpacity>
                                                 </View>
-                                                <View style={{alignItems:'center'}}>
+                                                <View style={{ alignItems: 'center' }}>
                                                     <Text style={styles.btnTopEdit}>End Date:</Text>
                                                     <DatePicker
                                                         style={styles.datePickerStyle}
@@ -373,32 +371,32 @@ export default class CreateListing extends React.Component {
                                                         format="MMM D, YYYY   hh:mm A"
                                                         confirmBtnText="Confirm"
                                                         cancelBtnText="Cancel"
-                                                        iconSource = {Images.date_smallIcon}   
-                                                        customStyles={{                                                                                         
-                                                        dateIcon: {
-                                                            position: 'absolute',
-                                                            right: 10,
-                                                            top: 10,
-                                                            width:17,
-                                                            height:17,
-                                                            marginLeft: 0
-                                                        },
-                                                        dateInput: {
-                                                            borderRadius:50,
-                                                            borderColor:'#fff',
-                                                        }
+                                                        iconSource={Images.date_smallIcon}
+                                                        customStyles={{
+                                                            dateIcon: {
+                                                                position: 'absolute',
+                                                                right: 10,
+                                                                top: 10,
+                                                                width: 17,
+                                                                height: 17,
+                                                                marginLeft: 0
+                                                            },
+                                                            dateInput: {
+                                                                borderRadius: 50,
+                                                                borderColor: '#fff',
+                                                            }
                                                         }}
-                                                        onDateChange={(date) => {this.setState({endDate: date})}}
+                                                        onDateChange={(date) => { this.setState({ endDate: date }) }}
                                                     />
                                                 </View>
                                             </View>
                                         }
-                                </View>
-                            </View>:<View></View>}
+                                    </View>
+                                </View> : <View></View>}
                         </View>
-                        
+
                         <View>
-                            <Text style={[styles.btnTopEdit,{textAlign:'center', marginTop:20}]}>Select Food Type(s)</Text>
+                            <Text style={[styles.btnTopEdit, { textAlign: 'center', marginTop: 20 }]}>Select Food Type(s)</Text>
                             <View style={styles.vDetsilSElection}>
                                 <View style={{alignItems: 'center'}} >
                                     <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({foodTypeToggle:false})}}>
@@ -406,10 +404,10 @@ export default class CreateListing extends React.Component {
                                     </TouchableOpacity>
                                     <Text style={styles.foodTypeText} >Groceries</Text>
                                 </View>
-                                
-                                <View style={{alignItems: 'center'}} >
-                                    <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({foodTypeToggle:true})}}>
-                                        <Image source={this.state.foodTypeToggle?Images.prepared_sel:Images.prepared} style={styles.vImgBoxCover} resizeMode={'contain'} />
+
+                                <View style={{ alignItems: 'center' }} >
+                                    <TouchableOpacity style={styles.imgBoxCover} onPress={() => { this.setState({ foodTypeToggle: true }) }}>
+                                        <Image source={this.state.foodTypeToggle ? Images.prepared_sel : Images.prepared} style={styles.vImgBoxCover} resizeMode={'contain'} />
                                     </TouchableOpacity>
                                     <Text style={styles.foodTypeText} >Hot meal</Text>
                                 </View>
@@ -419,23 +417,23 @@ export default class CreateListing extends React.Component {
                             <Text style={styles.btnTopEdit}>How many people can you serve?</Text>
                             <Slider
                                 value={this.state.value}
-                                onValueChange={(value) => this.setState({value})}
+                                onValueChange={(value) => this.setState({ value })}
                                 style={styles.sliderS}
                                 maximumTrackTintColor='#f4b9b2'
                                 minimumTrackTintColor='#fff'
                                 thumbTintColor='#ffb660'
                                 maximumValue={500}
-                                trackStyle={{height: 10}}
-                                thumbStyle={{width: 30, height: 30, borderRadius: 15}}/>
-                            {this.sliderValue()}                        
+                                trackStyle={{ height: 10 }}
+                                thumbStyle={{ width: 30, height: 30, borderRadius: 15 }} />
+                            {this.sliderValue()}
                         </View>
                         {this.writeHere()}
-                  </ScrollView>
-               </Image>
-               <AlertModal show={this.state.msgBox} modal={() => this.showDialog(false)} title={this.state.msgText} />
-               <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal} chooseAvatar = {this.chooseAvatar} />
-               <DescriptionModal descriptionModalVisible={this.state.descriptionModalVisible} close={this.closeDescriptionModal}/>
-           </View>
-         )
-     }
- }
+                    </ScrollView>
+                </Image>
+                <AlertModal show={this.state.msgBox} modal={() => this.showDialog(false)} title={this.state.msgText} />
+                <PictureModal picturemodalVisible={this.state.picturemodalVisible} close={this.closePictureModal} chooseAvatar={this.chooseAvatar} />
+                <DescriptionModal descriptionModalVisible={this.state.descriptionModalVisible} close={this.closeDescriptionModal} />
+            </View>
+        )
+    }
+}

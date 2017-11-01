@@ -47,7 +47,9 @@ export default StyleSheet.create({
     color: 'white',
     fontSize: 14,
     backgroundColor: 'transparent',
-    width: '70%'
+    width: '70%',
+    fontFamily: 'Ubuntu',
+    fontWeight : '600'
   },
 
   toggle: {
@@ -79,6 +81,8 @@ export default StyleSheet.create({
     fontSize: 12,
     width: 70,
     textAlign: 'center',
+    fontFamily: 'Ubuntu',
+    fontWeight : '600'
   },
 
   car_inactive: {
@@ -110,7 +114,9 @@ export default StyleSheet.create({
     width: 30,
     color: '#fff',
     opacity: 1,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    fontFamily: 'Ubuntu',
+    fontWeight : '600'
   },
 
   foodTypeContainer: {
@@ -126,14 +132,18 @@ export default StyleSheet.create({
     color: 'white',
     fontSize: 14,
     backgroundColor: 'transparent',
-    marginBottom : 10
+    marginBottom : 10,
+    fontFamily: 'Ubuntu',
+    fontWeight : '600'
   },
 
   subLabel : {
     color: 'white',
     fontSize: 10,
     backgroundColor: 'transparent',
-    marginBottom : 20
+    marginBottom : 20,
+    fontFamily: 'Ubuntu',
+    fontWeight : '600'
   },
 
   rowDirection : {

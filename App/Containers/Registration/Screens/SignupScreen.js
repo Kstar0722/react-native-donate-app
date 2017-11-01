@@ -135,7 +135,7 @@ export default class SignupScreen extends Component {
                             </View>
                         </View>
                         {
-                            state.params.bType === false ? this.switch_business() : this.switch_signup()
+                            state.params.bType === 0 ? this.switch_business() : this.switch_signup()
                         }
                     </View>
 
@@ -185,7 +185,7 @@ export default class SignupScreen extends Component {
                 phone: this.state.phone,
                 bRescueFood: this.state.bRescueFood,
                 bCreateFoodDonation: this.state.bCreateFoodDonation,
-                bType: this.props.navigation.state.params.bType
+                bType: this.props.navigation.state.params.bType === 0 ? false : true
             }
         }
         const avatar = this.state.avatar
@@ -223,18 +223,29 @@ export default class SignupScreen extends Component {
                     phone: this.state.phone,
                     bRescueFood: this.state.bRescueFood,
                     bCreateFoodDonation: this.state.bCreateFoodDonation,
-                    bType: this.props.navigation.state.params.bType
+                    bType: this.props.navigation.state.params.bType === 0 ? false : true
                 }
             }
+            if (this.props.navigation.state.params.bType === 1) {
+                Meteor.call('onCreateUser', user, (err, res) => {
+                    if (err) {
+                        console.log(err.message)
+                        this.showDialog(true, err.message)
+                    } else {
+                        this.props.navigation.navigate('FindDonation')
+                    }
+                })
+            } else {
+                Meteor.call('acceptTeamMember', user, (err, res) => {
+                    if (err) {
+                        console.log(err.message)
+                        this.showDialog(true, err.message)
+                    } else {
+                        this.props.navigation.navigate('FindDonation')
+                    }
+                })
+            }
 
-            Meteor.call('onCreateUser', user, (err, res) => {
-                if (err) {
-                    console.log(err.message)
-                    this.showDialog(true, err.message)
-                } else {
-                    this.props.navigation.navigate('FindDonation')
-                }
-            })
         })
     }
 }
