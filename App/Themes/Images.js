@@ -186,7 +186,8 @@ const images = {
   feed_community: require('../Images/feed_community.png'),
   message: require('../Images/message.png'),
 
-  phone: require('../Images/phone.png')
+  phone: require('../Images/phone.png'),
+  groceries_active: require('../Images/groceries_active.png')
 
   }
 

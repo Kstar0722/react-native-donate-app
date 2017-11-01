@@ -12,8 +12,7 @@ import PictureModal from '../../../Components/Modals/pictureModal';
 export default class MainScreen extends Component {
     constructor() {
         super()
-        profile = Meteor.user().profile
-        console.log(profile.businessInfo.vehicles.vans)
+        
         this.state = { 
             toggleRescue:profile.businessInfo.bContainer,
             toggleRescueone:profile.businessInfo.bReceiveDonation,

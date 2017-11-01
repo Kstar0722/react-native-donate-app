@@ -402,7 +402,7 @@ export default class CreateListing extends React.Component {
                             <View style={styles.vDetsilSElection}>
                                 <View style={{alignItems: 'center'}} >
                                     <TouchableOpacity style={styles.imgBoxCover} onPress={()=>{this.setState({foodTypeToggle:false})}}>
-                                        <Image source={this.state.foodTypeToggle==false?Images.non_perishable_new_sel:Images.groceriesIcon} style={[styles.vImgBoxCover, !this.state.foodTypeToggle1&& {}]} resizeMode={'contain'} />
+                                        <Image source={this.state.foodTypeToggle==false?Images.groceries_active:Images.groceriesIcon} style={[styles.vImgBoxCover, !this.state.foodTypeToggle1&& {}]} resizeMode={'contain'} />
                                     </TouchableOpacity>
                                     <Text style={styles.foodTypeText} >Groceries</Text>
                                 </View>

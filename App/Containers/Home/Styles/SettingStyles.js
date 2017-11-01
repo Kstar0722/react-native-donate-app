@@ -146,7 +146,7 @@ export default StyleSheet.create({
   bussinesstabsmLabel:{
     color:'#000',
     fontFamily: 'Ubuntu',
-    fontSize:20,
+    fontSize:18,
   },
   right_gray:{
     width:15,
