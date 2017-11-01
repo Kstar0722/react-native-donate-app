@@ -19,12 +19,7 @@ import DonationDetail from './containers/DonationDetail'
 import DonationList from './containers/DonationList'
 import MessageScreen from './containers/MessageScreen'
 import ReservedDonationDetail from './containers/ReservedDonationDetail'
-<<<<<<< HEAD
-//import CreateListing from './containers/CreateListing'
-
-=======
 import CreateListing from './containers/CreateListing'
->>>>>>> eduardo
 import completedDonationScreen  from './containers/completedDonationScreen'
 
 import ViewListings from './containers/ViewListings'
@@ -50,11 +45,6 @@ const PrimaryNav = StackNavigator({
   ProfileScreen: {screen: ProfileScreen},
   ReservedDonationDetail: {screen: ReservedDonationDetail},
   completedDonationScreen: { screen: completedDonationScreen},
-<<<<<<< HEAD
-  //CreateListing: {screen:CreateListing}
-}, {
-    initialRouteName: 'RescueProgress',
-=======
   CreateListing: {screen:CreateListing},
 
   DonationList: {screen: DonationList},
@@ -64,7 +54,6 @@ const PrimaryNav = StackNavigator({
   
 }, {
     initialRouteName: 'CircularMenuTest',
->>>>>>> eduardo
     heaerStyle: styles.header
   })
 export default PrimaryNav

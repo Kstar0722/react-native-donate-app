@@ -15,8 +15,6 @@ export default class MainScreen extends Component {
         super()
         
         let profile = Meteor.user().profile
-        console.log("meteor test")
-        console.log(profile.image)
         this.state = { 
             avatar: profile.image,
             
