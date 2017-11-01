@@ -53,7 +53,7 @@ export default class LaunchScreen extends Component {
             if (err) {
                 this.showDialog(true, err.message)
             } else {
-                this.props.navigation.navigate("TeamScreen")
+                this.props.navigation.navigate("Setting")
             }
         
         })
