@@ -22,8 +22,8 @@ export default class LaunchScreen extends Component {
             msgText: "",
             position: 0,
             interval: null,
-            email: "",
-            password: ""
+            email: "kstar123@gmail.com",
+            password: "KingStar1"
         }
         this.showDialog = this.showDialog.bind(this);
         this.login = this.login.bind(this);

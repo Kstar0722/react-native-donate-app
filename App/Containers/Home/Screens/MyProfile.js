@@ -83,9 +83,9 @@ export default class MainScreen extends Component {
             return (
                 <View style={[styles.bussinesstab, styles.arrowSpace]}>
                     <TouchableOpacity  onPress={()=>this.setState({descriptionModalVisible: true})}>
-                        <Text style={styles.bussinesstabsmTitle}>EDIT</Text>
+                        <Text style={styles.bussinesstabsmLabel}>EDIT</Text>
                     </TouchableOpacity>
-                    <Text style={styles.toggleWidth}>{t}</Text>
+                    <Text style={[styles.toggleWidth1, styles.bussinesstabsmTitle]}>{t}</Text>
               </View>
             );
         }else{
@@ -93,7 +93,7 @@ export default class MainScreen extends Component {
                 <View >
                     <TouchableOpacity  onPress={()=>this.setState({descriptionModalVisible: true})}>
                     <View style={[styles.bussinesstab, styles.arrowSpace]}>
-                        <Text style={styles.bussinesstabsmTitle}>Description</Text>                            
+                        <Text style={styles.bussinesstabsmTitle}>Business Description</Text>                            
                         <Image source={Images.right_gray} style={styles.right_gray} />
                     </View>
                     </TouchableOpacity>
@@ -155,7 +155,7 @@ export default class MainScreen extends Component {
     settingTabShow()
     {
         return(
-            <ScrollView style={{flex:1}}>
+            <View style={{flex:1}}>
                 <View style={styles.inputContainer}>
                     <View style={styles.inputContainerInner}>
                     <Image source={Images.nuser} style={styles.lIcon} />
@@ -201,7 +201,7 @@ export default class MainScreen extends Component {
                         placeholder="User PhoneNumber"
                         editable = {true}
                         onChangeText={(text) => this.setState({userPhoneNumber: text})}
-                        style={styles.inputc} 
+                        style={[styles.inputc,{fontWeight:'bold'}]} 
                         value={this.state.userPhoneNumber}
                         />
                     </View>
@@ -213,7 +213,7 @@ export default class MainScreen extends Component {
                         placeholder="User Address"
                         editable = {true}
                         onChangeText={(text) => this.setState({userAddress: text})}
-                        style={styles.inputc} 
+                        style={[styles.inputc,{fontWeight:'bold'}]} 
                         value={this.state.userAddress} 
                         />
                     </View>
@@ -221,15 +221,15 @@ export default class MainScreen extends Component {
                 <TouchableOpacity style={styles.saveBtn} onPress={() => this.upDateData()}>
                     <Text style={styles.saveBtn_button}>SAVE</Text>
                 </TouchableOpacity>
-            </ScrollView>
+            </View>
         )
     }
     bussinessTabShow()
     {
         return (
-            <ScrollView>
+            <View style={{flex:1}}>
                 <View style={styles.bussinesstab}>
-                <Text style={[styles.bussinesstabsmTitle, {fontSize:14, marginBottom:10}]}>Business Name</Text>
+                <Text style={[styles.bussinesstabsmTitle, {marginBottom:10}]}>Business Name</Text>
                   <TextInput
                     placeholder="Business Name"
                     editable = {true}
@@ -239,7 +239,7 @@ export default class MainScreen extends Component {
                     />
               </View>
               <View style={styles.bussinesstab}>
-                <Text style={[styles.bussinesstabsmTitle, {fontSize:14, marginBottom:10}]}>Business Address</Text>
+                <Text style={[styles.bussinesstabsmTitle, {marginBottom:10}]}>Business Address</Text>
                   <TextInput
                     placeholder="Business Address"
                     editable = {true}
@@ -249,7 +249,7 @@ export default class MainScreen extends Component {
                     />
               </View>
               <View style={styles.bussinesstab}>
-                  <Text style={[styles.bussinesstabsmTitle, {fontSize:14, marginBottom:10}]}>Business-EIN</Text>
+                  <Text style={[styles.bussinesstabsmTitle, {marginBottom:10, fontWeight:'bold'}]}>Business-EIN</Text>
                   <TextInput
                     placeholder="Business-EIN"
                     editable = {true}
@@ -275,26 +275,26 @@ export default class MainScreen extends Component {
               <TouchableOpacity style={styles.saveBtn} onPress={() => this.upDateData()}>
                 <Text style={styles.saveBtn_button}>SAVE</Text>
             </TouchableOpacity>
-        </ScrollView>
+        </View>
         )
     }
     operationTabShow()
     {
         return (
-            <ScrollView>
-                <View style={styles.toggleContainer}>
+            <View style={{flex:1}}>
+                <View style={[styles.toggleContainer, {marginBottom:10}]}>
                     <Text style={[styles.bussinesstabsmTitle,styles.toggleWidth]}>Can you receive food donations at this location?</Text>
                     <Text style={styles.toggle}>{this.state.toggleRescue?"YES":"NO"}</Text>
                     <Switch onValueChange={(val) => this.setState({toggleRescue:val})} value={this.state.toggleRescue}
                         onTintColor='#FFFFFF' thumbTintColor="#FFB660" />
                 </View>
-                <View style={styles.toggleContainer}>
+                <View style={[styles.toggleContainer, {marginBottom:15}]}>
                     <Text style={[styles.bussinesstabsmTitle,styles.toggleWidth]}>Do you have containers for the food if the donor cannot provide them?</Text>
                     <Text style={styles.toggle}>{this.state.toggleRescueone?"YES":"NO"}</Text>
                     <Switch onValueChange={(val) => this.setState({toggleRescueone:val})} value={this.state.toggleRescueone}
                         onTintColor='#FFFFFF' thumbTintColor="#FFB660" />
                 </View>
-                <View style={styles.toggleContainer}>
+                <View style={[styles.toggleContainer, {marginBottom:15}]}>
                     <Text style={[styles.bussinesstabsmTitle,styles.toggleWidth]}>Do you have containers for the food if the donor cannot provide them?</Text>
                     <Text style={styles.toggle}>{this.state.toggleRescuetwo?"YES":"NO"}</Text>
                     <Switch onValueChange={(val) => this.setState({toggleRescuetwo:val})} value={this.state.toggleRescuetwo}
@@ -317,19 +317,22 @@ export default class MainScreen extends Component {
                     <TextInput
                         editable = {true}
                         onChangeText={(text) => this.setState({countOne: text})}
-                        style={[styles.bussinesstabsmTitleone, {marginLeft:20}]} 
+                        keyboardType='phone-pad'
+                        style={[styles.bussinesstabsmTitleone, {fontSize:15, fontWeight:'bold', marginLeft:30}]} 
                         value={this.state.countOne}
                     />
                     <TextInput
                         editable = {true}
                         onChangeText={(text) => this.setState({countTwo: text})}
-                        style={[styles.bussinesstabsmTitleone, {marginLeft:30}]} 
+                        keyboardType='phone-pad'
+                        style={[styles.bussinesstabsmTitleone, {fontSize:15, fontWeight:'bold',marginLeft:40}]} 
                         value={this.state.countTwo}
                     />
                     <TextInput
                         editable = {true}
                         onChangeText={(text) => this.setState({countThree: text})}
-                        style={[styles.bussinesstabsmTitleone, {marginLeft:20}]} 
+                        keyboardType='phone-pad'
+                        style={[styles.bussinesstabsmTitleone, {fontSize:15, fontWeight:'bold', marginLeft:30}]} 
                         value={this.state.countThree}
                     />
                 </View>
@@ -337,7 +340,7 @@ export default class MainScreen extends Component {
                 <TouchableOpacity style={styles.saveBtn} onPress={() => this.upDateData()}>
                 <Text style={styles.saveBtn_button}>SAVE</Text>
                 </TouchableOpacity>
-            </ScrollView>
+            </View>
         )
         
     }
