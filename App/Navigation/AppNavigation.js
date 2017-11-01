@@ -10,9 +10,7 @@ import FindDonation from '../Containers/Home/Screens/FindDonation'
 import DonationView from '../Containers/Home/Screens/DonationView'
 import CreateListing from '../Containers/Home/Screens/CreateListing'
 import Description from '../Containers/Home/Screens/Description'
-import Setting from '../Containers/Home/Screens/Setting'
-import Bussiness from '../Containers/Home/Screens/Bussiness'
-import Operation from '../Containers/Home/Screens/Operation'
+import MyProfile from '../Containers/Home/Screens/MyProfile'
 import TeamScreen from '../Containers/Home/Screens/TeamScreen'
 import AddMemberScreen from '../Containers/Home/Screens/AddMemberScreen'
 import Meteor from 'react-native-meteor'
@@ -33,9 +31,7 @@ const PrimaryNav = StackNavigator({
   DonationView: { screen: DonationView },
   CreateListing: {screen: CreateListing},
   Description: {screen: Description},
-  Setting:{screen:Setting},
-  Bussiness:{screen:Bussiness},
-  Operation:{screen:Operation},
+  MyProfile:{screen:MyProfile},
   CompletedDonationScreen: { screen: CompletedDonationScreen },
   TeamScreen : {screen : TeamScreen},
   AddMemberScreen : {screen : AddMemberScreen}
