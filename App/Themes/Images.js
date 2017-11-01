@@ -190,7 +190,10 @@ const images = {
   circle : require('../Images/circle.png'),
   setting : require('../Images/setting.png'),
   phone: require('../Images/phone.png'),
-  groceries_active: require('../Images/groceries_active.png')
+  groceries_active: require('../Images/groceries_active.png'),
+  
+  calendar_left_arrow: require('../Images/calendar_left_arrow.png'),
+  calendar_right_arrow: require('../Images/calendar_right_arrow.png'),
   
 
   }
