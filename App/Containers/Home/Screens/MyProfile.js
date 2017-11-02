@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Image, TouchableOpacity, Dimensions, ScrollView, TextInput, Switch } from 'react-native'
+import { Text, View, Image, TouchableOpacity, Dimensions, ScrollView, TextInput } from 'react-native'
 import { Images } from '../../../Themes';
 import styles from '../Styles/SettingStyles';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
@@ -9,6 +9,7 @@ import { guid, validateEmail } from '../../../Transforms'
 import AppConfig from '../../../Config'
 import PictureModal from '../../../Components/Modals/pictureModal';
 import DescriptionModal from '../../../Components/Modals/descriptionModal';
+import Switch from 'react-native-customisable-switch';
 _dText='';
 export default class MainScreen extends Component {
     constructor() {
@@ -26,8 +27,8 @@ export default class MainScreen extends Component {
             userAddress: profile.businessInfo.address,
             
             //bussiness
-            toggleRescue:profile.bRescueFood,
-            toggleRescueone:profile.bCreateFoodDonation,
+            bRescueFood:profile.bRescueFood,
+            bCreateFoodDonation:profile.bCreateFoodDonation,
             bussinessName: profile.businessInfo.name,
             businessAddress: profile.businessInfo.address,
             businessEIN : profile.businessInfo.ein,
@@ -259,16 +260,50 @@ export default class MainScreen extends Component {
               {this.writeHere()}
               <View style={styles.toggleContainer}>
                   <Text style={[styles.bussinesstabsmTitle,styles.toggleWidth]}>Are you using this service to rescue food?</Text>
-                  <Text style={styles.toggle}>{this.state.toggleRescue?"YES":"NO"}</Text>
-                  <Switch onValueChange={(val) => this.setState({toggleRescue:val})} value={this.state.toggleRescue}
-                      onTintColor='#FFFFFF' thumbTintColor="#FFB660" />
+                  <Text style={styles.toggle}>{this.state.bRescueFood?"YES":"NO"}</Text>
+                  <Switch
+                    onChangeValue={(value) => {
+                        this.setState({bRescueFood:value})
+                    }}
+                    value={this.state.bRescueFood}
+                    switchWidth={50}
+                    switchHeight={30}
+                    buttonWidth={30}
+                    buttonHeight={30}
+                    buttonBorderColor={'#D8D8D8'}
+                    buttonBorderWidth={1}
+                    switchBorderColor={'#D8D8D8'}
+                    switchBorderWidth={1}
+                    activeBackgroundColor={'#fff'}
+                    inactiveBackgroundColor={'#fff'}
+                    activeButtonBackgroundColor={'#FFB660'}
+                    inactiveButtonBackgroundColor={'rgba(255, 255, 255, 1)'}
+                    padding={false}
+                  />
               </View>
 
               <View style={styles.toggleContainer}>
                   <Text style={[styles.bussinesstabsmTitle,styles.toggleWidth]}>Will you use this system to create food donations?</Text>
-                  <Text style={styles.toggle}>{this.state.toggleRescueone?"YES":"NO"}</Text>
-                  <Switch onValueChange={(val) => this.setState({toggleRescueone:val})} value={this.state.toggleRescueone}
-                      onTintColor='#FFFFFF' thumbTintColor="#FFB660" />
+                  <Text style={styles.toggle}>{this.state.bCreateFoodDonation?"YES":"NO"}</Text>
+                  <Switch
+                    onChangeValue={(value) => {
+                        this.setState({bCreateFoodDonation:value})
+                    }}
+                    value={this.state.bCreateFoodDonation}
+                    switchWidth={50}
+                    switchHeight={30}
+                    buttonWidth={30}
+                    buttonHeight={30}
+                    buttonBorderColor={'#D8D8D8'}
+                    buttonBorderWidth={1}
+                    switchBorderColor={'#D8D8D8'}
+                    switchBorderWidth={1}
+                    activeBackgroundColor={'#fff'}
+                    inactiveBackgroundColor={'#fff'}
+                    activeButtonBackgroundColor={'#FFB660'}
+                    inactiveButtonBackgroundColor={'rgba(255, 255, 255, 1)'}
+                    padding={false}
+                  />
               </View>
               <TouchableOpacity style={styles.saveBtn} onPress={() => this.upDateData()}>
                 <Text style={styles.saveBtn_button}>SAVE</Text>
@@ -283,20 +318,71 @@ export default class MainScreen extends Component {
                 <View style={[styles.toggleContainer, {marginBottom:10}]}>
                     <Text style={[styles.bussinesstabsmTitle,styles.toggleWidth]}>Can you receive food donations at this location?</Text>
                     <Text style={styles.toggle}>{this.state.toggleRescue?"YES":"NO"}</Text>
-                    <Switch onValueChange={(val) => this.setState({toggleRescue:val})} value={this.state.toggleRescue}
-                        onTintColor='#FFFFFF' thumbTintColor="#FFB660" />
+                    <Switch
+                        onChangeValue={(value) => {
+                            this.setState({toggleRescue:value})
+                        }}
+                        value={this.state.toggleRescue}
+                        switchWidth={50}
+                        switchHeight={30}
+                        buttonWidth={30}
+                        buttonHeight={30}
+                        buttonBorderColor={'#D8D8D8'}
+                        buttonBorderWidth={1}
+                        switchBorderColor={'#D8D8D8'}
+                        switchBorderWidth={1}
+                        activeBackgroundColor={'#fff'}
+                        inactiveBackgroundColor={'#fff'}
+                        activeButtonBackgroundColor={'#FFB660'}
+                        inactiveButtonBackgroundColor={'rgba(255, 255, 255, 1)'}
+                        padding={false}
+                    />
                 </View>
                 <View style={[styles.toggleContainer, {marginBottom:15}]}>
                     <Text style={[styles.bussinesstabsmTitle,styles.toggleWidth]}>Do you have containers for the food if the donor cannot provide them?</Text>
                     <Text style={styles.toggle}>{this.state.toggleRescueone?"YES":"NO"}</Text>
-                    <Switch onValueChange={(val) => this.setState({toggleRescueone:val})} value={this.state.toggleRescueone}
-                        onTintColor='#FFFFFF' thumbTintColor="#FFB660" />
+                    <Switch
+                        onChangeValue={(value) => {
+                            this.setState({toggleRescueone:value})
+                        }}
+                        value={this.state.toggleRescueone}
+                        switchWidth={50}
+                        switchHeight={30}
+                        buttonWidth={30}
+                        buttonHeight={30}
+                        buttonBorderColor={'#D8D8D8'}
+                        buttonBorderWidth={1}
+                        switchBorderColor={'#D8D8D8'}
+                        switchBorderWidth={1}
+                        activeBackgroundColor={'#fff'}
+                        inactiveBackgroundColor={'#fff'}
+                        activeButtonBackgroundColor={'#FFB660'}
+                        inactiveButtonBackgroundColor={'rgba(255, 255, 255, 1)'}
+                        padding={false}
+                    />
                 </View>
                 <View style={[styles.toggleContainer, {marginBottom:15}]}>
                     <Text style={[styles.bussinesstabsmTitle,styles.toggleWidth]}>Do you have containers for the food if the donor cannot provide them?</Text>
                     <Text style={styles.toggle}>{this.state.toggleRescuetwo?"YES":"NO"}</Text>
-                    <Switch onValueChange={(val) => this.setState({toggleRescuetwo:val})} value={this.state.toggleRescuetwo}
-                        onTintColor='#FFFFFF' thumbTintColor="#FFB660" />
+                    <Switch
+                        onChangeValue={(value) => {
+                            this.setState({toggleRescuetwo:value})
+                        }}
+                        value={this.state.toggleRescuetwo}
+                        switchWidth={50}
+                        switchHeight={30}
+                        buttonWidth={30}
+                        buttonHeight={30}
+                        buttonBorderColor={'#D8D8D8'}
+                        buttonBorderWidth={1}
+                        switchBorderColor={'#D8D8D8'}
+                        switchBorderWidth={1}
+                        activeBackgroundColor={'#fff'}
+                        inactiveBackgroundColor={'#fff'}
+                        activeButtonBackgroundColor={'#FFB660'}
+                        inactiveButtonBackgroundColor={'rgba(255, 255, 255, 1)'}
+                        padding={false}
+                    />
                 </View>
                 <View style={styles.vDetsilSElection}>
                     <Text style={[styles.bussinesstabsmTitle,{width:50}]}>Size:</Text>

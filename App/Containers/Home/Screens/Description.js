@@ -37,7 +37,6 @@ export default class MainScreen extends Component {
                             style={styles.multi_text} multiline={true} />
                     </View>
                 </ScrollView>
-                <KeyboardSpacer />
             </View>
         )
     }
