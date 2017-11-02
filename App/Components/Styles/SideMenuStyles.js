@@ -127,13 +127,17 @@ export default StyleSheet.create({
     flex: 1
   },
   sideMneuClose:{
-    width:25,
-    height:25,
-    marginTop:10,
+    width:18,
+    height:18,
+    marginTop:15,
+    marginLeft: 10,
     marginBottom: 37
+
   },
   profileName:{
-    fontSize:36,
+    fontFamily: 'Ubuntu',
+    fontWeight:"500",
+    fontSize:20,
     color:'#1d1d26',
     marginTop:15,
     marginBottom:50,
@@ -176,6 +180,8 @@ export default StyleSheet.create({
     height:25,
   },
   sideMenuTextInput:{
+    fontFamily: 'Ubuntu',
+    fontWeight:"300",
     paddingVertical:0,
     paddingHorizontal:15,
     height:25,

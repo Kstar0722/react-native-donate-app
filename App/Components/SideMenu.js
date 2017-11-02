@@ -27,21 +27,21 @@ export default class MainScreen extends Component {
         <View style={styles.sidemenuInner}>
           <Text style={styles.profileName}>{Meteor.user()? Meteor.user().profile.name : null}</Text>
           <View style={styles.sideMenuRowCover1}>
-            <TouchableOpacity style={styles.sideMenuRowCover}>
-              <Image source={Images.donationIcon} style={styles.donationIcon} />
-              <Text style={styles.sideMenuTextInput}>My Donations</Text>
+            <TouchableOpacity style={styles.sideMenuRowCover} onPress={() => navigate('MyProfile')}>
+              <Image source={Images.profileIcon} style={styles.donationIcon}/>
+              <Text style={styles.sideMenuTextInput}>My Profile</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.sideMenuRowCover1}>
+            <TouchableOpacity style={styles.sideMenuRowCover} onPress={() => navigate('TeamScreen')}>
+              <Image source={Images.myTeam} style={styles.donationIcon} />
+              <Text style={styles.sideMenuTextInput}>My Team</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.sideMenuRowCover1}>
             <TouchableOpacity style={styles.sideMenuRowCover}>
               <Image source={Images.impactIcon} style={styles.donationIcon} />
-              <Text style={styles.sideMenuTextInput}>My Impact</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.sideMenuRowCover1}>
-            <TouchableOpacity style={styles.sideMenuRowCover} onPress={() => navigate('CreateListing')}>
-              <Image source={Images.profileIcon} style={styles.donationIcon}/>
-              <Text style={styles.sideMenuTextInput}>Profile</Text>
+              <Text style={styles.sideMenuTextInput}>Reporting</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.sideMenuRowCover1}>
