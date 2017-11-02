@@ -265,6 +265,7 @@ export default class MainScreen extends Component {
                     onChangeValue={(value) => {
                         this.setState({bRescueFood:value})
                     }}
+                    defaultValue={this.state.bRescueFood}
                     value={this.state.bRescueFood}
                     switchWidth={50}
                     switchHeight={30}
@@ -289,6 +290,7 @@ export default class MainScreen extends Component {
                     onChangeValue={(value) => {
                         this.setState({bCreateFoodDonation:value})
                     }}
+                    defaultValue={this.state.bCreateFoodDonation}
                     value={this.state.bCreateFoodDonation}
                     switchWidth={50}
                     switchHeight={30}
@@ -322,6 +324,7 @@ export default class MainScreen extends Component {
                         onChangeValue={(value) => {
                             this.setState({toggleRescue:value})
                         }}
+                        defaultValue={this.state.toggleRescue}
                         value={this.state.toggleRescue}
                         switchWidth={50}
                         switchHeight={30}
@@ -345,6 +348,7 @@ export default class MainScreen extends Component {
                         onChangeValue={(value) => {
                             this.setState({toggleRescueone:value})
                         }}
+                        defaultValue={this.state.toggleRescueone}
                         value={this.state.toggleRescueone}
                         switchWidth={50}
                         switchHeight={30}
@@ -365,9 +369,7 @@ export default class MainScreen extends Component {
                     <Text style={[styles.bussinesstabsmTitle,styles.toggleWidth]}>Do you have containers for the food if the donor cannot provide them?</Text>
                     <Text style={styles.toggle}>{this.state.toggleRescuetwo?"YES":"NO"}</Text>
                     <Switch
-                        onChangeValue={(value) => {
-                            this.setState({toggleRescuetwo:value})
-                        }}
+                        defaultValue={this.state.toggleRescuetwo}
                         value={this.state.toggleRescuetwo}
                         switchWidth={50}
                         switchHeight={30}
@@ -382,6 +384,9 @@ export default class MainScreen extends Component {
                         activeButtonBackgroundColor={'#FFB660'}
                         inactiveButtonBackgroundColor={'rgba(255, 255, 255, 1)'}
                         padding={false}
+                        onChangeValue={(value) => {
+                            this.setState({toggleRescuetwo:value})
+                        }}
                     />
                 </View>
                 <View style={styles.vDetsilSElection}>
