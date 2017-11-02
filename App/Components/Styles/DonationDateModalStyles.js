@@ -14,9 +14,21 @@ export default StyleSheet.create({
         paddingBottom: 40,
     },
 
+    shadowView: {
+        position: 'absolute', 
+        bottom: 10, 
+        height: 10, 
+        width: width, 
+        borderRadius: 5, 
+        shadowOffset: {width: 5, height: 5}, 
+        shadowColor: 'black', 
+        shadowOpacity: 0.5,
+        backgroundColor: 'red',
+    },
+
     containerBottom: {
         flex: 2, 
-        backgroundColor: 'white',
+        backgroundColor: '#f5f5f5',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -40,16 +52,18 @@ export default StyleSheet.create({
         textAlign:'center',
         color:'#fff',
         fontWeight:'bold',
-        fontSize:17,
+        fontSize:15,
         backgroundColor:'transparent',
+        fontFamily: 'Avenir',
     },
 
     navRightItem: {
-        fontSize:16, 
+        fontSize:14, 
         backgroundColor:'transparent', 
         textAlign:'center',
         color:'#fff',
         fontWeight:'bold',
+        fontFamily: 'Avenir',
     },
 
     timeFrame: {
@@ -82,7 +96,8 @@ export default StyleSheet.create({
         color: '#ababab',
         backgroundColor: 'transparent', 
         paddingLeft: 15, 
-        fontSize: 15
+        fontSize: 13,
+        fontFamily: 'Ubuntu',
     },
 
     endTimeFrame: {
@@ -97,34 +112,61 @@ export default StyleSheet.create({
         color: 'white', 
         backgroundColor: 'transparent', 
         textAlign: 'center', 
-        fontSize: 15
+        fontSize: 13,
+        fontWeight: 'bold',
+        fontFamily: 'Ubuntu',
     },
 
     calendarFrame: {
         flex: 1, 
-        marginBottom: 60, 
-        marginTop: -30, 
+        marginBottom: 110, 
+        marginTop: -38, 
+        alignItems: 'center',
+        justifyContent: 'center',
+        
     },
 
     calendarStyle: {
         width: width - 30,
-        marginLeft: 15,
+        marginLeft: 0,
         borderRadius: 10,
         borderColor: 'gray',
-        height: 120
+        height: 200,
+        borderRadius: 5, 
+        shadowOffset: {width: 0, height: 3}, 
+        shadowColor: 'black', 
+        shadowOpacity: 0.4,
     },
 
     bottomButtonContainerStyle: {
         width: width - 40, 
         position: 'absolute', 
-        bottom: 20, 
+        bottom: 10, 
+        marginLeft: 20,
+    },
+
+    notesFrame: {
+        position: 'absolute', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        bottom: 65, 
+        flex: 1, 
+        flexDirection: 'row', 
+        backgroundColor: 'transparent'
+    },
+
+    notesText: {
+        textAlign: 'center', 
+        color: '#809efd', 
         marginLeft: 20, 
-        height: 40,
+        backfaceVisibility: 'hidden', 
+        fontFamily: 'Ubuntu',
+        fontSize: 13,
     },
 
     addButton: {
-        backgroundColor: '#f5f5f5',
-        borderColor: '#f5f5f5',
+        backgroundColor: 'white',
+        borderColor: 'white',
         borderWidth: 1,
         height: 30,
         width: 30,
@@ -144,6 +186,15 @@ export default StyleSheet.create({
         width:10, 
         height:10, 
         tintColor: '#809efd'
+    },
+
+    arrowFrame: {
+        width: 26, 
+        height: 26, 
+        borderRadius: 13, 
+        backgroundColor: '#f7f8fc', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
     },
     
 })

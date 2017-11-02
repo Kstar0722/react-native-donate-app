@@ -80,7 +80,7 @@ export default class DonationDateModal extends React.Component {
 
     _handleDatePicked = (date) => {
         console.log('Selected Time', date)
-        cDate = dateFormat(date, 'HH:MM')
+        cDate = dateFormat(date, 'hh:MM TT')
         console.log('Formatted Time', cDate)
         if (this.state.isStartTime) {
             this.setState({
@@ -95,6 +95,24 @@ export default class DonationDateModal extends React.Component {
         this._hideDateTimePicker();
 
     };
+
+    getArrow = (direction) => {
+        var isLeft = true
+        if (direction == 'left') {
+            isLeft = true
+        } else {
+            isLeft = false
+        }
+        return (
+            <View style={styles.arrowFrame} >
+                <Image 
+                    resizeMode={'contain'} 
+                    source={isLeft ? Images.calendar_left_arrow : Images.calendar_right_arrow } 
+                    style={[{width:17, height: 17,}, isLeft ? {marginLeft: -3} : {marginRight: -3}]} 
+                />
+            </View>
+        )
+    }
 
     render() {
         return (
@@ -139,10 +157,10 @@ export default class DonationDateModal extends React.Component {
                                 titleIOS='Select Time'
                                 mode='time'
                             />
+                            
                         </View>
 
                         <Text style={styles.descriptionLabel} >Select Pickup Date Below:</Text>
-
                     </View>
 
                     <View style={styles.containerBottom} >
@@ -174,6 +192,8 @@ export default class DonationDateModal extends React.Component {
 
                             markedDates={{[this.state.dateString]: {selected: true, marked: true}}}
 
+                            renderArrow={(direction) => (this.getArrow(direction))}
+
                             style={styles.calendarStyle}
 
                             theme={{
@@ -187,20 +207,22 @@ export default class DonationDateModal extends React.Component {
                                 textDisabledColor: '#aeaeae',
                                 dotColor: '#00adf5',
                                 selectedDotColor: '#ffffff',
-                                arrowColor: '#dbdde6',
+                                arrowColor: '#dcdfe7',
                                 monthTextColor: '#809efd',
                                 textDayFontSize: 15,
-                                textMonthFontSize: 18,
-                                textDayHeaderFontSize: 15
+                                textMonthFontSize: 16,
+                                textMonthFontFamily: 'Ubuntu',
+                                textDayHeaderFontSize: 15,
+                                textDayHeaderFontFamily: 'Ubuntu',                                
                             }}
                             />
                         </View>
 
-                        <View style={{position: 'absolute', alignItems: 'center', justifyContent: 'center', bottom: 80, flex: 1, flexDirection: 'row',}} >
+                        <View style={styles.notesFrame} >
                             <TouchableOpacity style={styles.addButton} underlayColor='#f5f5f5' onPress={() => {this.setState({descriptionModalVisible: true})}} > 
                                 <Image source={Images.plus_1} style={styles.addButtonImage} />          
                             </TouchableOpacity>                            
-                            <Text style={{textAlign: 'center', color: '#809efd', marginLeft: 20, backfaceVisibility: 'hidden'}} >Add pickup/dropoff notes</Text>
+                            <Text style={styles.notesText} >Add pickup/dropoff notes</Text>
                         </View>
 
                         <Button                            
@@ -208,8 +230,9 @@ export default class DonationDateModal extends React.Component {
                             containerViewStyle={styles.bottomButtonContainerStyle}
                             backgroundColor={'#dd8d6c'}
                             borderRadius={15}
-                            fontWeight={'bold'}
-                            fontSize={20}
+                            fontWeight={'500'}
+                            fontSize={17}
+                            fontFamily={'Ubuntu'}
                             disabled={this.checkData() ? false : true}
                             disabledStyle={{backgroundColor: '#dd8d6c', opacity: 0.4}}
                             onPress={() => this.props.handleDatePicked(this.getData())}
