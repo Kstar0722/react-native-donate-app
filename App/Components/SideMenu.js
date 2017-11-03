@@ -39,7 +39,7 @@ export default class MainScreen extends Component {
             </TouchableOpacity>
           </View>
           <View style={styles.sideMenuRowCover1}>
-            <TouchableOpacity style={styles.sideMenuRowCover} onPress={() => navigator('MyProfile')}>
+            <TouchableOpacity style={styles.sideMenuRowCover} onPress={() => {this.props.close(), navigator('MyProfile')}}>
               <Image source={Images.profileIcon} style={styles.donationIcon}/>
               <Text style={styles.sideMenuTextInput}>Profile</Text>
             </TouchableOpacity>

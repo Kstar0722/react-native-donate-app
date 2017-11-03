@@ -220,7 +220,7 @@ export default class CreateListing extends React.Component {
           <View style={styles.container}>
               <Image source={Images.overlay} style={styles.body}>
                   <View style={styles.cNavigation}>
-                      <TouchableOpacity onPress={() => navigate('FindDonation')}>
+                      <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                           <Image source={Images.backIcon} style={styles.menuIconNav} />
                        </TouchableOpacity>
                        <Text style={styles.refedText}>Give Food</Text>
