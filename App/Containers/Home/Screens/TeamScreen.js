@@ -29,7 +29,7 @@ export default class TeamScreen extends Component {
             <View style={[styles.dContainer]}>
                 <Image source={Images.settingBackground} style={styles.settingBack}>
                     <View style={styles.dHeaderInner}>
-                        <TouchableOpacity style={styles.dLeftHeader} onPress={() => this.props.navigation.goBack()}>
+                        <TouchableOpacity style={styles.dLeftHeader} onPress={() => navigate("FindDonation")}>
                             <Image source={Images.back_new} style={styles.backwhite} />
                         </TouchableOpacity>
                         <Text style={styles.headertitlen}>My Team</Text>
