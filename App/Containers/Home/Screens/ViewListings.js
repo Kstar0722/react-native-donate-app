@@ -72,7 +72,7 @@ export default class ViewListings extends Component {
             <Text style={this.state.headerTab==1?styles.textWhite14:styles.textNotActive14}>Reserved</Text>
           </TouchableOpacity>
           <TouchableOpacity style={this.state.headerTab==2?styles.activeTabStyle:styles.tabStyle} onPress={() => { this.setState({headerTab:2})}}>
-            <Text style={this.state.headerTab==2?styles.textWhite14:styles.textNotActive14}>Canceled</Text>
+            <Text style={this.state.headerTab==2?styles.textWhite14:styles.textNotActive14}>Closed</Text>
           </TouchableOpacity>
        
         </View>
