@@ -12,13 +12,13 @@ export default class MainScreen extends Component {
   constructor() {
     super()
     this.state = { isOpenSideMenu1: false }
-    console.log("-------------")
-    console.log(Meteor.user().profile)
-    console.log(this.props)
   }
 
 
   render() {
+    console.log(this.props)
+    const { navigator } = this.props;
+    
     return (
       <View style={styles.sidemenuBody}>
         <TouchableOpacity style={styles.sideMneuClose} onPress={() => { this.props.close() }}>
@@ -39,7 +39,7 @@ export default class MainScreen extends Component {
             </TouchableOpacity>
           </View>
           <View style={styles.sideMenuRowCover1}>
-            <TouchableOpacity style={styles.sideMenuRowCover} onPress={() => navigate('CreateListing')}>
+            <TouchableOpacity style={styles.sideMenuRowCover} onPress={() => navigator('MyProfile')}>
               <Image source={Images.profileIcon} style={styles.donationIcon}/>
               <Text style={styles.sideMenuTextInput}>Profile</Text>
             </TouchableOpacity>

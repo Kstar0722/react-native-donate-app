@@ -104,12 +104,11 @@ class MainScreen extends Component {
 
     render() {
         const { navigate } = this.props.navigation;
-
         return (
             <View style={styles.mainView}>
                 <Image source={Images.rectangle} style={styles.fDheadr}>
                     <View style={styles.cNavigation}>
-                        <TouchableOpacity onPress={() => { this.props.sideMenuToggle(true) }}>
+                        <TouchableOpacity onPress={() => { this.props.sideMenuToggle(true),this.props}}>
                             <Image source={Images.fDbar} style={styles.menuIconNav} />
                         </TouchableOpacity>
                         <Text style={styles.refedText}>Find a Donation</Text>
@@ -150,7 +149,7 @@ class MainScreen extends Component {
                         </TouchableOpacity>
                         
                         <View style={{ flex: 1, alignItems: 'center', opacity: 1 }} >
-                            <TouchableOpacity style={[styles.addButton, {backgroundColor: '#7d9eff', borderColor: '#7d9eff'}]} underlayColor='#7d9eff' onPress={() => navigate('CompletedDonationScreen')}> 
+                            <TouchableOpacity style={[styles.addButton, {backgroundColor: '#7d9eff', borderColor: '#7d9eff'}]} underlayColor='#7d9eff' onPress={() => navigate('ViewListings')}> 
                                 <Image source={Images.message} style={styles.messageButtonImage} resizeMode={'contain'}/>          
                             </TouchableOpacity>
                         </View>

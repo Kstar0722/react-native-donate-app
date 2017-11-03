@@ -14,6 +14,7 @@ import MyProfile from '../Containers/Home/Screens/MyProfile'
 import TeamScreen from '../Containers/Home/Screens/TeamScreen'
 import AddMemberScreen from '../Containers/Home/Screens/AddMemberScreen'
 import RescueProgress from '../Containers/Home/Screens/RescueProgress'
+import ViewListings from '../Containers/Home/Screens/ViewListings'
 import Meteor from 'react-native-meteor'
 import styles from './Styles/NavigationStyles'
 
@@ -36,7 +37,8 @@ const PrimaryNav = StackNavigator({
   CompletedDonationScreen: { screen: CompletedDonationScreen },
   TeamScreen : {screen : TeamScreen},
   AddMemberScreen : {screen : AddMemberScreen},
-  RescueProgress: {screen: RescueProgress}
+  RescueProgress: {screen: RescueProgress},
+  ViewListings: {screen: ViewListings}
 }, {
 //    initialRouteName: Meteor.userId() !== null ? 'FindDonation' : 'CreateListing',
     initialRouteName: 'LaunchScreen',
