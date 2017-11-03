@@ -309,7 +309,7 @@ export default class HomeScreen extends React.Component {
           <View style={styles.container}>
               <ImageBackground source={Images.overlay} style={styles.body}>
                   <View style={styles.cNavigation}>
-                      <TouchableOpacity onPress={() => navigate('FindDonation')}>
+                      <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                           <Image source={Images.backIcon} style={styles.menuIconNav} />
                       </TouchableOpacity>
                       <Text style={styles.refedText}>Create a Donation</Text>

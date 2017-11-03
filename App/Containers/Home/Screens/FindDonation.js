@@ -89,15 +89,22 @@ class MainScreen extends Component {
 
 
     handlePress() {
-        this.setState(this.circleTransition.start(this.callback))
+        this.setState(this.circleTransition.start(this.callback))        
     }
 
     handleMenuRightItem = () => {
         console.log('Right Menu Button Clicked...')
+        this.setTimeout(() => {
+            this.props.navigation.navigate("CreateListing")
+         }, 400)
     }
 
     handleMenuLeftItem = () => {
         console.log('Left Menu Button Clicked...')
+        this.setTimeout(() => {
+            this.props.navigation.navigate("CompletedDonationScreen")
+         }, 400)
+        
     }
 
 
@@ -139,9 +146,10 @@ class MainScreen extends Component {
                 <View style={styles.fDfooter}>
                     <View style={styles.fDfooterInner}>
                         <View style={{flex: 1, alignItems: 'center', opacity: 1}}>
-                            <TouchableOpacity style={[styles.addButton, {backgroundColor: '#7d9eff', borderColor: '#7d9eff'}]} underlayColor='#7d9eff' onPress={() => navigate('CreateListing')}> 
+                            <TouchableOpacity style={[styles.addButton, {backgroundColor: '#7d9eff', borderColor: '#7d9eff'}]} underlayColor='#7d9eff' > 
                                 <Image source={Images.fDsearch} style={styles.addButtonImage} resizeMode={'contain'} />          
                             </TouchableOpacity>
+                            <View style={{width: 50, height: 5, backgroundColor: '#ffb660', bottom: 8}} />
                         </View>
 
                         <TouchableOpacity style={styles.addButton} underlayColor='#ffb660' onPress={this.handlePress}> 

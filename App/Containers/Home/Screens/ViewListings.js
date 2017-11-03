@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   Modal,
   ScrollView,
-  Text
+  Text,
+  Dimensions,
 } from 'react-native'
 import styles from '../Styles/ViewListingsStyle'
 import { Images } from '../../../Themes'
@@ -13,6 +14,16 @@ import TapBar from '../../../Components/Tapbar'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Icon1 from 'react-native-vector-icons/Ionicons'
 import SegmentedControlTab from 'react-native-segmented-control-tab'
+
+import CircularMenu from '../../../Components/Modals/CircularMenu'
+var {height, width} = Dimensions.get('window');
+const reactMixin = require('react-mixin')
+import TimerMixin from 'react-timer-mixin'
+
+const ANIMATION_DURATION = 300
+const TRANSITION_BUFFER = 10
+
+
 
 export default class ViewListings extends Component {
   constructor () {
@@ -26,6 +37,9 @@ export default class ViewListings extends Component {
         headerTab: 0,
         segmentIndex: 0,
     }
+
+    this.handlePress = this.handlePress.bind(this)
+    this.callback = this.callback.bind(this)
   }
 
   static navigationOptions = {
@@ -38,6 +52,35 @@ export default class ViewListings extends Component {
         headerTab:0,
     });
   }
+
+  callback() {
+    /*this.setTimeout(() => {
+        this.setState({
+            circleColor: 'white'
+        })
+    }, TRANSITION_BUFFER + 5)*/
+}
+
+
+
+    handlePress() {
+        this.setState(this.circleTransition.start(this.callback))        
+    }
+
+    handleMenuRightItem = () => {
+        console.log('Right Menu Button Clicked...')
+        this.setTimeout(() => {
+            this.props.navigation.navigate("CreateListing")
+        }, 400)
+    }
+
+    handleMenuLeftItem = () => {
+        console.log('Left Menu Button Clicked...')
+        this.setTimeout(() => {
+            this.props.navigation.navigate("CompletedDonationScreen")
+        }, 400)
+        
+    }
 
   render () {
     const { navigate } = this.props.navigation;
@@ -231,11 +274,41 @@ export default class ViewListings extends Component {
             
         }
       </Image>
-        <TouchableOpacity onPress={() => navigate('LaunchScreen')} style={styles.addButton}>
-        <Image source={Images.addButton} />
-        </TouchableOpacity>
-        <TapBar />
+        
+            <View style={styles.fDfooter}>
+                <View style={styles.fDfooterInner}>
+                    <View style={{flex: 1, alignItems: 'center', opacity: 1}}>
+                        <TouchableOpacity style={[styles.addButton, {backgroundColor: '#7d9eff', borderColor: '#7d9eff'}]} underlayColor='#7d9eff' onPress={() => navigate('FindDonation')}> 
+                            <Image source={Images.fDsearch} style={styles.addButtonImage} resizeMode={'contain'} />          
+                        </TouchableOpacity>                            
+                    </View>
+
+                    <TouchableOpacity style={styles.addButton} underlayColor='#ffb660' onPress={this.handlePress}> 
+                        <Image source={Images.plus_1} style={styles.addButtonImage} />          
+                    </TouchableOpacity>
+                        
+                    <View style={{ flex: 1, alignItems: 'center', opacity: 1 }} >
+                        <TouchableOpacity style={[styles.addButton, {backgroundColor: '#7d9eff', borderColor: '#7d9eff'}]} underlayColor='#7d9eff'> 
+                            <Image source={Images.message} style={styles.messageButtonImage} resizeMode={'contain'}/>          
+                        </TouchableOpacity>
+                        <View style={{width: 50, height: 5, backgroundColor: '#ffb660', bottom: 8}} />
+                    </View>
+
+
+                    <CircularMenu
+                        ref={(circle) => {this.circleTransition = circle}}                    
+                        duration={ANIMATION_DURATION}
+                        size = {width}
+                        transitionBuffer={TRANSITION_BUFFER}
+                        rightPress={this.handleMenuRightItem}
+                        leftPress={this.handleMenuLeftItem}
+                    />
+                </View>
+            </View>
+
       </View>
     )
   }
 }
+
+reactMixin(ViewListings.prototype, TimerMixin)

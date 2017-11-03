@@ -9,13 +9,13 @@ export default StyleSheet.create({
     resizeMode: 'cover'
   },
 
-  addButton: {
+  /*addButton: {
     position: 'absolute',
     zIndex: 10,
     alignSelf: 'center',
     bottom: 7
 
-  },
+  },*/
   menu: {
     marginHorizontal:20,
     marginVertical:7,
@@ -141,6 +141,65 @@ dtListings:{
     height: 1,
     },
     shadowOpacity: 0.3,
+},
+
+
+
+fDfooter:{
+  backgroundColor:'#ffffff',
+},
+fDfooterInner:{
+  flexDirection:'row',
+    borderTopWidth:2,
+    borderTopColor: 'rgba(216,216,216,0.8)',
+    shadowColor: '#D8D8D8',
+    shadowOffset: {
+    width:2,
+    height: 2,
+    },
+    shadowOpacity: 0.7,
+    alignItems:'center',
+    height:53,
+    justifyContent: 'space-around',
+},
+
+addButton: {
+  backgroundColor: '#ffb660',
+  borderColor: '#ffb660',
+  borderWidth: 1,
+  height: 60,
+  width: 60,
+  borderRadius: 35,
+  alignItems: 'center',
+  justifyContent: 'center',
+  shadowColor: "#000000",
+  shadowOpacity: 0.7,
+  shadowRadius: 3,
+  shadowOffset: {
+    height: 3,
+    width: 0
+  },
+  top: -15,
+},
+
+addButtonImage: {
+  width: 30, 
+  height: 30, 
+  tintColor: 'white'
+},
+
+searchButtonImage: {
+  width: 30*54/57,
+  height: 30,
+  tintColor: 'white',
+},
+
+messageButtonImage: {
+  width: 25,
+  height: 34,
+  tintColor: 'white',
 }
+
+
 
 })
