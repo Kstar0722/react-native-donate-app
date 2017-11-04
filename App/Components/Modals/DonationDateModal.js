@@ -30,6 +30,8 @@ export default class DonationDateModal extends React.Component {
             isStartTime: true,
             startTime: "",
             endTime: "",
+            startTimeNumber: 0,
+            endTimeNumber: 0,
         }
         this.onDayPress = this.onDayPress.bind(this);
     }
@@ -49,6 +51,8 @@ export default class DonationDateModal extends React.Component {
             startTime: this.state.startTime,
             endTime: this.state.endTime,
             notes: _dText,
+            startTimeNumber: this.state.startTimeNumber,
+            endTimeNumber: this.state.endTimeNumber,
         }
 
         return date
@@ -82,13 +86,24 @@ export default class DonationDateModal extends React.Component {
         console.log('Selected Time', date)
         cDate = dateFormat(date, 'hh:MM TT')
         console.log('Formatted Time', cDate)
+        cDateNew = dateFormat(date, 'H:M')
+        console.log('Formatted Time(24)', cDateNew)
+        var timeArray = cDateNew.split(':')
+        timeHour = parseInt(timeArray[0])
+        timeMinute = parseInt(timeArray[1])
+        timeNumber = timeHour * 60 + timeMinute
+        console.log('Time Hour', timeHour)
+        console.log('Time Minute', timeMinute)
+        console.log('Time Number', timeNumber)
         if (this.state.isStartTime) {
             this.setState({
-                startTime: cDate
+                startTime: cDate,
+                startTimeNumber: timeNumber
             })
         } else {
             this.setState({
-                endTime: cDate
+                endTime: cDate,
+                endTimeNumber: timeNumber
             })
         }
         

@@ -227,7 +227,7 @@ export default class HomeScreen extends React.Component {
             if (!this.state.deliveryOptionToggle1 && !this.state.deliveryOptionToggle2 && !this.state.deliveryOptionToggle3) {
                 return
             }
-            if (this.state.value == 0) return
+            //if (this.state.value == 0) return
             if(!_dText) return
 
             this.setState({
@@ -269,16 +269,23 @@ export default class HomeScreen extends React.Component {
                 deliveryOption = 2
             }
 
+            const {date, startTimeNumber, endTimeNumber, notes} = this.state.date
+            var newDate = {
+                date, 
+                startTime: startTimeNumber, 
+                endTime: endTimeNumber, 
+                notes
+            }
 
             postData = {
-                date: this.state.date,
+                date: newDate,//this.state.date,
                 location: {address:this.state.address},
                 vehicleSize: vehicleSize,
                 foodTypes_NonPerishable: this.state.foodTypeToggle1,
                 foodTypes_Prepared: this.state.foodTypeToggle2,
                 foodTypes_Perishable: this.state.foodTypeToggle3,
                 deliveryOption: deliveryOption,
-                bWeight: true,
+                bWeight: this.state.switchValue,
                 weight: (this.state.value).toFixed(0),
                 description: _dText,
             }
