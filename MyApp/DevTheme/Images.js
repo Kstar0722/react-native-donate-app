@@ -176,5 +176,31 @@ const images = {
   donate_excess_food: require('../Images/donate_excess_food.png'),
   feed_community: require('../Images/feed_community.png'),
 
+
+
+
+  add_blue: require('../Images/CompleteDonation/add_blue.png'),
+  calendar: require('../Images/CompleteDonation/calendar.png'),
+  camera_bg: require('../Images/CompleteDonation/calendar.png'),
+  camera_full: require('../Images/CompleteDonation/camera_full.png'),
+  circle_ring: require('../Images/CompleteDonation/circle_ring.png'),
+  complete_donation_top_bg: require('../Images/CompleteDonation/complete_donation_top_bg.png'),
+  deliver_gray: require('../Images/CompleteDonation/deliver_gray.png'),
+  done: require('../Images/CompleteDonation/done.png'),
+  location_gray: require('../Images/CompleteDonation/location_gray.png'),
+  navigate: require('../Images/CompleteDonation/navigate.png'),
+  nonperishable_gray: require('../Images/CompleteDonation/nonperishable_gray.png'),
+  paid_pickup_gray: require('../Images/CompleteDonation/paid_pickup_gray.png'),
+  perishable_gray: require('../Images/CompleteDonation/perishable_gray.png'),
+  prepared_gray: require('../Images/CompleteDonation/prepared_gray.png'),
+  perishable_black: require('../Images/CompleteDonation/perishable_black.png'),
+  prepared_black: require('../Images/CompleteDonation/prepared_black.png'),
+  skip: require('../Images/CompleteDonation/skip.png'),
+  status_full: require('../Images/CompleteDonation/status_full.png'),
+  status_left: require('../Images/CompleteDonation/status_left.png'),
+  status_right: require('../Images/CompleteDonation/status_right.png'),
+  timeline: require('../Images/CompleteDonation/timeline.png'),
+  volunteer_gray: require('../Images/CompleteDonation/volunteer_gray.png'),
+
 }
 export default images
