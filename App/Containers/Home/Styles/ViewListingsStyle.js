@@ -67,12 +67,16 @@ dtDate:{
   fontWeight: 'bold',
   color:'#96A883',
   fontSize:28,
+  textAlign : 'center',
+  width: 40
 },
 dtMonth:{
   color:'#96A883',
   fontFamily: 'ubuntu',
   fontSize:12,
-  marginLeft: 5
+  //marginLeft: 5,
+  textAlign : 'center',
+  width: 40
 },
 dtDescription:{
     flex:1,
@@ -198,6 +202,11 @@ messageButtonImage: {
   width: 25,
   height: 34,
   tintColor: 'white',
+},
+
+carImage : {
+  width: 40,
+  height : 18
 }
 
 
