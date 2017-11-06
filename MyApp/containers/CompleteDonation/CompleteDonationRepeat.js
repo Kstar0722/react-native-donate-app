@@ -23,11 +23,18 @@ export default class CompleteDonationRepeat extends React.Component {
         
         this.state = {
             repeatType: 10,
+            customString: '',
         }
     }
 
     static navigationOptions = {
         header : null,
+    }
+
+    componentDidMount() {
+        this.setState({
+            repeatType: this.props.navigation.state.params.repeat
+        })
     }
 
     checkRepestType = (index) => {
@@ -53,7 +60,21 @@ export default class CompleteDonationRepeat extends React.Component {
         var ref = this
         setTimeout(function() {
             ref.props.navigation.goBack()
-        }, 1000);
+        }, 500);
+    }
+
+    setCustom = (custom) => {
+        console.log(custom)
+        this.setState({customString: custom})
+    }
+
+    onBackClick = () => {
+        if (this.state.customString) {
+            this.props.navigation.state.params.onGoBack(this.state.repeatType)
+        } else {
+            this.props.navigation.state.params.onGoBack(10)
+        }
+        this.props.navigation.goBack()
     }
 
     render() {
@@ -63,7 +84,7 @@ export default class CompleteDonationRepeat extends React.Component {
             <View style={styles.container} >
                 <View style={{backgroundColor: '#f6f6f8'}} >
                     <View style={styles.nav}>
-                        <TouchableOpacity onPress={() => {this.props.navigation.goBack()}} >
+                        <TouchableOpacity onPress={() => this.onBackClick() } >
                             <View style={{flexDirection: 'row'}} >
                                 <Image source={Images.arrow_left} style={styles.navLeftIcon} />
                                 <Text style={styles.navLeftText} >Edit Event</Text>
@@ -133,7 +154,11 @@ export default class CompleteDonationRepeat extends React.Component {
 
                 <View style={[styles.gapFrame, {borderTopColor: '#c6c6ca', borderTopWidth: 1}]} /> 
 
-                <TouchableWithoutFeedback onPress={() => {this.setState({repeatType: 6}), this.props.navigation.navigate('CompleteDonationCustom')}} >
+                <TouchableWithoutFeedback 
+                    onPress={() => {this.setState({repeatType: 6}), 
+                        this.props.navigation.navigate('CompleteDonationCustom', {onGoBack: (custom) => this.setCustom(custom) })}
+                    } 
+                >
                     <View style={[styles.item, {backgroundColor: 'white', paddingLeft: 20}]} >
                         <Text style={styles.itemText} >Custom</Text>
                         <Image source={Images.arrow_right} resizeMode={'contain'} style={[styles.icon, {tintColor: '#c6c6ca'}]} />

@@ -28,7 +28,6 @@ export default class LocationModal extends React.Component {
             {primaryText: 'New York 59', secondaryText: 'Hillburn, NY, United States'},
             {primaryText: 'New York Avenue', secondaryText: 'Huntington Station, NY, United States'},
             {primaryText: 'New York Avenue', secondaryText: 'Washington, DC, United States'},
-
         ]
         this.state={
             searchTerm: '',
@@ -42,7 +41,7 @@ export default class LocationModal extends React.Component {
             RNGooglePlaces.getAutocompletePredictions(text, {
                 //type: 'address',                
             }).then((place) => {
-                console.log(place)
+                //console.log(place)
                 this.setState({dataSource: place})
             }).catch(error =>console.log(error.message))
         } else {
@@ -58,7 +57,7 @@ export default class LocationModal extends React.Component {
     }
 
     onClose = () => {        
-        this.setState({searchTerm: ''}, function() {
+        this.setState({searchTerm: '', dataSource: []}, function() {
             this.props.close()
         })
     }
@@ -93,7 +92,13 @@ export default class LocationModal extends React.Component {
     }
 
     onItemClick = (item) => {
-
+        RNGooglePlaces.lookUpPlaceByID(item.placeID).then((results) => {
+           // console.log(results)
+            this.props.itemSelected(item, results)
+            this.setState({searchTerm: '', dataSource: []}, function() {
+                this.props.close()
+            })
+        }).catch(error => console.log(error.message))
     }
 
     render() {

@@ -14,6 +14,7 @@ import DatePicker from 'react-native-datepicker'
 
 
 import DescriptionModal from '../../../App/Components/Modals/descriptionModal'
+import PictureModal from '../../../App/Components/Modals/pictureModal'
 import LocationModal from './LocationModal'
 
 import { Images } from '../../DevTheme'
@@ -21,7 +22,7 @@ import styles from './Styles/CompleteDonationDetailStyles'
 
 const { width, height } =Dimensions.get('window')
 _dText='';
-var REPEAT_TYPE_KEY = '@repeat_type';
+var AVATAR_URI_KEY = '@avatar_uri';
 
 export default class CompleteDonationDetail extends React.Component {
     constructor(props) {
@@ -30,7 +31,10 @@ export default class CompleteDonationDetail extends React.Component {
         this.state = {
             isEnabledButton: false,
             descriptionModalVisible: false,
+            picturemodalVisible: false,
             locationModalVisible: false,
+
+            avatar: null,
 
             startDate: '',
             endDate: '',
@@ -39,41 +43,40 @@ export default class CompleteDonationDetail extends React.Component {
             foodTypes_Perishable: false,
             foodTypes_Prepared: false,
 
-            repeat: 10
+            repeat: 10,
+
+            addressData: null,
+            locationData: null,
         }
     }
 
     validateData = () => {
-        console.log('Validate.............')
+        if (this.state.avatar == null) {
+            this.setState({isEnabledButton: false})
+            return
+        }
         if (!_dText) {
-            this.setState({
-                isEnabledButton: false
-            })
+            this.setState({isEnabledButton: false})
             return
         }
         if (!this.state.startDate) {
-            this.setState({
-                isEnabledButton: false
-            })
+            this.setState({isEnabledButton: false})
             return
         }
         if (!this.state.endDate) {
-            this.setState({
-                isEnabledButton: false
-            })
+            this.setState({isEnabledButton: false})
             return
         }
-        //if () //location check
+        if (this.state.addressData == null) {
+            this.setState({isEnabledButton: false})
+            return
+        }
         if (!this.state.foodTypes_NonPerishable && !this.state.foodTypes_Perishable && !this.state.foodTypes_Prepared) {
-            this.setState({
-                isEnabledButton: false
-            })
+            this.setState({isEnabledButton: false})
             return
         }
         if (this.state.repeat == 10) {
-            this.setState({
-                isEnabledButton: false
-            })
+            this.setState({isEnabledButton: false})
             return
         }
         console.log('Validate Success...')
@@ -83,7 +86,9 @@ export default class CompleteDonationDetail extends React.Component {
     }
 
     componentDidMount() {
-        
+        /*AsyncStorage.getItem(AVATAR_URI_KEY).then((avatar_uri) => {
+            this.setState({avatar: {uri: avatar_uri}})
+        })*/        
     }
 
     static navigationOptions = {
@@ -116,6 +121,23 @@ export default class CompleteDonationDetail extends React.Component {
         })        
     }
 
+    locationTextOrIcon = () => {
+        if (this.state.locationData == null ) {
+            return <Image source={Images.location_gray} resizeMode={'contain'} style={styles.icon} />
+        } else {
+            var locationName = this.state.locationData.name
+            if(locationName.length>23){
+                locationName=locationName.substring(0, 23)+'...';
+            }
+            return (
+                <View style={{flexDirection: 'row'}} >
+                    <Image source={Images.navigate} resizeMode={'contain'} style={{width: 25, height: 25, marginRight: 8}} />
+                    <Text style={{fontSize: 16}} >{locationName}</Text>
+                </View>            
+            )
+        }
+    }
+
     repeatTextOrIcon = () => {
         if (this.state.repeat == 10) {
            return <Image source={Images.timeline} resizeMode={'contain'} style={styles.icon} />
@@ -138,7 +160,10 @@ export default class CompleteDonationDetail extends React.Component {
                     break;
                 case 5:
                     return <Text style={{fontSize: 16}} >Every Year</Text>                    
-                    break;            
+                    break;      
+                case 6:
+                    return <Text style={{fontSize: 16}} >Custom</Text>                    
+                    break;                      
                 default:
                     <Image source={Images.timeline} resizeMode={'contain'} style={styles.icon} />
                     break;
@@ -179,17 +204,51 @@ export default class CompleteDonationDetail extends React.Component {
         }
     }
 
-    
+    handleLocationSelected = (addressData, locationData) => {
+        /**
+         * addressData : {primaryText: '...', secondaryText: '...', fullText: '...', ...  }
+         * locationData : {name: '...', address: '...', latitude: '...', longitude: '...', }
+         */
+        console.log(addressData)
+        console.log(locationData)
+        this.setState({
+            addressData: addressData,
+            locationData: locationData,
+        }, function() {
+            this.validateData()
+        })        
+    }
+
+    chooseAvatar = (avatar) => {
+        console.log('avatar', avatar)
+        console.log('Avatar', avatar.uri)
+        this.setState({avatar : avatar}, function() {
+            this.closePictureModal()
+            AsyncStorage.setItem(AVATAR_URI_KEY, avatar.uri)
+        })
+    }
+
+    closePictureModal = () => {
+        this.setState({ picturemodalVisible: false }, function() {
+            this.validateData()
+        })
+    }
+
+    onBackClick = () => {
+        let key = this.props.navigation.state.key
+        this.props.navigation.goBack(key)
+        //this.props.navigation.goBack()
+    }
+
 
 
     render() {
-        console.log('Rendering.........')
         return (
             <View style={styles.container} >
                 <View style={styles.containerTop} >
-                    <ImageBackground source={Images.complete_donation_top_bg} style={styles.imgBg} resizeMode={'cover'} >
+                    <ImageBackground source={this.state.avatar ? this.state.avatar : Images.complete_donation_top_bg} style={styles.imgBg} resizeMode={'cover'} >
                         <View style={styles.nav}>
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity onPress={() => this.onBackClick() }>
                                 <Image source={Images.backIcon} style={styles.navLeftIcon} />
                             </TouchableOpacity>
                             <Text style={styles.navText}>New Food Donation</Text>
@@ -206,7 +265,7 @@ export default class CompleteDonationDetail extends React.Component {
                 <View style={{flex: 1}} >
                     <TouchableWithoutFeedback onPress={() => {this.setState({descriptionModalVisible: true})}} >
                         <View style={styles.descriptionFrame}>
-                            <TouchableOpacity >
+                            <TouchableOpacity onPress={() => {this.setState({picturemodalVisible: true})}} >
                                 <Image source={Images.camera_full} resizeMode={'contain'} style={styles.cameraImg} />
                             </TouchableOpacity>
                             {_dText ?
@@ -224,7 +283,7 @@ export default class CompleteDonationDetail extends React.Component {
                             date= {this.state.startDate}
                             mode="datetime"
                             placeholder=" "
-                            format="MMM D, YYYY hh:mm A"
+                            format="MMM D, YYYY h:m A"
                             confirmBtnText="Done"
                             cancelBtnText="Cancel"
                             iconSource = {Images.calendar}   
@@ -259,7 +318,7 @@ export default class CompleteDonationDetail extends React.Component {
                             minDate={new Date(this.state.startDate)}
                             mode="datetime"
                             placeholder=" "
-                            format="MMM D, YYYY hh:mm A"
+                            format="MMM D, YYYY h:m a"
                             confirmBtnText="Done"
                             cancelBtnText="Cancel"
                             iconSource = {Images.calendar}   
@@ -288,19 +347,18 @@ export default class CompleteDonationDetail extends React.Component {
                     
                     
 
-                    <View style={styles.dateFrame} >
+                    <TouchableOpacity style={styles.dateFrame} onPress={() => this.setState({locationModalVisible: true})}  >
                         <Text>LOCATION</Text>
-                        <TouchableOpacity onPress={() => this.setState({locationModalVisible: true})} >
-                            <Image source={Images.location_gray} resizeMode={'contain'} style={styles.icon} />
-                        </TouchableOpacity>
-                    </View>
+                        {this.locationTextOrIcon()}
+                    </TouchableOpacity>
                     
-                    <TouchableOpacity onPress={() => {this.props.navigation.navigate('CompleteDonationRepeat', {onGoBack: (value) => this.refresh(value)})}} >                            
-                    <View style={styles.dateFrame} >
-                        <Text>REPEAT</Text>
-                        {this.repeatTextOrIcon()}                            
-                        
-                    </View>
+                    <TouchableOpacity 
+                        onPress={() => {this.props.navigation.navigate('CompleteDonationRepeat', {onGoBack: (value) => this.refresh(value), repeat: this.state.repeat})}} 
+                    >                            
+                        <View style={styles.dateFrame} >
+                            <Text style={{marginRight: 5}} >REPEAT</Text>
+                            {this.repeatTextOrIcon()}    
+                        </View>
                     </TouchableOpacity>
 
                     <View style={styles.dateFrame} >
@@ -341,7 +399,7 @@ export default class CompleteDonationDetail extends React.Component {
                 <TouchableOpacity 
                     style={[styles.containerBottom, this.state.isEnabledButton ? {backgroundColor: '#f58a55'} : {backgroundColor : '#fcdccb'}]} 
                     disabled={this.state.isEnabledButton ? false : true} 
-                    onPress={() => {this.props.navigation.navigate('CompleteDonationService')}}
+                    onPress={() => {this.props.navigation.navigate('CompleteDonationService', {backKey: this.props.navigation.state.key})}}
                 >
                     <Text style={styles.buttonText} >ADD DETAILS</Text>
                 </TouchableOpacity>
@@ -350,9 +408,16 @@ export default class CompleteDonationDetail extends React.Component {
                     descriptionModalVisible={this.state.descriptionModalVisible} 
                     close={this.closeDescriptionModal}
                 />
+
+                <PictureModal 
+                    picturemodalVisible={this.state.picturemodalVisible} 
+                    close={this.closePictureModal} 
+                    chooseAvatar = {this.chooseAvatar} 
+                />
                 <LocationModal
                     locationModalVisible={this.state.locationModalVisible}
                     close={this.closeLocationModal}
+                    itemSelected={this.handleLocationSelected}
                 />
 
             </View>

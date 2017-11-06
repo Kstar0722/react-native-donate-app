@@ -20,6 +20,12 @@ import styles from './Styles/NavigationStyles'
 
 import CompletedDonationScreen from '../Containers/Home/Screens/completedDonationScreen'
 
+import CompleteDonationDetails from '../../MyApp/containers/CompleteDonation/CompleteDonationDetails'
+import CompleteDonationRepeat from '../../MyApp/containers/CompleteDonation/CompleteDonationRepeat'
+import CompleteDonationCustom from '../../MyApp/containers/CompleteDonation/CompleteDonationCustom'
+import CompleteDonationService from '../../MyApp/containers/CompleteDonation/CompleteDonationService'
+import CompleteDonationDelivery from '../../MyApp/containers/CompleteDonation/CompleteDonationDelivery'
+
 const PrimaryNav = StackNavigator({
   LaunchScreen: { screen: LaunchScreen },
   OnboardingScreen: { screen: OnboardingScreen },
@@ -38,7 +44,13 @@ const PrimaryNav = StackNavigator({
   TeamScreen : {screen : TeamScreen},
   AddMemberScreen : {screen : AddMemberScreen},
   RescueProgress: {screen: RescueProgress},
-  ViewListings: {screen: ViewListings}
+  ViewListings: {screen: ViewListings},
+
+  CompleteDonationDetails: {screen: CompleteDonationDetails},
+  CompleteDonationRepeat: {screen: CompleteDonationRepeat},
+  CompleteDonationCustom: {screen: CompleteDonationCustom},
+  CompleteDonationService: {screen: CompleteDonationService},
+  CompleteDonationDelivery: {screen: CompleteDonationDelivery},
 }, {
 //    initialRouteName: Meteor.userId() !== null ? 'FindDonation' : 'CreateListing',
     initialRouteName: 'LaunchScreen',

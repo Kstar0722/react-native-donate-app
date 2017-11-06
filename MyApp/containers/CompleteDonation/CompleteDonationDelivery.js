@@ -8,26 +8,37 @@ import {
     ImageBackground, 
     TouchableWithoutFeedback,
     FlatList,
+    AsyncStorage,
 } from 'react-native'
+import { NavigationActions } from 'react-navigation'
 
 import { Images } from '../../DevTheme'
 import styles from './Styles/CompleteDonationDeliveryStyles'
 
 const { width, height } =Dimensions.get('window')
+var AVATAR_URI_KEY = '@avatar_uri';
+
 
 export default class CompleteDonationDelivery extends React.Component {
 
     constructor(props) {
         super(props)
-
+        
         this.state = {
             isEnabledButton: false,
             deliveryOption: -1,
+            avatar: null,
         }
     }
 
     static navigationOptions = {
         header:null,
+    }
+
+    componentDidMount() {
+        AsyncStorage.getItem(AVATAR_URI_KEY).then((avatar_uri) => {
+            this.setState({avatar: {uri: avatar_uri}})
+        })  
     }
 
     checkItemSelected = (index) => {
@@ -45,14 +56,26 @@ export default class CompleteDonationDelivery extends React.Component {
         })
     }
 
+    onBackClick = () => {
+        /*let navigationAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({routeName: 'FindDonation'})
+            ]
+        })
+        this.props.navigation.dispatch(navigationAction)*/
+        let key = this.props.navigation.state.params.backKey
+        this.props.navigation.goBack(key)
+    }
+
     render() {
         return (
         
         <View style={styles.container}>
             <View style={styles.containerTop} >
-                <ImageBackground source={Images.complete_donation_top_bg} style={styles.imgBg} resizeMode={'cover'} >
+                <ImageBackground source={this.state.avatar ? this.state.avatar : Images.complete_donation_top_bg} style={styles.imgBg} resizeMode={'cover'} >
                     <View style={styles.nav}>
-                        <TouchableOpacity onPress={() => {}}>
+                        <TouchableOpacity onPress={() => this.onBackClick()}>
                             <Image source={Images.backIcon} style={styles.navLeftIcon} />
                         </TouchableOpacity>
                         <Text style={styles.navText}>New Food Donation</Text>                        
@@ -146,7 +169,7 @@ export default class CompleteDonationDelivery extends React.Component {
             <TouchableOpacity 
                 style={[styles.containerBottom, this.state.isEnabledButton ? {backgroundColor: '#f58a55'} : {backgroundColor : '#fcdccb'}]} 
                 disabled={this.state.isEnabledButton ? false : true} 
-                onPress={() => {this.props.navigation.navigate('CompleteDonationService')}}
+                onPress={() => {this.props.navigation.navigate('CreateListing')}}
             >
                 <Text style={styles.buttonText} >COMPLETE</Text>
             </TouchableOpacity>

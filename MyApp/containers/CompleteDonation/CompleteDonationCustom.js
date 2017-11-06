@@ -11,20 +11,27 @@ import {
     Picker,
 } from 'react-native'
 
+import {NavigationActions} from 'react-navigation'
+
 import { Images } from '../../DevTheme'
 import styles from './Styles/CompleteDonationCustomStyles'
 
 const { width, height } =Dimensions.get('window')
 const PickerItem = Picker.Item;
-const pickerData = [
-    ' first         Sunday  ', 
-    ' second        Monday  ', 
-    ' third         Tuesday ', 
-    ' fourth       Wednesday',
-    ' fifth        Thursday ',
-    ' sixth        Friday   ',
-    'seventh      Saturday  '
+const pickerData1 = [
+    'first', 'second', 'third', 'fourth'
 ]
+const pickerData1Desc = [
+    '1st', '2nd', '3rd', '4th'
+]
+
+const pickerData2 = [
+    'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+]
+const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+]
+
 
 export default class CompleteDonationCustom extends React.Component {
     constructor(props) {
@@ -37,7 +44,10 @@ export default class CompleteDonationCustom extends React.Component {
                 false, false, false, false,
                 false, false, false, false,
             ],
-            selectedPickerItem: 0,
+            selectedMonthItem: 1,
+            selectedPickerItem1: 0,
+            selectedPickerItem2: 0,
+            descriptionText: 'Event will occur every year.',
         }
         
     }
@@ -49,20 +59,71 @@ export default class CompleteDonationCustom extends React.Component {
     componentWillMount() {
         var today = new Date()
         currentMonth = today.getMonth()
+        this.setState({selectedMonthItem: currentMonth})
         this.onClickMonth(currentMonth)
     }
 
     onClickMonth = (index) => {
+        this.setState({selectedMonthItem: index})
         var tempMonths = [
             false, false, false, false,
             false, false, false, false,
             false, false, false, false,
         ]
         tempMonths[index] = true
-        this.setState({
-            months: tempMonths
-        })        
+        this.setState({ months: tempMonths}, function() {
+            this.setDescriptionText()
+        })
     }
+
+    onSwitchChanged = (value) => {
+        this.setState({switchIsOn: value}, function() {
+            this.setDescriptionText()
+        })
+    }
+
+    onPicker1Changed = (index) => {
+        this.setState({selectedPickerItem1: index}, function() {
+            this.setDescriptionText()
+        })
+    }
+
+    onPicker2Changed = (index) => {
+        this.setState({selectedPickerItem2: index}, function() {
+            this.setDescriptionText()
+        })
+    }
+
+    setDescriptionText() {
+        var text = 'Event will occur every year.'
+        if (this.state.switchIsOn) {
+            text = 'Event will occur every year on the ' + pickerData1Desc[this.state.selectedPickerItem1] 
+            + ' ' + pickerData2[this.state.selectedPickerItem2] + ' of ' + monthNames[this.state.selectedMonthItem]
+        } 
+        this.setState({descriptionText: text})
+    }
+
+    onBackClick = () => {
+        if (this.state.switchIsOn) {
+            let customStr = this.state.selectedMonthItem.toString() + ':' 
+                             + this.state.selectedPickerItem1 + ':' 
+                             + this.state.selectedPickerItem2
+
+            this.props.navigation.state.params.onGoBack(customStr)
+            this.props.navigation.goBack()
+        } else {
+            this.props.navigation.goBack()
+            /*let navigationAction = NavigationActions.reset({
+                index: 0,
+                actions: [
+                    NavigationActions.navigate({routeName: 'CompleteDonationDetails'})
+                ]
+            })
+            this.props.navigation.dispatch(navigationAction)*/
+        }
+    }
+
+
 
 
     render() {
@@ -70,7 +131,7 @@ export default class CompleteDonationCustom extends React.Component {
             <View style={styles.container} >
                 <View style={{backgroundColor: '#f6f6f8'}} >
                     <View style={[styles.nav, styles.borderBottom]}>
-                        <TouchableOpacity onPress={() => {this.props.navigation.goBack()}} >
+                        <TouchableOpacity onPress={() => this.onBackClick()} >
                             <View style={{flexDirection: 'row'}} >
                                 <Image source={Images.arrow_left} style={styles.navLeftIcon} />
                                 <Text style={styles.navLeftText} >Repeat</Text>
@@ -99,7 +160,7 @@ export default class CompleteDonationCustom extends React.Component {
                 </View>   
 
                 <View style={[styles.gapFrame, styles.borderTop, {height: 50, justifyContent: 'center'}]} >
-                    <Text style={{color: '#8a8a8f', paddingLeft: 20, paddingRight: 20}} >Event will occur every year.</Text>
+                    <Text style={{color: '#8a8a8f', paddingLeft: 20, paddingRight: 20}} >{this.state.descriptionText}</Text>
                 </View> 
 
                 <View style={styles.monthRow} >                    
@@ -186,19 +247,31 @@ export default class CompleteDonationCustom extends React.Component {
                 <View style={[styles.item, styles.borderBottom, {paddingLeft: 20, backgroundColor: 'white'}]} >
                     <Text style={styles.itemText} >Days of Week</Text>
                     <Switch
-                    onValueChange={(value) => this.setState({switchIsOn: value})}
+                    onValueChange={(value) => {this.onSwitchChanged(value)}}
                     value={this.state.switchIsOn} 
                     />
                 </View>  
                 {this.state.switchIsOn &&
-                <Picker style={{width: width, height: 220, backgroundColor: 'white', opacity: 1}} 
-                    selectedValue={this.state.selectedPickerItem}
-                    onValueChange={(index) => {this.setState({selectedPickerItem: index})}}
+                <View style={{flex: 1, flexDirection: 'row'}} >
+                 <Picker style={{width: width/2, height: 220, backgroundColor: 'white', opacity: 1, flex: 1}} 
+                    selectedValue={this.state.selectedPickerItem1}
+                    onValueChange={(index) => {this.onPicker1Changed(index)}}
                 >
-                    {pickerData.map((value, i) => (
+                    {pickerData1.map((value, i) => (
                         <PickerItem label={value} value={i} key={"money"+value}/>
                     ))}
                 </Picker> 
+
+                <Picker style={{width: width/2, height: 220, backgroundColor: 'white', opacity: 1, flex: 1}} 
+                    selectedValue={this.state.selectedPickerItem2}
+                    onValueChange={(index) => {this.onPicker2Changed(index)}}
+                >
+                    {pickerData2.map((value, i) => (
+                        <PickerItem label={value} value={i} key={"money"+value}/>
+                    ))}
+                </Picker>
+                </View>
+               
                 }
                   
             </View>
