@@ -28,6 +28,8 @@ import CircularMenuTest from './containers/CircularMenuTest'
 import CompleteDonationDetails from './containers/CompleteDonation/CompleteDonationDetails'
 import CompleteDonationRepeat from './containers/CompleteDonation/CompleteDonationRepeat'
 import CompleteDonationCustom from './containers/CompleteDonation/CompleteDonationCustom'
+import CompleteDonationService from './containers/CompleteDonation/CompleteDonationService'
+import CompleteDonationDelivery from './containers/CompleteDonation/CompleteDonationDelivery'
 
 import styles from './Styles/NavigationStyles'
 
@@ -60,6 +62,8 @@ const PrimaryNav = StackNavigator({
   CompleteDonationDetails: {screen: CompleteDonationDetails},
   CompleteDonationRepeat: {screen: CompleteDonationRepeat},
   CompleteDonationCustom: {screen: CompleteDonationCustom},
+  CompleteDonationService: {screen: CompleteDonationService},
+  CompleteDonationDelivery: {screen: CompleteDonationDelivery},
   
 }, {
     initialRouteName: 'CompleteDonationDetails',

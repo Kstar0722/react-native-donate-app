@@ -11,6 +11,8 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+@import GoogleMaps;
+@import GooglePlaces;
 
 @implementation AppDelegate
 
@@ -19,6 +21,8 @@
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  [GMSServices provideAPIKey:@"AIzaSyBWybQsjrXfu36moZDMRhj5NcMvnuD6tcY"];
+  [GMSPlacesClient provideAPIKey:@"AIzaSyBWybQsjrXfu36moZDMRhj5NcMvnuD6tcY"];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"DonateApp"

@@ -23,7 +23,7 @@ export default StyleSheet.create({
     },
 
     statusText: {
-        marginLeft: width/2-10, 
+        marginLeft: width/2-30, 
         backgroundColor: 'transparent', 
         color: 'white', 
         fontSize: 17,

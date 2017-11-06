@@ -14,6 +14,7 @@ import DatePicker from 'react-native-datepicker'
 
 
 import DescriptionModal from '../../../App/Components/Modals/descriptionModal'
+import LocationModal from './LocationModal'
 
 import { Images } from '../../DevTheme'
 import styles from './Styles/CompleteDonationDetailStyles'
@@ -22,13 +23,14 @@ const { width, height } =Dimensions.get('window')
 _dText='';
 var REPEAT_TYPE_KEY = '@repeat_type';
 
-export default class HomeScreen extends React.Component {
+export default class CompleteDonationDetail extends React.Component {
     constructor(props) {
         super(props)
         currentDate = new Date()
         this.state = {
             isEnabledButton: false,
             descriptionModalVisible: false,
+            locationModalVisible: false,
 
             startDate: '',
             endDate: '',
@@ -93,6 +95,13 @@ export default class HomeScreen extends React.Component {
           descriptionModalVisible: false
         })
         this.validateData()
+    }
+
+    closeLocationModal = () => {
+        this.setState({locationModalVisible: false}, function() {
+            this.validateData()
+        })
+
     }
 
     refresh = (value) => {
@@ -281,7 +290,7 @@ export default class HomeScreen extends React.Component {
 
                     <View style={styles.dateFrame} >
                         <Text>LOCATION</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.setState({locationModalVisible: true})} >
                             <Image source={Images.location_gray} resizeMode={'contain'} style={styles.icon} />
                         </TouchableOpacity>
                     </View>
@@ -332,6 +341,7 @@ export default class HomeScreen extends React.Component {
                 <TouchableOpacity 
                     style={[styles.containerBottom, this.state.isEnabledButton ? {backgroundColor: '#f58a55'} : {backgroundColor : '#fcdccb'}]} 
                     disabled={this.state.isEnabledButton ? false : true} 
+                    onPress={() => {this.props.navigation.navigate('CompleteDonationService')}}
                 >
                     <Text style={styles.buttonText} >ADD DETAILS</Text>
                 </TouchableOpacity>
@@ -339,6 +349,10 @@ export default class HomeScreen extends React.Component {
                 <DescriptionModal 
                     descriptionModalVisible={this.state.descriptionModalVisible} 
                     close={this.closeDescriptionModal}
+                />
+                <LocationModal
+                    locationModalVisible={this.state.locationModalVisible}
+                    close={this.closeLocationModal}
                 />
 
             </View>
