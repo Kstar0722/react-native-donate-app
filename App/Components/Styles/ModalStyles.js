@@ -158,7 +158,7 @@ export default StyleSheet.create({
         paddingHorizontal: 15,
     },
     mLineText: {
-        color: '#D8D8d8',
+       // color: '#D8D8d8',
         fontSize: 12,
         padding: 15,
         marginTop: 30,
