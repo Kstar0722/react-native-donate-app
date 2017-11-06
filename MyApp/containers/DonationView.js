@@ -103,7 +103,6 @@ export default class MainScreen extends Component {
                         <View style={styles.roundView}>
                             <View style={{alignItems: 'center', marginRight: 70}}>
                                 <TouchableHighlight style={styles.keyAround} onPress={()=>this.setState({rescueModal: true})}>
-
                                     <Image source={Images.key} style={styles.key} />
                                 </TouchableHighlight>
                                 <Text style={styles.rescue}>Rescue</Text>
