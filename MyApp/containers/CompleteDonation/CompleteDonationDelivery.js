@@ -11,13 +11,14 @@ import {
     AsyncStorage,
 } from 'react-native'
 import { NavigationActions } from 'react-navigation'
+import Meteor, { createContainer } from 'react-native-meteor'
+import AlertModal from '../../../App/Components/AlertModal'
 
 import { Images } from '../../DevTheme'
 import styles from './Styles/CompleteDonationDeliveryStyles'
 
 const { width, height } =Dimensions.get('window')
 var AVATAR_URI_KEY = '@avatar_uri';
-
 
 export default class CompleteDonationDelivery extends React.Component {
 
@@ -28,6 +29,12 @@ export default class CompleteDonationDelivery extends React.Component {
             isEnabledButton: false,
             deliveryOption: -1,
             avatar: null,
+
+            driver: null,
+            business: null,
+
+            msgBox: false,
+            msgText: "",
         }
     }
 
@@ -56,6 +63,26 @@ export default class CompleteDonationDelivery extends React.Component {
         })
     }
 
+    onDriverClick = () => {
+        this.props.navigation.navigate('DonationAssignDriver', {
+            onGoBack: (driver) => this.onReceiveDriver(driver)
+        })
+    }
+
+    onReceiveDriver = (driver) => {
+        this.setState({driver: driver})
+    }
+
+    onBusinessClick = () => {
+        this.props.navigation.navigate('DonationAssignBusiness', {
+            onGoBack: (business) => this.onReceiveBusiness(business)
+        })
+    }
+
+    onReceiveBusiness = (business) => {
+        this.setState({business: business})
+    }
+
     onBackClick = () => {
         /*let navigationAction = NavigationActions.reset({
             index: 0,
@@ -68,12 +95,36 @@ export default class CompleteDonationDelivery extends React.Component {
         this.props.navigation.goBack(key)
     }
 
+    onCompleteClick = () => {
+        postData = this.props.navigation.state.params.postData
+        postData.deliveryOption = this.state.deliveryOption
+        console.log(postData)
+
+        Meteor.call('createDonation', postData, (err, res) => {
+            console.log('Data Post Called...')
+            if (err) {
+                this.showDialog(true, err.message)
+                console.log(err)
+            } else {
+                console.log("Data Post Success...")
+                this.props.navigation.navigate('ViewListings')
+            }
+        })
+    }
+
+    showDialog = (show, title) => {
+        if (show) this.setState({ msgBox: show, msgText: title })
+        else this.setState({ msgBox: show })
+    }
+
     render() {
+        console.log('Post......', this.props.navigation.state.params.postData)
         return (
         
         <View style={styles.container}>
             <View style={styles.containerTop} >
                 <ImageBackground source={this.state.avatar ? this.state.avatar : Images.complete_donation_top_bg} style={styles.imgBg} resizeMode={'cover'} >
+                    {this.state.avatar && <View style={styles.overlay} />}
                     <View style={styles.nav}>
                         <TouchableOpacity onPress={() => this.onBackClick()}>
                             <Image source={Images.backIcon} style={styles.navLeftIcon} />
@@ -153,26 +204,31 @@ export default class CompleteDonationDelivery extends React.Component {
                 </View>
 
                 <View style={styles.contentFrame} >
-                    <TouchableOpacity style={[styles.borderBottom, styles.contentItem]}>
+                    <TouchableOpacity style={[styles.borderBottom, styles.contentItem]} onPress={() => {this.onDriverClick()}} >
                         <Image source={Images.add_blue} resizeMode={'contain'} style={styles.contentItemImg} />
-                        <Text>CLICK HERE TO ASSIGN TO DRIVER</Text>
+                        <Text>{this.state.driver ? 'DRIVER: ' + this.state.driver.name : 'CLICK HERE TO ASSIGN TO DRIVER'}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.borderBottom, styles.contentItem]}>
+                    <TouchableOpacity style={[styles.borderBottom, styles.contentItem]} onPress={() => this.onBusinessClick()} >
                         <Image source={Images.add_blue} resizeMode={'contain'} style={styles.contentItemImg} />
-                        <Text>CLICK HERE TO ASSIGN TO A BUSINESS</Text>
+                        <Text>{this.state.business ? 'BUSINESS: ' + this.state.business.name : 'CLICK HERE TO ASSIGN TO A BUSINESS'}</Text>
                     </TouchableOpacity>
                 </View>
             </View>
             }
             
-
             <TouchableOpacity 
                 style={[styles.containerBottom, this.state.isEnabledButton ? {backgroundColor: '#f58a55'} : {backgroundColor : '#fcdccb'}]} 
                 disabled={this.state.isEnabledButton ? false : true} 
-                onPress={() => {this.props.navigation.navigate('CreateListing')}}
+                onPress={() => this.onCompleteClick()}
             >
                 <Text style={styles.buttonText} >COMPLETE</Text>
             </TouchableOpacity>
+
+            <AlertModal 
+                show={this.state.msgBox} 
+                modal={() => this.showDialog(false)} 
+                title={this.state.msgText} 
+            />
         </View>
         )
     }

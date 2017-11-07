@@ -76,7 +76,6 @@ export default class CompleteDonationService extends React.Component {
         this.state.dataSource.map((value, i) => {
             if (value.checked) checked = true
         })
-        console
         if (checked) {
             this.setState({isServiceSelected: true})
         } else {
@@ -85,8 +84,8 @@ export default class CompleteDonationService extends React.Component {
     }
 
     _updateDataSource(checked, index) {
-        console.log('Checked', checked)
-        console.log('Index', index)
+        //console.log('Checked', checked)
+        //console.log('Index', index)
         let dataSource = [...this.state.dataSource]
         dataSource[index].checked = checked
         this.setState({dataSource}, function() {
@@ -102,16 +101,27 @@ export default class CompleteDonationService extends React.Component {
             ]
         })
         this.props.navigation.dispatch(navigationAction)*/
-        let key = this.props.navigation.state.params.backKey
-        this.props.navigation.goBack(key)
+        /*let key = this.props.navigation.state.key
+        this.props.navigation.goBack(key)*/
+        this.props.navigation.goBack()
+    }
+
+    onNextClick = () => {
+        this.props.navigation.navigate(
+            'CompleteDonationDelivery',  
+            {          
+                backKey: this.props.navigation.state.key,
+                postData: this.props.navigation.state.params.postData
+            }
+        )
     }
 
     render() {
-        console.log('Recdering.........')
         return(
         <View style={styles.container} >
             <View style={styles.containerTop} >
                 <ImageBackground source={this.state.avatar ? this.state.avatar : Images.complete_donation_top_bg} style={styles.imgBg} resizeMode={'cover'} >
+                    {this.state.avatar && <View style={styles.overlay} />}
                     <View style={styles.nav}>
                         <TouchableOpacity onPress={() => this.onBackClick() }>
                             <Image source={Images.backIcon} style={styles.navLeftIcon} />
@@ -139,12 +149,18 @@ export default class CompleteDonationService extends React.Component {
                 style={{marginBottom: 60}}
             />
             {!this.state.isServiceSelected ?
-            <TouchableOpacity style={styles.skipFrame} onPress={() => this.props.navigation.navigate('CompleteDonationDelivery', {backKey: this.props.navigation.state.params.backKey})} >
+            <TouchableOpacity 
+                style={styles.skipFrame} 
+                onPress={() => this.onNextClick()} 
+            >
                 <Text style={styles.buttonText} >Skip This Step</Text>
                 <Image source={Images.skip} style={styles.skipIcon} />
             </TouchableOpacity>
             :
-            <TouchableOpacity style={styles.requestFrame} onPress={() => this.props.navigation.navigate('CompleteDonationDelivery',  {backKey: this.props.navigation.state.params.backKey})} >
+            <TouchableOpacity 
+                style={styles.requestFrame} 
+                onPress={() => this.onNextClick()} 
+            >
                 <Text style={styles.buttonText} >ADD REQUESTED SERVICES</Text>
             </TouchableOpacity>
             }

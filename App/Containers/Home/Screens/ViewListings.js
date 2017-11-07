@@ -78,7 +78,7 @@ export default class ViewListings extends Component {
     handleMenuLeftItem = () => {
         console.log('Left Menu Button Clicked...')
         this.setTimeout(() => {
-            this.props.navigation.navigate("CompletedDonationScreen")
+            this.props.navigation.navigate('CompleteDonationDetails')//this.props.navigation.navigate("CompletedDonationScreen")
         }, 400)
 
     }

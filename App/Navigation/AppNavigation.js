@@ -25,6 +25,8 @@ import CompleteDonationRepeat from '../../MyApp/containers/CompleteDonation/Comp
 import CompleteDonationCustom from '../../MyApp/containers/CompleteDonation/CompleteDonationCustom'
 import CompleteDonationService from '../../MyApp/containers/CompleteDonation/CompleteDonationService'
 import CompleteDonationDelivery from '../../MyApp/containers/CompleteDonation/CompleteDonationDelivery'
+import DonationAssignDriver from '../../MyApp/containers/CompleteDonation/DonationAssignDriver'
+import DonationAssignBusiness from '../../MyApp/containers/CompleteDonation/DonationAssignBusiness'
 
 const PrimaryNav = StackNavigator({
   LaunchScreen: { screen: LaunchScreen },
@@ -51,6 +53,8 @@ const PrimaryNav = StackNavigator({
   CompleteDonationCustom: {screen: CompleteDonationCustom},
   CompleteDonationService: {screen: CompleteDonationService},
   CompleteDonationDelivery: {screen: CompleteDonationDelivery},
+  DonationAssignDriver: {screen: DonationAssignDriver},
+  DonationAssignBusiness: {screen: DonationAssignBusiness},
 }, {
 //    initialRouteName: Meteor.userId() !== null ? 'FindDonation' : 'CreateListing',
     initialRouteName: 'LaunchScreen',

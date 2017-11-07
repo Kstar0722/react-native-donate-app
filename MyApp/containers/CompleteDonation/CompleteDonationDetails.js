@@ -12,10 +12,18 @@ import {
 import dateFormat from 'dateformat';
 import DatePicker from 'react-native-datepicker'
 
-
 import DescriptionModal from '../../../App/Components/Modals/descriptionModal'
 import PictureModal from '../../../App/Components/Modals/pictureModal'
 import LocationModal from './LocationModal'
+
+
+import { RNS3 } from 'react-native-aws3'
+import Meteor, { createContainer } from 'react-native-meteor'
+import AlertModal from '../../../App/Components/AlertModal'
+import AppConfig from '../../../App/Config'
+import { guid, validateEmail } from '../../../App/Transforms'
+
+
 
 import { Images } from '../../DevTheme'
 import styles from './Styles/CompleteDonationDetailStyles'
@@ -47,10 +55,13 @@ export default class CompleteDonationDetail extends React.Component {
 
             addressData: null,
             locationData: null,
+
+            msgBox: false,
+            msgText: "",
         }
     }
 
-    validateData = () => {
+    validateData = () => {        
         if (this.state.avatar == null) {
             this.setState({isEnabledButton: false})
             return
@@ -71,15 +82,15 @@ export default class CompleteDonationDetail extends React.Component {
             this.setState({isEnabledButton: false})
             return
         }
-        if (!this.state.foodTypes_NonPerishable && !this.state.foodTypes_Perishable && !this.state.foodTypes_Prepared) {
+        /*if (!this.state.foodTypes_NonPerishable && !this.state.foodTypes_Perishable && !this.state.foodTypes_Prepared) {
             this.setState({isEnabledButton: false})
             return
         }
         if (this.state.repeat == 10) {
             this.setState({isEnabledButton: false})
             return
-        }
-        console.log('Validate Success...')
+        }*/
+        //console.log('Validate Success...')
         this.setState({
             isEnabledButton: true
         })
@@ -114,9 +125,9 @@ export default class CompleteDonationDetail extends React.Component {
             (values) => {
               console.log('Then: ',values);
         });*/
-        console.log('Value: ', value)
+        //console.log('Value: ', value)
         this.setState({repeat: value}, function() {
-            console.log("Repeat:", this.state.repeat)
+            //console.log("Repeat:", this.state.repeat)
             this.validateData()
         })        
     }
@@ -147,19 +158,19 @@ export default class CompleteDonationDetail extends React.Component {
                     return <Text style={{fontSize: 16}} >Never</Text>                    
                     break;
                 case 1:
-                    return <Text style={{fontSize: 16}} >Every Day</Text>                    
+                    return <Text style={{fontSize: 16}} >Daily</Text>                    
                     break;
                 case 2:
-                    return <Text style={{fontSize: 16}} >Every Week</Text>                    
+                    return <Text style={{fontSize: 16}} >Weekly</Text>                    
                     break; 
                 case 3:
-                    return <Text style={{fontSize: 16}} >Every 2 Weeks</Text>                    
+                    return <Text style={{fontSize: 16}} >Biweekly</Text>                    
                     break;
                 case 4:
-                    return <Text style={{fontSize: 16}} >Every Month</Text>                    
+                    return <Text style={{fontSize: 16}} >Monthly</Text>                    
                     break;
                 case 5:
-                    return <Text style={{fontSize: 16}} >Every Year</Text>                    
+                    return <Text style={{fontSize: 16}} >Yearly</Text>                    
                     break;      
                 case 6:
                     return <Text style={{fontSize: 16}} >Custom</Text>                    
@@ -209,8 +220,8 @@ export default class CompleteDonationDetail extends React.Component {
          * addressData : {primaryText: '...', secondaryText: '...', fullText: '...', ...  }
          * locationData : {name: '...', address: '...', latitude: '...', longitude: '...', }
          */
-        console.log(addressData)
-        console.log(locationData)
+        //console.log(addressData)
+        //console.log(locationData)
         this.setState({
             addressData: addressData,
             locationData: locationData,
@@ -220,8 +231,8 @@ export default class CompleteDonationDetail extends React.Component {
     }
 
     chooseAvatar = (avatar) => {
-        console.log('avatar', avatar)
-        console.log('Avatar', avatar.uri)
+        //console.log('avatar', avatar)
+        //console.log('Avatar', avatar.uri)
         this.setState({avatar : avatar}, function() {
             this.closePictureModal()
             AsyncStorage.setItem(AVATAR_URI_KEY, avatar.uri)
@@ -235,11 +246,112 @@ export default class CompleteDonationDetail extends React.Component {
     }
 
     onBackClick = () => {
+        _dText = ''
         let key = this.props.navigation.state.key
         this.props.navigation.goBack(key)
         //this.props.navigation.goBack()
     }
 
+    onNextClick = () => {
+
+        const file = {
+            uri: this.state.avatar,
+            name: guid() + ".png",
+            type: "image/png"
+        }
+        const options = {
+            keyPrefix: AppConfig.KEY_PREFIX,
+            bucket: AppConfig.BUCKET,
+            accessKey: AppConfig.ACCESS_KEY,
+            secretKey: AppConfig.SECRET_KEY,
+            region: AppConfig.REGION
+        }
+
+        postData = {
+            date: this.getDate(),
+            location: this.getLocation(),
+            foodTypes_NonPerishable: this.state.foodTypes_NonPerishable,
+            foodTypes_Perishable: this.state.foodTypes_Perishable,
+            foodTypes_Prepared: this.state.foodTypes_Prepared,
+            description: _dText,
+        }
+
+        RNS3.put(file, options).then(response => {
+            _dText = ''
+            postData.image = response.body.postResponse.location
+            console.log('Post Data', postData)
+            this.props.navigation.navigate('CompleteDonationService', {postData: postData})            
+        }).catch(error => {
+            this.showDialog(true, error.message)
+        })
+
+    }
+
+    getDate = () => {
+        let monthNames = [
+            'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+        ]
+        
+        if (this.state.startDate && this.state.endDate) {
+            dateList1 = this.state.startDate.split("-")
+            dateStr = dateList1[0].trim()
+            MonDayYear = dateStr.split(' ')
+            month = monthNames.indexOf(MonDayYear[0]) + 1
+            date = MonDayYear[2] + '-' + month.toString() + '-' + MonDayYear[1]
+            //console.log(date)
+    
+            startTimeStr = dateList1[1].trim().split(' ')
+            startTime = this.getTime(startTimeStr)
+    
+            dateList2 = this.state.endDate.split('-')
+            endTimeStr = dateList2[1].trim().split(' ')
+            endTime = this.getTime(endTimeStr)
+    
+            newDate = {date: date, startTime: startTime, endTime: endTime, notes: _dText}
+            //console.log(newDate)
+            return newDate
+        }
+        return {}
+        
+    }
+
+    getTime = (timeStr) => {
+        time = timeStr[0].split(':')
+        hour = parseInt(time[0])
+        minute = parseInt(time[1])
+        AmPm = timeStr[1]
+        if (AmPm == 'AM' && hour == 12) {
+            hour = 0
+        }
+        if (AmPm == 'PM' && hour != 12) {
+            hour = 12 + hour
+        }
+        return hour*60 + minute
+    }
+
+    getStartDateStr = () => {
+        dateStrs = this.state.startDate.split('-')
+        return dateStrs[0] + ' ' + dateStrs[1]
+
+    }
+
+    getLocation = () => {
+        let data = this.state.locationData
+        if (data) {
+            lat = data.latitude
+            lon = data.longitude
+            address = data.address
+            newLocation = {lat: lat, lon: lon, address: address}
+            //console.log('Location', newLocation)
+            return newLocation
+        }
+        return {}
+    }
+
+    showDialog = (show, title) => {
+        if (show) this.setState({ msgBox: show, msgText: title })
+        else this.setState({ msgBox: show })
+    }
 
 
     render() {
@@ -247,6 +359,7 @@ export default class CompleteDonationDetail extends React.Component {
             <View style={styles.container} >
                 <View style={styles.containerTop} >
                     <ImageBackground source={this.state.avatar ? this.state.avatar : Images.complete_donation_top_bg} style={styles.imgBg} resizeMode={'cover'} >
+                        {this.state.avatar && <View style={styles.overlay} />}
                         <View style={styles.nav}>
                             <TouchableOpacity onPress={() => this.onBackClick() }>
                                 <Image source={Images.backIcon} style={styles.navLeftIcon} />
@@ -281,9 +394,10 @@ export default class CompleteDonationDetail extends React.Component {
                         <DatePicker
                             style={styles.datePickerStyle}
                             date= {this.state.startDate}
+                            minDate={new Date()}
                             mode="datetime"
                             placeholder=" "
-                            format="MMM D, YYYY h:m A"
+                            format="MMMM D YYYY - h:m A"
                             confirmBtnText="Done"
                             cancelBtnText="Cancel"
                             iconSource = {Images.calendar}   
@@ -315,10 +429,10 @@ export default class CompleteDonationDetail extends React.Component {
                         <DatePicker
                             style={styles.datePickerStyle}
                             date= {this.state.endDate}
-                            minDate={new Date(this.state.startDate)}
+                            minDate={new Date(this.getStartDateStr())}
                             mode="datetime"
                             placeholder=" "
-                            format="MMM D, YYYY h:m a"
+                            format="MMMM D YYYY - h:m A"
                             confirmBtnText="Done"
                             cancelBtnText="Cancel"
                             iconSource = {Images.calendar}   
@@ -399,7 +513,7 @@ export default class CompleteDonationDetail extends React.Component {
                 <TouchableOpacity 
                     style={[styles.containerBottom, this.state.isEnabledButton ? {backgroundColor: '#f58a55'} : {backgroundColor : '#fcdccb'}]} 
                     disabled={this.state.isEnabledButton ? false : true} 
-                    onPress={() => {this.props.navigation.navigate('CompleteDonationService', {backKey: this.props.navigation.state.key})}}
+                    onPress={() => this.onNextClick()}
                 >
                     <Text style={styles.buttonText} >ADD DETAILS</Text>
                 </TouchableOpacity>
@@ -418,6 +532,12 @@ export default class CompleteDonationDetail extends React.Component {
                     locationModalVisible={this.state.locationModalVisible}
                     close={this.closeLocationModal}
                     itemSelected={this.handleLocationSelected}
+                />
+
+                <AlertModal 
+                    show={this.state.msgBox} 
+                    modal={() => this.showDialog(false)} 
+                    title={this.state.msgText} 
                 />
 
             </View>
