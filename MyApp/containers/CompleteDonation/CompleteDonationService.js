@@ -128,7 +128,7 @@ export default class CompleteDonationService extends React.Component {
                         </TouchableOpacity>
                         <Text style={styles.navText}>New Food Donation</Text>
                         {!this.state.isServiceSelected &&
-                        <TouchableOpacity onPress={() => {}} >
+                        <TouchableOpacity onPress={() => this.onNextClick()} >
                             <Text style={[styles.postBtnText,]}>SKIP</Text>
                         </TouchableOpacity>
                         }

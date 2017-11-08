@@ -92,7 +92,7 @@ export default class CompleteDonationDelivery extends React.Component {
         })
         this.props.navigation.dispatch(navigationAction)*/
         let key = this.props.navigation.state.params.backKey
-        this.props.navigation.goBack(key)
+        this.props.navigation.goBack()
     }
 
     onCompleteClick = () => {

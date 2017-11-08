@@ -41,7 +41,7 @@ export default class DescriptionModal extends React.Component {
                                 </TouchableOpacity>
                             </View>
                             <View>
-                                <Text style={styles.entryTxt}>Entry for January 4, 2017 | 10:30 PM</Text>
+                                <Text style={styles.entryTxt}>{'              '}</Text>
                             </View>
                             <View style={{ flex: 1 }}>
                                 <TextInput style={[styles.mLineText]} multiline={true} editable={true}
