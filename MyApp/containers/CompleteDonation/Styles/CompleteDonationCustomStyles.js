@@ -66,11 +66,10 @@ export default StyleSheet.create({
 
     content: {
         backgroundColor: 'white', 
-        paddingLeft: 20
     },
 
     item: {
-        height: 45,  
+        height: 40,  
         paddingRight: 20,
         flexDirection: 'row',
         justifyContent: 'space-between', 
@@ -78,7 +77,7 @@ export default StyleSheet.create({
     },
 
     itemText: {
-        fontSize: 19
+        fontSize: 18
     },
 
     icon: {
@@ -96,7 +95,7 @@ export default StyleSheet.create({
     monthItem: {
         flex: 1, 
         alignItems: 'center', 
-        height: 45, 
+        height: 40, 
         justifyContent: 'center'
     },
 

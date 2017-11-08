@@ -35,6 +35,7 @@ var AVATAR_URI_KEY = '@avatar_uri';
 export default class CompleteDonationDetail extends React.Component {
     constructor(props) {
         super(props)
+        _dText = ''
         currentDate = new Date()
         this.state = {
             isEnabledButton: false,
@@ -51,7 +52,8 @@ export default class CompleteDonationDetail extends React.Component {
             foodTypes_Perishable: false,
             foodTypes_Prepared: false,
 
-            repeat: 10,
+            repeat: 0,
+            customRepeatData: null,
 
             addressData: null,
             locationData: null,
@@ -120,13 +122,16 @@ export default class CompleteDonationDetail extends React.Component {
 
     }
 
-    refresh = (value) => {
+    refresh = (repeat, customRepeatData) => {
         /*var value = AsyncStorage.getItem(REPEAT_TYPE_KEY).then(
             (values) => {
               console.log('Then: ',values);
         });*/
         //console.log('Value: ', value)
-        this.setState({repeat: value}, function() {
+        this.setState({
+            repeat: repeat,
+            customRepeatData: customRepeatData,
+        }, function() {
             //console.log("Repeat:", this.state.repeat)
             this.validateData()
         })        
@@ -150,12 +155,12 @@ export default class CompleteDonationDetail extends React.Component {
     }
 
     repeatTextOrIcon = () => {
-        if (this.state.repeat == 10) {
+        if (this.state.repeat == 0) {
            return <Image source={Images.timeline} resizeMode={'contain'} style={styles.icon} />
         } else {
             switch (this.state.repeat) {
                 case 0:
-                    return <Text style={{fontSize: 16}} >Never</Text>                    
+                    //return <Text style={{fontSize: 16}} >Never</Text>                    
                     break;
                 case 1:
                     return <Text style={{fontSize: 16}} >Daily</Text>                    
@@ -467,7 +472,11 @@ export default class CompleteDonationDetail extends React.Component {
                     </TouchableOpacity>
                     
                     <TouchableOpacity 
-                        onPress={() => {this.props.navigation.navigate('CompleteDonationRepeat', {onGoBack: (value) => this.refresh(value), repeat: this.state.repeat})}} 
+                        onPress={() => {this.props.navigation.navigate('CompleteDonationRepeat', {
+                            onGoBack: (repeat, customRepeatData) => this.refresh(repeat, customRepeatData), 
+                            repeat: this.state.repeat,
+                            customRepeatData: this.state.customRepeatData,
+                        })}} 
                     >                            
                         <View style={styles.dateFrame} >
                             <Text style={{marginRight: 5}} >REPEAT</Text>

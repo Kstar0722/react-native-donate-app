@@ -22,8 +22,8 @@ export default class CompleteDonationRepeat extends React.Component {
         super(props)
         
         this.state = {
-            repeatType: 10,
-            customString: '',
+            repeatType: 0,
+            customRepeatData: null,
         }
     }
 
@@ -33,7 +33,8 @@ export default class CompleteDonationRepeat extends React.Component {
 
     componentDidMount() {
         this.setState({
-            repeatType: this.props.navigation.state.params.repeat
+            repeatType: this.props.navigation.state.params.repeat,
+            customRepeatData: this.props.navigation.state.params.customRepeatData,
         })
     }
 
@@ -60,19 +61,19 @@ export default class CompleteDonationRepeat extends React.Component {
         var ref = this
         setTimeout(function() {
             ref.props.navigation.goBack()
-        }, 500);
+        }, 300);
     }
 
     setCustom = (custom) => {
         console.log(custom)
-        this.setState({customString: custom})
+        this.setState({customRepeatData: custom})
     }
 
     onBackClick = () => {
-        if (this.state.customString) {
-            this.props.navigation.state.params.onGoBack(this.state.repeatType)
+        if (this.state.customRepeatData) {
+            this.props.navigation.state.params.onGoBack(this.state.repeatType, this.state.customRepeatData)
         } else {
-            this.props.navigation.state.params.onGoBack(10)
+            this.props.navigation.state.params.onGoBack(0)
         }
         this.props.navigation.goBack()
     }
@@ -156,12 +157,20 @@ export default class CompleteDonationRepeat extends React.Component {
 
                 <TouchableWithoutFeedback 
                     onPress={() => {this.setState({repeatType: 6}), 
-                        this.props.navigation.navigate('CompleteDonationCustom', {onGoBack: (custom) => this.setCustom(custom) })}
+                        this.props.navigation.navigate('CompleteDonationCustom', {
+                            onGoBack: (custom) => this.setCustom(custom),
+                            customRepeatData: this.state.customRepeatData 
+                        })}
                     } 
                 >
                     <View style={[styles.item, {backgroundColor: 'white', paddingLeft: 20}]} >
                         <Text style={styles.itemText} >Custom</Text>
+                        {this.checkRepestType(6) ?
+                        <Image source={Images.checked} resizeMode={'contain'} style={styles.icon}/>
+                        :
                         <Image source={Images.arrow_right} resizeMode={'contain'} style={[styles.icon, {tintColor: '#c6c6ca'}]} />
+                        }
+                        
                     </View>
                 </TouchableWithoutFeedback>                
             </View>
