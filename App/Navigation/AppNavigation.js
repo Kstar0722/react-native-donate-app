@@ -20,13 +20,13 @@ import styles from './Styles/NavigationStyles'
 
 import CompletedDonationScreen from '../Containers/Home/Screens/completedDonationScreen'
 
-import CompleteDonationDetails from '../../MyApp/containers/CompleteDonation/CompleteDonationDetails'
-import CompleteDonationRepeat from '../../MyApp/containers/CompleteDonation/CompleteDonationRepeat'
-import CompleteDonationCustom from '../../MyApp/containers/CompleteDonation/CompleteDonationCustom'
-import CompleteDonationService from '../../MyApp/containers/CompleteDonation/CompleteDonationService'
-import CompleteDonationDelivery from '../../MyApp/containers/CompleteDonation/CompleteDonationDelivery'
-import DonationAssignDriver from '../../MyApp/containers/CompleteDonation/DonationAssignDriver'
-import DonationAssignBusiness from '../../MyApp/containers/CompleteDonation/DonationAssignBusiness'
+import CompleteDonationDetails from '../Containers/CompleteDonation/CompleteDonationDetails'
+import CompleteDonationRepeat from '../Containers/CompleteDonation/CompleteDonationRepeat'
+import CompleteDonationCustom from '../Containers/CompleteDonation/CompleteDonationCustom'
+import CompleteDonationService from '../Containers/CompleteDonation/CompleteDonationService'
+import CompleteDonationDelivery from '../Containers/CompleteDonation/CompleteDonationDelivery'
+import DonationAssignDriver from '../Containers/CompleteDonation/DonationAssignDriver'
+import DonationAssignBusiness from '../Containers/CompleteDonation/DonationAssignBusiness'
 
 const PrimaryNav = StackNavigator({
   LaunchScreen: { screen: LaunchScreen },
