@@ -6,6 +6,8 @@ import {
     TextInput,
     Image,
     TouchableOpacity,
+    Dimensions,
+    ImageBackground,
 } from 'react-native';
 import styles from '../Styles/LoginScreenStyles'
 
@@ -13,6 +15,8 @@ import Meteor from 'react-native-meteor'
 import AlertModal from '../../../Components/AlertModal'
 import { Images } from '../../../Themes'
 import { guid, validateEmail } from '../../../Transforms'
+
+const { width, height } =Dimensions.get('window')
 
 export default class LaunchScreen extends Component {
     constructor() {
@@ -77,34 +81,28 @@ export default class LaunchScreen extends Component {
     render() {
         const { navigate } = this.props.navigation
         return (
-            <View style={{ width: '100%', height: '100%' }}>
-                <Image source={Images.signbg} style={styles.container}>
-                    <View style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-                        <Image source={Images.logoBig} style={styles.logoBig} />
-
-                        <View style={{ top: '15%' }}>
-                            <TextInput placeholder='USERNAME OR EMAIL'
-                                placeholderTextColor='rgba(255,255,255,0.5)' style={styles.text}
-                                underlineColorAndroid='white'
-                                onChangeText={(text) => this.setState({ email: text })}
-                                value={this.state.email} />
-                            <TextInput placeholder='PASSWORD'
-                                placeholderTextColor='rgba(255,255,255,0.5)' style={styles.text}
-                                onChangeText={(text) => this.setState({ password: text })} secureTextEntry
-                                value={this.state.password} />
-                        </View>
-
-                        <Text style={styles.info}>WE BELIEVE IN A FULL AMERICA</Text>
+            <View style = {{flex: 1}}>
+                <ImageBackground source={Images.signbg_new} style={{width: width, height: height - 75, justifyContent: 'center', alignItems: 'center'}}>
+                <Image source={Images.logoBig} style={styles.logoBig} resizeMode={'contain'} />
+                <View style={{ top: '15%' }}>
+                    <TextInput placeholder='USERNAME OR EMAIL'
+                        placeholderTextColor='rgba(255,255,255,0.5)' style={styles.text}
+                        underlineColorAndroid='white'
+                        onChangeText={(text) => this.setState({ email: text })}
+                        value={this.state.email} />
+                    <TextInput placeholder='PASSWORD'
+                        placeholderTextColor='rgba(255,255,255,0.5)' style={styles.text}
+                        onChangeText={(text) => this.setState({ password: text })} secureTextEntry
+                        value={this.state.password} />
+                </View>
+                <Text style={[styles.info, {bottom: 40}]}>WE BELIEVE IN A FULL AMERICA</Text>                
+                </ImageBackground>
+                <TouchableOpacity style={[styles.login, {width: width, position: 'absolute', bottom: 0, height: 75}]} onPress={this.login}>
+                    <View style={styles.button}>
+                        <Image source={Images.LOGIN} style = {styles.button_login_txt}  />
                     </View>
-
-                    <View style={styles.login}>
-                        <TouchableOpacity style={styles.button} onPress={this.login}>
-                            <Image source={Images.LOGIN} style = {styles.button_login_txt}  />
-                        </TouchableOpacity>
-                    </View>
-                </Image>
+                </TouchableOpacity>
                 <AlertModal show={this.state.msgBox} modal={() => this.showDialog(false)} title={this.state.msgText} />
-
             </View>
 
         );

@@ -93,13 +93,12 @@ export default class DonationAssignDriver extends Component {
                     </View>
 
                 </Image>
-                <TeamListView 
+                <TeamListViewContainer 
                     mode={this.state.toggleSearch} 
                     searchText={this.state.searchText} 
                     searchFilter={this.state.toggleType} 
                     selectedIndex={this.state.selectedIndex}
-                    onClick = {this.onItemClick}
-                />                
+                    onClick = {this.onItemClick} />                
                 
                 <TouchableOpacity 
                     style={[styles.assignBtn, this.state.isEnabledButton ? {backgroundColor: '#ffb660'} : {backgroundColor : '#ffb660'}]} 
@@ -118,7 +117,7 @@ export default class DonationAssignDriver extends Component {
 
 class TeamListView extends React.Component {
     render() {
-        const members = [
+        /*const members = [
             {name: 'Alex Smith', role: true, status: true},
             {name: 'Anthony Baldwin', role: true, status: true},
             {name: 'Brittnay Boyd', role: false, status: true},
@@ -150,8 +149,8 @@ class TeamListView extends React.Component {
                 return member.role == searchFilter
             }
         })
-        filteredMember = filteredMember.sort((a, b) => a.name > b.name)
-        /*const { team, mode, searchText, searchFilter, users, navigate } = this.props
+        filteredMember = filteredMember.sort((a, b) => a.name > b.name)*/
+        const { team, mode, searchText, searchFilter, users, selectedIndex, onClick } = this.props
         var prevChar = ""
         var filteredMember = team.length > 0 ? team[0].members.filter((member) => {
             const user = users.filter(user => user._id === member.userId)
@@ -163,7 +162,7 @@ class TeamListView extends React.Component {
                 return member.role === searchFilter
             }
         }) : []
-        filteredMember = filteredMember.sort((a, b) => a.name > b.name)*/
+        filteredMember = filteredMember.sort((a, b) => a.name > b.name)
 
         return (
             <Container style={{marginBottom: 60}}>
@@ -254,10 +253,10 @@ class TeamListView extends React.Component {
     }
 }
 
-/*const TeamListViewContainer = createContainer((params) => {
+const TeamListViewContainer = createContainer((params) => {
     Meteor.subscribe('myteam', Meteor.user().profile.teamId)
     return ({
         team: Meteor.collection('Team').find({ _id: Meteor.user().profile.teamId }),
         users: Meteor.collection('users').find({})
     })
-}, TeamListView)*/
+}, TeamListView)

@@ -196,7 +196,9 @@ const images = {
   calendar_left_arrow: require('../Images/calendar_left_arrow.png'),
   calendar_right_arrow: require('../Images/calendar_right_arrow.png'),
 
-  car_black: require('../Images/car_black.png')
+  car_black: require('../Images/car_black.png'),
+  signbg_new: require('../Images/signbg_new.png'),
+
   
 
   }

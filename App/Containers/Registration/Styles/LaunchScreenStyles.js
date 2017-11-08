@@ -23,7 +23,8 @@ export default StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        height: 64
+        height: 75,
+        backgroundColor: 'white'
     },
     button: {
         marginVertical: 8
