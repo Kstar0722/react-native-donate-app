@@ -225,6 +225,22 @@ const images = {
   timeline: require('../Images/timeline.png'),
   volunteer_gray: require('../Images/volunteer_gray.png'),
   volunteer_black: require('../Images/volunteer_black.png'),
+
+
+  back_img: require('../Images/Signup/back_img.png'),
+  building_heart_sel: require('../Images/Signup/building_heart_sel.png'),
+  building_heart: require('../Images/Signup/building_heart.png'),
+  checkmark: require('../Images/Signup/checkmark.png'),
+  close_img: require('../Images/Signup/close_img.png'),
+  help: require('../Images/Signup/help.png'),
+  operation_info_bg: require('../Images/Signup/operation_info_bg.png'),
+  person_sel: require('../Images/Signup/person_sel.png'),
+  person: require('../Images/Signup/person.png'),
+  rectangle_frame: require('../Images/Signup/rectangle_frame.png'),
+  right_rectangle_frame: require('../Images/Signup/right_rectangle_frame.png'),
+  right_rectangle_small: require('../Images/Signup/right_rectangle_small.png'),
+  team_sel: require('../Images/Signup/team_sel.png'),
+  team: require('../Images/Signup/team.png'),
   
 
   }

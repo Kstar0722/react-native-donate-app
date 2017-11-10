@@ -33,6 +33,17 @@ import CompleteDonationDelivery from './containers/CompleteDonation/CompleteDona
 import DonationAssignDriver from './containers/CompleteDonation/DonationAssignDriver'
 import DonationAssignBusiness from './containers/CompleteDonation/DonationAssignBusiness'
 
+import Signup from './containers/Signup/Signup'
+import SignupHelp from './containers/Signup/SignupHelp'
+import SignupHelpBusiness from './containers/Signup/SignupHelpBusiness'
+import SignupHelpTeam from './containers/Signup/SignupHelpTeam'
+import SignupHelpIndividual from './containers/Signup/SignupHelpIndividual'
+import SignupBusiness from './containers/Signup/SignupBusiness'
+import SignupBusinessAccountInfo from './containers/Signup/SignupBusinessAccountInfo'
+import SignupBusinessOperationInfo from './containers/Signup/SignupBusinessOperationInfo'
+//import SignupBusinessService from './containers/Signup/SignupBusinessService'
+//import SignupBusinessHour from './containers/Signup/SignupBusinessHour'
+
 import styles from './Styles/NavigationStyles'
 
 const PrimaryNav = StackNavigator({
@@ -68,9 +79,20 @@ const PrimaryNav = StackNavigator({
   CompleteDonationDelivery: {screen: CompleteDonationDelivery},
   DonationAssignDriver: {screen: DonationAssignDriver},
   DonationAssignBusiness: {screen: DonationAssignBusiness},
+
+  Signup: {screen: Signup, navigationOptions: { gesturesEnabled: false}},
+  SignupHelp: {screen: SignupHelp, navigationOptions: { gesturesEnabled: false}},
+  SignupHelpBusiness: {screen: SignupHelpBusiness, navigationOptions: { gesturesEnabled: false}},
+  SignupHelpTeam: {screen: SignupHelpTeam, navigationOptions: { gesturesEnabled: false}},
+  SignupHelpIndividual: {screen: SignupHelpIndividual, navigationOptions: { gesturesEnabled: false}},
+  SignupBusiness: {screen: SignupBusiness},
+  SignupBusinessAccountInfo: {screen: SignupBusinessAccountInfo},
+  SignupBusinessOperationInfo: {screen: SignupBusinessOperationInfo},
+  //SignupBusinessService: {screen: SignupBusinessService},
+  //SignupBusinessHour: {screen: SignupBusinessHour},
   
 }, {
-    initialRouteName: 'DonationAssignBusiness',
+    initialRouteName: 'Signup',
     heaerStyle: styles.header
   })
 export default PrimaryNav
