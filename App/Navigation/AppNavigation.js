@@ -28,6 +28,19 @@ import CompleteDonationDelivery from '../Containers/CompleteDonation/CompleteDon
 import DonationAssignDriver from '../Containers/CompleteDonation/DonationAssignDriver'
 import DonationAssignBusiness from '../Containers/CompleteDonation/DonationAssignBusiness'
 
+import Signup from '../Containers/NewRegistration/Signup'
+import SignupHelp from '../Containers/NewRegistration/SignupHelp'
+import SignupHelpBusiness from '../Containers/NewRegistration/SignupHelpBusiness'
+import SignupHelpTeam from '../Containers/NewRegistration/SignupHelpTeam'
+import SignupHelpIndividual from '../Containers/NewRegistration/SignupHelpIndividual'
+import SignupBusiness from '../Containers/NewRegistration/SignupBusiness'
+import SignupGeneral from '../Containers/NewRegistration/SignupGeneral'
+import SignupBusinessAccountInfo from '../Containers/NewRegistration/SignupBusinessAccountInfo'
+import SignupBusinessWelcome from '../Containers/NewRegistration/SignupBusinessWelcome'
+import SignupBusinessOperationInfo from '../Containers/NewRegistration/SignupBusinessOperationInfo'
+//import SignupBusinessService from '../Containers/NewRegistration/SignupBusinessService'
+//import SignupBusinessHour from '../Containers/NewRegistration/SignupBusinessHour'
+
 const PrimaryNav = StackNavigator({
   LaunchScreen: { screen: LaunchScreen },
   OnboardingScreen: { screen: OnboardingScreen },
@@ -37,7 +50,7 @@ const PrimaryNav = StackNavigator({
   AddItemsModal: { screen: AddItemsModal },
   LoginScreen: { screen: LoginScreen },
   /*===============================*/
-  FindDonation: { screen: /*FindDonation*/ FindDonation },
+  FindDonation: { screen: /*FindDonation*/ FindDonation, navigationOptions: { gesturesEnabled: true} },
   DonationView: { screen: DonationView },
   CreateListing: {screen: CreateListing},
   Description: {screen: Description},
@@ -46,7 +59,7 @@ const PrimaryNav = StackNavigator({
   TeamScreen : {screen : TeamScreen},
   AddMemberScreen : {screen : AddMemberScreen},
   RescueProgress: {screen: RescueProgress},
-  ViewListings: {screen: ViewListings},
+  ViewListings: {screen: ViewListings, navigationOptions: { gesturesEnabled: true}},
 
   CompleteDonationDetails: {screen: CompleteDonationDetails},
   CompleteDonationRepeat: {screen: CompleteDonationRepeat},
@@ -55,6 +68,19 @@ const PrimaryNav = StackNavigator({
   CompleteDonationDelivery: {screen: CompleteDonationDelivery},
   DonationAssignDriver: {screen: DonationAssignDriver},
   DonationAssignBusiness: {screen: DonationAssignBusiness},
+
+  Signup: {screen: Signup, navigationOptions: { gesturesEnabled: true}},
+  SignupHelp: {screen: SignupHelp, navigationOptions: { gesturesEnabled: false}},
+  SignupHelpBusiness: {screen: SignupHelpBusiness, navigationOptions: { gesturesEnabled: true}},
+  SignupHelpTeam: {screen: SignupHelpTeam, navigationOptions: { gesturesEnabled: true}},
+  SignupHelpIndividual: {screen: SignupHelpIndividual, navigationOptions: { gesturesEnabled: true}},
+  SignupBusiness: {screen: SignupBusiness},
+  SignupGeneral: {screen: SignupGeneral},
+  SignupBusinessAccountInfo: {screen: SignupBusinessAccountInfo},
+  SignupBusinessWelcome: {screen: SignupBusinessWelcome, navigationOptions: { gesturesEnabled: false}},
+  SignupBusinessOperationInfo: {screen: SignupBusinessOperationInfo, navigationOptions: { gesturesEnabled: false}},
+  //SignupBusinessService: {screen: SignupBusinessService},
+  //SignupBusinessHour: {screen: SignupBusinessHour},
 }, {
 //    initialRouteName: Meteor.userId() !== null ? 'FindDonation' : 'CreateListing',
     initialRouteName: 'LaunchScreen',

@@ -46,7 +46,7 @@ export default class LaunchScreen extends Component {
                     <Text style = {styles.info}>WE BELIEVE IN A FULL AMERICA</Text>
                 </ImageBackground>
                 <View style={[styles.login, {position: 'absolute', bottom: 0, width: width}]}>
-                    <TouchableOpacity onPress={() => navigate('OnboardingScreen')} style={styles.button}>
+                    <TouchableOpacity onPress={() => navigate('Signup')} style={styles.button}>
                         <Text style = {styles.button_txt} >SIGN UP</Text>
                     </TouchableOpacity>
                     <Image source={Images.devide} style={{ marginBottom: 1 }} />
@@ -55,9 +55,7 @@ export default class LaunchScreen extends Component {
                     </TouchableOpacity>
                 </View>
 
-            </View>
-
-            
+            </View>           
 
         );
     }
