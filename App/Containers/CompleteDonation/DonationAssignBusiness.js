@@ -58,7 +58,7 @@ export default class DonationAssignBusiness extends Component {
                     </View>
 
                 </Image>
-                <AgencyListView 
+                <AgencyListViewContainer 
                     searchText={this.state.searchText} 
                     selectedIndex={this.state.selectedIndex}
                     onClick = {this.onItemClick}
@@ -80,8 +80,10 @@ export default class DonationAssignBusiness extends Component {
 
 
 class AgencyListView extends React.Component {
+    
+    
     render() {
-        const agencies = [
+        /*const agencies = [
             {name: 'Alex Smith'},
             {name: 'Anthony Baldwin'},
             {name: 'Brittnay Boyd'},
@@ -108,6 +110,7 @@ class AgencyListView extends React.Component {
             return agency.name.toLowerCase().indexOf(searchText.toLowerCase()) >= 0
         })
         filteredAgency = filteredAgency.sort((a, b) => a.name > b.name)
+
 
         return (
             <Container style={{marginBottom: 60}}>
@@ -182,6 +185,109 @@ class AgencyListView extends React.Component {
                 
 
             </Container>
+        )*/
+
+
+
+        
+        const {searchText, selectedIndex, onClick, users} = this.props
+        var prevChar = ""
+        var filteredAgency = users.filter((agency) => {
+            return (agency.profile.name.toLowerCase().indexOf(searchText.toLowerCase()) >= 0) && (agency.profile.bType == false)
+        })
+        filteredAgency = filteredAgency.sort((a, b) => a.profile.name > b.profile.name)
+
+        //filteredAgency = filteredAgency.sort((a, b) => a.localeCompare(b))
+
+
+        return (
+            <Container style={{marginBottom: 60}}>
+                <Content>
+                    <List  >
+                        {
+                            filteredAgency.map((agency, index) => {
+                                //console.log(member)
+                                const name = agency.profile.name
+                                if (prevChar !== name[0]) {
+                                    prevChar = name[0]
+                                    return (
+                                        <View>
+                                            <ListItem itemDivider style={styles.listItemSection} >
+                                                <Text style={styles.listItemSectionText}>{name[0]}</Text>
+                                            </ListItem>
+                                            <ListItem icon onPress={() => {onClick(index, agency)}}>                                                                            
+                                                <Left style={index == selectedIndex ? {paddingLeft: 3, paddingRight: 14} : {paddingLeft: 10, paddingRight: 20}} >
+                                                    {index == selectedIndex ?
+                                                    <View style={{
+                                                            alignItems: 'center', 
+                                                            justifyContent: 'center', 
+                                                            width: 24, 
+                                                            height: 24,
+                                                            borderRadius: 12,
+                                                            backgroundColor: '#ffb660',
+                                                        }} 
+                                                    >
+                                                        <Image source={Images.checked} resizeMode={'contain'} style={{width:15, height: 15}} />
+                                                    </View>
+                                                    :
+                                                    <Icon name="circle" color="#F5F5F5" />
+                                                    }
+                                                    
+                                                </Left>
+                                                <Body>
+                                                    <Text style={styles.listItemText}>{name}</Text>
+                                                </Body>
+                                            </ListItem>
+                                        </View>
+                                    )
+                                } else {
+                                    return (
+                                        <ListItem icon onPress={() => onClick(index, agency)}  >
+                                            <Left style={index == selectedIndex ? {paddingLeft: 3, paddingRight: 14} : {paddingLeft: 10, paddingRight: 20}}>
+                                                {index == selectedIndex ?
+                                                <View style={{
+                                                        alignItems: 'center', 
+                                                        justifyContent: 'center', 
+                                                        width: 24, 
+                                                        height: 24,
+                                                        borderRadius: 12,
+                                                        backgroundColor: '#ffb660',
+                                                    }} 
+                                                >
+                                                    <Image source={Images.checked} resizeMode={'contain'} style={{width:15, height: 15}} />
+                                                </View>
+                                                :
+                                                <Icon name="circle" color="#F5F5F5" />
+                                                }
+                                            </Left>
+                                            <Body>
+                                                <Text style={styles.listItemText}>{name}</Text>
+                                            </Body>
+                                        </ListItem>
+                                    )
+                                }
+                            })
+                        }
+                    </List>
+                </Content>
+                
+
+            </Container>
         )
+
+
+
+
+
+
     }
 }
+
+
+
+const AgencyListViewContainer = createContainer((params) => {
+    Meteor.subscribe('business')
+    return ({
+        users: Meteor.collection('users').find({})
+    })
+}, AgencyListView)

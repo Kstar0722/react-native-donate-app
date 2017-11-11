@@ -210,7 +210,7 @@ export default class CompleteDonationDelivery extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.borderBottom, styles.contentItem]} onPress={() => this.onBusinessClick()} >
                         <Image source={Images.add_blue} resizeMode={'contain'} style={styles.contentItemImg} />
-                        <Text>{this.state.business ? 'BUSINESS: ' + this.state.business.name : 'CLICK HERE TO ASSIGN TO A BUSINESS'}</Text>
+                        <Text>{this.state.business ? 'BUSINESS: ' + this.state.business.profile.name : 'CLICK HERE TO ASSIGN TO A BUSINESS'}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

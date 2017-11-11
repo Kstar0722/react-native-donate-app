@@ -13,6 +13,8 @@ import {
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
+import LocationModal from '../../Components/Modals/LocationModal'
+
 import { Images } from '../../Themes'
 import styles from './Styles/SignupGeneralStyles'
 
@@ -29,6 +31,8 @@ export default class SignupBusinessAccountInfo extends React.Component {
             phone: '',
             ein: '',
             website: '',
+
+            locationModalVisible: false,
         }
     }
 
@@ -54,6 +58,27 @@ export default class SignupBusinessAccountInfo extends React.Component {
             accountType: accountType,
             businessInfo: businessInfo,
         })
+    }
+
+    closeLocationModal = () => {
+        this.setState({locationModalVisible: false}, function() {
+            this.validate()
+        })
+
+    }
+
+    handleLocationSelected = (addressData, locationData) => {
+        /**
+         * addressData : {primaryText: '...', secondaryText: '...', fullText: '...', ...  }
+         * locationData : {name: '...', address: '...', latitude: '...', longitude: '...', }
+         */
+        //console.log(addressData)
+        //console.log(locationData)
+        this.setState({
+            address: locationData.address
+        }, function() {
+            this.validate()
+        })        
     }
 
     validate = () => {
@@ -97,25 +122,18 @@ export default class SignupBusinessAccountInfo extends React.Component {
                             selectionColor='white'
                             autoFocus={false}
                             returnKeyType='next'
-                            onSubmitEditing={() => this.refs.addressInput.focus()}
-                            style={[styles.textInput, {paddingLeft: 0, paddingVertical: 8}]} />
-                    </View>
-
-                    <View style={[styles.textInputFrame, {marginTop: 15}]} >
-                        <TextInput keyboardType='email-address'
-                            ref='addressInput'
-                            placeholder='Address'
-                            placeholderTextColor='rgba(255, 255, 255, 0.5)'
-                            onChangeText={(text) => this.setState({address: text}, function() {
-                                this.validate()
-                            })} 
-                            value={this.state.address}
-                            underlineColorAndroid='white'
-                            selectionColor={'white'}
-                            returnKeyType='next'
                             onSubmitEditing={() => this.refs.phoneInput.focus()}
                             style={[styles.textInput, {paddingLeft: 0, paddingVertical: 8}]} />
                     </View>
+                    
+                    <TouchableOpacity  onPress={() => this.setState({locationModalVisible: true})} activeOpacity={0.9} >
+                    <View style={[styles.textInputFrame, {marginTop: 15}]} >
+                        <Text numberOfLines={1} style={[styles.textInput, {paddingLeft: 0, paddingVertical: 8, backgroundColor: 'transparent'}, this.state.address ? {color: 'white'} : {color: 'rgba(255, 255, 255, 0.5)'}]} >
+                            {this.state.address ? this.state.address : 'Address'}
+                        </Text>
+                    </View>
+                    </TouchableOpacity>
+                    
 
                     <View style={[styles.textInputFrame, {marginTop: 15}]} >
                         <TextInput keyboardType='phone-pad'                             
@@ -174,6 +192,12 @@ export default class SignupBusinessAccountInfo extends React.Component {
                     <Text style={{fontSize: 17}} >Complete</Text>
                 </TouchableOpacity>
                 }
+
+                <LocationModal
+                    locationModalVisible={this.state.locationModalVisible}
+                    close={this.closeLocationModal}
+                    itemSelected={this.handleLocationSelected}
+                />
                 
             </ImageBackground>
         )
