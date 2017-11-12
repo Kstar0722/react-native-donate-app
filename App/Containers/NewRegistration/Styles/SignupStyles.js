@@ -76,7 +76,8 @@ export default StyleSheet.create({
 
     rectFrameText: {
         backgroundColor: 'transparent', 
-        fontSize: 13
+        fontSize: 13,
+        textAlign: 'center',
     },
 
     checkMark: {

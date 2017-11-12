@@ -115,7 +115,7 @@ export default class SignupBusinessService extends React.Component {
                 </View>
 
                 <Text style={[styles.titleText, {marginTop: 16}]} >Select all that apply</Text>
-                <Text style={[styles.titleText, {fontSize: 28}]}>Available Services</Text>
+                <Text style={[styles.titleText, (width < 370) ? {fontSize: 25} : {fontSize: 28}]}>Available Services</Text>
             </ImageBackground> 
 
             <View >

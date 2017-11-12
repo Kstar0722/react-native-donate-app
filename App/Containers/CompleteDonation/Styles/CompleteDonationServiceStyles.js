@@ -34,12 +34,12 @@ export default StyleSheet.create({
         paddingHorizontal:20,
         textAlign:'left',
         color:'#fff',
-        fontSize:18,
+        fontSize:(width < 370) ? 16 : 18,
         backgroundColor:'transparent',
     },
 
     postBtnText:{
-        fontSize:16,
+        fontSize:(width < 370) ? 14 : 16,
         backgroundColor:'transparent',
         textAlign:'center',
         color:'#fff',
@@ -54,7 +54,7 @@ export default StyleSheet.create({
         marginLeft: width/2-30, 
         backgroundColor: 'transparent', 
         color: 'white', 
-        fontSize: 17,
+        fontSize: (width < 370) ? 15 : 17,
     },
 
     titleTextFrame: {
@@ -66,7 +66,7 @@ export default StyleSheet.create({
 
     titleText: {        
         textAlign: 'center',
-        fontSize: 30,
+        fontSize: (width < 370) ? 25 : 30,
         color: 'white',
         backgroundColor:'transparent',
     },
@@ -82,26 +82,26 @@ export default StyleSheet.create({
     },
 
     itemCheckFrame: {
-        width: 30, 
-        height: 30, 
+        width: (width < 370) ? 25 : 30, 
+        height: (width < 370) ? 25 : 30, 
         borderRadius: 15, 
-        marginLeft: 30,
+        marginLeft: (width < 370) ? 20 : 30,
         borderColor: '#e8e8e9', 
         borderWidth: 1.5,
     },
 
     itemCheckDone: {
-        width: 30,
-        height: 30,
+        width: (width < 370) ? 25 : 30,
+        height: (width < 370) ? 25 : 30,
         tintColor: '#50d2c2',
-        marginLeft: 30,
+        marginLeft: (width < 370) ? 20 : 30,
     },
 
     itemText: {
         marginLeft: 16, 
         marginRight: 8, 
-        marginVertical: 25, 
-        fontSize: 18
+        marginVertical: (width < 370) ? 20 : 25, 
+        fontSize: (width < 370) ? 16 : 18
     },
 
     skipFrame: {
@@ -109,7 +109,7 @@ export default StyleSheet.create({
         bottom: 16, 
         left: 20, 
         right: 20, 
-        height: 60, 
+        height: 50, 
         borderTopLeftRadius: 30,
         borderBottomLeftRadius: 30,
         borderTopRightRadius: 30,
@@ -141,7 +141,7 @@ export default StyleSheet.create({
         bottom: 0,
         width: width, 
         flex: 1, 
-        height: 60, 
+        height: (width < 370) ? 50 : 60, 
         backgroundColor: '#f58a55',
         justifyContent: 'center',
         alignItems: 'center',
