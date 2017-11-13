@@ -7,6 +7,7 @@ import {
     ScrollView,
     Text,
     Dimensions,
+    ImageBackground,
 } from 'react-native'
 import styles from '../Styles/ViewListingsStyle'
 import { Images } from '../../../Themes'
@@ -88,7 +89,7 @@ export default class ViewListings extends Component {
 
         return (
             <View style={styles.mainView}>
-                <Image source={Images.rectangle} style={styles.bg}>
+                <ImageBackground source={Images.rectangle} style={styles.bg}>
                     <View style={styles.cNavigation}>
 
                         <TouchableOpacity onPress={() => { }}>
@@ -125,7 +126,7 @@ export default class ViewListings extends Component {
                         :
                         <FoodListViewContainer status = {this.state.headerTab} />
                     }
-                </Image>
+                </ImageBackground>
 
                 <View style={styles.fDfooter}>
                     <View style={styles.fDfooterInner}>
@@ -224,8 +225,9 @@ class FoodListView extends React.Component {
                                     </View>
                                     <View style={styles.dtDescription}>
                                         <Text style={styles.dtText}>{
-                                            food.foodType ? 'Groceries' :
-                                            'Hot Meal'
+                                            food.foodTypes_NonPerishable ? 'Non-perishable' :
+                                            food.foodTypes_Perishable ? 'Grocery' :
+                                            food.foodTypes_Prepared ?  'Prepared' : null
                                         }</Text>
                                     </View>
                                     <TouchableOpacity style={styles.dtDesEditBtn}>

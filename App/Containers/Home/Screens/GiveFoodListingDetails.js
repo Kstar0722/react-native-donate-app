@@ -315,7 +315,14 @@ export default class GiveFoodListingDetails extends React.Component {
             dateStr = dateList1[0].trim()
             MonDayYear = dateStr.split(' ')
             month = monthNames.indexOf(MonDayYear[0]) + 1
-            date = MonDayYear[2] + '-' + month.toString() + '-' + MonDayYear[1]
+            
+            yearString = MonDayYear[2]
+            monthString = month.toString()
+            if (month < 10) monthString = '0' + month.toString
+            dayString = MonDayYear[1]
+            if (dayString.length < 2) dayString = '0' + MonDayYear[1]
+
+            date = yearString + '-' + monthString + '-' + dayString
             //console.log(date)
     
             startTimeStr = dateList1[1].trim().split(' ')
