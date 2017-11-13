@@ -71,7 +71,7 @@ export default class ViewListings extends Component {
     handleMenuRightItem = () => {
         console.log('Right Menu Button Clicked...')
         this.setTimeout(() => {
-            this.props.navigation.navigate("CreateListing")
+            this.props.navigation.navigate('GiveFoodListingDetails') //this.props.navigation.navigate("CreateListing")
         }, 400)
     }
 

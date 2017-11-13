@@ -58,6 +58,8 @@ export default class SignupBusinessOperationInfo extends React.Component {
 
             msgBox: false,
             msgText: "",
+
+            isCompleteEnabled: true,
         }
 
     }
@@ -229,6 +231,8 @@ export default class SignupBusinessOperationInfo extends React.Component {
     }
 
     onCompleteClick = () => {
+        this.setState({isCompleteEnabled: false})
+
         var { user, accountType, businessInfo } = this.props.navigation.state.params
 
         businessInfo.description = _dText
@@ -260,6 +264,7 @@ export default class SignupBusinessOperationInfo extends React.Component {
         RNS3.put(file, options).then(response => {
             user.profile.image = response.body.postResponse.location
             Meteor.call('onCreateUser', user, (err, res) => {
+                this.setState({isCompleteEnabled: true})
                 if (err) {
                     this.showDialog(true, err.message)
                     console.log(err)
@@ -271,6 +276,9 @@ export default class SignupBusinessOperationInfo extends React.Component {
                     }                    
                 }
             })
+        }).catch(error => {
+            this.setState({isCompleteEnabled: true})
+            this.showDialog(true, error.message)
         })
         
     }
@@ -311,7 +319,8 @@ export default class SignupBusinessOperationInfo extends React.Component {
                 </TouchableOpacity>
             </View>
             {this.validateData() &&
-            <TouchableOpacity style={styles.buttonFrame} onPress={() => this.onCompleteClick()}>
+            <TouchableOpacity style={styles.buttonFrame} onPress={() => this.onCompleteClick()}
+                disabled= {!this.state.isCompleteEnabled}>
                 <Text style={styles.buttonText} >Complete</Text>
             </TouchableOpacity>
             }

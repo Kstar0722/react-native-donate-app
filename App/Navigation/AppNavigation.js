@@ -41,6 +41,8 @@ import SignupBusinessOperationInfo from '../Containers/NewRegistration/SignupBus
 //import SignupBusinessService from '../Containers/NewRegistration/SignupBusinessService'
 //import SignupBusinessHour from '../Containers/NewRegistration/SignupBusinessHour'
 
+import GiveFoodListingDetails from '../Containers/Home/Screens/GiveFoodListingDetails'
+
 const PrimaryNav = StackNavigator({
   LaunchScreen: { screen: LaunchScreen },
   OnboardingScreen: { screen: OnboardingScreen },
@@ -81,6 +83,8 @@ const PrimaryNav = StackNavigator({
   SignupBusinessOperationInfo: {screen: SignupBusinessOperationInfo, navigationOptions: { gesturesEnabled: false}},
   //SignupBusinessService: {screen: SignupBusinessService},
   //SignupBusinessHour: {screen: SignupBusinessHour},
+
+  GiveFoodListingDetails: {screen: GiveFoodListingDetails},
 }, {
 //    initialRouteName: Meteor.userId() !== null ? 'FindDonation' : 'CreateListing',
     initialRouteName: 'LaunchScreen',
