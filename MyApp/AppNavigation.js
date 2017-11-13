@@ -33,6 +33,10 @@ import CompleteDonationDelivery from './containers/CompleteDonation/CompleteDona
 import DonationAssignDriver from './containers/CompleteDonation/DonationAssignDriver'
 import DonationAssignBusiness from './containers/CompleteDonation/DonationAssignBusiness'
 
+import GiveFoodListingDetails from './containers/GiveFoodListing/GiveFoodListingDetails'
+import GiveFoodListingRepeat from './containers/GiveFoodListing/GiveFoodListingRepeat'
+import GiveFoodListingCustom from './containers/GiveFoodListing/GiveFoodListingCustom'
+
 import Signup from './containers/Signup/Signup'
 import SignupHelp from './containers/Signup/SignupHelp'
 import SignupHelpBusiness from './containers/Signup/SignupHelpBusiness'
@@ -65,8 +69,6 @@ const PrimaryNav = StackNavigator({
   completedDonationScreen: { screen: completedDonationScreen},
   CreateListing: {screen:CreateListing},
 
-  DonationList: {screen: DonationList},
-
   ViewListings: {screen: ViewListings},
   CircularMenuTest: {screen: CircularMenuTest},
 
@@ -80,6 +82,10 @@ const PrimaryNav = StackNavigator({
   DonationAssignDriver: {screen: DonationAssignDriver},
   DonationAssignBusiness: {screen: DonationAssignBusiness},
 
+  GiveFoodListingDetails: {screen: GiveFoodListingDetails},
+  GiveFoodListingRepeat: {screen: GiveFoodListingRepeat},
+  GiveFoodListingCustom: {screen: GiveFoodListingCustom},
+
   Signup: {screen: Signup, navigationOptions: { gesturesEnabled: false}},
   SignupHelp: {screen: SignupHelp, navigationOptions: { gesturesEnabled: false}},
   SignupHelpBusiness: {screen: SignupHelpBusiness, navigationOptions: { gesturesEnabled: false}},
@@ -92,7 +98,7 @@ const PrimaryNav = StackNavigator({
   //SignupBusinessHour: {screen: SignupBusinessHour},
   
 }, {
-    initialRouteName: 'Signup',
+    initialRouteName: 'GiveFoodListingDetails',
     heaerStyle: styles.header
   })
 export default PrimaryNav

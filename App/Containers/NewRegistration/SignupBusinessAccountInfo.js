@@ -112,7 +112,7 @@ export default class SignupBusinessAccountInfo extends React.Component {
 
                     <View style={[styles.textInputFrame, {marginTop: 50}]} >
                         <TextInput keyboardType='default' 
-                            placeholder='Business/Organization Name'
+                            placeholder='Business Name'
                             placeholderTextColor='rgba(255, 255, 255, 0.5)'
                             onChangeText={(text) => this.setState({name: text}, function() {
                                 this.validate()
@@ -129,7 +129,7 @@ export default class SignupBusinessAccountInfo extends React.Component {
                     <TouchableOpacity  onPress={() => this.setState({locationModalVisible: true})} activeOpacity={0.9} >
                     <View style={[styles.textInputFrame, {marginTop: 15}]} >
                         <Text numberOfLines={1} style={[styles.textInput, {paddingLeft: 0, paddingVertical: 8, backgroundColor: 'transparent'}, this.state.address ? {color: 'white'} : {color: 'rgba(255, 255, 255, 0.5)'}]} >
-                            {this.state.address ? this.state.address : 'Address'}
+                            {this.state.address ? this.state.address : 'Business Address'}
                         </Text>
                     </View>
                     </TouchableOpacity>
@@ -138,7 +138,7 @@ export default class SignupBusinessAccountInfo extends React.Component {
                     <View style={[styles.textInputFrame, {marginTop: 15}]} >
                         <TextInput keyboardType='phone-pad'                             
                             ref='phoneInput'
-                            placeholder='Phone'
+                            placeholder='Business Phone'
                             placeholderTextColor='rgba(255, 255, 255, 0.5)'
                             onChangeText={(text) => this.setState({phone: text}, function() {
                                 this.validate()
