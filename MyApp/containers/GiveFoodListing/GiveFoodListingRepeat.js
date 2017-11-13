@@ -17,7 +17,7 @@ const { width, height } =Dimensions.get('window')
 _dText='';
 var REPEAT_TYPE_KEY = '@repeat_type';
 
-export default class CompleteDonationRepeat extends React.Component {
+export default class GiveFoodListingRepeat extends React.Component {
     constructor(props) {
         super(props)
         
@@ -157,7 +157,7 @@ export default class CompleteDonationRepeat extends React.Component {
 
                 <TouchableWithoutFeedback 
                     onPress={() => {this.setState({repeatType: 6}), 
-                        this.props.navigation.navigate('CompleteDonationCustom', {
+                        this.props.navigation.navigate('GiveFoodListingCustom', {
                             onGoBack: (custom) => this.setCustom(custom),
                             customRepeatData: this.state.customRepeatData 
                         })}

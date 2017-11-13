@@ -56,7 +56,7 @@ const MONTHS = [
 
 
 
-export default class CompleteDonationCustom extends React.Component {
+export default class GiveFoodListingCustom extends React.Component {
     constructor(props) {
         super(props)
         

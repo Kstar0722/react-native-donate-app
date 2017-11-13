@@ -32,7 +32,7 @@ const { width, height } =Dimensions.get('window')
 _dText='';
 var AVATAR_URI_KEY = '@avatar_uri';
 
-export default class CompleteDonationDetail extends React.Component {
+export default class GiveFoodListingDetails extends React.Component {
     constructor(props) {
         super(props)
         _dText = ''
@@ -257,7 +257,7 @@ export default class CompleteDonationDetail extends React.Component {
         //this.props.navigation.goBack()
     }
 
-    onNextClick = () => {
+    onCompleteClick = () => {
 
         const file = {
             uri: this.state.avatar,
@@ -283,11 +283,20 @@ export default class CompleteDonationDetail extends React.Component {
 
         RNS3.put(file, options).then(response => {
             _dText = ''
-            postData.image = response.body.postResponse.location
-            console.log('Post Data', postData)
-            this.props.navigation.navigate('CompleteDonationService', {postData: postData})            
+            postData.image = response.body.postResponse.location         
         }).catch(error => {
             this.showDialog(true, error.message)
+        })
+
+        Meteor.call('createGiveFood', postData, (err, res) => {
+            console.log('Data Post Called...')
+            if (err) {
+                this.showDialog(true, err.message)
+                console.log(err)
+            } else {
+                console.log("Data Post Success...")
+                this.props.navigation.navigate('ViewListings')
+            }
         })
 
     }
@@ -471,7 +480,7 @@ export default class CompleteDonationDetail extends React.Component {
                     </TouchableOpacity>
                     
                     <TouchableOpacity 
-                        onPress={() => {this.props.navigation.navigate('CompleteDonationRepeat', {
+                        onPress={() => {this.props.navigation.navigate('GiveFoodListingRepeat', {
                             onGoBack: (repeat, customRepeatData) => this.refresh(repeat, customRepeatData), 
                             repeat: this.state.repeat,
                             customRepeatData: this.state.customRepeatData,
@@ -521,9 +530,9 @@ export default class CompleteDonationDetail extends React.Component {
                 <TouchableOpacity 
                     style={[styles.containerBottom, this.state.isEnabledButton ? {backgroundColor: '#f58a55'} : {backgroundColor : '#fcdccb'}]} 
                     disabled={this.state.isEnabledButton ? false : true} 
-                    onPress={() => this.onNextClick()}
+                    onPress={() => this.onCompleteClick()}
                 >
-                    <Text style={styles.buttonText} >ADD DETAILS</Text>
+                    <Text style={styles.buttonText} >Post</Text>
                 </TouchableOpacity>
 
                 <DescriptionModal 
