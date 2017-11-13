@@ -64,7 +64,7 @@ export default StyleSheet.create({
     },
 
     itemText: {
-        fontSize: 19
+        fontSize: (width < 370) ? 17 : 19
     },
 
     icon: {

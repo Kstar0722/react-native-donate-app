@@ -67,26 +67,26 @@ export default StyleSheet.create({
     },
 
     itemCheckFrame: {
-        width: 30, 
-        height: 30, 
+        width: (width < 370) ? 25 : 30, 
+        height: (width < 370) ? 25 : 30, 
         borderRadius: 15, 
-        marginLeft: 30,
+        marginLeft: (width < 370) ? 16 : 30,
         borderColor: '#e8e8e9', 
         borderWidth: 1.5,
     },
 
     itemCheckDone: {
-        width: 30,
-        height: 30,
+        width: (width < 370) ? 25 : 30,
+        height: (width < 370) ? 25 : 30,
         tintColor: '#50d2c2',
-        marginLeft: 30,
+        marginLeft: (width < 370) ? 16 : 30,
     },
 
     itemText: {
-        marginLeft: 16, 
+        marginLeft: (width < 370) ? 8 : 16, 
         marginRight: 8, 
         marginVertical: 25, 
-        fontSize: 17,
+        fontSize: (width < 370) ? 15 : 17,
     },
 
 

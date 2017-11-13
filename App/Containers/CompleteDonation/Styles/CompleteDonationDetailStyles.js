@@ -22,19 +22,27 @@ export default StyleSheet.create({
         height: 30,
     },
 
-    statusText: {
+    statusText: { 
         marginLeft: width/2-30, 
         backgroundColor: 'transparent', 
         color: 'white', 
-        fontSize: 17,
+        fontSize: (width < 370) ? 15 : 17,
+    },
+
+    cameraImgFrame: {
+        position: 'absolute',
+        top: 170,
+        right: 16,
+        width: 60,
+        height: 60,
     },
 
     cameraImg: {
-        position: 'absolute', 
-        top: -50, 
+        //position: 'absolute', 
+        //top: -50, 
         height: 60, 
         width: 60, 
-        right: 16,
+        //right: 16,
     },
 
     nav: {
@@ -55,12 +63,12 @@ export default StyleSheet.create({
         paddingHorizontal:20,
         textAlign:'left',
         color:'#fff',
-        fontSize:18,
+        fontSize: (width < 370) ? 16 : 18,
         backgroundColor:'transparent',
     },
 
-    postBtnText:{
-        fontSize:16,
+    postBtnText:{ 
+        fontSize: (width < 370) ? 14 : 16,
         backgroundColor:'transparent',
         textAlign:'center',
         color:'#fff',
@@ -73,9 +81,9 @@ export default StyleSheet.create({
         width: width,
     },
 
-    titleText: {        
+    titleText: { 
         textAlign: 'center',
-        fontSize: 30,
+        fontSize: (width < 370) ? 25 : 30,
         color: 'white',
         backgroundColor:'transparent',
     },
@@ -96,22 +104,22 @@ export default StyleSheet.create({
         fontWeight: 'bold'
     },
 
-    descriptionFrame: {
+    descriptionFrame: { 
         width: width, 
         height: 60, 
         borderBottomColor: '#f3f3f4', 
         borderBottomWidth: 1, 
         justifyContent: 'center', 
-        paddingLeft: 30
+        paddingLeft: (width < 370) ? 16 : 30
     },
 
     dateFrame: {
-        width: width-60, 
+        width: (width < 370) ? width-32 : width-60, 
         height: 60, 
         borderBottomColor: '#f3f3f4', 
         borderBottomWidth: 1,  
-        marginLeft: 30,
-        marginRight: 30,
+        marginLeft: (width < 370) ? 16 : 30,
+        marginRight: (width < 370) ? 16 : 30,
         flexDirection: 'row',
         justifyContent: 'space-between', 
         alignItems: 'center'       
@@ -137,7 +145,7 @@ export default StyleSheet.create({
 
     iconText: {
         color: '#bebec0', 
-        fontSize: 10, 
+        fontSize: (width < 370) ? 8 : 10, 
         marginTop: 3, 
         textAlign: 'center',
     },
@@ -154,6 +162,10 @@ export default StyleSheet.create({
         right: 0,
         bottom: 0,
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },    
+
+    text: {
+        fontSize: (width < 370) ? 13 : 15,
     },
 
 

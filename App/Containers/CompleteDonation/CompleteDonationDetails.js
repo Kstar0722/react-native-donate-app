@@ -8,6 +8,7 @@ import {
     ImageBackground, 
     TouchableWithoutFeedback,
     AsyncStorage,
+    ScrollView,
 } from 'react-native'
 import dateFormat from 'dateformat';
 import DatePicker from 'react-native-datepicker'
@@ -51,6 +52,8 @@ export default class CompleteDonationDetail extends React.Component {
             foodTypes_NonPerishable: false,
             foodTypes_Perishable: false,
             foodTypes_Prepared: false,
+
+            vehicleSize: -1, // 0 - car, 1 - van, 2 - truck
 
             repeat: 0,
             customRepeatData: null,
@@ -148,7 +151,7 @@ export default class CompleteDonationDetail extends React.Component {
             return (
                 <View style={{flexDirection: 'row'}} >
                     <Image source={Images.navigate} resizeMode={'contain'} style={{width: 25, height: 25, marginRight: 8}} />
-                    <Text style={{fontSize: 16}} >{locationName}</Text>
+                    <Text style={{fontSize: (width < 370) ? 13 : 15}} >{locationName}</Text>
                 </View>            
             )
         }
@@ -163,22 +166,22 @@ export default class CompleteDonationDetail extends React.Component {
                     //return <Text style={{fontSize: 16}} >Never</Text>                    
                     break;
                 case 1:
-                    return <Text style={{fontSize: 16}} >Daily</Text>                    
+                    return <Text style={{fontSize: (width < 370) ? 13 : 15}} >Daily</Text>                    
                     break;
                 case 2:
-                    return <Text style={{fontSize: 16}} >Weekly</Text>                    
+                    return <Text style={{fontSize: (width < 370) ? 13 : 15}} >Weekly</Text>                    
                     break; 
                 case 3:
-                    return <Text style={{fontSize: 16}} >Biweekly</Text>                    
+                    return <Text style={{fontSize: (width < 370) ? 13 : 15}} >Biweekly</Text>                    
                     break;
                 case 4:
-                    return <Text style={{fontSize: 16}} >Monthly</Text>                    
+                    return <Text style={{fontSize: (width < 370) ? 13 : 15}} >Monthly</Text>                    
                     break;
                 case 5:
-                    return <Text style={{fontSize: 16}} >Yearly</Text>                    
+                    return <Text style={{fontSize: (width < 370) ? 13 : 15}} >Yearly</Text>                    
                     break;      
                 case 6:
-                    return <Text style={{fontSize: 16}} >Custom</Text>                    
+                    return <Text style={{fontSize: (width < 370) ? 13 : 15}} >Custom</Text>                    
                     break;                      
                 default:
                     <Image source={Images.timeline} resizeMode={'contain'} style={styles.icon} />
@@ -220,6 +223,12 @@ export default class CompleteDonationDetail extends React.Component {
         }
     }
 
+    onVehicleSizePress = (index) => {
+        this.setState({vehicleSize: index}, function() {
+            this.validateData()
+        })
+    }
+
     handleLocationSelected = (addressData, locationData) => {
         /**
          * addressData : {primaryText: '...', secondaryText: '...', fullText: '...', ...  }
@@ -251,13 +260,14 @@ export default class CompleteDonationDetail extends React.Component {
     }
 
     onBackClick = () => {
-        _dText = ''
+        //_dText = ''
         let key = this.props.navigation.state.key
         this.props.navigation.goBack(key)
         //this.props.navigation.goBack()
     }
 
     onNextClick = () => {
+        this.setState({isEnabledButton: false})
 
         const file = {
             uri: this.state.avatar,
@@ -281,12 +291,18 @@ export default class CompleteDonationDetail extends React.Component {
             description: _dText,
         }
 
+        if (this.state.vehicleSize > -1) {
+            postData.vehicleSize = this.state.vehicleSize
+        }
+
         RNS3.put(file, options).then(response => {
-            _dText = ''
+            this.setState({isEnabledButton: true})
+            //_dText = ''
             postData.image = response.body.postResponse.location
             console.log('Post Data', postData)
             this.props.navigation.navigate('CompleteDonationService', {postData: postData})            
         }).catch(error => {
+            this.setState({isEnabledButton: true})
             this.showDialog(true, error.message)
         })
 
@@ -362,6 +378,7 @@ export default class CompleteDonationDetail extends React.Component {
     render() {
         return (
             <View style={styles.container} >
+            
                 <View style={styles.containerTop} >
                     <ImageBackground source={this.state.avatar ? this.state.avatar : Images.complete_donation_top_bg} style={styles.imgBg} resizeMode={'cover'} >
                         {this.state.avatar && <View style={styles.overlay} />}
@@ -370,7 +387,7 @@ export default class CompleteDonationDetail extends React.Component {
                                 <Image source={Images.backIcon} style={styles.navLeftIcon} />
                             </TouchableOpacity>
                             <Text style={styles.navText}>New Food Donation</Text>
-                            <Text style={[styles.postBtnText,]}>01</Text>
+                            <Text style={styles.postBtnText}>01</Text>
                         </View>
                         <Image source={Images.status_right} style={styles.statusImg} resizeMode={'contain'} />
                         <Text style={styles.statusText} >STEP 1</Text>
@@ -380,22 +397,22 @@ export default class CompleteDonationDetail extends React.Component {
                     </ImageBackground>                    
                 </View>
                 
-                <View style={{flex: 1}} >
+                <ScrollView style={{marginBottom: 60}} showsVerticalScrollIndicator={false} >
+                <View style={{}} >
                     <TouchableWithoutFeedback onPress={() => {this.setState({descriptionModalVisible: true})}} >
-                        <View style={styles.descriptionFrame}>
-                            <TouchableOpacity onPress={() => {this.setState({picturemodalVisible: true})}} >
-                                <Image source={Images.camera_full} resizeMode={'contain'} style={styles.cameraImg} />
-                            </TouchableOpacity>
+                        <View style={styles.descriptionFrame}>                            
                             {_dText ?
-                            <View style={{alignItems: 'center', marginTop: 13}} ><Text>CLICK TO VIEW OR EDIT DESCRIPTION</Text></View>
+                            <View style={{alignItems: 'center', marginTop: 13}} >
+                                <Text style={styles.text} >CLICK TO VIEW OR EDIT DESCRIPTION</Text>
+                            </View>
                             :
-                            <Text style={{width: width/2}} >DESCRIPTION</Text>
+                            <Text style={styles.text} >DESCRIPTION</Text>
                             }                            
                         </View>
                     </TouchableWithoutFeedback>
 
                     <View style={styles.dateFrame} >
-                        <Text>START DATE</Text>                        
+                        <Text style={styles.text} >START DATE</Text>                        
                         <DatePicker
                             style={styles.datePickerStyle}
                             date= {this.state.startDate}
@@ -422,7 +439,7 @@ export default class CompleteDonationDetail extends React.Component {
 
                                 dateText: {
                                     color: 'black',
-                                    fontSize: 15,
+                                    fontSize: (width < 370) ? 13 : 15,
                                 }
                             }}
                             onDateChange={(date) => this.onStartDateChange(date)}                            
@@ -430,7 +447,7 @@ export default class CompleteDonationDetail extends React.Component {
                     </View>
 
                     <View style={styles.dateFrame} >
-                        <Text>END DATE</Text>
+                        <Text style={styles.text} >END DATE</Text>
                         <DatePicker
                             style={styles.datePickerStyle}
                             date= {this.state.endDate}
@@ -457,7 +474,7 @@ export default class CompleteDonationDetail extends React.Component {
 
                                 dateText: {
                                     color: 'black',
-                                    fontSize: 15,
+                                    fontSize: (width < 370) ? 13 : 15,
                                 }
                             }}
                             onDateChange={(date) => this.onEndDateChange(date)}                            
@@ -466,8 +483,9 @@ export default class CompleteDonationDetail extends React.Component {
                     
                     
 
-                    <TouchableOpacity style={styles.dateFrame} onPress={() => this.setState({locationModalVisible: true})}  >
-                        <Text>LOCATION</Text>
+                    <TouchableOpacity style={styles.dateFrame} 
+                        onPress={() => this.setState({locationModalVisible: true})}  >
+                        <Text style={styles.text} >LOCATION</Text>
                         {this.locationTextOrIcon()}
                     </TouchableOpacity>
                     
@@ -485,7 +503,7 @@ export default class CompleteDonationDetail extends React.Component {
                     </TouchableOpacity>
 
                     <View style={styles.dateFrame} >
-                        <Text>FOOD TYPE</Text>
+                        <Text style={styles.text} >FOOD TYPE</Text>
                         <View>
                             <TouchableOpacity onPress={() => this.onFoodTypePress(1)} >
                             <View style={styles.iconFrame} >
@@ -517,7 +535,43 @@ export default class CompleteDonationDetail extends React.Component {
                             <Text style={[styles.iconText, this.state.foodTypes_Prepared ? {color : 'black'} : {color: '#bebec0'}]} >PREPARED</Text>
                         </View> 
                     </View>
-                </View>                
+
+                    <View style={styles.dateFrame} >
+                        <Text style={styles.text} >VEHICLE SIZE</Text>
+                        <View>
+                            <TouchableOpacity onPress={() => this.onVehicleSizePress(0)} >
+                            <View style={styles.iconFrame} >
+                                <Image source={this.state.vehicleSize == 0 ? Images.checked : Images.circle_ring } resizeMode={'contain'} style={[styles.checkboxCircle, this.state.foodTypes_NonPerishable ? { tintColor: '#f58a55'} : {tintColor: '#000'}]}  />                                                             
+                                <Image source={this.state.vehicleSize == 0 ? Images.car_sel : Images.car_sel} style={[{width: 35, height: 20}, this.state.vehicleSize == 0 ? {tintColor: 'black'} : {tintColor: 'rgba(0, 0, 0, 0.4)'}]} resizeMode={'contain'}  />
+                            </View>
+                            </TouchableOpacity>                            
+                            <Text style={[styles.iconText, this.state.vehicleSize == 0 ? {color : 'black'} : {color: '#bebec0'}]}>{'Car'}</Text>
+                        </View>
+
+                        <View>
+                            <TouchableOpacity onPress={() => this.onVehicleSizePress(1)} >
+                            <View style={[styles.iconFrame, {marginTop: 5}]} >
+                                <Image source={this.state.vehicleSize == 1 ? Images.checked : Images.circle_ring } resizeMode={'contain'} style={[styles.checkboxCircle, this.state.foodTypes_NonPerishable ? { tintColor: '#f58a55'} : {tintColor: '#000'}]}  />                                                             
+                                <Image source={this.state.vehicleSize == 1 ? Images.van_sel : Images.van_sel} style={[{width: 35, height: 15}, this.state.vehicleSize == 1 ? {tintColor: 'black'} : {tintColor: 'rgba(0, 0, 0, 0.4)'}]} resizeMode={'contain'}  />
+                            </View>
+                            </TouchableOpacity>                            
+                            <Text style={[styles.iconText, this.state.vehicleSize == 1 ? {color : 'black'} : {color: '#bebec0'}]}>{'Van'}</Text>
+                        </View>
+
+                        <View>
+                            <TouchableOpacity onPress={() => this.onVehicleSizePress(2)} >
+                            <View style={styles.iconFrame} >
+                                <Image source={this.state.vehicleSize == 2 ? Images.checked : Images.circle_ring } resizeMode={'contain'} style={[styles.checkboxCircle, this.state.foodTypes_NonPerishable ? { tintColor: '#f58a55'} : {tintColor: '#000'}]}  />                                                             
+                                <Image source={this.state.vehicleSize == 2 ? Images.truck_sel : Images.truck_sel} style={[{width: 35, height: 21}, this.state.vehicleSize == 2 ? {tintColor: 'black'} : {tintColor: 'rgba(0, 0, 0, 0.4)'}]} resizeMode={'contain'}  />
+                            </View>
+                            </TouchableOpacity>                            
+                            <Text style={[styles.iconText, this.state.vehicleSize == 2 ? {color : 'black'} : {color: '#bebec0'}]}>{'Truck'}</Text>
+                        </View>
+                    </View>
+
+                </View>   
+                </ScrollView>
+                           
 
                 <TouchableOpacity 
                     style={[styles.containerBottom, this.state.isEnabledButton ? {backgroundColor: '#f58a55'} : {backgroundColor : '#fcdccb'}]} 
@@ -549,6 +603,11 @@ export default class CompleteDonationDetail extends React.Component {
                     title={this.state.msgText} 
                 />
 
+
+            <TouchableOpacity onPress={() => {this.setState({picturemodalVisible: true})}} style={styles.cameraImgFrame} >
+                <Image source={Images.camera_full} resizeMode={'contain'} style={styles.cameraImg} />
+            </TouchableOpacity>
+            
             </View>
         )
     }

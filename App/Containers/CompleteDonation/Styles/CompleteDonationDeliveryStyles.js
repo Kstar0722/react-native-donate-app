@@ -33,7 +33,7 @@ export default StyleSheet.create({
         paddingHorizontal:20,
         textAlign:'left',
         color:'#fff',
-        fontSize:18,
+        fontSize:(width < 370) ? 16 : 18,
         backgroundColor:'transparent',
     },
 
@@ -46,7 +46,7 @@ export default StyleSheet.create({
         marginLeft: width/2-30, 
         backgroundColor: 'transparent', 
         color: 'white', 
-        fontSize: 17,
+        fontSize: (width < 370) ? 15 : 17,
     },
 
     titleTextFrame: {
@@ -58,7 +58,7 @@ export default StyleSheet.create({
 
     titleText: {        
         textAlign: 'center',
-        fontSize: 30,
+        fontSize: (width < 370) ? 25 : 30,
         color: 'white',
         backgroundColor:'transparent',
     },
@@ -81,7 +81,7 @@ export default StyleSheet.create({
 
     item: {
         width: width, 
-        height: 100, 
+        height: (width < 370) ? 80 : 100, 
         flexDirection: 'row', 
         alignItems: 'center',
     },
@@ -92,50 +92,51 @@ export default StyleSheet.create({
     },
 
     itemImg: {
-        width: 50, 
-        height: 50, 
+        width: (width < 370) ? 40 : 50, 
+        height: (width < 370) ? 40 : 50, 
         marginLeft: 8
     },
 
     itemCheckFrame: {
-        width: 30, 
-        height: 30, 
+        width: (width < 370) ? 25 : 30, 
+        height: (width < 370) ? 25 : 30, 
         borderRadius: 15, 
-        marginLeft: 25,
+        marginLeft: (width < 370) ? 16 : 25,
         borderColor: '#e8e8e9', 
         borderWidth: 1.5,
     },
 
     itemCheckDone: {
-        width: 30,
-        height: 30,
-        marginLeft: 25,
+        width: (width < 370) ? 25 : 30,
+        height: (width < 370) ? 25 : 30,
+        marginLeft: (width < 370) ? 16 : 25,
         tintColor: '#50d2c2',
     },
 
     itemText: {         
-        marginLeft: 20,
+        marginLeft: (width < 370) ? 8 : 20,
+        fontSize: (width < 370) ? 12 : 15,
     },
 
     contentFrame: {
         marginTop: 20,
-        marginLeft: 30,
-        marginRight: 30,
+        marginLeft: (width < 370) ? 8 : 30,
+        marginRight: (width < 370) ? 8 : 30,
         flex: 1,
     },
 
     contentItem: {
-        width: width-60,
+        width: (width < 370) ? width-16 : width-60,
         height: 60,
         alignItems: 'center',
         flexDirection: 'row',
     },
 
     contentItemImg: {
-        width: 30, 
-        height: 30, 
+        width: (width < 370) ? 25 : 30, 
+        height: (width < 370) ? 25 : 30, 
         marginLeft: 5,
-        marginRight: 20,
+        marginRight: (width < 370) ? 10 : 20,
     },
 
     overlay: {
@@ -145,6 +146,10 @@ export default StyleSheet.create({
         right: 0,
         bottom: 0,
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+
+    text: {
+        fontSize: (width < 370) ? 13 : 15,
     },
 
 })

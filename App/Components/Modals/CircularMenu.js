@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     },
 
     menuItemText: {
-        fontSize: 14, 
+        fontSize: (width < 370) ? 11 : 14, 
         color: 'white', 
         textAlign: 'center'
     },
@@ -259,14 +259,14 @@ const styles = StyleSheet.create({
     },
 
     menuCenterTopText: {
-        fontSize: 15, 
+        fontSize: (width < 370) ? 13 : 15, 
         color: 'white', 
         fontWeight: 'bold', 
         textAlign: 'center'
     },
 
     menuCenterBottomText: {
-        fontSize: 14, 
+        fontSize: (width < 370) ? 12 : 14, 
         color: 'white', 
         textAlign: 'center', 
         marginTop: 8

@@ -206,11 +206,11 @@ export default class CompleteDonationDelivery extends React.Component {
                 <View style={styles.contentFrame} >
                     <TouchableOpacity style={[styles.borderBottom, styles.contentItem]} onPress={() => {this.onDriverClick()}} >
                         <Image source={Images.add_blue} resizeMode={'contain'} style={styles.contentItemImg} />
-                        <Text>{this.state.driver ? 'DRIVER: ' + this.state.driver.name : 'CLICK HERE TO ASSIGN TO DRIVER'}</Text>
+                        <Text style={styles.text} >{this.state.driver ? 'DRIVER: ' + this.state.driver.name : 'CLICK HERE TO ASSIGN TO DRIVER'}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.borderBottom, styles.contentItem]} onPress={() => this.onBusinessClick()} >
                         <Image source={Images.add_blue} resizeMode={'contain'} style={styles.contentItemImg} />
-                        <Text>{this.state.business ? 'BUSINESS: ' + this.state.business.profile.name : 'CLICK HERE TO ASSIGN TO A BUSINESS'}</Text>
+                        <Text style={styles.text} >{this.state.business ? 'BUSINESS: ' + this.state.business.profile.name : 'CLICK HERE TO ASSIGN TO A BUSINESS'}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

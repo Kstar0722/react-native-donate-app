@@ -289,7 +289,7 @@ export default class SignupBusinessOperationInfo extends React.Component {
                 </View>
 
                 <Text style={[styles.titleText, {marginTop: 16}]} >Complete Account</Text>
-                <Text style={[styles.titleText, {fontSize: 28}]}>Operation Information</Text>
+                <Text style={[styles.titleText, (width < 370) ? {fontSize: 25} : {fontSize: 28}]}>Operation Information</Text>
             </ImageBackground>            
             
             <View style={styles.content} >      
