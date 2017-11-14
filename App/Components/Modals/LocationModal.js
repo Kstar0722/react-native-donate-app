@@ -94,7 +94,13 @@ export default class LocationModal extends React.Component {
     onItemClick = (item) => {
         RNGooglePlaces.lookUpPlaceByID(item.placeID).then((results) => {
            // console.log(results)
-            this.props.itemSelected(item, results)
+           let locationData={
+               lat: results.latitude,
+               lon: results.longitude,
+               address: results.address,
+               name: results.name,
+           }
+            this.props.itemSelected(locationData)
             this.setState({searchTerm: '', dataSource: []}, function() {
                 this.props.close()
             })

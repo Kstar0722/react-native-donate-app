@@ -9,6 +9,7 @@ import {
     ScrollView,
     TextInput,
     Dimensions,
+    ImageBackground,
 } from 'react-native'
 import styles from '../Styles/FindDonationStyles'
 import { Images } from '../../../Themes'
@@ -95,16 +96,22 @@ class MainScreen extends Component {
     handleMenuRightItem = () => {
         console.log('Right Menu Button Clicked...')
         this.setTimeout(() => {
-            this.props.navigation.navigate('GiveFoodListingDetails') //this.props.navigation.navigate("CreateListing")
-         }, 400)
+            this.props.navigation.navigate('GiveFoodListingDetails', {
+                foodData: null,
+                mode: 'create',
+            }) //this.props.navigation.navigate("CreateListing")
+        }, 400)
     }
 
     handleMenuLeftItem = () => {
         console.log('Left Menu Button Clicked...')
         this.setTimeout(() => {
-            this.props.navigation.navigate('CompleteDonationDetails')//this.props.navigation.navigate("CompletedDonationScreen")
-         }, 400)
-        
+            this.props.navigation.navigate('CompleteDonationDetails', {
+                donationData: null,
+                mode: 'create',
+            })//this.props.navigation.navigate("CompletedDonationScreen")
+        }, 400)
+
     }
 
 
@@ -113,7 +120,7 @@ class MainScreen extends Component {
         const { navigate } = this.props.navigation;
         return (
             <View style={styles.mainView}>
-                <Image source={Images.rectangle} style={styles.fDheadr}>
+                <ImageBackground source={Images.rectangle} style={styles.fDheadr}>
                     <View style={styles.cNavigation}>
                         <TouchableOpacity onPress={() => { this.props.sideMenuToggle(true),this.props}}>
                             <Image source={Images.fDbar} style={styles.menuIconNav} />
@@ -140,7 +147,7 @@ class MainScreen extends Component {
                         confirmTextIOS="Ok"
                         titleIOS='Select Date'
                     />
-                </Image>
+                </ImageBackground>
                 <DonationListViewContainer switchValue={this.state.switchValue} date={this.state.currentDate}
                     navigate={navigate} />
                 <View style={styles.fDfooter}>
@@ -236,12 +243,12 @@ class DonationListView extends React.Component {
                 <View>
                     <ScrollView>
                         {
-                            donations.map(donation => {
+                            donations.map((donation, index) => {
                                 var user = users.filter(user => { return (user._id === donation.userId) })
                                 if (user.length === 0) return <View />
                                 user = user[0]
                                 return (
-                                    <View style={styles.mapViewDetail}>
+                                    <View style={styles.mapViewDetail} key={index.toString()} >
                                         <MapView style={styles.listMapView}
                                             initialRegion={{
                                                 latitude: donation.location.lat,
@@ -285,7 +292,7 @@ const DonationListViewContainer = createContainer((params) => {
     cDate = dateFormat(params.date, 'yyyy-mm-dd')
     Meteor.subscribe('donation.list', cDate)
     return ({
-        donations: Meteor.collection('Donations').find({ "date.date": cDate, status: 0 }),
+        donations: Meteor.collection('Donations').find({ "startDate.date": cDate, status: 0 }),
         users: Meteor.collection('users').find({})
     })
 }, DonationListView)

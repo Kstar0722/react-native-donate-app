@@ -6,7 +6,6 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    resizeMode: 'cover'
   },
 
   /*addButton: {
@@ -80,8 +79,7 @@ dtMonth:{
 },
 dtDescription:{
     flex:1,
-    flexDirection: 'row',
-    textAlign:'center',
+    flexDirection: 'row',    
     
 },
 dtText:{
@@ -89,6 +87,7 @@ dtText:{
   fontWeight:'bold',
   color:'#666666',
   fontSize:18,
+  textAlign:'center',
 },
 dtEditText:{
   fontFamily: 'ubuntu',
@@ -206,7 +205,7 @@ messageButtonImage: {
 
 carImage : {
   width: 40,
-  height : 18
+  height : 40,
 }
 
 

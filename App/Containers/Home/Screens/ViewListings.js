@@ -72,14 +72,20 @@ export default class ViewListings extends Component {
     handleMenuRightItem = () => {
         console.log('Right Menu Button Clicked...')
         this.setTimeout(() => {
-            this.props.navigation.navigate('GiveFoodListingDetails') //this.props.navigation.navigate("CreateListing")
+            this.props.navigation.navigate('GiveFoodListingDetails', {
+                foodData: null,
+                mode: 'create',
+            }) //this.props.navigation.navigate("CreateListing")
         }, 400)
     }
 
     handleMenuLeftItem = () => {
         console.log('Left Menu Button Clicked...')
         this.setTimeout(() => {
-            this.props.navigation.navigate('CompleteDonationDetails')//this.props.navigation.navigate("CompletedDonationScreen")
+            this.props.navigation.navigate('CompleteDonationDetails', {
+                donationData: null,
+                mode: 'create',
+            })//this.props.navigation.navigate("CompletedDonationScreen")
         }, 400)
 
     }
@@ -89,7 +95,7 @@ export default class ViewListings extends Component {
 
         return (
             <View style={styles.mainView}>
-                <ImageBackground source={Images.rectangle} style={styles.bg}>
+                <ImageBackground source={Images.rectangle} resizeMode='cover' style={styles.bg} >
                     <View style={styles.cNavigation}>
 
                         <TouchableOpacity onPress={() => { }}>
@@ -122,9 +128,9 @@ export default class ViewListings extends Component {
 
                     </View>
                     {this.state.segmentIndex == 0 ?
-                        <DonationListViewContainer status = {this.state.headerTab} />
+                        <DonationListViewContainer status = {this.state.headerTab} navigate = {navigate} />
                         :
-                        <FoodListViewContainer status = {this.state.headerTab} />
+                        <FoodListViewContainer status = {this.state.headerTab} navigate = {navigate} />
                     }
                 </ImageBackground>
 
@@ -166,17 +172,43 @@ export default class ViewListings extends Component {
 
 class DonationListView extends React.Component {
     render() {
-        const { donations } = this.props
+        const { donations, status, navigate } = this.props
+        let curDate = new Date()
+        curTimeMillisec = parseInt(moment().format('x')) 
+
+        console.log('Current Time', curTimeMillisec)
+
+        let filteredDonations =  donations.filter((donation) => {
+            let donationDate = donation.endDate.date
+            timeMillisec = parseInt(moment(donationDate, "YYYY-MM-DD").format('x'))  + parseInt(donation.endDate.time * 60 * 1000) 
+            console.log('Donation Date', timeMillisec)
+            switch (status) {
+                case 0:
+                    return timeMillisec > curTimeMillisec                   
+                    break;
+                case 1:
+                    return timeMillisec > 0
+                    break;
+                case 2:
+                    return timeMillisec < curTimeMillisec
+                    break;            
+                default:
+                    break;
+            }
+
+        })
+
         return (
             <ScrollView style={{ backgroundColor: 'white', flex: 1 }}>
                 {
-                    donations.map((donation) => {
+                    filteredDonations.map((donation, index) => {
+                        
                         return (
-                            <View style={styles.dtBody}>
+                            <View style={styles.dtBody} key={index.toString()} >
                                 <View style={styles.dtListings}>
                                     <View style={styles.dtDAte}>
-                                        <Text style={styles.dtDate}>{moment(donation.date.date).format('D')}</Text>
-                                        <Text style={styles.dtMonth}>{moment(donation.date.date).format('MMM')}</Text>
+                                        <Text style={styles.dtDate}>{moment(donation.startDate.date).format('D')}</Text>
+                                        <Text style={styles.dtMonth}>{moment(donation.startDate.date).format('MMM')}</Text>
                                     </View>
                                     <View style={styles.dtDescription}>
                                         <Text style={styles.dtText}>{
@@ -185,8 +217,13 @@ class DonationListView extends React.Component {
                                             donation.foodTypes_Prepared ?  'Prepared' : null
                                         }</Text>
                                     </View>
-                                    <Image style = {styles.carImage} source={donation.vehicleSize === 0 ?  Images.gray_carn : donation.vehicleSize === 1 ? Images.gray_vann : Images.gray_tmpn }></Image>
-                                    <TouchableOpacity style={styles.dtDesEditBtn}>
+                                    <Image style = {styles.carImage} resizeMode='contain' 
+                                        source={donation.vehicleSize === 0 ?  Images.gray_carn : donation.vehicleSize === 1 ? Images.gray_vann : Images.gray_tmpn }></Image>
+                                    <TouchableOpacity style={styles.dtDesEditBtn}
+                                        onPress={() => navigate('CompleteDonationDetails', {
+                                            donationData: donation,
+                                            mode: 'edit',
+                                        })} >
                                         <Text style={styles.dtEditText}>EDIT</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -202,26 +239,61 @@ class DonationListView extends React.Component {
 
 const DonationListViewContainer = createContainer((params) => {
     const status = params.status
+    const navigate = params.navigate
     Meteor.subscribe('donation.mine')
-    return ({
-        donations: Meteor.collection('Donations').find({userId : Meteor.userId(), status : status})
-    })
+    if (status == 0 || status == 2) {
+        return ({
+            donations: Meteor.collection('Donations').find({userId : Meteor.userId(), status : 0}),
+            status: status,
+            navigate: navigate,
+        })
+    } else {
+        return ({
+            donations: Meteor.collection('Donations').find({userId : Meteor.userId(), status : 1}),
+            status: status,
+            navigate: navigate,
+        })
+    }
+    
 }, DonationListView)
 
 class FoodListView extends React.Component {
     render() {
-        const { foods } = this.props
-        console.log(foods)
+        const { foods, status, navigate } = this.props
+        let curDate = new Date()
+        curTimeMillisec = parseInt(moment().format('x')) 
+
+        //console.log('Current Time', curTimeMillisec)
+
+        let filteredFoods =  foods.filter((food) => {
+            let foodDate = food.endDate.date
+            timeMillisec = parseInt(moment(foodDate, "YYYY-MM-DD").format('x'))  + parseInt(food.endDate.time * 60 * 1000) 
+            //console.log('Donation Date', timeMillisec)
+            switch (status) {
+                case 0:
+                    return timeMillisec > curTimeMillisec                   
+                    break;
+                case 1:
+                    return timeMillisec > 0
+                    break;
+                case 2:
+                    return timeMillisec < curTimeMillisec
+                    break;            
+                default:
+                    break;
+            }
+
+        })
         return (
             <ScrollView style={{ backgroundColor: 'white', flex: 1 }}>
                 {
-                    foods.map((food) => {
+                    filteredFoods.map((food, index) => {
                         return (
-                            <View style={styles.dtBody}>
+                            <View style={styles.dtBody} key={index.toString()} >
                                 <View style={styles.dtListings}>
                                     <View style={styles.dtDAte}>
-                                        <Text style={styles.dtDate}>{moment(food.date.date).format('D')}</Text>
-                                        <Text style={styles.dtMonth}>{moment(food.date.date).format('MMM')}</Text>
+                                        <Text style={styles.dtDate}>{moment(food.startDate.date).format('D')}</Text>
+                                        <Text style={styles.dtMonth}>{moment(food.startDate.date).format('MMM')}</Text>
                                     </View>
                                     <View style={styles.dtDescription}>
                                         <Text style={styles.dtText}>{
@@ -230,7 +302,11 @@ class FoodListView extends React.Component {
                                             food.foodTypes_Prepared ?  'Prepared' : null
                                         }</Text>
                                     </View>
-                                    <TouchableOpacity style={styles.dtDesEditBtn}>
+                                    <TouchableOpacity style={styles.dtDesEditBtn} 
+                                        onPress={() => navigate('GiveFoodListingDetails', {
+                                            foodData: food,
+                                            mode: 'edit',
+                                        })} >
                                         <Text style={styles.dtEditText}>EDIT</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -246,10 +322,24 @@ class FoodListView extends React.Component {
 
 const FoodListViewContainer = createContainer((params) => {
     const status = params.status
+    const navigate = params.navigate
     Meteor.subscribe('givefood.mine')
-    return ({
+    /*return ({
         foods: Meteor.collection('GiveFood').find({userId : Meteor.userId(), status : status})
-    })
+    })*/
+    if (status == 0 || status == 2) {
+        return ({
+            foods: Meteor.collection('GiveFood').find({userId : Meteor.userId(), status : 0}),
+            status: status,
+            navigate: navigate,
+        })
+    } else {
+        return ({
+            foods: Meteor.collection('GiveFood').find({userId : Meteor.userId(), status : 1}),
+            status: status,
+            navigate: navigate,
+        })
+    }
 }, FoodListView)
 
 reactMixin(ViewListings.prototype, TimerMixin)

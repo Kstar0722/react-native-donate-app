@@ -74,7 +74,7 @@ export default class MainScreen extends Component {
         const { navigate } = this.props.navigation;
         const { user, donation } = this.props.navigation.state.params
         if (!(user && donation)) return <View />
-        const hour = donation.date.startTime / 60 , minutes = donation.date.start
+        //const hour = donation.startDate.time / 60 , minutes = donation.startDate.time % 60
         return (
             <View style={styles.mainView}>
                 <View style={styles.cNavigation}>
@@ -89,7 +89,8 @@ export default class MainScreen extends Component {
                             <Text style={styles.donatorname}>{user.profile.name}</Text>
                             <Image source={Images.stars} style={styles.stars} />
                             <View style={styles.pickupView}>
-                                <Text style={styles.pickup}>PICKUP TIME:  <Text style={styles.time}>{this.dateToString(donation.date.startTime)} - {this.dateToString(donation.date.endTime)}</Text></Text>
+                                <Text style={styles.pickup}>PICKUP TIME:  <Text style={styles.time}>{donation.startDate.date + ' ' + this.dateToString(donation.startDate.time)}</Text></Text>
+                                <Text style={[styles.pickup, styles.time, {paddingLeft: 90}]} >{donation.endDate.date + ' ' + this.dateToString(donation.endDate.time)}</Text>
                             </View>
                             <View style={styles.pickupView}>
                                 <Text style={styles.pickup}>ADDRESS:  <Text style={styles.time}>{donation.location.address}</Text></Text>

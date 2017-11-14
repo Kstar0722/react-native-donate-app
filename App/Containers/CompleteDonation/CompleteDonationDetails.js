@@ -12,6 +12,8 @@ import {
 } from 'react-native'
 import dateFormat from 'dateformat';
 import DatePicker from 'react-native-datepicker'
+import moment from 'moment'
+import ImageLoad from 'react-native-image-placeholder'
 
 import DescriptionModal from '../../Components/Modals/descriptionModal'
 import PictureModal from '../../Components/Modals/pictureModal'
@@ -58,11 +60,14 @@ export default class CompleteDonationDetail extends React.Component {
             repeat: 0,
             customRepeatData: null,
 
-            addressData: null,
-            locationData: null,
+            //addressData: null,
+            //locationData: null,
+            location: null,
 
             msgBox: false,
             msgText: "",
+
+            mode: 'create' // 'create', 'edit'
         }
     }
 
@@ -83,7 +88,7 @@ export default class CompleteDonationDetail extends React.Component {
             this.setState({isEnabledButton: false})
             return
         }
-        if (this.state.addressData == null) {
+        if (this.state.location == null) {
             this.setState({isEnabledButton: false})
             return
         }
@@ -104,7 +109,45 @@ export default class CompleteDonationDetail extends React.Component {
     componentDidMount() {
         /*AsyncStorage.getItem(AVATAR_URI_KEY).then((avatar_uri) => {
             this.setState({avatar: {uri: avatar_uri}})
-        })*/        
+        })*/    
+        const donationData = this.props.navigation.state.params.donationData
+        const mode = this.props.navigation.state.params.mode
+        this.setState({mode: mode})
+        if (donationData) {
+            this.setState({
+                isEnabledButton: true,
+                avatar: {uri: donationData.image}, 
+                foodTypes_NonPerishable: donationData.foodTypes_NonPerishable,
+                foodTypes_Perishable: donationData.foodTypes_Perishable,
+                foodTypes_Prepared: donationData.foodTypes_Prepared,
+                vehicleSize: donationData.vehicleSize,
+                location: donationData.location,
+                startDate: this.getDateString(donationData.startDate),
+                endDate: this.getDateString(donationData.endDate),
+            })
+            _dText = donationData.description
+        }
+
+    }
+
+    getDateString = (dateData) => {
+        const {date, time} = dateData
+        let dayString = moment(date, 'yyyy-mm-dd').format('MMMM D YYYY')
+
+        timeNum = parseInt(time)
+        hourStr = (parseInt(timeNum/60)).toString()
+        if (hourStr.length < 2) {
+            hourStr = '0' + hourStr
+        }
+        minuteStr = (timeNum%60).toString()
+        if (minuteStr < 2) {
+            minuteStr = '0' + minuteStr
+        }
+        timeStr = hourStr + minuteStr        
+        timeString = moment(timeStr, 'HHmm').format("h:m A")
+        //format="MMMM D YYYY - h:m A"
+        result = dayString + ' - ' + timeString
+        return result
     }
 
     static navigationOptions = {
@@ -141,10 +184,10 @@ export default class CompleteDonationDetail extends React.Component {
     }
 
     locationTextOrIcon = () => {
-        if (this.state.locationData == null ) {
+        if (this.state.location == null ) {
             return <Image source={Images.location_gray} resizeMode={'contain'} style={styles.icon} />
         } else {
-            var locationName = this.state.locationData.name
+            var locationName = this.state.location.name
             if(locationName.length>23){
                 locationName=locationName.substring(0, 23)+'...';
             }
@@ -229,16 +272,17 @@ export default class CompleteDonationDetail extends React.Component {
         })
     }
 
-    handleLocationSelected = (addressData, locationData) => {
+    handleLocationSelected = (locationData) => {
         /**
          * addressData : {primaryText: '...', secondaryText: '...', fullText: '...', ...  }
          * locationData : {name: '...', address: '...', latitude: '...', longitude: '...', }
          */
         //console.log(addressData)
-        //console.log(locationData)
+        console.log(locationData)
         this.setState({
-            addressData: addressData,
-            locationData: locationData,
+            //addressData: addressData,
+            //locationData: locationData,
+            location: locationData
         }, function() {
             this.validateData()
         })        
@@ -283,8 +327,9 @@ export default class CompleteDonationDetail extends React.Component {
         }
 
         postData = {
-            date: this.getDate(),
-            location: this.getLocation(),
+            startDate: this.getDate(this.state.startDate),
+            endDate: this.getDate(this.state.endDate),
+            location: this.state.location, //this.getLocation(),
             foodTypes_NonPerishable: this.state.foodTypes_NonPerishable,
             foodTypes_Perishable: this.state.foodTypes_Perishable,
             foodTypes_Prepared: this.state.foodTypes_Prepared,
@@ -295,25 +340,47 @@ export default class CompleteDonationDetail extends React.Component {
             postData.vehicleSize = this.state.vehicleSize
         }
 
-        RNS3.put(file, options).then(response => {
-            this.setState({isEnabledButton: true})
-            //_dText = ''
-            postData.image = response.body.postResponse.location
-            console.log('Post Data', postData)
-            this.props.navigation.navigate('CompleteDonationService', {postData: postData})            
-        }).catch(error => {
-            this.setState({isEnabledButton: true})
-            this.showDialog(true, error.message)
-        })
+        if (this.state.mode == 'create') {
+            RNS3.put(file, options).then(response => {
+                this.setState({isEnabledButton: true})
+                //_dText = ''
+                postData.image = response.body.postResponse.location
+                postData.id = moment().format('x')
+                console.log('Post Data', postData)
+                this.props.navigation.navigate('CompleteDonationService', {postData: postData})            
+            }).catch(error => {
+                this.setState({isEnabledButton: true})
+                this.showDialog(true, error.message)
+            })
+        } else {
+            RNS3.put(file, options).then(response => {
+                postData.id = this.props.navigation.state.params.donationData.id
+                postData.image = response.body.postResponse.location
+                Meteor.call('updateDonation', postData, (err, res) => {
+                    this.setState({isEnabledButton: true})
+                    if (err) {
+                        this.showDialog(true, err.message)
+                        console.log(err)
+                    } else {
+                        this.props.navigation.goBack()
+                    }
+                })
+            }).catch(error => {
+                this.setState({isEnabledButton: true})
+                this.showDialog(true, error.message)
+            })
+        }
+
+        
 
     }
 
-    getDate = () => {
+    getDate = (dateState) => {
         let monthNames = [
             'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
         ]
         
-        if (this.state.startDate && this.state.endDate) {
+        /*if (this.state.startDate && this.state.endDate) {
             dateList1 = this.state.startDate.split("-")
             dateStr = dateList1[0].trim()
             MonDayYear = dateStr.split(' ')
@@ -335,11 +402,28 @@ export default class CompleteDonationDetail extends React.Component {
             endTimeStr = dateList2[1].trim().split(' ')
             endTime = this.getTime(endTimeStr)
     
-            newDate = {date: date, startTime: startTime, endTime: endTime, notes: _dText}
+            newDate = {date: date, startTime: startTime, endTime: endTime}
             //console.log(newDate)
             return newDate
-        }
-        return {}
+        }*/
+
+        dateList = dateState.split("-")
+        dateStr = dateList[0].trim()
+        MonDayYear = dateStr.split(' ')
+        month = monthNames.indexOf(MonDayYear[0]) + 1
+        
+        yearString = MonDayYear[2]
+        monthString = month.toString()
+        if (month < 10) monthString = '0' + month.toString
+        dayString = MonDayYear[1]
+        if (dayString.length < 2) dayString = '0' + MonDayYear[1]
+
+        date = yearString + '-' + monthString + '-' + dayString
+
+        timeStr = dateList[1].trim().split(' ')
+        time = this.getTime(timeStr) 
+
+        return {date, time}
         
     }
 
@@ -363,7 +447,7 @@ export default class CompleteDonationDetail extends React.Component {
 
     }
 
-    getLocation = () => {
+    /*getLocation = () => {
         let data = this.state.locationData
         if (data) {
             lat = data.latitude
@@ -374,7 +458,7 @@ export default class CompleteDonationDetail extends React.Component {
             return newLocation
         }
         return {}
-    }
+    }*/
 
     showDialog = (show, title) => {
         if (show) this.setState({ msgBox: show, msgText: title })
@@ -387,7 +471,8 @@ export default class CompleteDonationDetail extends React.Component {
             <View style={styles.container} >
             
                 <View style={styles.containerTop} >
-                    <ImageBackground source={this.state.avatar ? this.state.avatar : Images.complete_donation_top_bg} style={styles.imgBg} resizeMode={'cover'} >
+                    <ImageLoad source={this.state.avatar ? this.state.avatar : Images.complete_donation_top_bg} style={styles.imgBg} resizeMode={'cover'} 
+                        placeholderSource={Images.complete_donation_top_bg} placeholderStyle={styles.imgBg} loadingStyle={{ size: 'large', color: 'white' }}  >
                         {this.state.avatar && <View style={styles.overlay} />}
                         <View style={styles.nav}>
                             <TouchableOpacity onPress={() => this.onBackClick() }>
@@ -401,7 +486,7 @@ export default class CompleteDonationDetail extends React.Component {
                         <View style={styles.titleTextFrame} >
                             <Text style={styles.titleText} >Donation Details</Text>
                         </View>                        
-                    </ImageBackground>                    
+                    </ImageLoad>                    
                 </View>
                 
                 <ScrollView style={{marginBottom: 60}} showsVerticalScrollIndicator={false} >
@@ -585,7 +670,7 @@ export default class CompleteDonationDetail extends React.Component {
                     disabled={this.state.isEnabledButton ? false : true} 
                     onPress={() => this.onNextClick()}
                 >
-                    <Text style={styles.buttonText} >ADD DETAILS</Text>
+                    <Text style={styles.buttonText} >{this.state.mode=='create' ? 'ADD DETAILS' : 'Save'}</Text>
                 </TouchableOpacity>
 
                 <DescriptionModal 
