@@ -67,7 +67,7 @@ export default class SignupBusinessAccountInfo extends React.Component {
 
     }
 
-    handleLocationSelected = (addressData, locationData) => {
+    handleLocationSelected = (locationData) => {
         /**
          * addressData : {primaryText: '...', secondaryText: '...', fullText: '...', ...  }
          * locationData : {name: '...', address: '...', latitude: '...', longitude: '...', }
