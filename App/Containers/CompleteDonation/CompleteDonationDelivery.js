@@ -107,7 +107,9 @@ export default class CompleteDonationDelivery extends React.Component {
                 console.log(err)
             } else {
                 console.log("Data Post Success...")
-                this.props.navigation.navigate('ViewListings')
+                this.props.navigation.navigate('ViewListings', {
+                    segmentIndex: 0,
+                })
             }
         })
     }

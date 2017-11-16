@@ -129,7 +129,7 @@ export default class GiveFoodListingDetails extends React.Component {
 
     getDateString = (dateData) => {
         const {date, time} = dateData
-        let dayString = moment(date, 'yyyy-mm-dd').format('MMMM D YYYY')
+        let dayString = moment(date, 'YYYY-MM-DD').format('MMMM D YYYY')
 
         timeNum = parseInt(time)
         hourStr = (parseInt(timeNum/60)).toString()
@@ -144,6 +144,8 @@ export default class GiveFoodListingDetails extends React.Component {
         timeString = moment(timeStr, 'HHmm').format("h:m A")
         //format="MMMM D YYYY - h:m A"
         result = dayString + ' - ' + timeString
+
+        console.log('Result', result)
         return result
     }
 
@@ -342,7 +344,9 @@ export default class GiveFoodListingDetails extends React.Component {
                         this.showDialog(true, err.message)
                         console.log(err)
                     } else {
-                        this.props.navigation.navigate('ViewListings')
+                        this.props.navigation.navigate('ViewListings', {
+                            segmentIndex: 1,
+                        })
                     }
                 })          
             }).catch(error => {
@@ -517,7 +521,7 @@ export default class GiveFoodListingDetails extends React.Component {
                         <DatePicker
                             style={styles.datePickerStyle}
                             date= {this.state.startDate}
-                            minDate={new Date()}
+                            minDate={this.state.mode=='edit' ? null : new Date()}
                             mode="datetime"
                             placeholder=" "
                             format="MMMM D YYYY - h:m A"

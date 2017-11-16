@@ -48,6 +48,15 @@ export default class ViewListings extends Component {
         header: null,
     }
 
+    componentDidMount() {
+        let segmentIndex = this.props.navigation.state.params.segmentIndex
+        if (segmentIndex) {
+            this.setState({
+                segmentIndex: segmentIndex
+            })
+        }
+    }
+
     segmentIndexChange = (index) => {
         this.setState({
             segmentIndex: index,

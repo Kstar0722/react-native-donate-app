@@ -164,7 +164,7 @@ class MainScreen extends Component {
                         </TouchableOpacity>
                         
                         <View style={{ flex: 1, alignItems: 'center', opacity: 1 }} >
-                            <TouchableOpacity style={[styles.addButton, {backgroundColor: '#7d9eff', borderColor: '#7d9eff'}]} underlayColor='#7d9eff' onPress={() => navigate('ViewListings')}> 
+                            <TouchableOpacity style={[styles.addButton, {backgroundColor: '#7d9eff', borderColor: '#7d9eff'}]} underlayColor='#7d9eff' onPress={() => navigate('ViewListings', {segmentIndex: 0})}> 
                                 <Image source={Images.message} style={styles.messageButtonImage} resizeMode={'contain'}/>          
                             </TouchableOpacity>
                         </View>

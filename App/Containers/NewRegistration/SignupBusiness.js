@@ -13,6 +13,7 @@ import {
     Keyboard,
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import Meteor from 'react-native-meteor'
 
 import AlertModal from '../../Components/AlertModal'
 import { guid, validateEmail } from '../../Transforms'
@@ -69,10 +70,24 @@ export default class SignupBusiness extends React.Component {
             }
         }
 
-        this.props.navigation.navigate('SignupBusinessAccountInfo', {
-            user: user, 
-            accountType: this.state.accountType
+        Meteor.call('checkEmailExists', this.state.email, (err, result) => {
+            console.log('result', result)
+            if (err) {
+                console.log(err.message)
+                this.showDialog(true, err.message)
+            } else {
+                if (result) {
+                    this.showDialog(true, 'Email Verification Failure.')
+                    return
+                } 
+                this.props.navigation.navigate('SignupBusinessAccountInfo', {
+                    user: user, 
+                    accountType: this.state.accountType
+                })
+
+            }
         })
+        
     }
 
     validate = () => {

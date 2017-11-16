@@ -114,8 +114,8 @@ export default StyleSheet.create({
     },
 
     itemText: {         
-        marginLeft: (width < 370) ? 8 : 20,
-        fontSize: (width < 370) ? 12 : 15,
+        marginLeft: (width < 370) ? 8 : 8,
+        fontSize: (width < 370) ? 12 : 14,
     },
 
     contentFrame: {
