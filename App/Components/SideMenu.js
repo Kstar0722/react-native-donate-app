@@ -8,10 +8,17 @@ import {
 import styles from './Styles/SideMenuStyles'
 import { Images } from '../Themes'
 import Meteor from 'react-native-meteor'
+import { NavigationActions } from 'react-navigation'
+
 export default class MainScreen extends Component {
   constructor() {
     super()
     this.state = { isOpenSideMenu1: false }
+  }
+
+  handleLogout = () => {
+    Meteor.logout()
+    this.props.navigator('LaunchScreen')    
   }
 
 
@@ -52,7 +59,7 @@ export default class MainScreen extends Component {
               <Text style={styles.sideMenuTextInput}>Notifications</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.lastSideMenuRowCover}>
+          <TouchableOpacity style={styles.lastSideMenuRowCover} onPress={this.handleLogout} >
             <Image source={Images.logoutIcon} style={styles.donationIcon} />
             <Text style={styles.sideMenuTextInput}>Logout</Text>
           </TouchableOpacity>

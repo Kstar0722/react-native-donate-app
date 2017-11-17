@@ -263,7 +263,7 @@ class DonationListView extends React.Component {
                                                 }}
                                                 image={Images.marker} />
                                         </MapView>
-                                        <TouchableOpacity style={styles.listMapViewText} onPress={() => navigate("DonationView", { user, donation })}>
+                                        <TouchableOpacity style={styles.listMapViewText} onPress={() => navigate("RescueDonationView", { user, donation })}>
                                             <Image source={Images.wCarRedBack} style={styles.vehicleIcon} />
                                             <View style={styles.listMapViewTopRow}>
                                                 <Image source={{ uri: user.profile.image }} style={styles.donaterName} />

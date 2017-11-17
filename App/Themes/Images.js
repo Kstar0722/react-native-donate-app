@@ -247,6 +247,12 @@ const images = {
   car_sel: require('../Images/car_sel.png'),
   truck_sel: require('../Images/truck_sel.png'),
   van_sel: require('../Images/van_sel.png'),
+
+  img_icoon: require('../Images/img_icon.png'),
+  questionMark_gray: require('../Images/questionMark_gray.png'),
+  contact: require('../Images/contact.png'),
+  rescue: require('../Images/rescue.png'),
+  report: require('../Images/report.png'),
   
 
   }

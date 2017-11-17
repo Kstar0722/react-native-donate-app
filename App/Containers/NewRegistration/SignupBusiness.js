@@ -60,17 +60,17 @@ export default class SignupBusiness extends React.Component {
         }
 
         const user = {
-            email: this.state.email,
+            email: this.state.email.toLowerCase(),
             password: this.state.password,
             profile: {
                 name: this.state.name,
-                email: this.state.email,
+                email: this.state.email.toLowerCase(),
                 phone: this.state.phone,
                 bType: false,
             }
         }
 
-        Meteor.call('checkEmailExists', this.state.email, (err, result) => {
+        Meteor.call('checkEmailExists', this.state.email.toLowerCase(), (err, result) => {
             console.log('result', result)
             if (err) {
                 console.log(err.message)

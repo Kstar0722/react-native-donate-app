@@ -43,6 +43,8 @@ import SignupBusinessOperationInfo from '../Containers/NewRegistration/SignupBus
 
 import GiveFoodListingDetails from '../Containers/Home/Screens/GiveFoodListingDetails'
 
+import RescueDonationView from '../../MyApp/containers/RescueDonationView'
+
 const PrimaryNav = StackNavigator({
   LaunchScreen: { screen: LaunchScreen },
   OnboardingScreen: { screen: OnboardingScreen },
@@ -85,6 +87,8 @@ const PrimaryNav = StackNavigator({
   //SignupBusinessHour: {screen: SignupBusinessHour},
 
   GiveFoodListingDetails: {screen: GiveFoodListingDetails},
+
+  RescueDonationView: {screen: RescueDonationView},
 }, {
 //    initialRouteName: Meteor.userId() !== null ? 'FindDonation' : 'CreateListing',
     initialRouteName: 'LaunchScreen',

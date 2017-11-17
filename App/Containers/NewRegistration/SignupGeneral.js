@@ -61,11 +61,11 @@ export default class SignupGeneral extends React.Component {
         }
 
         const user = {
-            email: this.state.email,
+            email: this.state.email.toLowerCase(),
             password: this.state.password,
             profile: {
                 name: this.state.name,
-                email: this.state.email,
+                email: this.state.email.toLowerCase(),
                 phone: this.state.phone,
                 bType: this.props.navigation.state.params.bType === 0 ? false : true,
             }

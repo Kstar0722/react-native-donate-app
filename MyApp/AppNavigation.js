@@ -47,6 +47,7 @@ import SignupBusinessAccountInfo from './containers/Signup/SignupBusinessAccount
 import SignupBusinessOperationInfo from './containers/Signup/SignupBusinessOperationInfo'
 //import SignupBusinessService from './containers/Signup/SignupBusinessService'
 //import SignupBusinessHour from './containers/Signup/SignupBusinessHour'
+import RescueDonationView from './containers/RescueDonationView'
 
 import styles from './Styles/NavigationStyles'
 
@@ -96,9 +97,12 @@ const PrimaryNav = StackNavigator({
   SignupBusinessOperationInfo: {screen: SignupBusinessOperationInfo},
   //SignupBusinessService: {screen: SignupBusinessService},
   //SignupBusinessHour: {screen: SignupBusinessHour},
+
+  DonationView: {screen: DonationView},
+  RescueDonationView: {screen: RescueDonationView},
   
 }, {
-    initialRouteName: 'GiveFoodListingDetails',
+    initialRouteName: 'RescueDonationView',
     heaerStyle: styles.header
   })
 export default PrimaryNav
