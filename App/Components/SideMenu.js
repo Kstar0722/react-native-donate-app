@@ -34,13 +34,13 @@ export default class MainScreen extends Component {
         <View style={styles.sidemenuInner}>
           <Text style={styles.profileName}>{Meteor.user()? Meteor.user().profile.name : null}</Text>
           <View style={styles.sideMenuRowCover1}>
-            <TouchableOpacity style={styles.sideMenuRowCover} onPress={() => navigator('MyProfile')}>
+            <TouchableOpacity style={styles.sideMenuRowCover} onPress={() => {navigator('MyProfile'), this.props.close()}}>
               <Image source={Images.profileIcon} style={styles.donationIcon}/>
               <Text style={styles.sideMenuTextInput}>My Profile</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.sideMenuRowCover1}>
-            <TouchableOpacity style={styles.sideMenuRowCover} onPress={() => navigator('TeamScreen')}>
+            <TouchableOpacity style={styles.sideMenuRowCover} onPress={() => {navigator('TeamScreen'), this.props.close()}}>
               <Image source={Images.myTeam} style={styles.donationIcon} />
               <Text style={styles.sideMenuTextInput}>My Team</Text>
 

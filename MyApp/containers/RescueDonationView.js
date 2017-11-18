@@ -146,7 +146,10 @@ export default class RescueDonationView extends React.Component {
                         <Text style={styles.distanceText} >{Math.round(this.state.distance).toString() + ' MILES AWAY'}</Text>                                          
                     </ImageLoad> 
                     {/*<Image source={Images.foodBoxes} resizeMode={'cover'} style={[styles.cameraImg, {borderRadius: 40}]} /> */}  
-                    <Thumbnail source={{uri: profile.image}} style={styles.cameraImg} large />                                    
+                    <TouchableOpacity style={styles.cameraImg} onPress={() => {navigate('MyProfile')}} >
+                        <Thumbnail source={{uri: profile.image}}  large /> 
+                    </TouchableOpacity>
+                                                       
                 </View>
                 
                 <ScrollView style={{paddingBottom: 100}} showsVerticalScrollIndicator={false} >
@@ -154,11 +157,11 @@ export default class RescueDonationView extends React.Component {
                     <View style={{paddingHorizontal: 16}} >                        
                         <View style={styles.itemFrame} >
                             <Text>Available Time: </Text>
-                            <Text>{this.getDateString(donation.startDate)}</Text>
+                            <Text style={styles.text} >{this.getDateString(donation.startDate)}</Text>
                         </View>
                         <View style={styles.itemFrame} >
                             <Text>Expiration Time: </Text>
-                            <Text>{this.getDateString(donation.endDate)}</Text>
+                            <Text style={styles.text} >{this.getDateString(donation.endDate)}</Text>
                         </View>
                         <View style={[styles.itemFrame]} >
                             <Text>Food Type:</Text>
@@ -228,8 +231,7 @@ export default class RescueDonationView extends React.Component {
                                     <Text>{item}</Text>
                                     <Image source={Images.questionMark_gray} resizeMode='contain' style={styles.navRightIcon} />
                                 </View>
-                                )
-                                
+                                )                                
                             })
                             }                            
                         </View> 
@@ -254,19 +256,32 @@ export default class RescueDonationView extends React.Component {
 
 
                     <View style={styles.buttonGroupFrame} >
+                        <View style={{
+                            width: width, 
+                            height: 53,
+                            position: 'absolute',
+                            bottom: 0,
+                            borderTopWidth:2,
+                            borderTopColor: 'rgba(216,216,216,0.8)',
+                            shadowColor: '#D8D8D8',
+                            shadowOffset: {
+                                width:2,
+                                height: 2,
+                            },
+                            shadowOpacity: 0.7,
+                            }} />
                         <TouchableOpacity style={{alignItems: 'center'}} >
                             <Image source={Images.contact} resizeMode='contain' style={styles.buttonImage} />
-                            <Text style={{marginTop: 5}} >Contact</Text>
+                            <Text style={{marginTop: 0}} >Contact</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{alignItems: 'center'}} onPress={() => this.setState({ rescueModal: true })} >
                             <Image source={Images.rescue} resizeMode='contain' style={styles.buttonImage} />
-                            <Text style={{marginTop: 5}} >Rescue</Text>
+                            <Text style={{marginTop: 0}} >Rescue</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{alignItems: 'center'}} >
                             <Image source={Images.report} resizeMode='contain' style={styles.buttonImage} />
-                            <Text style={{marginTop: 5}} >Report</Text>
+                            <Text style={{marginTop: 0}} >Report</Text>
                         </TouchableOpacity>
-
                     </View>
                  
                 </ScrollView>   

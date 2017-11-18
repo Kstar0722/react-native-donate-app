@@ -69,6 +69,7 @@ export default StyleSheet.create({
 
     text: {
         backgroundColor:'transparent',
+        fontSize: (width < 370) ? 13 : 15
     },
 
     stars: {
@@ -114,9 +115,9 @@ export default StyleSheet.create({
     },
 
     foodTypeText: {
-        fontSize: 10, 
+        fontSize: (width < 370) ? 9 : 10, 
         marginTop: 5, 
-        paddingHorizontal: 8
+        paddingHorizontal: (width < 370) ? 5 : 8
     },
 
     foodTypeIcon: {
@@ -131,7 +132,7 @@ export default StyleSheet.create({
 
     buttonGroupFrame: {
         marginTop: 50,
-        marginBottom: 16,
+        paddingBottom: 8,
         width: width, 
         paddingHorizontal: 30,
         flexDirection: 'row',

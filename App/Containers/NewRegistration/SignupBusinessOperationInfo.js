@@ -245,6 +245,7 @@ export default class SignupBusinessOperationInfo extends React.Component {
         } else { //business...
             businessInfo.bItems = false
         }
+        businessInfo.vehicles = { cars: 0, vans: 0, trucks: 0 }
 
         const file = {
             uri: this.state.avatar,
