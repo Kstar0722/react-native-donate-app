@@ -20,10 +20,10 @@ import { BlurView, VibrancyView } from 'react-native-blur'
 import dateFormat from 'dateformat'
 import moment from 'moment'
 
-import AlertModal from '../../App/Components/AlertModal'
-import ImagePreviewModal from './Modals/ImagePreviewModal'
+import AlertModal from '../../../Components/AlertModal'
+import ImagePreviewModal from '../../../Components/Modals/ImagePreviewModal'
 
-import { Images } from '../../App/Themes'
+import { Images } from '../../../Themes'
 import styles from '../Styles/RescueDonationViewStyles'
 
 const { width, height } =Dimensions.get('window')

@@ -43,7 +43,7 @@ export default class ProfileScreen extends React.Component {
         return(
             <ScrollView bounces={false} style={styles.container}>
                 <View style={styles.header}>
-                    <TouchableOpacity style={{position:'absolute', left: 20}}>
+                    <TouchableOpacity style={{position:'absolute', left: 20}} onPress={() => this.props.navigation.goBack()} >
                         <Image source={Images.backIcon} style={styles.menuIconNav} />
                     </TouchableOpacity>
                     <Text style={styles.headerTitle}>Donator Name</Text>                            
